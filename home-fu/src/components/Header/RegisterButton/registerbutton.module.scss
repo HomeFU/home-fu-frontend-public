@@ -1,0 +1,30 @@
+.registerbutton {
+    width: 87px;
+    height: 47px;
+    border-radius: 26px;
+    border: 1px solid #211E1A;
+    background: #DDDBD7; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .icon:first-of-type {
+    width: 18px; 
+    height: 18px;
+  }
+  
+  .icon:last-of-type {
+    width: 20px; 
+    height: 20px;
+    margin-left: -2px; 
+  }
+  
