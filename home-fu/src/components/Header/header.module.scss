@@ -1,0 +1,30 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    $color: $color
+}
+
+.header {
+    padding-top: 61px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    @include text(500, 32px, #211E1A);
+}
+
+.listMenu {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+.listItem,
+.offerListing {
+    @include text(500, 12px, #211E1A);
+} 

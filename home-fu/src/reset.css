@@ -22,8 +22,14 @@ body {
 	line-height: 1;
 }
 a {
+	cursor: pointer;
     text-decoration: none;
     color: inherit;
+}
+button {
+	background: none;
+	border: none;
+	outline: none;
 }
 ol, ul {
 	list-style: none;
