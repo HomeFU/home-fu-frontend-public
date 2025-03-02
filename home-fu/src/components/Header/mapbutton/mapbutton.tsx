@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./mapbutton.module.scss";
-import { Map } from "lucide-react"; // библиотека картинка карты
+import mapIcon from "../../../assets/icons/iconMap.svg";
 
 type MapButtonProps = {
-  onClick?: () => void; // Для обработки на будущее. 
+  onClick?: () => void; 
 };
 
 const MapButton: React.FC<MapButtonProps> = ({ onClick }) => {
   return (
     <button className={styles.mapButton} onClick={onClick}>
       <span className={styles.text}>Показати мапу</span>
-      <Map size={20} className={styles.icon} />
+      <img src={mapIcon} className={styles.icon} />
     </button>
   );
 };
