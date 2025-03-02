@@ -1,5 +1,5 @@
 import "./App.css";
-import MapButton from "./components/Header/mapbutton/mapbutton";
+import MapButton from "./components/Header/MapButton/mapbutton";
 
 function App() {
   return (
