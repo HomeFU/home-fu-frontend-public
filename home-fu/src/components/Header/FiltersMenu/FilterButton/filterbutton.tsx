@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./filterbutton.module.scss";
 import iconFilter from "../../../../assets/icons/iconFilter.svg";
 

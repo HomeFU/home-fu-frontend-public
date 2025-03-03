@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./mapbutton.module.scss";
 import mapIcon from "../../../assets/icons/iconMap.svg";
 
@@ -6,7 +5,7 @@ type MapButtonProps = {
   onClick?: () => void; 
 };
 
-const MapButton: React.FC<MapButtonProps> = ({ onClick }) => {
+const MapButton = ({ onClick }: MapButtonProps) => {
   return (
     <button className={styles.mapButton} onClick={onClick}>
       <span className={styles.text}>Показати мапу</span>
@@ -14,4 +13,5 @@ const MapButton: React.FC<MapButtonProps> = ({ onClick }) => {
     </button>
   );
 };
+
 export default MapButton;

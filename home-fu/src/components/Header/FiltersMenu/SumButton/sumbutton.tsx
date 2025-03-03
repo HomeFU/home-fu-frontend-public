@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./sumbutton.module.scss";
 
-const SumButton: React.FC = () => {
+const SumButton = () => {
     const [active, setActive] = useState(false);
 
     return (
