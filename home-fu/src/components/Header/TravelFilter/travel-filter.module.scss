@@ -1,0 +1,79 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    $color: $color
+}
+
+.filterWrapper {
+    display: flex;
+    align-items: center;
+    max-width: 779px;
+    height: 51px;
+    padding: 5px 32px;
+    border: 1px solid #2C2823;
+    border-radius: 9999px;
+    position: relative;
+    margin-right: 80px;
+}
+
+.inputSection {
+    cursor: pointer;
+    border-right: 1px solid #1F222C;
+
+    &:last-of-type {
+        border-right: none;
+    }
+
+    &:nth-of-type(1) {
+       flex: 3.3;
+    }
+    
+    &:nth-of-type(2) {
+        flex: 1.5;
+    }
+    
+    &:nth-of-type(3) {
+        flex: 1.5;
+    }
+    
+    &:nth-of-type(4) {
+        flex: 2.5;
+    }
+    
+    &:not(:first-of-type) {
+        padding-left: 25px;
+    }
+}
+
+.inputLabel {
+    @include text(500, 12px, #211E1A)
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    background: none;
+    border: none;
+    padding: 5px 0 0 0;
+
+    &::placeholder {
+        @include text(500, 12px, #8A8278);
+    }
+}
+
+.searchButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6F6558;
+    border-radius: 9999px;
+
+    &:hover {
+        background: #5a4f44;
+    } 
+}

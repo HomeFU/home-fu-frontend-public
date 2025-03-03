@@ -8,7 +8,7 @@
     padding-top: 61px;
 }
 
-.content {
+.contentTop {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,3 +28,10 @@
 .offerListing {
     @include text(500, 12px, #211E1A);
 } 
+
+.contentBottom {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 30px;
+}

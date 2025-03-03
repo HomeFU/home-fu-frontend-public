@@ -1,9 +1,12 @@
 import style from "./header.module.scss";
 import RegisterButton from "./RegisterButton/registerbutton";
+import TravetFilter from "./TravelFilter/travel-filter";
+import MapButton from "./MapButton/mapbutton";
+
 const Header = () => {
     return (
         <header className={style.header}>
-            <div className={style.content}>
+            <div className={style.contentTop}>
                 <div className={style.logo}><a>HomeFU</a></div>
                 <ul className={style.listMenu}>
                     <li className={style.listItem}><a>Варіанти помешкань</a></li>
@@ -13,6 +16,10 @@ const Header = () => {
                 <div>
                     <RegisterButton></RegisterButton>
                 </div>
+            </div>
+            <div className={style.contentBottom}>
+                <TravetFilter></TravetFilter>
+                <MapButton></MapButton>
             </div>
         </header>
     )
