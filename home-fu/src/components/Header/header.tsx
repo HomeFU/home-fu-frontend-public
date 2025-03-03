@@ -1,5 +1,5 @@
 import style from "./header.module.scss";
-
+import RegisterButton from "./RegisterButton/registerbutton";
 const Header = () => {
     return (
         <header className={style.header}>
@@ -11,6 +11,7 @@ const Header = () => {
                     <li className={style.listItem}><a>Онлайн-враження</a></li>
                 </ul>
                 <div>
+                    <RegisterButton></RegisterButton>
                 </div>
             </div>
         </header>
