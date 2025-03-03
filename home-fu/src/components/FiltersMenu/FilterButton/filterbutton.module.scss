@@ -1,15 +1,10 @@
-@mixin text($font-weight, $font-size, $line-height, $color) {
-    font-family: "Inknut Antiqua", sans-serif;
+@mixin text($font-weight, $font-size, $color) {
     font-weight: $font-weight;
     font-size: $font-size;
-    line-height: $line-height;
     color: $color;
 }
 
 .filterWrapper {
-    position: fixed;
-    top: 250px;
-    left: 60%;
     width: 110px;
     height: 47px;
     border-radius: 26px;
@@ -29,9 +24,6 @@
 }
 
 .filterText {
-    @include text(500, 12px, 30.95px, #2C2823);
-}
-
-.filterWrapper.active {
-    background: #BEBBB5;
+    @include text(500, 12px, #2C2823);
+    font-family: "Inknut Antiqua", sans-serif;
 }

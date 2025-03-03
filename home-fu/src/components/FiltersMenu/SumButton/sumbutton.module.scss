@@ -1,16 +1,10 @@
-@mixin text($font-weight, $font-size, $line-height, $color) {
-    font-family: "Inknut Antiqua", sans-serif;
+@mixin text($font-weight, $font-size, $color) {
     font-weight: $font-weight;
     font-size: $font-size;
-    line-height: $line-height;
     color: $color;
 }
 
 .switchWrapper {
-    position: fixed;
-    top: 250px;
-    left: 75%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
     width: 272px;
@@ -23,7 +17,8 @@
     transition: background 0.3s ease-in-out;
     
     .switchText {
-        @include text(500, 12px, 30.95px, #2C2823);
+        @include text(500, 12px, #2C2823);
+        font-family: "Inknut Antiqua", sans-serif;
         flex-grow: 1;
         text-align: center;
     }
