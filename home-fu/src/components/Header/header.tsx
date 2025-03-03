@@ -2,6 +2,8 @@ import style from "./header.module.scss";
 import RegisterButton from "./RegisterButton/registerbutton";
 import TravetFilter from "./TravelFilter/travel-filter";
 import MapButton from "./MapButton/mapbutton";
+import SumButton from "./FiltersMenu/SumButton/sumbutton";
+import FilterButton from "./FiltersMenu/FilterButton/filterbutton"
 
 const Header = () => {
     return (
@@ -20,6 +22,8 @@ const Header = () => {
             <div className={style.contentBottom}>
                 <TravetFilter></TravetFilter>
                 <MapButton></MapButton>
+                <SumButton></SumButton>
+                <FilterButton></FilterButton>
             </div>
         </header>
     )
