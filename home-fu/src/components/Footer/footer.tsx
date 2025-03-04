@@ -3,6 +3,7 @@ import style from './footer.module.scss';
 import langIcon from '../../assets/icons/languageIcon.svg';
 import instaIcon from '../../assets/icons/instagramIcon.svg';
 import facebookIcon from '../../assets/icons/facebookIcon.svg';
+import { Link } from "react-router-dom";
 
 type Tab = {
     id:string;
@@ -83,10 +84,10 @@ const Footer = () => {
             <div className={style.tabContent}>
                 {
                     content[activeTab].map((item, index) => (
-                        <a className={style.tabItem} key={index}>
+                        <Link to="/" className={style.tabItem} key={index}>
                             <p className={style.tabItemTitle}>{item.title}</p>
                             <span className={style.tabItemSubtitle}>{item.subtitle}</span>
-                        </a>
+                        </Link>
                     ))
                 }
             </div>
@@ -94,32 +95,32 @@ const Footer = () => {
                 <div className={style.supportItem}>
                     <p className={style.supportTitle}>Підтримка</p>
                     <ul className={style.supportList}>
-                        <li className={style.supportListItem}><a href="">Довідковий центр</a></li>
-                        <li className={style.supportListItem}><a href="">AirCover</a></li>
-                        <li className={style.supportListItem}><a href="">Протидія дискримінації</a></li>
-                        <li className={style.supportListItem}><a href="">Підтримка людей з інвалідністю</a></li>
-                        <li className={style.supportListItem}><a href="">Варіанти скасування бронювань</a></li>
-                        <li className={style.supportListItem}><a href="">Надіслати скаргу від сусідів</a></li>
+                        <li className={style.supportListItem}><Link to="/" >Довідковий центр</Link></li>
+                        <li className={style.supportListItem}><Link to="/" >AirCover</Link></li>
+                        <li className={style.supportListItem}><Link to="/" >Протидія дискримінації</Link></li>
+                        <li className={style.supportListItem}><Link to="/" >Підтримка людей з інвалідністю</Link></li>
+                        <li className={style.supportListItem}><Link to="/">Варіанти скасування бронювань</Link></li>
+                        <li className={style.supportListItem}><Link to="/" >Надіслати скаргу від сусідів</Link></li>
                     </ul>
                 </div>
                 <div className={style.hostItem}>
                     <p className={style.hostTitle}>Прийом гостей</p>
                     <ul className={style.hostList}>
-                        <li className={style.hostListItem}><a href="">Перетворити помешкання на HomeFU</a></li>
-                        <li className={style.hostListItem}><a href="">AirCover для господарів</a></li>
-                        <li className={style.hostListItem}><a href="">Ресурси про прийом гостей</a></li>
-                        <li className={style.hostListItem}><a href="">Форум спільноти</a></li>
-                        <li className={style.hostListItem}><a href="">Відповідальний прийом гостей</a></li>
+                        <li className={style.hostListItem}><Link to="/">Перетворити помешкання на HomeFU</Link></li>
+                        <li className={style.hostListItem}><Link to="/">AirCover для господарів</Link></li>
+                        <li className={style.hostListItem}><Link to="/">Ресурси про прийом гостей</Link></li>
+                        <li className={style.hostListItem}><Link to="/">Форум спільноти</Link></li>
+                        <li className={style.hostListItem}><Link to="/">Відповідальний прийом гостей</Link></li>
                     </ul>
                 </div>
                 <div className={style.homeFu}>
                     <p className={style.homeFuTitle}>HomeFU</p>
                     <ul className={style.homeFuList}>
-                        <li className={style.homeFuListItem}><a href="">Новини</a></li>
-                        <li className={style.homeFuListItem}><a href="">Нові функції</a></li>
-                        <li className={style.homeFuListItem}><a href="">Вакансії</a></li>
-                        <li className={style.homeFuListItem}><a href="">Інвестори</a></li>
-                        <li className={style.homeFuListItem}><a href="">Тимчасове житло від HomeFU</a></li>
+                        <li className={style.homeFuListItem}><Link to="/">Новини</Link></li>
+                        <li className={style.homeFuListItem}><Link to="/">Нові функції</Link></li>
+                        <li className={style.homeFuListItem}><Link to="/">Вакансії</Link></li>
+                        <li className={style.homeFuListItem}><Link to="/">Інвестори</Link></li>
+                        <li className={style.homeFuListItem}><Link to="/">Тимчасове житло від HomeFU</Link></li>
                     </ul>
                 </div>
             </div>
@@ -127,9 +128,9 @@ const Footer = () => {
                 <div className={style.footerInfo}>
                     <span className={style.footerText}>2022 HomeFU, Inc.</span>
                     <ul className={style.footerLinks}>
-                        <li className={style.footerLinksItem}><a href="">Конфінденційність</a></li>
-                        <li className={style.footerLinksItem}><a href="">Умови</a></li>
-                        <li className={style.footerLinksItem}><a href="">Мапа сайту</a></li>
+                        <li className={style.footerLinksItem}><Link to="/">Конфінденційність</Link></li>
+                        <li className={style.footerLinksItem}><Link to="/">Умови</Link></li>
+                        <li className={style.footerLinksItem}><Link to="/">Мапа сайту</Link></li>
                     </ul>
                 </div>
                 <div className={style.footerActions}>
@@ -141,8 +142,8 @@ const Footer = () => {
                         $ USD
                     </button>
                     <ul className={style.socialLinks}>
-                        <li className={style.socialLinkItem}><a href=""><img src={facebookIcon} alt="facebookIcon" /></a></li>
-                        <li className={style.socialLinkItem}><a href=""><img src={instaIcon} alt="instagramIcon"/></a></li>
+                        <li className={style.socialLinkItem}><Link to="/"><img src={facebookIcon} alt="facebookIcon" /></Link></li>
+                        <li className={style.socialLinkItem}><Link to="/"><img src={instaIcon} alt="instagramIcon"/></Link></li>
                     </ul>
                 </div>
             </div>

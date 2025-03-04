@@ -1,19 +1,20 @@
 import style from "./header.module.scss";
 import RegisterButton from "./RegisterButton/registerbutton";
 import TravetFilter from "./TravelFilter/travel-filter";
-import MapButton from "./MapButton/mapbutton";
+import MapButton from "./mapbutton/mapbutton";
 import SumButton from "../FiltersMenu/SumButton/sumbutton";
 import FilterButton from "../FiltersMenu/FilterButton/filterbutton"
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
         <header className={style.header}>
             <div className={style.contentTop}>
-                <div className={style.logo}><a>HomeFU</a></div>
+                <div className={style.logo}><Link to="/">HomeFU</Link></div>
                 <ul className={style.listMenu}>
-                    <li className={style.listItem}><a>Варіанти помешкань</a></li>
-                    <li className={style.listItem}><a>Враження</a></li>
-                    <li className={style.listItem}><a>Онлайн-враження</a></li>
+                    <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
+                    <li className={style.listItem}><Link to="/">Враження</Link></li>
+                    <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
                 </ul>
                 <div>
                     <RegisterButton></RegisterButton>
