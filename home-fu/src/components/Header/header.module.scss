@@ -11,23 +11,33 @@
 .contentTop {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .logo {
     @include text(500, 32px, #211E1A);
+    margin-right: auto;
 }
 
 .listMenu {
     display: flex;
     align-items: center;
-    gap: 45px;
+}
+
+.offerListWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 20px
 }
 
 .listItem,
-.offerListing {
-    @include text(500, 12px, #211E1A);
+.offerItem {
+    @include text(500, 14px, #211E1A);
+    padding: 5px 16px;
 } 
+
+.offerItem {
+    text-decoration: underline;
+}
 
 .contentBottom {
     display: flex;

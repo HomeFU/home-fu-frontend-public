@@ -16,7 +16,8 @@ const Header = () => {
                     <li className={style.listItem}><Link to="/">Враження</Link></li>
                     <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
                 </ul>
-                <div>
+                <div className={style.offerListWrapper}>
+                    <Link className={style.offerItem} to="/">Запропонувати помешкання на HomeFU</Link>
                     <RegisterButton></RegisterButton>
                 </div>
             </div>
