@@ -1,9 +1,7 @@
 import style from "./header.module.scss";
 import RegisterButton from "./RegisterButton/registerbutton";
 import TravetFilter from "./TravelFilter/travel-filter";
-import MapButton from "./mapbutton/mapbutton";
-import SumButton from "../FiltersMenu/SumButton/sumbutton";
-import FilterButton from "../FiltersMenu/FilterButton/filterbutton"
+import MapButton from "./MapButton/mapbutton";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -25,8 +23,6 @@ const Header = () => {
                 <TravetFilter></TravetFilter>
                 <MapButton></MapButton>
             </div>
-            <SumButton></SumButton>
-            <FilterButton></FilterButton>
         </header>
     )
 }
