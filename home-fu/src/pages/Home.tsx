@@ -3,7 +3,7 @@ import Footer from "../components/Footer/footer";
 import FilterButton from "./CategoryBar/FilterButton/filterbutton";
 import SumButton from "./CategoryBar/SumButton/sumbutton";
 import style from "./home.module.scss";
-
+import Register from "../features/Auth/Register/registerForm";
 const Home = () => {
 
     return (<>
@@ -13,6 +13,7 @@ const Home = () => {
                 <FilterButton></FilterButton>
                 <SumButton></SumButton>
             </div>
+            <Register></Register>
         </main>
         <Footer></Footer>
     </>)
