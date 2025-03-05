@@ -1,0 +1,30 @@
+.mapButton {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    width: 182px;
+    height: 60px;
+    border-radius: 26px;
+    background: #6F6558;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  
+    .icon {
+      width: 20px;
+      height: 20px;
+  
+    }
+  
+    &:hover {
+      background: #5a4f44;
+    }   
+  }

@@ -1,0 +1,58 @@
+@mixin text($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.switchWrapper {
+    display: flex;
+    align-items: center;
+    width: 272px;
+    height: 47px;
+    border-radius: 26px;
+    border: 1px solid #6F6558;
+    background: #DDDBD7; 
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    
+    .switchText {
+        @include text(500, 12px, #2C2823);
+        font-family: "Inknut Antiqua", sans-serif;
+        flex-grow: 1;
+        text-align: center;
+        
+    }
+
+    .switchToggle {
+        width: 42px;
+        height: 23px;
+        border-radius: 26px;
+        background: #6F6558;
+        position: relative;
+        transition: background 0.3s ease-in-out;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            top: 50%;
+            left: 2px;
+            transform: translateY(-50%);
+            transition: left 0.3s ease-in-out;
+        }
+    }
+
+    &.active {
+        .switchToggle {
+            background: #4F463A;
+
+            &::before {
+                left: 21px;
+            }
+        }
+    }
+}

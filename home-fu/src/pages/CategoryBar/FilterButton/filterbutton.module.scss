@@ -1,0 +1,29 @@
+@mixin text($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.filterWrapper {
+    width: 110px;
+    height: 47px;
+    border-radius: 26px;
+    border: 1px solid #6F6558;
+    background: #DDDBD7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.filterIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.filterText {
+    @include text(500, 12px, #2C2823);
+    font-family: "Inknut Antiqua", sans-serif;
+}

@@ -1,0 +1,47 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+.header {
+    padding-top: 61px;
+}
+
+.contentTop {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    @include text(500, 32px, #211E1A);
+    margin-right: auto;
+}
+
+.listMenu {
+    display: flex;
+    align-items: center;
+}
+
+.offerListWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 20px
+}
+
+.listItem,
+.offerItem {
+    @include text(500, 14px, #211E1A);
+    padding: 5px 16px;
+} 
+
+.offerItem {
+    text-decoration: underline;
+}
+
+.contentBottom {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 30px;
+}
