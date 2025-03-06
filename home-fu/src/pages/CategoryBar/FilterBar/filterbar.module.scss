@@ -1,0 +1,123 @@
+.filterBarContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем слайдер с иконками */
+    flex: 1;
+    overflow: hidden;
+}
+
+.filterBar {
+    display: flex;
+    gap: 35px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    padding-right: 40px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.filterButton {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    min-width: 70px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.active {
+        .label {
+            font-weight: 500;
+        }
+    }
+}
+
+.iconWrapper {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.label {
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    color: #222222;
+    margin-bottom: 8px;
+}
+
+.activeIndicator {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76.5px;
+    height: 2px;
+    background-color: #211E1A;
+    border: none;
+    animation: indicatorAppear 0.3s ease forwards;
+}
+
+@keyframes indicatorAppear {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 76.5px;
+        opacity: 1;
+    }
+}
+
+.scrollButton {
+    position: absolute;
+    top: 28px;
+    left: 80%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #DDDBD7;
+    border: 1px solid #6F6558;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &.scrollRight {
+        right: 10px; /* Немного отступаем кнопку справа */
+    }
+
+    &.scrollLeft {
+        left: 10px; /* Немного отступаем кнопку слева */
+    }
+}

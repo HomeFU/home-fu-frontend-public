@@ -3,6 +3,7 @@ import Footer from "../components/Footer/footer";
 import FilterButton from "./CategoryBar/FilterButton/filterbutton";
 import SumButton from "./CategoryBar/SumButton/sumbutton";
 import style from "./home.module.scss";
+import FilterBar from "./CategoryBar/FilterBar/filterbar";
 
 const Home = () => {
 
@@ -13,7 +14,10 @@ const Home = () => {
                 <FilterButton></FilterButton>
                 <SumButton></SumButton>
             </div>
-        </main>
+            <div className= {style.filterBar}>
+                <FilterBar></FilterBar>
+            </div>
+        </main> 
         <Footer></Footer>
     </>)
 }

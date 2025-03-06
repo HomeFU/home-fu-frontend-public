@@ -1,4 +1,4 @@
-.main{
+.main {
     padding-top: 67px;
 }
 
@@ -7,4 +7,24 @@
     align-items: center;
     justify-content: end;
     gap: 13px;
+}
+
+.filterBar {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;  // Выравнивание по левому краю
+    bottom: 52px;
+    right: 22%;
+}
+
+.filterContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: relative;
 }
