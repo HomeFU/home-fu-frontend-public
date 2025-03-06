@@ -46,21 +46,21 @@ const FilterBar = () => {
 
     const handleLastIconClick = () => {
         if (startIndex + 6 < filterOptions.length) {
-            setStartIndex(startIndex + 1); 
+            setStartIndex(startIndex + 1);
         }
     };
 
     const handleFirstIconClick = () => {
         if (startIndex > 0) {
-            setStartIndex(startIndex - 1); 
+            setStartIndex(startIndex - 1);
         }
     };
 
     const handleLastVisibleIconClick = (index: number) => {
         if (index === 5 && startIndex + 6 < filterOptions.length) {
-            setStartIndex(startIndex + 1); 
+            setStartIndex(startIndex + 1);
         } else if (index === 0 && startIndex > 0) {
-            setStartIndex(startIndex - 1); 
+            setStartIndex(startIndex - 1);
         }
     };
 
@@ -92,13 +92,13 @@ const FilterBar = () => {
 
             <div className={styles.scrollControls}>
                 <button className={styles.scrollButton} onClick={handleFirstIconClick}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
 
                 <button className={styles.scrollButton} onClick={handleLastIconClick}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
