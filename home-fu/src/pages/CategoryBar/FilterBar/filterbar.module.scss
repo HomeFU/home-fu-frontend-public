@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрируем слайдер с иконками */
+    justify-content: center; 
     flex: 1;
     overflow: hidden;
 }
@@ -114,10 +114,10 @@
     }
 
     &.scrollRight {
-        right: 10px; /* Немного отступаем кнопку справа */
+        right: 10px; 
     }
 
     &.scrollLeft {
-        left: 10px; /* Немного отступаем кнопку слева */
+        left: 10px; 
     }
 }

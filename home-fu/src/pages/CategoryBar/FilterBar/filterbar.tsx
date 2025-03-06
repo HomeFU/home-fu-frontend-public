@@ -46,21 +46,21 @@ const FilterBar = () => {
 
     const handleLastIconClick = () => {
         if (startIndex + 6 < filterOptions.length) {
-            setStartIndex(startIndex + 1); // Переход к следующим иконкам
+            setStartIndex(startIndex + 1); 
         }
     };
 
     const handleFirstIconClick = () => {
         if (startIndex > 0) {
-            setStartIndex(startIndex - 1); // Переход к предыдущим иконкам
+            setStartIndex(startIndex - 1); 
         }
     };
 
     const handleLastVisibleIconClick = (index: number) => {
         if (index === 5 && startIndex + 6 < filterOptions.length) {
-            setStartIndex(startIndex + 1); // Сдвиг вправо при клике на 6-ю иконку
+            setStartIndex(startIndex + 1); 
         } else if (index === 0 && startIndex > 0) {
-            setStartIndex(startIndex - 1); // Сдвиг влево при клике на первую иконку
+            setStartIndex(startIndex - 1); 
         }
     };
 
@@ -73,7 +73,7 @@ const FilterBar = () => {
                         ref={(el) => { buttonRefs.current[index] = el || null; }}
                         className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""}`}
                         onClick={() => handleFilterClick(option.id, index)}
-                        onMouseDown={() => handleLastVisibleIconClick(index)} // Реализуем логику для прокрутки
+                        onMouseDown={() => handleLastVisibleIconClick(index)} 
                     >
                         <div className={styles.iconWrapper}>
                             <img
