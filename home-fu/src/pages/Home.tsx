@@ -11,11 +11,9 @@ const Home = () => {
         <Header></Header>
         <main className = {style.main}>
             <div className= {style.categoryBar}>
+                <FilterBar></FilterBar>
                 <FilterButton></FilterButton>
                 <SumButton></SumButton>
-            </div>
-            <div className= {style.filterBar}>
-                <FilterBar></FilterBar>
             </div>
         </main> 
         <Footer></Footer>

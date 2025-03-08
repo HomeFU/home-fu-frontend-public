@@ -32,9 +32,7 @@
                 const containerWidth = container.clientWidth;
                 const maxScrollLeft = container.scrollWidth - containerWidth;
 
-                let targetScroll = buttonLeft - containerWidth / 2 + buttonWidth / 2;
-                
-                // Ограничиваем скролл, чтобы не было резких скачков
+                let targetScroll = buttonLeft - containerWidth / 2 + buttonWidth / 2; 
                 if (targetScroll < 0) targetScroll = 0;
                 if (targetScroll > maxScrollLeft) targetScroll = maxScrollLeft;
 
@@ -50,7 +48,7 @@
 
             setTimeout(() => {
                 scrollToButton(index);
-            }, 100); // небольшая задержка перед скроллом
+            }, 100); 
         };
 
         const handleLastIconClick = () => {

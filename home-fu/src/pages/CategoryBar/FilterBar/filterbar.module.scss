@@ -5,6 +5,7 @@
     justify-content: center; 
     flex: 1;
     overflow: hidden;
+    top: 13px;
 }
 
 .filterBar {
@@ -95,8 +96,8 @@
 
 .scrollButton {
     position: absolute;
-    top: 28px;
-    left: 80%;
+    top: 25px;
+    left: 95%;
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
