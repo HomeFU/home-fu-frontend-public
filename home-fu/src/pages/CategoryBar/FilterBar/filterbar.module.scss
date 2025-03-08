@@ -5,7 +5,8 @@
     justify-content: center; 
     flex: 1;
     overflow: hidden;
-    top: 13px;
+    top: 11px;
+
 }
 
 .filterBar {
@@ -14,8 +15,8 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 10px;
-    padding-right: 40px;
-    transition: scroll-left 0.3s ease-in-out;
+    padding-left: 35px;
+    transition: scroll-left 1.2s ease-in-out;  
 
     &::-webkit-scrollbar {
         display: none;
@@ -96,8 +97,7 @@
 
 .scrollButton {
     position: absolute;
-    top: 25px;
-    left: 95%;
+    top: 38%;
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
@@ -115,12 +115,12 @@
     &:hover {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
+}
 
-    &.scrollRight {
-        right: 10px; 
-    }
+.scrollButton.scrollLeft {
+    left: 20px;
+}
 
-    &.scrollLeft {
-        left: 10px; 
-    }
+.scrollButton.scrollRight {
+    right: 10px;
 }
