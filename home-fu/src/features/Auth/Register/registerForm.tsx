@@ -5,7 +5,7 @@ import google from "../../../assets/icons/googleIcon.svg";
 import facebook from "../../../assets/icons/facebookIconForm.svg";
 const Register = () => {
 
-    return (<>
+    return (
         <div className={style.formCard}>
             <h2 className={style.title}>Register</h2>
 
@@ -65,7 +65,7 @@ const Register = () => {
                 </form>
             </div>
         </div>
-    </>)
+    )
 }
 
 export default Register;

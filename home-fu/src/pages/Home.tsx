@@ -4,6 +4,7 @@ import FilterButton from "./CategoryBar/FilterButton/filterbutton";
 import SumButton from "./CategoryBar/SumButton/sumbutton";
 import style from "./home.module.scss";
 import Register from "../features/Auth/Register/registerForm";
+import Login from "../features/Auth/Login/loginForm";
 const Home = () => {
 
     return (<>
@@ -14,6 +15,7 @@ const Home = () => {
                 <SumButton></SumButton>
             </div>
             <Register></Register>
+            <Login></Login>
         </main>
         <Footer></Footer>
     </>)
