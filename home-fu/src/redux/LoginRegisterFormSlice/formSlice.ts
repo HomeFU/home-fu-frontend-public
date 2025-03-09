@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     isOpen: false,
+    isOpenRegisterForm: false
 }
 
 const formSlice = createSlice({
@@ -9,13 +10,21 @@ const formSlice = createSlice({
     initialState,
     reducers: {
         toggleForm:(state) => {
-            state.isOpen = !state.isOpen
+            state.isOpen = !state.isOpen;
         },
-        closeForm: (state) => {
-            state.isOpen = false
+        openRegisterForm:(state) => {
+            state.isOpenRegisterForm = true;
+        },
+        closeLoginForm: (state) => {
+            state.isOpen = false;
+        },
+        closeRegisterForm: (state) => {
+            state.isOpen = false;
+            state.isOpenRegisterForm = false;
+
         }
     }
 });
 
-export const {toggleForm, closeForm} = formSlice.actions;
+export const {toggleForm, openRegisterForm, closeLoginForm, closeRegisterForm} = formSlice.actions;
 export default formSlice.reducer;

@@ -3,13 +3,17 @@ import close from "../../../assets/icons/closeIcon.svg";
 import apple from "../../../assets/icons/appleIcon.svg";
 import google from "../../../assets/icons/googleIcon.svg";
 import facebook from "../../../assets/icons/facebookIconForm.svg";
+import { useDispatch } from "react-redux";
+import { closeRegisterForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
+
 const Register = () => {
+    const dispatch = useDispatch();
 
     return (
         <div className={style.formCard}>
             <h2 className={style.title}>Register</h2>
 
-            <button className={style.closeButton}>
+            <button className={style.closeButton} onClick={() => dispatch(closeRegisterForm())}>
                 <img src={close} alt="close" />
             </button>
 
