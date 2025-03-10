@@ -21,6 +21,9 @@ const FilterBar = () => {
     const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const [activeFilter, setActiveFilter] = useState<number | null>(null);
     const [startIndex, setStartIndex] = useState<number>(0);
+    const [hoveredFilter, setHoveredFilter] = useState<number | null>(null);
+    
+
 
     const scrollToButton = (index: number) => {
         const button = buttonRefs.current[index];
@@ -76,10 +79,14 @@ const FilterBar = () => {
                 {filterOptions.slice(startIndex, startIndex + 5).map((option, index) => (
                     <button
                         key={option.id}
+                        
                         ref={(el) => { buttonRefs.current[index] = el || null; }}
-                        className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""}`}
+                        className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""} ${hoveredFilter === option.id ? styles.hover : ""}`}
                         onClick={() => handleFilterClick(option.id, index)}
                         onMouseDown={() => handleLastVisibleIconClick(index)} 
+                        onMouseEnter={() => setHoveredFilter(option.id)}
+                        onMouseLeave={() => setHoveredFilter(null)}
+
                     >
                         <div className={styles.iconWrapper}>
                             <img
@@ -91,7 +98,7 @@ const FilterBar = () => {
                             />
                         </div>
                         <span className={styles.label}>{option.label}</span>
-                        {activeFilter === option.id && <div className={styles.activeIndicator}></div>}
+                        <div className={`${styles.activeIndicator} ${(activeFilter === option.id || hoveredFilter === option.id) ? styles.visible : ""}`} />
                     </button>
                 ))}
             </div>
