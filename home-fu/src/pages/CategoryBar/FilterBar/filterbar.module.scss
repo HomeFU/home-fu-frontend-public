@@ -6,20 +6,20 @@
     flex: 1;
     overflow: hidden;
     top: 11px;
+}
 
+.filterBarWrapper {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
 }
 
 .filterBar {
     display: flex;
     gap: 35px;
-    overflow: hidden;
     padding-bottom: 10px;
     padding-left: 35px;
     position: relative;
-}
-
-.filterBarInner {
-    display: flex;
     transition: transform 0.5s ease-in-out;
 }
 
@@ -88,7 +88,6 @@
     opacity: 1;
 }
 
-
 @keyframes indicatorAppear {
     from {
         width: 0;
@@ -128,18 +127,4 @@
 
 .scrollButton.scrollRight {
     right: 10px;
-}
-.filterButton:hover .activeIndicator {
-    width: 76.5px;
-    opacity: 1;
-}
-.activeIndicator {
-    width: 0;
-    opacity: 0;
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.filterButton:hover .activeIndicator {
-    width: 76.5px;
-    opacity: 1;
 }

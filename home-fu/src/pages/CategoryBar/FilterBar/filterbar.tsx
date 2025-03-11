@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "./filterbar.module.scss";
 
 const filterOptions = [
@@ -18,105 +18,86 @@ const filterOptions = [
 
 const FilterBar = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const [activeFilter, setActiveFilter] = useState<number | null>(null);
     const [startIndex, setStartIndex] = useState<number>(0);
     const [hoveredFilter, setHoveredFilter] = useState<number | null>(null);
-    
+    const [translateX, setTranslateX] = useState(0);
 
+    useEffect(() => {
+        setTranslateX(-startIndex * 120);
+    }, [startIndex]);
 
-    const scrollToButton = (index: number) => {
-        const button = buttonRefs.current[index];
-        const container = scrollContainerRef.current;
-
-        if (button && container) {
-            const buttonLeft = button.offsetLeft;
-            const buttonWidth = button.offsetWidth;
-            const containerWidth = container.clientWidth;
-            const maxScrollLeft = container.scrollWidth - containerWidth;
-
-            let targetScroll = buttonLeft - containerWidth / 2 + buttonWidth / 2;
-            if (targetScroll < 0) targetScroll = 0;
-            if (targetScroll > maxScrollLeft) targetScroll = maxScrollLeft;
-
-            container.scrollTo({
-                left: targetScroll,
-                behavior: "smooth", 
-            });
-        }
-    };
-
-    const handleFilterClick = (id: number, index: number) => {
+    const handleFilterClick = (id: number) => {
         setActiveFilter(id);
-        setTimeout(() => {
-            scrollToButton(index);
-        }, 100);
-    };
-
-    const handleLastIconClick = () => {
-        if (startIndex + 5 < filterOptions.length) {
-            setTimeout(() => setStartIndex(startIndex + 1), 150);
+        const selectedIndex = filterOptions.findIndex((option) => option.id === id);
+        if (selectedIndex === startIndex + 5) {
+            handleNext();
+        }
+        if (selectedIndex === startIndex) {
+            handlePrev();
         }
     };
 
-    const handleFirstIconClick = () => {
+    const handleNext = () => {
+        if (startIndex + 6 < filterOptions.length) {
+            setStartIndex((prev) => prev + 1);
+        }
+    };
+
+    const handlePrev = () => {
         if (startIndex > 0) {
-            setTimeout(() => setStartIndex(startIndex - 1), 150);
-        }
-    };
-
-    const handleLastVisibleIconClick = (index: number) => {
-        if (index === 4 && startIndex + 5 < filterOptions.length) {
-            setTimeout(() => setStartIndex(startIndex + 1), 150);
-        } else if (index === 0 && startIndex > 0) {
-            setTimeout(() => setStartIndex(startIndex - 1), 150);
+            setStartIndex((prev) => prev - 1);
         }
     };
 
     return (
         <div className={styles.filterBarContainer}>
-            <div className={styles.filterBar} ref={scrollContainerRef}>
-                {filterOptions.slice(startIndex, startIndex + 5).map((option, index) => (
-                    <button
-                        key={option.id}
-                        
-                        ref={(el) => { buttonRefs.current[index] = el || null; }}
-                        className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""} ${hoveredFilter === option.id ? styles.hover : ""}`}
-                        onClick={() => handleFilterClick(option.id, index)}
-                        onMouseDown={() => handleLastVisibleIconClick(index)} 
-                        onMouseEnter={() => setHoveredFilter(option.id)}
-                        onMouseLeave={() => setHoveredFilter(null)}
-
-                    >
-                        <div className={styles.iconWrapper}>
-                            <img
-                                src={`/src/assets/icons/${option.icon}`}
-                                alt={option.label}
-                                className={styles.icon}
-                                width="24"
-                                height="24"
-                            />
-                        </div>
-                        <span className={styles.label}>{option.label}</span>
-                        <div className={`${styles.activeIndicator} ${(activeFilter === option.id || hoveredFilter === option.id) ? styles.visible : ""}`} />
-                    </button>
-                ))}
+            <div className={styles.filterBarWrapper}>
+                <div
+                    className={styles.filterBar}
+                    ref={scrollContainerRef}
+                    style={{ transform: `translateX(${translateX}px)`, transition: "transform 0.5s ease-in-out" }}
+                >
+                    {filterOptions.map((option) => (
+                        <button
+                            key={option.id}
+                            className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""} ${hoveredFilter === option.id ? styles.hover : ""}`}
+                            onClick={() => handleFilterClick(option.id)}
+                            onMouseEnter={() => setHoveredFilter(option.id)}
+                            onMouseLeave={() => setHoveredFilter(null)}
+                        >
+                            <div className={styles.iconWrapper}>
+                                <img
+                                    src={`/src/assets/icons/${option.icon}`}
+                                    alt={option.label}
+                                    className={styles.icon}
+                                    width="24"
+                                    height="24"
+                                />
+                            </div>
+                            <span className={styles.label}>{option.label}</span>
+                            <div className={`${styles.activeIndicator} ${(activeFilter === option.id || hoveredFilter === option.id) ? styles.visible : ""}`} />
+                        </button>
+                    ))}
+                </div>
             </div>
 
             <div className={styles.scrollControls}>
-                {startIndex > 0 && ( 
-                    <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={handleFirstIconClick}>
+                {startIndex > 0 && (
+                    <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={handlePrev}>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
                 )}
 
-                <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={handleLastIconClick}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
+                {startIndex + 5 < filterOptions.length && (
+                    <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={handleNext}>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
+                )}
             </div>
         </div>
     );
