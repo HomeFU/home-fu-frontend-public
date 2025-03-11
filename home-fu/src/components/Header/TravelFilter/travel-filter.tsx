@@ -1,7 +1,9 @@
+"use client"
 import style from './travel-filter.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
+import { DateArrival } from './DateArrival/dateArrival';
+import { DateDeparture } from './DateDeparture/dateDeparture';
 const TravetFilter = () => {
 
     return (<>
@@ -14,22 +16,24 @@ const TravetFilter = () => {
                     className={style.input}
                 />
             </div>
-            <div className={style.inputSection}>
+            <DateArrival/>
+            <DateDeparture/>
+            {/* <div className={style.inputSection}>
                 <div className={style.inputLabel}>Прибуття</div>
                 <input
                     type="text"
                     placeholder="Додайте дату"
                     className={style.input}
                 />
-            </div>
-            <div className={style.inputSection}>
+            </div> */}
+            {/* <div className={style.inputSection}>
                 <div className={style.inputLabel}>Виїзд</div>
                 <input
                     type="text"
                     placeholder="Додайте дату"
                     className={style.input}
                 />
-            </div>
+            </div> */}
             <div className={style.inputSection}>
                 <div className={style.inputLabel}>Хто</div>
                 <input
