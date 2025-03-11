@@ -15,7 +15,7 @@
 
 .filterBar {
     display: flex;
-    gap: 24px;
+    gap: 30px;
     padding-bottom: 10px;
     position: relative;
     transition: transform 0.5s ease-in-out;
@@ -29,7 +29,6 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 5px;
     min-width: 70px;
     transition: all 0.3s ease-in-out;
 
@@ -69,11 +68,11 @@
 
 .activeIndicator {
     position: absolute;
-    bottom: -10px;
+    bottom: -5px;
     left: 50%;
     transform: translateX(-50%);
     width: 0; 
-    height: 2px;
+    height: 1.8px;
     background-color: #211E1A;
     border: none;
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -82,7 +81,7 @@
 
 .filterButton.active .activeIndicator,
 .filterButton:hover .activeIndicator {
-    width: 76.5px;
+    width: 100%;
     opacity: 1;
 }
 
