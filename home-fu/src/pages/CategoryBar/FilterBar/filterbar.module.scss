@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; 
     flex: 1;
     overflow: hidden;
     top: 11px;
@@ -10,15 +9,14 @@
 
 .filterBarWrapper {
     overflow: hidden;
-    width: 100%;
+    width: 95%;
     display: flex;
 }
 
 .filterBar {
     display: flex;
-    gap: 35px;
+    gap: 24px;
     padding-bottom: 10px;
-    padding-left: 35px;
     position: relative;
     transition: transform 0.5s ease-in-out;
 }
@@ -122,9 +120,9 @@
 }
 
 .scrollButton.scrollLeft {
-    left: 20px;
+    left: 0;
 }
 
 .scrollButton.scrollRight {
-    right: 10px;
+    right: 0;
 }
