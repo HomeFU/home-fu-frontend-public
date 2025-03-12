@@ -18,7 +18,7 @@ const filterOptions = [
 
 const FilterBar = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [activeFilter, setActiveFilter] = useState<number | null>(null);
+    const [activeFilter, setActiveFilter] = useState<number>(filterOptions[0].id);
     const [startIndex, setStartIndex] = useState<number>(0);
     const [hoveredFilter, setHoveredFilter] = useState<number | null>(null);
     const [translateX, setTranslateX] = useState(0);
@@ -28,25 +28,29 @@ const FilterBar = () => {
     }, [startIndex]);
 
     const handleFilterClick = (id: number) => {
-        setActiveFilter(id);
+        if (id !== activeFilter) {
+            setActiveFilter(id);
+        }
+    
         const selectedIndex = filterOptions.findIndex((option) => option.id === id);
-        if (selectedIndex === startIndex + 5) {
-            handleNext();
-        }
-        if (selectedIndex === startIndex) {
-            handlePrev();
+    
+        if (selectedIndex >= startIndex + 5) {
+            handleNext(5);
+        } else if (selectedIndex <= startIndex + 1) {
+            handlePrev(5);
         }
     };
+    
 
-    const handleNext = () => {
+    const handleNext = (step = 5) => {
         if (startIndex + 6 < filterOptions.length) {
-            setStartIndex((prev) => prev + 1);
+            setStartIndex((prev) => Math.min(prev + step, filterOptions.length - 6));
         }
     };
 
-    const handlePrev = () => {
+    const handlePrev = (step = 5) => {
         if (startIndex > 0) {
-            setStartIndex((prev) => prev - 1);
+            setStartIndex((prev) => Math.max(prev - step, 0));
         }
     };
 
@@ -84,15 +88,15 @@ const FilterBar = () => {
 
             <div className={styles.scrollControls}>
                 {startIndex > 0 && (
-                    <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={handlePrev}>
+                    <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={() => handlePrev()}>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
                 )}
 
-                {startIndex + 5 < filterOptions.length && (
-                    <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={handleNext}>
+                {startIndex + 6 < filterOptions.length && (
+                    <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={() => handleNext()}>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
