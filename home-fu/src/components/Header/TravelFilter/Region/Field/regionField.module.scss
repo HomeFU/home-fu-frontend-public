@@ -1,0 +1,26 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+.wrapperRegionBlock {
+    position: relative;
+    width: 212px;
+}
+
+.inputLabel {
+    @include text(500, 12px, #211E1A)
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    background: none;
+    border: none;
+    padding: 5px 0 0 0;
+
+    &::placeholder {
+        @include text(500, 12px, #8A8278);
+    }
+}
