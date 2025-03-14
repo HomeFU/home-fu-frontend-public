@@ -20,27 +20,21 @@ const FilterBar = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [activeFilter, setActiveFilter] = useState<number>(filterOptions[0].id);
     const [startIndex, setStartIndex] = useState<number>(0);
-    const [hoveredFilter, setHoveredFilter] = useState<number | null>(null);
     const [translateX, setTranslateX] = useState(0);
+    const [showLeftButton, setShowLeftButton] = useState(false);
+
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
     useEffect(() => {
         setTranslateX(-startIndex * 120);
+        setShowLeftButton(startIndex > 0);
     }, [startIndex]);
 
     const handleFilterClick = (id: number) => {
-        if (id !== activeFilter) {
-            setActiveFilter(id);
-        }
-    
-        const selectedIndex = filterOptions.findIndex((option) => option.id === id);
-    
-        if (selectedIndex >= startIndex + 5) {
-            handleNext(5);
-        } else if (selectedIndex <= startIndex + 1) {
-            handlePrev(5);
-        }
+        setActiveFilter(id);
     };
-    
 
     const handleNext = (step = 5) => {
         if (startIndex + 6 < filterOptions.length) {
@@ -53,6 +47,26 @@ const FilterBar = () => {
             setStartIndex((prev) => Math.max(prev - step, 0));
         }
     };
+    const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+        setIsDragging(true);
+        setStartX("touches" in e ? e.touches[0].clientX : e.clientX);
+        setScrollLeft(translateX);
+    };
+    const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+        if (!isDragging) return;
+        const x = "touches" in e ? e.touches[0].clientX : e.clientX;
+        const walk = x - startX;
+        const newTranslateX = scrollLeft + walk;
+
+        setTranslateX(newTranslateX);
+        setShowLeftButton(newTranslateX < 0); 
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
+        const newIndex = Math.round(-translateX / 120); 
+        setStartIndex(newIndex);
+    };
 
     return (
         <div className={styles.filterBarContainer}>
@@ -60,15 +74,20 @@ const FilterBar = () => {
                 <div
                     className={styles.filterBar}
                     ref={scrollContainerRef}
-                    style={{ transform: `translateX(${translateX}px)`, transition: "transform 0.5s ease-in-out" }}
+                    style={{ transform: `translateX(${translateX}px)`, transition: isDragging ? "none" : "transform 0.5s ease-in-out" }}
+                    onMouseDown={handleTouchStart}
+                    onMouseMove={handleTouchMove}
+                    onMouseUp={handleTouchEnd}
+                    onMouseLeave={handleTouchEnd}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
                 >
                     {filterOptions.map((option) => (
                         <button
                             key={option.id}
-                            className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""} ${hoveredFilter === option.id ? styles.hover : ""}`}
+                            className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""}`}
                             onClick={() => handleFilterClick(option.id)}
-                            onMouseEnter={() => setHoveredFilter(option.id)}
-                            onMouseLeave={() => setHoveredFilter(null)}
                         >
                             <div className={styles.iconWrapper}>
                                 <img
@@ -80,14 +99,14 @@ const FilterBar = () => {
                                 />
                             </div>
                             <span className={styles.label}>{option.label}</span>
-                            <div className={`${styles.activeIndicator} ${(activeFilter === option.id || hoveredFilter === option.id) ? styles.visible : ""}`} />
+                            <div className={`${styles.activeIndicator} ${activeFilter === option.id ? styles.visible : ""}`} />
                         </button>
                     ))}
                 </div>
             </div>
 
             <div className={styles.scrollControls}>
-                {startIndex > 0 && (
+                {showLeftButton && (
                     <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={() => handlePrev()}>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
