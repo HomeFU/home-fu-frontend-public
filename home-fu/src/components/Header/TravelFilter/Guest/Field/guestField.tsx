@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import style from "./guestField.module.scss";
 import {toggleGuest} from "../../../../../redux/TravelFilter/GuestSlices/guestSlice";
 import {closeRegion} from "../../../../../redux/TravelFilter/regionSlice";
+import { closeDateArrival } from "../../../../../redux/DateArrivalSlice/arrivalSlice";
+import { closeDateDeparture } from "../../../../../redux/DateDepartureSlice/departureSlice";
 
 export const GuestField = () => {
     const dispatch = useDispatch();
@@ -9,6 +11,8 @@ export const GuestField = () => {
     const openCloseGuestBlock = () => {
         dispatch(toggleGuest()); 
         dispatch(closeRegion());
+        dispatch(closeDateDeparture());
+        dispatch(closeDateArrival());
     };
 
     return (

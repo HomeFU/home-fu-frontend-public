@@ -12,23 +12,21 @@ import { GuestBlock } from './Guest/Block/guestBlock';
 const TravetFilter = () => {
     const isOpenRegionBlock = useSelector((state) => state.region.isOpen);
     const isOpenGuestBlock = useSelector((state) => state.guest.isOpen);
+    const isOpenArrivalCalendar =  useSelector((state) => state.arrival.isOpen);
+    const isOpenDepartureCalendar = useSelector((state) => state.departure.isOpen);
 
     return (<>
         <div className={style.filterWrapper}>
             <RegionField/>
-            {
-                isOpenRegionBlock && (<RegionBlock/>)
-            }
+            { isOpenRegionBlock && (<RegionBlock/>) }
             <DateArrival/>
             <DateDeparture/>
             <GuestField/>
-            {
-                isOpenGuestBlock && (<GuestBlock/>)
-            }
+            { isOpenGuestBlock && (<GuestBlock/>) }
             <button className={style.searchButton}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size='xl' style={{color: "#fff"}}/>
                 {
-                    isOpenRegionBlock || isOpenGuestBlock ? (<span className={style.search}>Пошук</span>) : ''
+                    isOpenRegionBlock || isOpenGuestBlock || isOpenArrivalCalendar || isOpenDepartureCalendar ? (<span className={style.search}>Пошук</span>) : ''
                 }
             </button>
         </div>
