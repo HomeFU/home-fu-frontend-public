@@ -4,10 +4,11 @@
     color: $color
 }
 
-.wrapperRegionBlock {
-    position: relative;
+.inputSection {
     cursor: pointer;
-    width: 212px;
+    width: 175px;
+    border-left: 1px solid #1F222C;
+    padding-left: 25px;
 }
 
 .inputLabel {

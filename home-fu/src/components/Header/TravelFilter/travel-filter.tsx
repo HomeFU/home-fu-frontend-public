@@ -7,27 +7,29 @@ import { DateDeparture } from './DateDeparture/dateDeparture';
 import { RegionBlock } from './Region/Block/regionBlock';
 import { useSelector } from "react-redux";
 import { RegionField } from './Region/Field/regionField';
+import { GuestField } from './Guest/Field/guestField';
+import { GuestBlock } from './Guest/Block/guestBlock';
 const TravetFilter = () => {
-    const isOpen = useSelector((state) => state.region.isOpen);
+    const isOpenRegionBlock = useSelector((state) => state.region.isOpen);
+    const isOpenGuestBlock = useSelector((state) => state.guest.isOpen);
 
     return (<>
         <div className={style.filterWrapper}>
             <RegionField/>
             {
-                isOpen && (<RegionBlock/>)
+                isOpenRegionBlock && (<RegionBlock/>)
             }
             <DateArrival/>
             <DateDeparture/>
-            <div className={style.inputSection}>
-                <div className={style.inputLabel}>Хто</div>
-                <input
-                    type="text"
-                    placeholder="Додайте гостей"
-                    className={style.input}
-                />
-            </div>
+            <GuestField/>
+            {
+                isOpenGuestBlock && (<GuestBlock/>)
+            }
             <button className={style.searchButton}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size='xl' style={{color: "#fff"}}/>
+                {
+                    isOpenRegionBlock || isOpenGuestBlock ? (<span className={style.search}>Пошук</span>) : ''
+                }
             </button>
         </div>
     </>)
