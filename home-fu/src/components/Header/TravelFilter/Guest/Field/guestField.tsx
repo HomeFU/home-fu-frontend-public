@@ -19,6 +19,7 @@ export const GuestField = () => {
         <div className={style.inputSection} onClick={() => {openCloseGuestBlock()}}>
             <div className={style.inputLabel}>Хто</div>
             <input
+                readOnly={true}
                 type="text"
                 placeholder="Додайте гостей"
                 className={style.input}
