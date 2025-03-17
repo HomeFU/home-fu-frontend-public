@@ -16,7 +16,6 @@ const Filter = () => {
   const dispatch = useDispatch()
   const isOpen = useSelector((state: RootState) => state.filterMenu.isOpen)
   const filters = useSelector((state: RootState) => state.filterMenu.filters)
-
   const [minPrice, setMinPrice] = useState(filters.priceRange.min)
   const [maxPrice, setMaxPrice] = useState(filters.priceRange.max)
   const [minThumbPosition, setMinThumbPosition] = useState(0)
@@ -28,7 +27,6 @@ const Filter = () => {
     } else {
       document.body.style.overflow = "auto"
     }
-
     return () => {
       document.body.style.overflow = "auto"
     }
@@ -93,18 +91,8 @@ const Filter = () => {
         <div className={style.header}>
         <button className={style.closeButton} onClick={() => dispatch(closeFilterMenu())}>
            <svg
-            viewBox="0 0 32 32"
-            aria-hidden="true"
-            role="presentation"
-            focusable="false"
-            style={{
-            display: "block",
-            fill: "none",
-            height: "16px",
-            width: "16px",
-            stroke: "currentcolor",
-            strokeWidth: 3,
-           }}
+            viewBox="0 0 32 32" aria-hidden="true" role="presentation"focusable="false"
+            style={{display: "block",fill: "none",height: "16px",width: "16px",stroke: "currentcolor",strokeWidth: 3, }}
   >
     <path d="m6 6 20 20" />
     <path d="m26 6-20 20" />
@@ -148,14 +136,8 @@ const Filter = () => {
 
               <div className={style.sliderContainer}>
                 <input
-                  type="range"
-                  min="0"
-                  max="14000"
-                  value={minPrice}
-                  onChange={handleMinSliderChange}
-                  onMouseUp={handlePriceChange}
-                  onTouchEnd={handlePriceChange}
-                  className={style.rangeInputMin}
+                  type="range"min="0"max="14000" value={minPrice} onChange={handleMinSliderChange} 
+                  onMouseUp={handlePriceChange} onTouchEnd={handlePriceChange} className={style.rangeInputMin}    
                 />
                 <input
                   type="range"
@@ -287,4 +269,3 @@ const Filter = () => {
 }
 
 export default Filter
-
