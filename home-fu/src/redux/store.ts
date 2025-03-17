@@ -1,8 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import formReducer from "../redux/LoginRegisterFormSlice/formSlice";
+import { configureStore } from "@reduxjs/toolkit"
+import formReducer from "../redux/LoginRegisterFormSlice/formSlice"
+import filterMenuReducer from "../redux/Filtermenu/filtermenu"
 
 export const store = configureStore({
-    reducer:{
-        form: formReducer
-    }
+  reducer: {
+    form: formReducer,
+    filterMenu: filterMenuReducer,
+  },
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
