@@ -5,14 +5,8 @@ import type React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import style from "./filter.module.scss"
-import {
-  closeFilterMenu,
-  setPlaceType,
-  setPriceRange,
-  incrementRoom,
-  decrementRoom,
-  resetFilters,
-} from "../../redux/Filtermenu/filtermenu"
+import { closeFilterMenu,  setPlaceType, setPriceRange, incrementRoom, decrementRoom, resetFilters,}
+from "../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../redux/store"
 
 type PlaceType = "any" | "room" | "entire"
@@ -69,20 +63,15 @@ const Filter = () => {
   }
 
   if (!isOpen) return null
-
-  // Generate a bell curve distribution for the price bars
   const generatePriceBars = () => {
-    const totalBars = 48 // More bars as requested
+    const totalBars = 48 
     const bars = []
 
     for (let i = 0; i < totalBars; i++) {
-      // Create a bell curve distribution
       const position = i / totalBars
       const distanceFromCenter = Math.abs(position - 0.5)
       const bellValue = Math.exp(-distanceFromCenter * distanceFromCenter * 10)
-      const height = bellValue * 60 + 5 // Scale to reasonable height
-
-      // Determine if the bar is in the selected range
+      const height = bellValue * 60 + 5 
       const barPosition = (i / totalBars) * 100
       const isInRange = barPosition >= minThumbPosition && barPosition <= maxThumbPosition
 
@@ -102,27 +91,26 @@ const Filter = () => {
     <div className={style.overlay} onClick={() => dispatch(closeFilterMenu())}>
       <div className={style.filterCard} onClick={(e) => e.stopPropagation()}>
         <div className={style.header}>
-          <button className={style.closeButton} onClick={() => dispatch(closeFilterMenu())}>
-            <svg
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="presentation"
-              focusable="false"
-              style={{
-                display: "block",
-                fill: "none",
-                height: "16px",
-                width: "16px",
-                stroke: "currentcolor",
-                strokeWidth: 3,
-                overflow: "visible",
-              }}
-            >
-              <path d="m6 6 20 20"></path>
-              <path d="m26 6-20 20"></path>
-            </svg>
-          </button>
+        <button className={style.closeButton} onClick={() => dispatch(closeFilterMenu())}>
+           <svg
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            role="presentation"
+            focusable="false"
+            style={{
+            display: "block",
+            fill: "none",
+            height: "16px",
+            width: "16px",
+            stroke: "currentcolor",
+            strokeWidth: 3,
+           }}
+  >
+    <path d="m6 6 20 20" />
+    <path d="m26 6-20 20" />
+  </svg>
+</button>
+
           <h2 className={style.title}>Фільтри</h2>
         </div>
 
@@ -284,7 +272,6 @@ const Filter = () => {
 
           <section className={style.section}>
             <h3 className={style.sectionTitle}>Зручності</h3>
-            {/* Additional amenities would go here */}
           </section>
         </div>
 
