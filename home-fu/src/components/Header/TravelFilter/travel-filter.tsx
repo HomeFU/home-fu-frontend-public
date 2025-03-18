@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import style from './travel-filter.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";

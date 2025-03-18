@@ -1,127 +1,73 @@
-.filterBarContainer {
+.filterBarWrapper {
     position: relative;
     display: flex;
     align-items: center;
-    flex: 1;
-    overflow: hidden;
-    top: 11px;
-}
-
-.filterBarWrapper {
-    overflow: hidden;
-    width: 95%;
-    display: flex;
+    gap: 10px;
+    max-width: 790px;
 }
 
 .filterBar {
     display: flex;
-    gap: 30px;
-    padding-bottom: 10px;
-    position: relative;
-    transition: transform 0.5s ease-in-out;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    width: 100%;
+    gap: 48px;
 }
 
-.filterButton {
+.filterBar::-webkit-scrollbar {
+    display: none; 
+}
+
+.filterItem {
+    cursor: pointer;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    min-width: 70px;
-    transition: all 0.3s ease-in-out;
+    padding-bottom: 6px;
 
-    &:hover {
-        opacity: 0.8;
-    }
-
-    &.active {
-        .label {
-            font-weight: 500;
-        }
-    }
-}
-
-.iconWrapper {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-}
-
-.icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
-.label {
-    font-size: 12px;
-    text-align: center;
-    white-space: nowrap;
-    color: #222222;
-    margin-bottom: 8px;
-}
-
-.activeIndicator {
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0; 
-    height: 1.8px;
-    background-color: #211E1A;
-    border: none;
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    opacity: 0;
-}
-
-.filterButton.active .activeIndicator,
-.filterButton:hover .activeIndicator {
-    width: 100%;
-    opacity: 1;
-}
-
-@keyframes indicatorAppear {
-    from {
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0px;
         width: 0;
-        opacity: 0;
+        height: 2px;
+        background: #716c69;
+        transition: 0.3s;
     }
-    to {
-        width: 76.5px;
-        opacity: 1;
+
+    &:hover::after {
+        width: 100%;
+        transition: 0.3s;
     }
 }
+
+.activeItem::after {
+    width: 100%;
+    background: #211E1A;
+}
+
 
 .scrollButton {
-    position: absolute;
-    top: 38%;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #DDDBD7;
-    border: 1px solid #6F6558;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    background: #DDDBD7;
+    border: 1px solid #6F6558;
+    border-radius: 999px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
+    z-index: 3;
 }
 
-.scrollButton.scrollLeft {
+.leftButton {
     left: 0;
 }
 
-.scrollButton.scrollRight {
+.rightButton {
     right: 0;
 }

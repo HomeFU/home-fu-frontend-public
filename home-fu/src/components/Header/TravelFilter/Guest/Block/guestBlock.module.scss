@@ -4,7 +4,7 @@
     color: $color
 }
 
-.wrapperRuestBlock {
+.wrapperGuestBlock {
     position: absolute;
     right: 0;
     top: 70px;
@@ -15,6 +15,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    z-index: 3;
 }
 
 .itemBlock {

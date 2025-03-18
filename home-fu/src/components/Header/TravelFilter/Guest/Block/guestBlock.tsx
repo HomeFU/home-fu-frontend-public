@@ -27,7 +27,7 @@ export const GuestBlock = () => {
     // console.log("SecondCounter" + counterValue[1])
 
     return (
-        <div className={style.wrapperRuestBlock}>
+        <div className={style.wrapperGuestBlock}>
             {
                 categorys.map((category, index) => (
                     <div className={style.itemBlock} key={category.id}>

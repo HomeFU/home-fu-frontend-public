@@ -1,127 +1,105 @@
-import { useRef, useState, useEffect } from "react";
-import styles from "./filterbar.module.scss";
+import { useEffect, useRef, useState } from "react";
+import icon from "../../../assets/icons/house.svg";
+import style from "./filterbar.module.scss";
 
-const filterOptions = [
-    { id: 1, icon: "iconHome.svg", label: "Гарні краєвиди" },
-    { id: 2, icon: "iconsmallRoom.svg", label: "Невеликі квартири" },
-    { id: 3, icon: "iconbigRoom.svg", label: "Великі квартири" },
-    { id: 4, icon: "iconRoom.svg", label: "Кімнати" },
-    { id: 5, icon: "iconHostel.svg", label: "Хостели" },
-    { id: 6, icon: "iconLuxe.svg", label: "Luxe" },
-    { id: 7, icon: "iconcenterCity.svg", label: "У центрі міста" },
-    { id: 8, icon: "iconVilage.svg", label: "Сільська місцевість" },
-    { id: 9, icon: "iconfromDisagner.svg", label: "Від дизайнера" },
-    { id: 10, icon: "iconSea.svg", label: "Біля моря" },
-    { id: 11, icon: "iconMansion.svg", label: "Особняки" },
-    { id: 12, icon: "iconLegendary.svg", label: "Легендарне" },
+type CategoryItem = {
+    id: number;
+    icon: string;
+    label: string;
+};
+
+const categories: CategoryItem[] = [
+    { id: 1, icon: icon, label: "Гарні краєвиди" },
+    { id: 2, icon: icon, label: "Невеликі квартири" },
+    { id: 3, icon: icon, label: "Великі квартири" },
+    { id: 4, icon: icon, label: "Кімнати" },
+    { id: 5, icon: icon, label: "Хостели" },
+    { id: 6, icon: icon, label: "Luxe" },
+    { id: 7, icon: icon, label: "У центрі міста" },
+    { id: 8, icon: icon, label: "Пляжний відпочинок" },
+    { id: 9, icon: icon, label: "Гори" },
+    { id: 10, icon: icon, label: "Сільська місцевість" },
+    { id: 11, icon: icon, label: "Будиночки в лісі" },
+    { id: 12, icon: icon, label: "Глемпінг" },
+    { id: 13, icon: icon, label: "Будиночки на воді" },
+    { id: 14, icon: icon, label: "Вілли" },
+    { id: 15, icon: icon, label: "Апарт-готелі" },
+    { id: 16, icon: icon, label: "Економ-житло" },
+    { id: 17, icon: icon, label: "Будиночки на деревах" },
+    { id: 18, icon: icon, label: "Історичні будівлі" },
 ];
 
 const FilterBar = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [activeFilter, setActiveFilter] = useState<number>(filterOptions[0].id);
-    const [startIndex, setStartIndex] = useState<number>(0);
-    const [translateX, setTranslateX] = useState(0);
-    const [showLeftButton, setShowLeftButton] = useState(false);
+    const [isSelectedCategori, setSelectedCategori] = useState("Гарні краєвиди");
+    const [isVisibleLeftButton, setVisibleLeftButton] = useState(false);
+    const [isVisibleRightButton, setVisibleRightButton] = useState(true);
 
-    const [isDragging, setIsDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
+    const checkButtonVisibility = () => {
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current;
+            const isScrolledToLeft = container.scrollLeft > 0;
+            const isScrolledToRight = container.scrollLeft + container.clientWidth >= container.scrollWidth - 1;
+
+            setVisibleLeftButton(isScrolledToLeft);
+            setVisibleRightButton(!isScrolledToRight);
+        }
+    };
 
     useEffect(() => {
-        setTranslateX(-startIndex * 120);
-        setShowLeftButton(startIndex > 0);
-    }, [startIndex]);
+        checkButtonVisibility();
+    }, []);
 
-    const handleFilterClick = (id: number) => {
-        setActiveFilter(id);
-    };
+    const handleItem = (item:string) => {
+        setSelectedCategori(item);
+    }
 
-    const handleNext = (step = 5) => {
-        if (startIndex + 6 < filterOptions.length) {
-            setStartIndex((prev) => Math.min(prev + step, filterOptions.length - 6));
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: -200,
+                behavior: "smooth",
+            });
         }
     };
 
-    const handlePrev = (step = 5) => {
-        if (startIndex > 0) {
-            setStartIndex((prev) => Math.max(prev - step, 0));
+    const scrollRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: 200,
+                behavior: "smooth",
+            });
         }
-    };
-    const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
-        setIsDragging(true);
-        setStartX("touches" in e ? e.touches[0].clientX : e.clientX);
-        setScrollLeft(translateX);
-    };
-    const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
-        if (!isDragging) return;
-        const x = "touches" in e ? e.touches[0].clientX : e.clientX;
-        const walk = x - startX;
-        const newTranslateX = scrollLeft + walk;
-
-        setTranslateX(newTranslateX);
-        setShowLeftButton(newTranslateX < 0); 
-    };
-
-    const handleTouchEnd = () => {
-        setIsDragging(false);
-        const newIndex = Math.round(-translateX / 120); 
-        setStartIndex(newIndex);
     };
 
     return (
-        <div className={styles.filterBarContainer}>
-            <div className={styles.filterBarWrapper}>
-                <div
-                    className={styles.filterBar}
-                    ref={scrollContainerRef}
-                    style={{ transform: `translateX(${translateX}px)`, transition: isDragging ? "none" : "transform 0.5s ease-in-out" }}
-                    onMouseDown={handleTouchStart}
-                    onMouseMove={handleTouchMove}
-                    onMouseUp={handleTouchEnd}
-                    onMouseLeave={handleTouchEnd}
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                >
-                    {filterOptions.map((option) => (
-                        <button
-                            key={option.id}
-                            className={`${styles.filterButton} ${activeFilter === option.id ? styles.active : ""}`}
-                            onClick={() => handleFilterClick(option.id)}
-                        >
-                            <div className={styles.iconWrapper}>
-                                <img
-                                    src={`/src/assets/icons/${option.icon}`}
-                                    alt={option.label}
-                                    className={styles.icon}
-                                    width="24"
-                                    height="24"
-                                />
-                            </div>
-                            <span className={styles.label}>{option.label}</span>
-                            <div className={`${styles.activeIndicator} ${activeFilter === option.id ? styles.visible : ""}`} />
-                        </button>
-                    ))}
-                </div>
+        <div className={style.filterBarWrapper}>
+            {isVisibleLeftButton && (
+                <button className={`${style.scrollButton} ${style.leftButton}`} onClick={scrollLeft}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </button>
+            )}
+            <div
+                className={style.filterBar}
+                ref={scrollContainerRef}
+                onScroll={checkButtonVisibility}
+            >
+                {categories.map((el) => (
+                    <div key={el.id} className={`${style.filterItem} ${isSelectedCategori === el.label ? style.activeItem : ''}`} onClick={() => {handleItem(el.label)}}>
+                        <img src={el.icon} alt={el.label} />
+                        <span>{el.label}</span>
+                    </div>
+                ))}
             </div>
-
-            <div className={styles.scrollControls}>
-                {showLeftButton && (
-                    <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={() => handlePrev()}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
-                )}
-
-                {startIndex + 6 < filterOptions.length && (
-                    <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={() => handleNext()}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
-                )}
-            </div>
+            {isVisibleRightButton && (
+                <button className={`${style.scrollButton} ${style.rightButton}`} onClick={scrollRight}>
+                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </button>
+            )}
         </div>
     );
 };
