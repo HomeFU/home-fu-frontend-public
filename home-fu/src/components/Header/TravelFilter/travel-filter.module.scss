@@ -7,7 +7,7 @@
 .filterWrapper {
     display: flex;
     align-items: center;
-    max-width: 779px;
+    width: 680px;
     height: 51px;
     padding: 5px 32px;
     border: 1px solid #2C2823;
@@ -18,31 +18,24 @@
 
 .inputSection {
     cursor: pointer;
-    border-right: 1px solid #1F222C;
+    // border-right: 1px solid #1F222C;
 
     &:last-of-type {
         border-right: none;
     }
 
     &:nth-of-type(1) {
-       flex: 3.3;
-    }
-    
-    &:nth-of-type(2) {
-        flex: 1.5;
+        width: 212px;
     }
     
     &:nth-of-type(3) {
-        flex: 1.5;
+        width: 130px;
     }
     
     &:nth-of-type(4) {
-        flex: 2.5;
+        width: 175px;
     }
-    
-    &:not(:first-of-type) {
-        padding-left: 25px;
-    }
+
 }
 
 .inputLabel {
@@ -65,15 +58,21 @@
     cursor: pointer;
     position: absolute;
     right: 10px;
-    width: 50px;
+    min-width: 50px;
+    padding: 0 15px 0 15px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
     background-color: #6F6558;
     border-radius: 9999px;
 
     &:hover {
         background: #5a4f44;
     } 
+}
+
+.search {
+    @include text(500, 14px, #fff);
 }

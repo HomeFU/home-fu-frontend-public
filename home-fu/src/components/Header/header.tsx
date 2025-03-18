@@ -1,7 +1,7 @@
 import style from "./header.module.scss";
 import RegisterButton from "./RegisterButton/registerbutton";
 import TravetFilter from "./TravelFilter/travel-filter";
-import MapButton from "./MapButton/mapbutton";
+import MapButton from "./mapbutton/mapbutton";
 import { Link } from "react-router-dom";
 
 const Header = () => {

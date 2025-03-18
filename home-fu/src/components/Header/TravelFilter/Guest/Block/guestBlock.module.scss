@@ -1,0 +1,94 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+.wrapperRuestBlock {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    width: 400px;
+    height: 342px;
+    padding: 40px 38px;
+    border-radius: 26px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.itemBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 30px;
+
+    &:nth-of-type(1),
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+        border-bottom: 0.5px solid rgb(221 221 221);
+    }
+
+    &:nth-of-type(2),
+    &:nth-of-type(3),
+    &:nth-of-type(4) {
+        padding-top: 30px;
+    }
+}
+
+.itemDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.title {
+    font-family: 'Nunito Sans';
+    @include text(600, 20px, #000)
+}
+
+.subtitle,
+.travelWithAnimal {
+    font-family: 'Nunito Sans';
+    @include text(400, 13px, #8A8278)
+}
+
+.travelWithAnimal {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.counterBlock {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.buttonIncrement,
+.buttonDecrement {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 9999px;
+    border: 1px solid gray;
+    width: 32px;
+    height: 32px;
+}
+
+.button_no_drop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 9999px;
+    border: 1px solid #d9d9d978;
+    width: 32px;
+    height: 32px;
+    cursor: no-drop;
+
+    svg {
+        color: #d9d9d978;
+    }
+}

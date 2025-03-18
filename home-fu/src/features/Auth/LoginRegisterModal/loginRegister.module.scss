@@ -1,0 +1,21 @@
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #15151599;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.5s ease, pointer-events 0s 0.5s; 
+}
+
+.overlay.open {
+    opacity: 1;
+    transition: opacity 0.5s ease, pointer-events 0s 0.5s; 
+    pointer-events: auto;
+}
