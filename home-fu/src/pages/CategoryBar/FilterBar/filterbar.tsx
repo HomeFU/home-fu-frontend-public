@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import icon from "../../../assets/icons/house.svg";
 import style from "./filterbar.module.scss";
+import  {setSelectedCategori} from "../../../redux/CategoryFilter/CategorySlice/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
 
 type CategoryItem = {
     id: number;
@@ -30,8 +32,10 @@ const categories: CategoryItem[] = [
 ];
 
 const FilterBar = () => {
+    const dispatch = useDispatch();
+    const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
+
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [isSelectedCategori, setSelectedCategori] = useState("Гарні краєвиди");
     const [isVisibleLeftButton, setVisibleLeftButton] = useState(false);
     const [isVisibleRightButton, setVisibleRightButton] = useState(true);
 
@@ -49,10 +53,6 @@ const FilterBar = () => {
     useEffect(() => {
         checkButtonVisibility();
     }, []);
-
-    const handleItem = (item:string) => {
-        setSelectedCategori(item);
-    }
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
@@ -87,7 +87,7 @@ const FilterBar = () => {
                 onScroll={checkButtonVisibility}
             >
                 {categories.map((el) => (
-                    <div key={el.id} className={`${style.filterItem} ${isSelectedCategori === el.label ? style.activeItem : ''}`} onClick={() => {handleItem(el.label)}}>
+                    <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.label ? style.activeItem : ''}`} onClick={() => {dispatch(setSelectedCategori(el.label))}}>
                         <img src={el.icon} alt={el.label} />
                         <span>{el.label}</span>
                     </div>

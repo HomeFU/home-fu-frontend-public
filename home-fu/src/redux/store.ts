@@ -5,6 +5,7 @@ import guestReducer from "./TravelFilter/GuestSlices/guestSlice";
 import countersReducer from "./TravelFilter/GuestSlices/countersSlice";
 import arrivalSlice from "./DateArrivalSlice/arrivalSlice";
 import departureSlice from "./DateDepartureSlice/departureSlice";
+import categorySlice from "./CategoryFilter/CategorySlice/categorySlice"
 
 export const store = configureStore({
     reducer:{
@@ -13,6 +14,7 @@ export const store = configureStore({
         guest: guestReducer,
         counters: countersReducer,
         arrival: arrivalSlice,
-        departure: departureSlice
+        departure: departureSlice,
+        category:categorySlice
     }
 })
