@@ -1,0 +1,74 @@
+.filterBarWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 790px;
+}
+
+.filterBar {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    width: 100%;
+    gap: 48px;
+    overflow-y: hidden;
+}
+
+.filterBar::-webkit-scrollbar {
+    display: none; 
+}
+
+.filterItem {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 6px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        width: 0;
+        height: 2px;
+        background: #716c69;
+        transition: 0.3s;
+    }
+
+    &:hover::after {
+        width: 100%;
+        transition: 0.3s;
+    }
+}
+
+.activeItem::after {
+    width: 100%;
+    background: #211E1A;
+}
+
+
+.scrollButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: #DDDBD7;
+    border: 1px solid #6F6558;
+    border-radius: 999px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.leftButton {
+    left: 0;
+}
+
+.rightButton {
+    right: 0;
+}

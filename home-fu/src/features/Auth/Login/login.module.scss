@@ -1,0 +1,155 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+// .overlay {
+//     position: fixed;
+//     left: 0;
+//     top: 0;
+//     background: #15151599;
+//     width: 100vw;
+//     height: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     z-index: 2;
+//     opacity: 0; 
+//     pointer-events: none; 
+//     transition: opacity 0.5s ease, pointer-events 0s 0.5s; 
+// }
+
+// .overlay.open {
+//     opacity: 1;
+//     transition: opacity 0.5s ease, pointer-events 0s 0.5s; 
+//     pointer-events: auto;
+// }
+
+.formCard {
+    background-color: #f5f5f3;
+    width: 400px;
+    border-radius: 13px;
+    padding: 24px;
+    position: relative;
+    
+}
+
+.title {
+    font-family: 'Nunito Sans';
+    @include text(800, 24px, #211E1A);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.closeButton {
+    position: absolute;
+    color: #6b7280;
+    right: 24px;
+    top: 24px;
+    cursor: pointer;
+
+    &:hover {
+        color: #374151;
+    }
+}
+
+.formContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.input {
+    padding: 15px 24px;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    @include text(400, 18px, #211E1A);
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #9ca3af;
+    }
+
+    &::placeholder {
+        font-family: 'Nunito Sans';
+        @include text(400, 16px, #717171);
+    }
+}
+
+.loginButton {
+    cursor: pointer;
+    padding: 22px 0 22px 0;
+    border-radius: 9999px;
+    background-color: #4a4640;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+    font-family: 'Nunito Sans';
+    @include text(700, 16px, #fff);
+
+    &:hover {
+        background-color: #3d3a35;
+    }
+}
+
+.createAccountHelper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 7px;
+
+    span {
+        font-family: "Nunito Sans";
+        @include text(400, 16px, #717171);
+    }
+
+    button {
+        cursor: pointer;
+        font-family: "Nunito Sans";
+        @include text(400, 16px, #8A8278);
+    }
+}
+.socialButtons {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.socialButton {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    color: #4b5563;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #f9fafb;
+    }
+
+    svg {
+        flex-shrink: 0;
+    }
+
+    span {
+        margin-left: 45%;
+        transform: translateX(-45%);
+    }
+}
+
+.socialIcon {
+    width: 20px;
+    height: 20px;
+}
+

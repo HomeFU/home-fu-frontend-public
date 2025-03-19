@@ -1,0 +1,54 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+.wrapperRegionBlock {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    width: 400px;
+    height: 353px;
+    padding: 40px 38px;
+    border-radius: 26px;
+    background-color: #fff;
+    z-index: 3;
+}
+
+.title {
+    font-family: 'Nunito Sans';
+    @include text(700, 14px, #211E1A);
+    margin-bottom: 25px;
+}
+
+.regionType {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 25px;
+}
+
+.typeRegion {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    transition: .3s;
+
+    img {
+        width: 120px;
+        height: 125px;
+    }
+
+    span {
+        font-family: 'Nunito Sans';
+        @include text(500, 12px, #8A8278);
+    }
+
+    &:hover {
+        transform: scale(1.03);
+        transition: .3s;
+    }
+}
+
