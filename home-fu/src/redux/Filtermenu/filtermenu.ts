@@ -1,4 +1,3 @@
-
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 
 type RoomType = "bedrooms" | "beds" | "bathrooms"
@@ -17,6 +16,7 @@ interface Rooms {
 
 interface FilterState {
   isOpen: boolean
+  isAnimating: boolean // Add this to track animation state
   filters: {
     placeType: PlaceType
     priceRange: PriceRange
@@ -26,6 +26,7 @@ interface FilterState {
 
 const initialState: FilterState = {
   isOpen: false,
+  isAnimating: false,
   filters: {
     placeType: "any",
     priceRange: {
@@ -45,10 +46,17 @@ const filterMenuSlice = createSlice({
   initialState,
   reducers: {
     toggleForm: (state) => {
-      state.isOpen = !state.isOpen
+      // Only toggle if not currently animating
+      if (!state.isAnimating) {
+        state.isOpen = !state.isOpen
+      }
+    },
+    startClosingAnimation: (state) => {
+      state.isAnimating = true
     },
     closeFilterMenu: (state) => {
       state.isOpen = false
+      state.isAnimating = false
     },
     setPlaceType: (state, action: PayloadAction<PlaceType>) => {
       state.filters.placeType = action.payload
@@ -72,8 +80,16 @@ const filterMenuSlice = createSlice({
   },
 })
 
-export const { toggleForm, closeFilterMenu, setPlaceType, setPriceRange, incrementRoom, decrementRoom, resetFilters } =
-  filterMenuSlice.actions
+export const {
+  toggleForm,
+  startClosingAnimation,
+  closeFilterMenu,
+  setPlaceType,
+  setPriceRange,
+  incrementRoom,
+  decrementRoom,
+  resetFilters,
+} = filterMenuSlice.actions
 
 export default filterMenuSlice.reducer
 
