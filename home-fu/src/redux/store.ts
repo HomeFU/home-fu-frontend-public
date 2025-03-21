@@ -5,10 +5,12 @@ import guestReducer from "./TravelFilter/GuestSlices/guestSlice";
 import countersReducer from "./TravelFilter/GuestSlices/countersSlice";
 import arrivalSlice from "./DateArrivalSlice/arrivalSlice";
 import departureSlice from "./DateDepartureSlice/departureSlice";
+import filterMenuReducer from "../redux/Filtermenu/filtermenu";
 
 export const store = configureStore({
     reducer:{
         form: formReducer,
+        filterMenu: filterMenuReducer,
         region:regionReducer,
         guest: guestReducer,
         counters: countersReducer,
@@ -16,3 +18,5 @@ export const store = configureStore({
         departure: departureSlice
     }
 })
+
+
