@@ -6,6 +6,7 @@ import countersReducer from "./TravelFilter/GuestSlices/countersSlice";
 import arrivalSlice from "./DateArrivalSlice/arrivalSlice";
 import departureSlice from "./DateDepartureSlice/departureSlice";
 import categorySlice from "./CategoryFilter/CategorySlice/categorySlice"
+import filterMenuSlice from "./Filtermenu/filtermenu"
 
 export const store = configureStore({
     reducer:{
@@ -15,6 +16,7 @@ export const store = configureStore({
         counters: countersReducer,
         arrival: arrivalSlice,
         departure: departureSlice,
-        category:categorySlice
+        category:categorySlice,
+        filterMenu: filterMenuSlice
     }
 })

@@ -2,15 +2,18 @@ import styles from "./filterbutton.module.scss";
 import iconFilter from "../../../assets/icons/iconFilter.svg";
 import { useDispatch } from "react-redux";
 import { toggleForm } from "../../../redux/Filtermenu/filtermenu";
-
+import Filter from "../../../components/Filtermenu/filter";
 const FilterButton: React.FC = () => {
     const dispatch = useDispatch();
 
     return (
-        <button className={`${styles.registerbutton} ${styles.filterWrapper}`} onClick={() => dispatch(toggleForm())}>
+        <>
+            <button className={`${styles.registerbutton} ${styles.filterWrapper}`} onClick={() => dispatch(toggleForm())}>
             <img src={iconFilter} alt="iconFilter" className={styles.filterIcon} />
             <span className={styles.filterText}>Фільтри</span>
-        </button>
+            </button>
+            <Filter></Filter>
+        </>
     );
 };
 
