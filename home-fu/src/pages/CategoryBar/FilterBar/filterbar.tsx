@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import icon from "../../../assets/icons/house.svg";
 import style from "./filterbar.module.scss";
+import  {setSelectedCategori} from "../../../redux/CategoryFilter/CategorySlice/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
 
 type CategoryItem = {
     id: number;
@@ -9,29 +11,31 @@ type CategoryItem = {
 };
 
 const categories: CategoryItem[] = [
-    { id: 1, icon: icon, label: "Гарні краєвиди" },
-    { id: 2, icon: icon, label: "Невеликі квартири" },
-    { id: 3, icon: icon, label: "Великі квартири" },
-    { id: 4, icon: icon, label: "Кімнати" },
-    { id: 5, icon: icon, label: "Хостели" },
-    { id: 6, icon: icon, label: "Luxe" },
-    { id: 7, icon: icon, label: "У центрі міста" },
-    { id: 8, icon: icon, label: "Пляжний відпочинок" },
-    { id: 9, icon: icon, label: "Гори" },
-    { id: 10, icon: icon, label: "Сільська місцевість" },
-    { id: 11, icon: icon, label: "Будиночки в лісі" },
-    { id: 12, icon: icon, label: "Глемпінг" },
-    { id: 13, icon: icon, label: "Будиночки на воді" },
-    { id: 14, icon: icon, label: "Вілли" },
-    { id: 15, icon: icon, label: "Апарт-готелі" },
-    { id: 16, icon: icon, label: "Економ-житло" },
-    { id: 17, icon: icon, label: "Будиночки на деревах" },
-    { id: 18, icon: icon, label: "Історичні будівлі" },
+    { id: 1, icon: "/src/assets/icons/iconHome.svg", label: "Гарні краєвиди" },
+    { id: 2, icon: "/src/assets/icons/iconsmallRoom.svg", label: "Невеликі квартири" },
+    { id: 3, icon: "/src/assets/icons/iconbigRoom.svg", label: "Великі квартири" },
+    { id: 4, icon: "/src/assets/icons/iconRoom.svg", label: "Кімнати" },
+    { id: 5, icon: "/src/assets/icons/iconHostel.svg", label: "Хостели" },
+    { id: 6, icon: "/src/assets/icons/iconLuxe.svg", label: "Luxe" },
+    { id: 7, icon: "/src/assets/icons/iconcenterCity.svg", label: "У центрі міста" },
+    { id: 8, icon: "/src/assets/icons/iconSea.svg", label: "Пляжний відпочинок" },
+    { id: 9, icon: "/src/assets/icons/iconMountain.svg", label: "Гори" },
+    { id: 10, icon: "/src/assets/icons/iconVilage.svg", label: "Сільська місцевість" },
+    { id: 11, icon: "/src/assets/icons/iconTrees.svg", label: "Будиночки в лісі" },
+    { id: 12, icon: "/src/assets/icons/iconCaravan.svg", label: "Глемпінг" },
+    { id: 13, icon: "/src/assets/icons/iconWaves.svg", label: "Будиночки на воді" },
+    { id: 14, icon: "/src/assets/icons/iconLegendary.svg", label: "Вілли" },
+    { id: 15, icon: "/src/assets/icons/iconMansion.svg", label: "Апарт-готелі" },
+    { id: 16, icon: "/src/assets/icons/iconDoor-closed.svg", label: "Економ-житло" },
+    { id: 17, icon: "/src/assets/icons/iconTent-tree.svg", label: "Будиночки на деревах" },
+    { id: 18, icon: "/src/assets/icons/iconfromDisagner.svg", label: "Історичні будівлі" },
 ];
 
 const FilterBar = () => {
+    const dispatch = useDispatch();
+    const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
+
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [isSelectedCategori, setSelectedCategori] = useState("Гарні краєвиди");
     const [isVisibleLeftButton, setVisibleLeftButton] = useState(false);
     const [isVisibleRightButton, setVisibleRightButton] = useState(true);
 
@@ -49,10 +53,6 @@ const FilterBar = () => {
     useEffect(() => {
         checkButtonVisibility();
     }, []);
-
-    const handleItem = (item:string) => {
-        setSelectedCategori(item);
-    }
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
@@ -87,7 +87,7 @@ const FilterBar = () => {
                 onScroll={checkButtonVisibility}
             >
                 {categories.map((el) => (
-                    <div key={el.id} className={`${style.filterItem} ${isSelectedCategori === el.label ? style.activeItem : ''}`} onClick={() => {handleItem(el.label)}}>
+                    <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.label ? style.activeItem : ''}`} onClick={() => {dispatch(setSelectedCategori(el.label))}}>
                         <img src={el.icon} alt={el.label} />
                         <span>{el.label}</span>
                     </div>
