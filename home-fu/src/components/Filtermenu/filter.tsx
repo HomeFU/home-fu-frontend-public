@@ -7,15 +7,14 @@ import { useEffect, useState } from "react"
 import style from "./filter.module.scss"
 import { closeFilterMenu,  setPlaceType, setPriceRange, incrementRoom, decrementRoom, resetFilters,}
 from "../../redux/Filtermenu/filtermenu"
-import type { RootState } from "../../redux/store"
 
 type PlaceType = "any" | "room" | "entire"
 type RoomType = "bedrooms" | "beds" | "bathrooms"
 
 const Filter = () => {
   const dispatch = useDispatch()
-  const isOpen = useSelector((state: RootState) => state.filterMenu.isOpen)
-  const filters = useSelector((state: RootState) => state.filterMenu.filters)
+  const isOpen = useSelector((state) => state.filterMenu.isOpen)
+  const filters = useSelector((state) => state.filterMenu.filters)
   const [minPrice, setMinPrice] = useState(filters.priceRange.min)
   const [maxPrice, setMaxPrice] = useState(filters.priceRange.max)
   const [minThumbPosition, setMinThumbPosition] = useState(0)
