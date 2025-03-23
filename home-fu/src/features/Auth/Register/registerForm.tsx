@@ -21,7 +21,7 @@ type UserModel = {
 const Register = () => {
     const dispatch = useDispatch();
 
-    const { register, formState: { errors },  handleSubmit, watch} = useForm<UserValidate>();
+    const { register, reset, formState: { errors },  handleSubmit, watch} = useForm<UserValidate>({mode:'onChange'});
 
     const onSubmit: SubmitHandler<UserValidate> = (data) => {
        
@@ -30,6 +30,7 @@ const Register = () => {
             password: data.password,
         }
 
+        reset();
         console.log(user);
     };
 
