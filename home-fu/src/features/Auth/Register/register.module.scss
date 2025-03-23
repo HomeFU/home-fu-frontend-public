@@ -60,6 +60,13 @@
     }
 }
 
+.error {
+    font-family: 'Nunito Sans';
+    @include text(400, 16px, rgb(216, 61, 61));
+    margin-left: 19px;
+    line-height: 24px;
+}
+
 .helperText {
     font-family: 'Nunito Sans';
     @include text(400, 16px, #6b7280);
