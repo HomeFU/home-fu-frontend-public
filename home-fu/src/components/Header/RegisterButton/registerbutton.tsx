@@ -3,10 +3,9 @@ import menuIcon from "../../../assets/icons/iconMenu.svg";
 import userIcon from "../../../assets/icons/iconUser.svg";
 import { useDispatch } from "react-redux";
 import { toggleForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
-// import Login from "../../../features/Auth/Login/loginForm";
-import LoginRegister from "../../../features/Auth/LoginRegisterModal/logiRegisterModal";
+import {LoginRegister} from "../../../features/Auth/LoginRegisterModal/logiRegisterModal";
 
-const RegisterButton = () => {
+export const RegisterButton = () => {
   const dispatch = useDispatch();
   
   return (
@@ -16,9 +15,7 @@ const RegisterButton = () => {
         <img src={userIcon} className={styles.icon} />
       </button>
       <LoginRegister/>
-      {/* <Login/> */}
     </>
   );
 };
 
-export default RegisterButton;

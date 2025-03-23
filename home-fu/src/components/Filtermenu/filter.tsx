@@ -1,7 +1,4 @@
-"use client"
-
 import type React from "react"
-
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import style from "./filter.module.scss"
@@ -11,7 +8,7 @@ from "../../redux/Filtermenu/filtermenu"
 type PlaceType = "any" | "room" | "entire"
 type RoomType = "bedrooms" | "beds" | "bathrooms"
 
-const Filter = () => {
+export const Filter = () => {
   const dispatch = useDispatch()
   const isOpen = useSelector((state) => state.filterMenu.isOpen)
   const filters = useSelector((state) => state.filterMenu.filters)
@@ -266,5 +263,3 @@ const Filter = () => {
     </div>
   )
 }
-
-export default Filter

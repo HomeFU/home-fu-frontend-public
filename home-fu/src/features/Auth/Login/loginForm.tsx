@@ -6,7 +6,7 @@ import facebook from "../../../assets/icons/facebookIconForm.svg";
 import { useDispatch } from "react-redux";
 import { closeLoginForm, openRegisterForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 
-const Login = () => {
+export const Login = () => {
     const dispatch = useDispatch();
     // const isOpenLoginForm = useSelector((state) => state.form.isOpen);
 
@@ -117,5 +117,3 @@ const Login = () => {
         // </div>
     )
 }
-
-export default Login;

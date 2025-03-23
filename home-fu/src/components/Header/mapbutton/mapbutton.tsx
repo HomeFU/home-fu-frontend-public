@@ -5,7 +5,7 @@ type MapButtonProps = {
   onClick?: () => void; 
 };
 
-const MapButton = ({ onClick }: MapButtonProps) => {
+export const MapButton = ({ onClick }: MapButtonProps) => {
   return (
     <button className={styles.mapButton} onClick={onClick}>
       <span className={styles.text}>Показати мапу</span>
@@ -13,5 +13,3 @@ const MapButton = ({ onClick }: MapButtonProps) => {
     </button>
   );
 };
-
-export default MapButton;

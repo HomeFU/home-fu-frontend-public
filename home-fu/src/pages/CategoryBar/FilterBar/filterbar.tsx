@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import icon from "../../../assets/icons/house.svg";
 import style from "./filterbar.module.scss";
 import  {setSelectedCategori} from "../../../redux/CategoryFilter/CategorySlice/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +30,7 @@ const categories: CategoryItem[] = [
     { id: 18, icon: "/src/assets/icons/iconfromDisagner.svg", label: "Історичні будівлі" },
 ];
 
-const FilterBar = () => {
+export const FilterBar = () => {
     const dispatch = useDispatch();
     const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
 
@@ -104,4 +103,3 @@ const FilterBar = () => {
     );
 };
 
-export default FilterBar;

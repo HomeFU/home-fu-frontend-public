@@ -18,7 +18,7 @@ type UserModel = {
     password: string;
 }
 
-const Register = () => {
+export const Register = () => {
     const dispatch = useDispatch();
 
     const { register, reset, formState: { errors },  handleSubmit, watch} = useForm<UserValidate>({mode:'onChange'});
@@ -118,4 +118,3 @@ const Register = () => {
     );
 };
 
-export default Register;

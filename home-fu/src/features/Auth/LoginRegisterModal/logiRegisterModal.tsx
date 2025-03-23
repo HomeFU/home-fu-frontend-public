@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { closeLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
-import Login from "../Login/loginForm";
-import Register from "../Register/registerForm";
+import {Login} from "../Login/loginForm";
+import {Register} from "../Register/registerForm";
 import style from "./loginRegister.module.scss";
 
-const LoginRegister = () => {
+export const LoginRegister = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => state.form.isOpen);
     const isRegisterForm = useSelector((state) => state.form.isOpenRegisterForm);
@@ -19,5 +19,3 @@ const LoginRegister = () => {
         </div>
     )
 }
-
-export default LoginRegister;

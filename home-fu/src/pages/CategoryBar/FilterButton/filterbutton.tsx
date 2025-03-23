@@ -2,8 +2,9 @@ import styles from "./filterbutton.module.scss";
 import iconFilter from "../../../assets/icons/iconFilter.svg";
 import { useDispatch } from "react-redux";
 import { toggleForm } from "../../../redux/Filtermenu/filtermenu";
-import Filter from "../../../components/Filtermenu/filter";
-const FilterButton: React.FC = () => {
+import { Filter } from "../../../components/Filtermenu/filter";
+
+export const FilterButton: React.FC = () => {
     const dispatch = useDispatch();
 
     return (
@@ -17,4 +18,3 @@ const FilterButton: React.FC = () => {
     );
 };
 
-export default FilterButton;

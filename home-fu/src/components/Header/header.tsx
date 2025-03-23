@@ -1,10 +1,10 @@
 import style from "./header.module.scss";
-import RegisterButton from "./RegisterButton/registerbutton";
-import TravetFilter from "./TravelFilter/travel-filter";
-import MapButton from "./mapbutton/mapbutton";
+import {RegisterButton} from "./RegisterButton/registerbutton";
+import {TravetFilter} from "./TravelFilter/travel-filter";
+import {MapButton} from "./mapbutton/mapbutton";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+export const Header = () => {
     return (
         <header className={style.header}>
             <div className={style.contentTop}>
@@ -26,5 +26,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header

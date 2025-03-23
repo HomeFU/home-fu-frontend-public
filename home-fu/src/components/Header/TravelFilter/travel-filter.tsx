@@ -1,4 +1,3 @@
-// "use client"
 import style from './travel-filter.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +8,8 @@ import { useSelector } from "react-redux";
 import { RegionField } from './Region/Field/regionField';
 import { GuestField } from './Guest/Field/guestField';
 import { GuestBlock } from './Guest/Block/guestBlock';
-const TravetFilter = () => {
+
+export const TravetFilter = () => {
     const isOpenRegionBlock = useSelector((state) => state.region.isOpen);
     const isOpenGuestBlock = useSelector((state) => state.guest.isOpen);
     const isOpenArrivalCalendar =  useSelector((state) => state.arrival.isOpen);
@@ -32,5 +32,3 @@ const TravetFilter = () => {
         </div>
     </>)
 }
-
-export default TravetFilter;

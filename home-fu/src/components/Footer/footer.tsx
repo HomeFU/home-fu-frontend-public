@@ -19,7 +19,7 @@ type ActiveTab = {
     [key: string]: Location[];
 }
 
-const Footer = () => {
+export const Footer = () => {
     const [activeTab, setActiveTab] = useState<string>('popular');
 
     const tabs:Tab[] = [
@@ -150,5 +150,3 @@ const Footer = () => {
         </footer>
     </>)
 }
-
-export default Footer;
