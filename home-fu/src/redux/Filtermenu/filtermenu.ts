@@ -16,7 +16,7 @@ interface Rooms {
 
 interface FilterState {
   isOpen: boolean
-  isAnimating: boolean // Add this to track animation state
+  isAnimating: boolean 
   filters: {
     placeType: PlaceType
     priceRange: PriceRange
@@ -46,7 +46,7 @@ const filterMenuSlice = createSlice({
   initialState,
   reducers: {
     toggleForm: (state) => {
-      // Only toggle if not currently animating
+  
       if (!state.isAnimating) {
         state.isOpen = !state.isOpen
       }
