@@ -11,7 +11,7 @@ type CategoryItem = {
 };
 
 const categories: CategoryItem[] = [
-    { id: 1, icon: "/src/assets/icons/iconHome.svg", label: "Гарні краєвиди" },
+    { id: 1, icon: "/src/assets/icons/iconHomes.svg", label: "Гарні краєвиди" },
     { id: 2, icon: "/src/assets/icons/iconsmallRoom.svg", label: "Невеликі квартири" },
     { id: 3, icon: "/src/assets/icons/iconbigRoom.svg", label: "Великі квартири" },
     { id: 4, icon: "/src/assets/icons/iconRoom.svg", label: "Кімнати" },

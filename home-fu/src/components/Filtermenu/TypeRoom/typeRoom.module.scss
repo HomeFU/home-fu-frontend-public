@@ -1,0 +1,113 @@
+.typeRoomContainer {
+  padding: 24px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.title {
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #222;
+  margin: 0;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s ease;
+}
+
+.chevronUp {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s ease;
+  transform: rotate(180deg);
+}
+
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 2000px;
+    transform: translateY(0);
+  }
+}
+
+.typeButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  min-width: 80px;
+
+  &:hover {
+    border-color: #222;
+  }
+
+  &.selected {
+    background-color: #f7f7f7;
+    border-color: #222;
+  }
+}
+
+.typeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.typeName {
+  font-weight: 400;
+  font-size: 16px;
+  color: #222;
+  text-align: center;
+}
+

@@ -11,6 +11,9 @@ import PriceRange from "../Filtermenu/PriceRange/RriceRangeScroll"
 import RoomBedroom from "../Filtermenu//RoomBedroom/RoomBedroomButton"
 import Amenities from "../Filtermenu/Amenities/Amenities"
 import Armoring from "../Filtermenu/Armoring/Armoring"
+import TypeRoom from "../Filtermenu/TypeRoom/typeRoom"
+import Facilities from "../Filtermenu/Facilities/facilities"
+import LanguageMaster from "../Filtermenu/LanguageMaster/languageMaster"
 
 const Filter = () => {
   const dispatch = useDispatch()
@@ -35,16 +38,31 @@ const Filter = () => {
 
   return (
     <div className={`${style.overlay} ${isAnimating ? style.fadeOut : ""}`} onClick={handleClose}>
-     <div className={`${style.filterCard} ${isAnimating ? style.scaleOut : ""}`} onClick={(e) => e.stopPropagation()}>
-    <div className={style.header}>
-      <button className={style.closeButton} onClick={handleClose} aria-label="Закрити">
-        <svg viewBox="0 0 32 32" width="16" height="16" stroke="currentColor" strokeWidth="3" fill="none">
-          <path d="M6 6 L26 26" />
-          <path d="M26 6 L6 26" />
-        </svg>
-      </button>
-      <h2 className={style.title}>Фільтри</h2>
-    </div>
+      <div className={`${style.filterCard} ${isAnimating ? style.scaleOut : ""}`} onClick={(e) => e.stopPropagation()}>
+        <div className={style.header}>
+          <button className={style.closeButton} onClick={handleClose}>
+            <svg
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              role="presentation"
+              focusable="false"
+              style={{
+                display: "block",
+                fill: "none",
+                height: "16px",
+                width: "16px",
+                stroke: "currentcolor",
+                strokeWidth: 3,
+                overflow: "visible",
+              }}
+            >
+              <path d="m6 6 20 20" />
+              <path d="m26 6-20 20" />
+            </svg>
+          </button>
+          <h2 className={style.title}>Фільтри</h2>
+        </div>
 
         <div className={style.content}>
           <section className={style.section}>
@@ -69,9 +87,20 @@ const Filter = () => {
           </section>
 
           <section className={style.section}>
-            <Armoring/>
+            <Armoring />
           </section>
-          
+
+          <section className={style.section}>
+            <TypeRoom />
+          </section>
+
+          <section className={style.section}>
+            <Facilities />
+          </section>
+
+          <section className={style.section}>
+            <LanguageMaster />
+          </section>
         </div>
 
         <div className={style.footer}>
@@ -91,3 +120,4 @@ const Filter = () => {
 }
 
 export default Filter
+
