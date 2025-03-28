@@ -34,6 +34,10 @@ const Filter = () => {
     setTimeout(() => dispatch(closeFilterMenu()), 300)
   }
 
+  const handleResetFilters = () => {
+    dispatch(resetFilters())
+  }
+
   if (!isOpen && !isAnimating) return null
 
   return (
@@ -104,12 +108,7 @@ const Filter = () => {
         </div>
 
         <div className={style.footer}>
-          <button
-            className={style.clearButton}
-            onClick={() => {
-              dispatch(resetFilters())
-            }}
-          >
+          <button className={style.clearButton} onClick={handleResetFilters}>
             Очистити все
           </button>
           <button className={style.showResultsButton}>Показати 1000+ осель</button>

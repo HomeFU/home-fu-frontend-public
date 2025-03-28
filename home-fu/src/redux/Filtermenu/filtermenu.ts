@@ -1,32 +1,30 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
+import type { PayloadAction } from "@reduxjs/toolkit"
 
 type RoomType = "bedrooms" | "beds" | "bathrooms"
-type PlaceType = "any" | "room" | "entire"
 
-interface PriceRange {
-  min: number
-  max: number
-}
-
-interface Rooms {
-  bedrooms: number
-  beds: number
-  bathrooms: number
-}
-
-interface FilterState {
+interface FilterMenuState {
   isOpen: boolean
-  isAnimating: boolean 
+  isAnimating: boolean
+  resetTriggered: boolean
   filters: {
-    placeType: PlaceType
-    priceRange: PriceRange
-    rooms: Rooms
+    placeType: "any" | "room" | "entire"
+    priceRange: {
+      min: number
+      max: number
+    }
+    rooms: {
+      bedrooms: number
+      beds: number
+      bathrooms: number
+    }
   }
 }
 
-const initialState: FilterState = {
+const initialState: FilterMenuState = {
   isOpen: false,
   isAnimating: false,
+  resetTriggered: false,
   filters: {
     placeType: "any",
     priceRange: {
@@ -41,55 +39,62 @@ const initialState: FilterState = {
   },
 }
 
-const filterMenuSlice = createSlice({
+export const filterMenuSlice = createSlice({
   name: "filterMenu",
   initialState,
   reducers: {
-    toggleForm: (state) => {
-  
-      if (!state.isAnimating) {
-        state.isOpen = !state.isOpen
-      }
-    },
-    startClosingAnimation: (state) => {
-      state.isAnimating = true
+    openFilterMenu: (state) => {
+      state.isOpen = true
+      state.isAnimating = false
     },
     closeFilterMenu: (state) => {
       state.isOpen = false
       state.isAnimating = false
     },
-    setPlaceType: (state, action: PayloadAction<PlaceType>) => {
+    toggleForm: (state) => {
+      state.isOpen = !state.isOpen
+      state.isAnimating = false
+    },
+    startClosingAnimation: (state) => {
+      state.isAnimating = true
+    },
+    setPlaceType: (state, action: PayloadAction<"any" | "room" | "entire">) => {
       state.filters.placeType = action.payload
     },
-    setPriceRange: (state, action: PayloadAction<PriceRange>) => {
+    setPriceRange: (state, action: PayloadAction<{ min: number; max: number }>) => {
       state.filters.priceRange = action.payload
     },
     incrementRoom: (state, action: PayloadAction<RoomType>) => {
-      const roomType = action.payload
-      state.filters.rooms[roomType] += 1
+      if (state.filters.rooms[action.payload] < 8) {
+        state.filters.rooms[action.payload] += 1
+      }
     },
     decrementRoom: (state, action: PayloadAction<RoomType>) => {
-      const roomType = action.payload
-      if (state.filters.rooms[roomType] > 0) {
-        state.filters.rooms[roomType] -= 1
+      if (state.filters.rooms[action.payload] > 0) {
+        state.filters.rooms[action.payload] -= 1
       }
+    },
+    setRoomValue: (state, action: PayloadAction<{ type: RoomType; value: number }>) => {
+      state.filters.rooms[action.payload.type] = action.payload.value
     },
     resetFilters: (state) => {
       state.filters = initialState.filters
+      state.resetTriggered = !state.resetTriggered
     },
   },
 })
 
 export const {
+  openFilterMenu,
+  closeFilterMenu,
   toggleForm,
   startClosingAnimation,
-  closeFilterMenu,
   setPlaceType,
   setPriceRange,
   incrementRoom,
   decrementRoom,
+  setRoomValue,
   resetFilters,
 } = filterMenuSlice.actions
 
 export default filterMenuSlice.reducer
-

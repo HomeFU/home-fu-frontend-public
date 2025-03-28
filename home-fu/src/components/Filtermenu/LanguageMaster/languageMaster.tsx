@@ -1,8 +1,10 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { useSelector } from "react-redux"
 import style from "./languageMaster.module.scss"
+import type { RootState } from "../../../redux/store"
 
 type Language = {
   id: string
@@ -13,6 +15,13 @@ const LanguageMaster: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
+  const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
+
+  useEffect(() => {
+    if (resetTriggered) {
+      setSelectedLanguages([])
+    }
+  }, [resetTriggered])
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)
@@ -77,7 +86,6 @@ const LanguageMaster: React.FC = () => {
     sign: "Мова жестів",
   }
   const languages: Language[] = Object.entries(languageObj).map(([id, name]) => ({ id, name }))
-  
 
   const leftColumnLanguages = languages.filter((_, index) => index % 2 === 0)
   const rightColumnLanguages = languages.filter((_, index) => index % 2 === 1)

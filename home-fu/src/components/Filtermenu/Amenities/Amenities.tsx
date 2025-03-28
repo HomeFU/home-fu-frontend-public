@@ -2,7 +2,9 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import styles from "./Amenities.module.scss"
+import type { RootState } from "../../../redux/store"
 
 const css = styles as Record<string, string>
 type Amenity = {
@@ -20,6 +22,7 @@ const Amenities: React.FC = () => {
   const [expanded, setExpanded] = useState(false)
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([])
   const [animating, setAnimating] = useState(false)
+  const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
   const amenityCategories: AmenityCategory[] = [
     {
       id: "basic",
@@ -73,6 +76,11 @@ const Amenities: React.FC = () => {
   ]
   const arrowIcon = "/src/assets/icons/iconArrow.svg"
   useEffect(() => {
+    if (resetTriggered) {
+      setSelectedAmenities([])
+    }
+  }, [resetTriggered])
+  useEffect(() => {
     if (animating) {
       const timer = setTimeout(() => setAnimating(false), 300)
       return () => clearTimeout(timer)
@@ -89,11 +97,11 @@ const Amenities: React.FC = () => {
     <button
       key={amenity.id}
       className={`${css.amenityButton} ${selectedAmenities.includes(amenity.id) ? css.selected : ""}`}
-      onClick={() => toggleAmenity(amenity.id)}>
-            <span className={css.amenityIcon}>
-           {amenity.icon && <img src={amenity.icon} alt={amenity.name} width={18} height={18} />}
-              </span>
-
+      onClick={() => toggleAmenity(amenity.id)}
+    >
+      <span className={css.amenityIcon}>
+        <img src={amenity.icon || "/placeholder.svg"} alt={amenity.name} width={18} height={18} />
+      </span>
       <span className={css.amenityName}>{amenity.name}</span>
     </button>
   )
@@ -118,13 +126,11 @@ const Amenities: React.FC = () => {
       <button className={css.showMoreButton} onClick={toggleExpanded}>
         {expanded ? "Показати менше" : "Показати більше"}
         <span className={`${css.arrowIcon} ${expanded ? css.arrowUp : ""}`}>
-          {arrowIcon && <img src={arrowIcon} alt="arrow" width={16} height={16} />}
-          </span>
-
+          <img src={arrowIcon || "/placeholder.svg"} alt="arrow" width={16} height={16} />
+        </span>
       </button>
     </>
   )
 }
 
 export default Amenities
-

@@ -1,8 +1,10 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { useSelector } from "react-redux"
 import style from "./facilities.module.scss"
+import type { RootState } from "../../../redux/store"
 
 type AccessibilityOption = {
   id: string
@@ -19,6 +21,13 @@ const Facilities: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
+  const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
+
+  useEffect(() => {
+    if (resetTriggered) {
+      setSelectedOptions([])
+    }
+  }, [resetTriggered])
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)

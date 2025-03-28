@@ -18,20 +18,44 @@ const RoomBedroom: React.FC = () => {
     { type: "bathrooms", label: "Ванні кімнати" },
   ]
 
+  const handleIncrement = (type: RoomType) => {
+    if (filters.rooms[type] < 8) {
+      dispatch(incrementRoom(type))
+    }
+  }
+
+  const handleDecrement = (type: RoomType) => {
+    if (filters.rooms[type] > 0) {
+      dispatch(decrementRoom(type))
+    }
+  }
+
+  const getDisplayValue = (value: number) => {
+    if (value === 0) return "Будь-який"
+    if (value === 8) return "8+"
+    return `${value}+`
+  }
+
   return (
     <>
-      <h3 className={style["sectionTitle"]}>Кімнати та спальні місця</h3>
+      <h3 className={style.sectionTitle}>Кімнати та спальні місця</h3>
       {roomTypes.map(({ type, label }) => (
-        <div key={type} className={style["roomCounter"]}>
-          <div className={style["roomType"]}>{label}</div>
-          <div className={style["counterControls"]}>
-            <button className={style["counterButton"]} onClick={() => dispatch(decrementRoom(type))}>
+        <div key={type} className={style.roomCounter}>
+          <div className={style.roomType}>{label}</div>
+          <div className={style.counterControls}>
+            <button
+              className={`${style.counterButton} ${filters.rooms[type] === 0 ? style.faded : ""}`}
+              onClick={() => handleDecrement(type)}
+              disabled={filters.rooms[type] === 0}
+            >
               −
             </button>
-            <span className={style["counterValue"]}>
-              {filters.rooms[type] === 0 ? "Будь-який" : filters.rooms[type]}
-            </span>
-            <button className={style["counterButton"]} onClick={() => dispatch(incrementRoom(type))}>
+            <span className={style.counterValue}>{getDisplayValue(filters.rooms[type])}</span>
+            <button
+              className={`${style.counterButton} ${filters.rooms[type] === 8 ? style.faded : ""}`}
+              onClick={() => handleIncrement(type)}
+              disabled={filters.rooms[type] === 8}
+            >
               +
             </button>
           </div>
@@ -42,4 +66,3 @@ const RoomBedroom: React.FC = () => {
 }
 
 export default RoomBedroom
-

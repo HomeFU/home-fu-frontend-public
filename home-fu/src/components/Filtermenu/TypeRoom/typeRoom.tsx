@@ -1,8 +1,10 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import style from "./typeroom.module.scss"
+import type { RootState } from "../../../redux/store"
 
 type AccommodationType = {
   id: string
@@ -13,6 +15,7 @@ type AccommodationType = {
 const TypeRoom: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
+  const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
 
   const accommodationTypes: AccommodationType[] = [
     { id: "house", name: "Будинок", icon: "/src/assets/icons/iconHouse.svg" },
@@ -20,6 +23,12 @@ const TypeRoom: React.FC = () => {
     { id: "guesthouse", name: "Гостьовий дім", icon: "/src/assets/icons/iconGuesthouse.svg" },
     { id: "hotel", name: "Готель", icon: "/src/assets/icons/iconHotel.svg" },
   ]
+
+  useEffect(() => {
+    if (resetTriggered) {
+      setSelectedType(null)
+    }
+  }, [resetTriggered])
 
   const selectType = (id: string) => {
     setSelectedType((prev) => (prev === id ? null : id))
@@ -61,4 +70,3 @@ const TypeRoom: React.FC = () => {
 }
 
 export default TypeRoom
-
