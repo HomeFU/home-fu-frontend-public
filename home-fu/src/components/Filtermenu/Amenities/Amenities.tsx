@@ -100,7 +100,7 @@ const Amenities: React.FC = () => {
       onClick={() => toggleAmenity(amenity.id)}
     >
       <span className={css.amenityIcon}>
-        <img src={amenity.icon || "/placeholder.svg"} alt={amenity.name} width={18} height={18} />
+      <img src={amenity.icon} alt={amenity.name} width={18} height={18} />
       </span>
       <span className={css.amenityName}>{amenity.name}</span>
     </button>
@@ -126,7 +126,7 @@ const Amenities: React.FC = () => {
       <button className={css.showMoreButton} onClick={toggleExpanded}>
         {expanded ? "Показати менше" : "Показати більше"}
         <span className={`${css.arrowIcon} ${expanded ? css.arrowUp : ""}`}>
-          <img src={arrowIcon || "/placeholder.svg"} alt="arrow" width={16} height={16} />
+        <img src={arrowIcon} alt="arrow" width={16} height={16} />
         </span>
       </button>
     </>

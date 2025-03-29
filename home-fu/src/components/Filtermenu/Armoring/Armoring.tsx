@@ -72,7 +72,7 @@ const Armoring: React.FC = () => {
       onClick={() => toggleOption(option.id)}
     >
       <span className={css.optionIcon}>
-        <img src={option.icon || "/placeholder.svg"} alt={option.name} width={18} height={18} />
+      <img src={option.icon} alt={option.name} width={18} height={18} />
       </span>
       <span className={css.optionName}>{option.name}</span>
     </button>
@@ -84,7 +84,7 @@ const Armoring: React.FC = () => {
         onClick={() => toggleOption(option.id)}
       >
         <span className={css.optionIcon}>
-          <img src={option.icon || "/placeholder.svg"} alt={option.name} width={18} height={18} />
+        <img src={option.icon} alt={option.name} width={18} height={18} />
         </span>
         <div className={css.optionContent}>
           <span className={css.optionName}>{option.name}</span>
