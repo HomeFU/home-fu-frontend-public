@@ -4,13 +4,13 @@
     color: $color;
 }
 
-.footer {
+.wrapper {
     width: 1135px;
     margin: 600px auto 0 auto;
 }
 
 .footerTitle {
-    @include text (600, 20px , #6F6558);
+    @include text (600, 20px , #000);
 }
 
 .wrapperButtons {
@@ -25,11 +25,12 @@
     // padding: 0 4px;
     padding-bottom: 3px;
     cursor: pointer;
-    @include text (500, 12px , #211E1AA8);
+    @include text (500, 14px , #211E1AA8);
 }
 
 .active {
     border-bottom: 1px solid #211E1A;
+    color: #000;
 }
 
 .tabContent {
@@ -48,12 +49,10 @@
 }
 
 .tabItemTitle {
-    font-family: 'Inder';
     @include text(400, 14px, #2C2823);
 }
 
 .tabItemSubtitle {
-    font-family: 'Inder';
     @include text(400, 12px, #6F6558);
 }
 
@@ -70,7 +69,6 @@
 .hostTitle,
 .homeFuTitle {
     @include text(400, 14px, #2C2823);
-    font-family: 'Inder';
     margin-bottom: 12px;
 }
 
@@ -85,7 +83,6 @@
 .supportListItem,
 .hostListItem,
 .homeFuListItem {
-    font-family: 'Inder';
     @include text(400, 12px, #6F6558);
 }
 
@@ -104,7 +101,6 @@
 }
 
 .footerText {
-    font-family: 'Inder';
     @include text(400, 12px, #6F6558);
 }
 
@@ -115,7 +111,6 @@
 }
 
 .footerLinksItem {
-    font-family: 'Inder';
     @include text(400, 12px, #6F6558);
     text-decoration: underline;
 }
@@ -131,13 +126,11 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-family: 'Inder';
     @include text(400, 14px, #2C2823);
 }
 
 .currencyButton {
     cursor: pointer;
-    font-family: 'Inder';
     @include text(400, 14px, #2C2823);
 }
 

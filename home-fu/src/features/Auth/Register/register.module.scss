@@ -5,7 +5,8 @@
 }
 
 .formCard {
-    background-color: #f5f5f3;
+    background: white;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
     width: 400px;
     border-radius: 13px;
     padding: 24px;
@@ -40,7 +41,6 @@
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: 13px;
 }
 
 .input {
@@ -93,14 +93,19 @@
     cursor: pointer;
     padding: 22px 0 22px 0;
     border-radius: 9999px;
-    background-color: #4a4640;
-    transition: background-color 0.2s;
-    margin-top: 20px;
+    background-color: rgb(52, 104, 194);
+    transition: 0.3s;
+    margin-top: 6px;
     font-family: 'Nunito Sans';
     @include text(700, 16px, #fff);
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
-        background-color: #3d3a35;
+        background-color: rgb(75, 122, 204);
+        transition: 0.3s;
     }
 }
 

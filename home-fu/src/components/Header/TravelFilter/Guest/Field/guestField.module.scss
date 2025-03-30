@@ -7,13 +7,13 @@
 .inputSection {
     cursor: pointer;
     width: 175px;
-    border-left: 1px solid #1F222C;
-    padding-left: 25px;
+    border-left: 1px solid rgb(75, 122, 204);
+    padding-left: 10px;
 }
 
 .inputLabel {
     cursor: pointer;
-    @include text(500, 12px, #211E1A)
+    @include text(500, 14px, #211E1A)
 }
 
 .input {

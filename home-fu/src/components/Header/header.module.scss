@@ -18,6 +18,10 @@
     margin-right: auto;
 }
 
+.logoModifier {
+    color: rgb(52, 104, 194);
+}
+
 .listMenu {
     display: flex;
     align-items: center;
@@ -31,9 +35,13 @@
 
 .listItem,
 .offerItem {
-    @include text(500, 14px, #211E1A);
+    @include text(500, 16px, #211E1A);
     padding: 5px 16px;
 } 
+
+.listItem:hover {
+    color: rgb(52, 104, 194);
+}
 
 .offerItem {
     text-decoration: underline;

@@ -8,14 +8,14 @@ export const Header = () => {
     return (
         <header className={style.header}>
             <div className={style.contentTop}>
-                <div className={style.logo}><Link to="/">HomeFU</Link></div>
+                <div className={style.logo}><Link to="/">Home<span className={style.logoModifier}>FU</span></Link></div>
                 <ul className={style.listMenu}>
                     <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
                     <li className={style.listItem}><Link to="/">Враження</Link></li>
                     <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
                 </ul>
                 <div className={style.offerListWrapper}>
-                    <Link className={style.offerItem} to="/">Запропонувати помешкання на HomeFU</Link>
+                    <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                     <RegisterButton></RegisterButton>
                 </div>
             </div>

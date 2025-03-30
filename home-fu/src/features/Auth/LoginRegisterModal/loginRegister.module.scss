@@ -2,7 +2,6 @@
     position: fixed;
     left: 0;
     top: 0;
-    background: #15151599;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -12,6 +11,7 @@
     opacity: 0; 
     pointer-events: none; 
     z-index: 4;
+    background: rgb(72 72 72 / 22%);
     transition: opacity 0.5s ease, pointer-events 0s 0.5s; 
 }
 

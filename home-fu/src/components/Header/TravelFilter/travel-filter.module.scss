@@ -10,10 +10,11 @@
     width: 680px;
     height: 51px;
     padding: 5px 32px;
-    border: 1px solid #2C2823;
+    border: 1px solid #bdbdbd;
     border-radius: 9999px;
     position: relative;
     margin-right: 80px;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.20);
 }
 
 .inputSection {
@@ -65,11 +66,13 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    background-color: #6F6558;
+    background-color: rgb(52, 104, 194);;
     border-radius: 9999px;
+    transition: 0.3s;
 
     &:hover {
-        background: #5a4f44;
+        background-color: rgb(75, 122, 204);
+        transition: 0.3s;
     } 
 }
 
