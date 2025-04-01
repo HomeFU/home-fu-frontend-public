@@ -67,10 +67,10 @@
     line-height: 24px;
 }
 
-.helperText {
+.errorMessage {
     font-family: 'Nunito Sans';
-    @include text(400, 16px, #6b7280);
-    margin-left: 19px;
+    @include text(400, 16px, red);
+    text-align: center;
     line-height: 24px;
 }
 

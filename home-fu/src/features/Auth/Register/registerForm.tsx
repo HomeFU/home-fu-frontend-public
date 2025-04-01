@@ -6,6 +6,11 @@ import facebook from "../../../assets/icons/facebookIconForm.svg";
 import { useDispatch } from "react-redux";
 import { closeRegisterForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { UserModel } from "../../../types/Auth/auth";
+import { RegistrationUser } from "../../../api/Auth/auth";
+import { useMutation } from "@tanstack/react-query";
+import { openLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
+import { useState } from "react";
 
 type UserValidate = {
     email: string;
@@ -13,15 +18,23 @@ type UserValidate = {
     confirmPassword: string;
 };
 
-type UserModel = {
-    email: string;
-    password: string;
-}
-
 export const Register = () => {
+    const [isErrorMessage, setErrorMessage] = useState<string>('');
+
     const dispatch = useDispatch();
 
     const { register, reset, formState: { errors },  handleSubmit, watch} = useForm<UserValidate>({mode:'onChange'});
+
+    const mutation = useMutation({
+        mutationFn: RegistrationUser,
+        onSuccess: () => {
+            dispatch(openLoginForm());
+            reset();
+        },
+        onError: (error) => {
+            setErrorMessage(error.response.data);
+        }
+    });
 
     const onSubmit: SubmitHandler<UserValidate> = (data) => {
        
@@ -30,8 +43,7 @@ export const Register = () => {
             password: data.password,
         }
 
-        reset();
-        console.log(user);
+        mutation.mutate(user);
     };
 
     return (
@@ -89,8 +101,8 @@ export const Register = () => {
                     <p className={style.error}>{errors.confirmPassword?.message}</p>
                 </div>
 
-                <p>
-                   
+                <p className={style.errorMessage}>
+                    { mutation.isError ? `Error: ${isErrorMessage} !` : '' }
                 </p>
 
                 <button type="submit" className={style.registerButton}>
