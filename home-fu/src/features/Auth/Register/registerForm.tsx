@@ -11,6 +11,7 @@ import { RegistrationUser } from "../../../api/Auth/auth";
 import { useMutation } from "@tanstack/react-query";
 import { openLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 import { useState } from "react";
+import { BeatLoader } from "react-spinners";
 
 type UserValidate = {
     email: string;
@@ -106,7 +107,9 @@ export const Register = () => {
                 </p>
 
                 <button type="submit" className={style.registerButton}>
-                    Register
+                    {
+                        mutation.isPending ? <BeatLoader color="#ffffff" /> : 'Register'
+                    }
                 </button>
             </form>
 
