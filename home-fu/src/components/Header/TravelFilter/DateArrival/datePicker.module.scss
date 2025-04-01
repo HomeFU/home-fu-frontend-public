@@ -7,7 +7,7 @@
 .date_picker {
     width: 130px;
     padding-left: 10px;
-    border-left: 1px solid rgb(75, 122, 204);
+    border-left: 1px solid #000000;
     display: flex;
     align-items: center;
 }
@@ -25,19 +25,16 @@
 }
 
 .date_picker_trigger {
-    font-family: 'Nunito Sans';
     @include text(500, 12px, #211E1A)
 }
 
 .date_picker_label {
-    font-family: 'Nunito Sans';
     @include text(500, 14px, #211E1A)
 }
 
 .date_picker_value {
-    font-family: 'Nunito Sans';
     padding: 5px 0 0 0;
-    @include text(500, 14px, #8A8278);
+    @include text(500, 12px, #8A8278);
 }
 
 .date_picker_value_selected {

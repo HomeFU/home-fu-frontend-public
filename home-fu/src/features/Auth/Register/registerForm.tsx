@@ -89,8 +89,8 @@ export const Register = () => {
                     <p className={style.error}>{errors.confirmPassword?.message}</p>
                 </div>
 
-                <p className={style.policyText}>
-                    *Get acquainted with our <span className={style.policyLink}>Privacy policy</span>
+                <p>
+                   
                 </p>
 
                 <button type="submit" className={style.registerButton}>
