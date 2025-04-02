@@ -90,15 +90,15 @@ const Filter = () => {
             <Armoring />
           </section>
 
-          <section className={style.section}>
+          <section className={`${style.section} ${style.noPaddingSection}`}>
             <TypeRoom />
           </section>
 
-          <section className={style.section}>
+          <section className={`${style.section} ${style.noPaddingSection}`}>
             <Facilities />
           </section>
 
-          <section className={style.section}>
+          <section className={`${style.section} ${style.noPaddingSection}`}>
             <LanguageMaster />
           </section>
         </div>
@@ -115,4 +115,3 @@ const Filter = () => {
 }
 
 export default Filter
-

@@ -115,6 +115,11 @@
   }
 }
 
+/* Специальный класс для секций без padding */
+.noPaddingSection {
+  padding: 0;
+}
+
 .sectionTitle {
   font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   @include text(600, 18px, #222);
