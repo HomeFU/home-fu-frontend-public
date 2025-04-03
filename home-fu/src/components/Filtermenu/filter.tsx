@@ -1,4 +1,3 @@
-"use client"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import style from "./filter.module.scss"
@@ -15,7 +14,7 @@ import TypeRoom from "../Filtermenu/TypeRoom/typeRoom"
 import Facilities from "../Filtermenu/Facilities/facilities"
 import LanguageMaster from "../Filtermenu/LanguageMaster/languageMaster"
 
-const Filter = () => {
+export const Filter = () => {
   const dispatch = useDispatch()
   const { isOpen, isAnimating } = useSelector((state: RootState) => state.filterMenu)
 
@@ -113,5 +112,3 @@ const Filter = () => {
     </div>
   )
 }
-
-export default Filter
