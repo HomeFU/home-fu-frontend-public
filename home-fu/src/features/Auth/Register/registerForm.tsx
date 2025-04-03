@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { closeRegisterForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserModel } from "../../../types/Auth/auth";
-import { RegistrationUser } from "../../../api/Auth/auth";
+import { RegistrationUser } from "../../../api/Auth/authRegistration";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { openLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 import { useState } from "react";
@@ -29,15 +29,15 @@ export const Register = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationKey: ["registration"],
+        mutationKey: ['auth', 'register'],
         mutationFn: RegistrationUser,
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["user"]});
+            queryClient.invalidateQueries({queryKey: ["auth"]});
             dispatch(openLoginForm());
             reset();
         },
         onError: (error) => {
-            setErrorMessage(error.response?.data || 'Ошибка регистрации');
+            setErrorMessage(error.response.data || 'Ошибка регистрации');
         }
     });
 

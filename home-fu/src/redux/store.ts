@@ -7,6 +7,7 @@ import arrivalSlice from "./DateArrivalSlice/arrivalSlice";
 import departureSlice from "./DateDepartureSlice/departureSlice";
 import categorySlice from "./CategoryFilter/CategorySlice/categorySlice"
 import filterMenuSlice from "./Filtermenu/filtermenu"
+import authSlice from "./Auth/authSlice";
 
 export const store = configureStore({
     reducer:{
@@ -17,6 +18,7 @@ export const store = configureStore({
         arrival: arrivalSlice,
         departure: departureSlice,
         category:categorySlice,
-        filterMenu: filterMenuSlice
+        filterMenu: filterMenuSlice,
+        auth: authSlice
     }
 })

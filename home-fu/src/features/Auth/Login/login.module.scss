@@ -64,7 +64,6 @@
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: 13px;
 }
 
 .input {
@@ -82,6 +81,20 @@
         font-family: 'Nunito Sans';
         @include text(400, 16px, #717171);
     }
+}
+
+.error {
+    font-family: 'Nunito Sans';
+    @include text(400, 16px, rgb(216, 61, 61));
+    margin-left: 19px;
+    line-height: 24px;
+}
+
+.errorMessage {
+    font-family: 'Nunito Sans';
+    @include text(400, 16px, red);
+    text-align: center;
+    line-height: 24px;
 }
 
 .loginButton {
