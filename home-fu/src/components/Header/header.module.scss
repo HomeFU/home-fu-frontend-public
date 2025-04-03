@@ -30,12 +30,11 @@
 .offerListWrapper {
     display: flex;
     align-items: center;
-    margin-left: 20px
 }
 
 .listItem,
 .offerItem {
-    @include text(500, 16px, #211E1A);
+    @include text(500, 15px, #211E1A);
     padding: 5px 16px;
 } 
 

@@ -45,13 +45,11 @@
 }
 
 .title {
-    font-family: 'Nunito Sans';
     @include text(600, 20px, #000)
 }
 
 .subtitle,
 .travelWithAnimal {
-    font-family: 'Nunito Sans';
     @include text(400, 13px, #8A8278)
 }
 

@@ -1,105 +1,101 @@
-body {
-    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-    color: #222;
-  }
-  
-  .sectionTitle {
-    font-weight: 600;
-    font-size: 20px;
-    letter-spacing: 0.3px;
-    margin-bottom: 18px;
-  }
-  
-  .amenitiesWrapper {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .amenityCategory {
-    margin-bottom: 28px;
-  }
-  
-  .categoryTitle {
-    font-weight: 550;
-    font-size: 17px;
-    letter-spacing: 0.2px;
-    margin-bottom: 14px;
-  }
-  
-  .amenitiesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-  
-  .expandableContent {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
-  
-    &.expanded {
-      max-height: 2500px;
-      opacity: 1;
-    }
-  }
-  
-  .amenityButton {
-    display: flex;
-    align-items: center;
-    padding: 12px 18px;
-    background-color: #fff;
-    border: 1px solid #bbb;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-    font-size: 15px;
-    
-    &:hover {
-        border-color: #111;
-    }
 
-    &.selected {
-        background-color: #f5f5f5;
-        border-color: #111;
-    }
+.sectionTitle {
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+  margin-bottom: 18px;
 }
 
-  
-  .amenityIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
+.amenitiesWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.amenityCategory {
+  margin-bottom: 28px;
+}
+
+.categoryTitle {
+  font-weight: 550;
+  font-size: 17px;
+  letter-spacing: 0.2px;
+  margin-bottom: 14px;
+}
+
+.amenitiesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.expandableContent {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
+
+  &.expanded {
+    max-height: 2500px;
+    opacity: 1;
   }
+}
+
+.amenityButton {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  font-size: 15px;
   
-  .amenityName {
-    white-space: nowrap;
+  &:hover {
+      border-color: #111;
   }
+
+  &.selected {
+      background-color: #f5f5f5;
+      border-color: #111;
+  }
+}
+
+
+.amenityIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.amenityName {
+  white-space: nowrap;
+}
+
+.showMoreButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 18px;
   
-  .showMoreButton {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    font-weight: 600;
-    font-size: 17px;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 18px;
-    
-    &:hover {
-      opacity: 0.75;
-    }
+  &:hover {
+    opacity: 0.75;
   }
-  
-  .arrowIcon {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-  }
-  
-  .arrowUp {
-    transform: rotate(180deg);
-  }
+}
+
+.arrowIcon {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}

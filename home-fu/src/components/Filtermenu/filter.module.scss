@@ -28,7 +28,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(72, 72, 72, 0.22);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -76,7 +76,6 @@
 }
 
 .title {
-  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   @include text(600, 16px, #222);
   text-align: center;
   margin: 0;
@@ -121,7 +120,6 @@
 }
 
 .sectionTitle {
-  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   @include text(600, 18px, #222);
   margin: 0 0 16px 0;
 }
@@ -144,7 +142,6 @@
 }
 
 .clearButton {
-  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   @include text(600, 16px, #222);
   text-decoration: underline;
   background: none;
@@ -159,7 +156,6 @@
 }
 
 .showResultsButton {
-  font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   @include text(600, 16px, white);
   background-color: #222;
   border: none;

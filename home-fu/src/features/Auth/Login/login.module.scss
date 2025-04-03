@@ -37,7 +37,6 @@
 }
 
 .title {
-    font-family: 'Nunito Sans';
     @include text(800, 24px, #211E1A);
     text-align: center;
     margin-bottom: 40px;
@@ -58,12 +57,12 @@
 .formContent {
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
+    margin-bottom: 16px;
 }
 
 .input {
@@ -78,20 +77,17 @@
     }
 
     &::placeholder {
-        font-family: 'Nunito Sans';
         @include text(400, 16px, #717171);
     }
 }
 
 .error {
-    font-family: 'Nunito Sans';
     @include text(400, 16px, rgb(216, 61, 61));
     margin-left: 19px;
     line-height: 24px;
 }
 
 .errorMessage {
-    font-family: 'Nunito Sans';
     @include text(400, 16px, red);
     text-align: center;
     line-height: 24px;
@@ -108,8 +104,6 @@
     background-color: #4a4640;
     transition: background-color 0.2s;
     background-color: rgb(52, 104, 194);
-    margin-top: 6px;
-    font-family: 'Nunito Sans';
     @include text(700, 16px, #fff);
     transition: 0.3s;
 
@@ -127,13 +121,11 @@
     margin-top: 7px;
 
     span {
-        font-family: "Nunito Sans";
         @include text(400, 16px, #717171);
     }
 
     button {
         cursor: pointer;
-        font-family: "Nunito Sans";
         @include text(400, 16px, rgb(52, 104, 194));
     }
 }

@@ -15,7 +15,6 @@ const categories: CategoryItem[] = [
     { id: 3, icon: "/src/assets/icons/iconbigRoom.svg", label: "Великі квартири" },
     { id: 4, icon: "/src/assets/icons/iconRoom.svg", label: "Кімнати" },
     { id: 5, icon: "/src/assets/icons/iconHostel.svg", label: "Хостели" },
-    { id: 6, icon: "/src/assets/icons/iconLuxe.svg", label: "Luxe" },
     { id: 7, icon: "/src/assets/icons/iconcenterCity.svg", label: "У центрі міста" },
     { id: 8, icon: "/src/assets/icons/iconSea.svg", label: "Пляжний відпочинок" },
     { id: 9, icon: "/src/assets/icons/iconMountain.svg", label: "Гори" },
