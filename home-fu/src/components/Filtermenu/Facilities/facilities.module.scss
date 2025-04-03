@@ -1,0 +1,132 @@
+.facilitiesContainer {
+    padding: 24px 0;
+    border-bottom: 1px solid #ebebeb;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .title {
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #222;
+    margin: 0;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .chevron {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.4s ease;
+  }
+  
+  .chevronUp {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.4s ease;
+    transform: rotate(180deg);
+  }
+  
+  .optionsContainer {
+    margin-top: 16px;
+    overflow: hidden;
+    animation: slideDown 0.4s ease;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      max-height: 2000px;
+      transform: translateY(0);
+    }
+  }
+  
+  .category {
+    margin-bottom: 16px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .categoryTitle {
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .checkboxItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .checkbox {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #b0b0b0;
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    
+    &:checked {
+      background-color: #222;
+      border-color: #222;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 4px;
+        width: 6px;
+        height: 12px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  
+  .optionName {
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #222;
+  }  
