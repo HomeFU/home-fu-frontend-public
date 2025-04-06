@@ -11,15 +11,13 @@
     gap: 8px;
     height: 47px;
     border-radius: 26px;
-    border: 1px solid #6F6558;
-    background: #DDDBD7; 
+    border: 1px solid #bdbdbd;
     padding: 0 15px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
     
     .switchText {
         @include text(500, 12px, #2C2823);
-        font-family: "Inknut Antiqua", sans-serif;
         flex-grow: 1;
         text-align: center;
         
@@ -29,7 +27,7 @@
         width: 42px;
         height: 23px;
         border-radius: 26px;
-        background: #6F6558;
+        background-color: rgb(52, 104, 194);
         position: relative;
         transition: background 0.3s ease-in-out;
 
@@ -49,7 +47,7 @@
 
     &.active {
         .switchToggle {
-            background: #4F463A;
+            background-color: rgb(75, 122, 204);
 
             &::before {
                 left: 21px;

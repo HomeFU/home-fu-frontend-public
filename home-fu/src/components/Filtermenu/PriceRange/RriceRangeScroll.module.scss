@@ -1,0 +1,186 @@
+.sectionTitle {
+    font-weight: 600;
+    font-size: 18px;
+    color: #222;
+    margin: 0 0 16px 0;
+  }
+  
+  .priceSubtitle {
+    font-weight: 400;
+    font-size: 14px;
+    color: #717171;
+    margin: 4px 0 24px 0;
+  }
+  
+  .priceSlider {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  
+  .sliderGraph {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 60px;
+    margin-bottom: 16px;
+    padding: 0 12px;
+  }
+  
+  .sliderBar {
+    width: 2px;
+    background-color: #ddd;
+    border-radius: 1px;
+    margin: 0 1px;
+    transition: background-color 0.3s ease;
+  
+    &.active {
+      background-color: rgb(52, 104, 194);;
+    }
+  }
+  
+  .sliderContainer {
+    position: relative;
+    height: 48px;
+    margin: 0 12px;
+  }
+  
+  .sliderTrack {
+    position: absolute;
+    height: 2px;
+    background-color: rgb(52, 104, 194);;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: left 0.2s ease, width 0.2s ease;
+  }
+  
+  .rangeInputMin, .rangeInputMax {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
+    z-index: 2;
+  
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 3;
+      transition: transform 0.2s ease;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  
+    &::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 3;
+      transition: transform 0.2s ease;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .rangeInputMin {
+    z-index: 3;
+  }
+  
+  .priceInputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 16px;
+    width: 100%;
+  }
+  
+  .priceInput {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    label {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      color: #717171;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+  
+    .inputWrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .currencySymbol {
+        position: absolute;
+        left: 8px;
+        font-size: 14px;
+        color: #222;
+      }
+  
+      input {
+        width: 47px;
+        padding: 6px 12px 6px 24px;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        font-weight: 400;
+        font-size: 14px;
+        color: #222;
+        height: 32px;
+        text-align: center;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  
+        &:focus {
+          outline: none;
+          border-color: #222;
+          box-shadow: 0 0 0 1px #222;
+        }
+      }
+    }
+  }
+  
+  .priceInput:first-child {
+    align-items: flex-start;
+  
+    label {
+      text-align: left;
+      margin-left: 17px;
+    }
+  }
+  
+  .priceInput:last-child {
+    align-items: flex-end;
+  
+    label {
+      text-align: right;
+      margin-right: 15px;
+    }
+  }
+  

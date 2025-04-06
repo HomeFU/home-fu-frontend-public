@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import icon from "../../../assets/icons/house.svg";
 import style from "./filterbar.module.scss";
 import  {setSelectedCategori} from "../../../redux/CategoryFilter/CategorySlice/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +10,11 @@ type CategoryItem = {
 };
 
 const categories: CategoryItem[] = [
-    { id: 1, icon: "/src/assets/icons/iconHome.svg", label: "Гарні краєвиди" },
+    { id: 1, icon: "/src/assets/icons/iconHomes.svg", label: "Гарні краєвиди" },
     { id: 2, icon: "/src/assets/icons/iconsmallRoom.svg", label: "Невеликі квартири" },
     { id: 3, icon: "/src/assets/icons/iconbigRoom.svg", label: "Великі квартири" },
     { id: 4, icon: "/src/assets/icons/iconRoom.svg", label: "Кімнати" },
     { id: 5, icon: "/src/assets/icons/iconHostel.svg", label: "Хостели" },
-    { id: 6, icon: "/src/assets/icons/iconLuxe.svg", label: "Luxe" },
     { id: 7, icon: "/src/assets/icons/iconcenterCity.svg", label: "У центрі міста" },
     { id: 8, icon: "/src/assets/icons/iconSea.svg", label: "Пляжний відпочинок" },
     { id: 9, icon: "/src/assets/icons/iconMountain.svg", label: "Гори" },
@@ -31,7 +29,7 @@ const categories: CategoryItem[] = [
     { id: 18, icon: "/src/assets/icons/iconfromDisagner.svg", label: "Історичні будівлі" },
 ];
 
-const FilterBar = () => {
+export const FilterBar = () => {
     const dispatch = useDispatch();
     const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
 
@@ -104,4 +102,3 @@ const FilterBar = () => {
     );
 };
 
-export default FilterBar;

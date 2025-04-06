@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./sumbutton.module.scss";
 
-const SumButton = () => {
+export const SumButton = () => {
     const [active, setActive] = useState(false);
 
     return (
@@ -12,4 +12,3 @@ const SumButton = () => {
     );
 };
 
-export default SumButton;

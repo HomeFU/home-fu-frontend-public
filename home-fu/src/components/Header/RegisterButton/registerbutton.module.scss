@@ -1,9 +1,8 @@
 .registerbutton {
     width: 87px;
-    height: 47px;
+    height: 43px;
     border-radius: 26px;
-    border: 1px solid #211E1A;
-    background: #DDDBD7; 
+    border: 1px solid #bdbdbd;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,8 +12,8 @@
   }
 
   .icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
   
   .icon:first-of-type {
@@ -23,8 +22,8 @@
   }
   
   .icon:last-of-type {
-    width: 20px; 
-    height: 20px;
+    width: 18px; 
+    height: 18px;
     margin-left: -2px; 
   }
   

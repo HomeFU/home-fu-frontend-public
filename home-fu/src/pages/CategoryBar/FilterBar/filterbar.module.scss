@@ -11,8 +11,8 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     white-space: nowrap;
-    width: 100%;
-    gap: 48px;
+    width: 99%;
+    gap: 38px;
     overflow-y: hidden;
 }
 
@@ -56,13 +56,21 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    background: #DDDBD7;
-    border: 1px solid #6F6558;
+    background: rgb(16 153 255 / 11%);
     border-radius: 999px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     z-index: 3;
+
+    svg {
+        width: 20px;
+        height: 20px;
+
+        path {
+            stroke: rgb(52, 104, 194);;
+        }
+    }
 }
 
 .leftButton {

@@ -27,7 +27,8 @@
 // }
 
 .formCard {
-    background-color: #f5f5f3;
+    background: white;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
     width: 400px;
     border-radius: 13px;
     padding: 24px;
@@ -36,7 +37,6 @@
 }
 
 .title {
-    font-family: 'Nunito Sans';
     @include text(800, 24px, #211E1A);
     text-align: center;
     margin-bottom: 40px;
@@ -57,13 +57,12 @@
 .formContent {
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    margin-bottom: 16px;
 }
 
 .input {
@@ -78,23 +77,39 @@
     }
 
     &::placeholder {
-        font-family: 'Nunito Sans';
         @include text(400, 16px, #717171);
     }
+}
+
+.error {
+    @include text(400, 16px, rgb(216, 61, 61));
+    margin-left: 19px;
+    line-height: 24px;
+}
+
+.errorMessage {
+    @include text(400, 16px, red);
+    text-align: center;
+    line-height: 24px;
 }
 
 .loginButton {
     cursor: pointer;
     padding: 22px 0 22px 0;
     border-radius: 9999px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #4a4640;
     transition: background-color 0.2s;
-    margin-top: 20px;
-    font-family: 'Nunito Sans';
+    background-color: rgb(52, 104, 194);
     @include text(700, 16px, #fff);
+    transition: 0.3s;
 
     &:hover {
-        background-color: #3d3a35;
+        background-color: rgb(75, 122, 204);
+        transition: 0.3s;
     }
 }
 
@@ -106,14 +121,12 @@
     margin-top: 7px;
 
     span {
-        font-family: "Nunito Sans";
         @include text(400, 16px, #717171);
     }
 
     button {
         cursor: pointer;
-        font-family: "Nunito Sans";
-        @include text(400, 16px, #8A8278);
+        @include text(400, 16px, rgb(52, 104, 194));
     }
 }
 .socialButtons {
