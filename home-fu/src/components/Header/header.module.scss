@@ -25,11 +25,23 @@
 .listMenu {
     display: flex;
     align-items: center;
+
+    @media (max-width:1024px) {
+        display: none;
+    }
+
+    @media (max-width:768px) {
+        
+    }
 }
 
 .offerListWrapper {
     display: flex;
     align-items: center;
+
+    @media (max-width:1024px) {
+        display: none;
+    }
 }
 
 .listItem,
@@ -47,8 +59,75 @@
 }
 
 .contentBottom {
+    // display: flex;
+    // align-items: center;
+    // justify-content: end;
+    // margin-top: 30px;
+
+    // @media (max-width:1024px) {
+    //     flex-direction: column;
+    //     gap: 15px;
+    // }
+}
+
+.buttonShowClose {    
+    display: none;
+
+    @media (max-width:1024px) { 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 40px;
+        background-color: #fff;
+        border: none;
+        border-radius: 9999px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        font-weight: 500;
+        color: #1e1e1e;
+        cursor: pointer;
+        transition: box-shadow 0.3s ease;
+        width: 100%;
+        margin-top: 30px;
+        &:hover {
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+.wrapperTravelFilter {
     display: flex;
     align-items: center;
     justify-content: end;
     margin-top: 30px;
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        gap: 15px;
+
+        /* Анимация */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+    }
+}
+
+.showTravelFilter {
+    @media (max-width: 1024px) {
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+.burgerButton {
+    display: none;
+
+    @media (max-width:1024px) {
+        display: block;
+    }
 }

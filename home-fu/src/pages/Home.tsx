@@ -11,8 +11,10 @@ const Home = () => {
         <main className = {style.main}>
             <div className= {style.categoryBar}>
                 <FilterBar></FilterBar>
-                <FilterButton></FilterButton>
-                <SumButton></SumButton>
+                <div className={style.wrapperFilterSumButton}>
+                    <FilterButton></FilterButton>
+                    <SumButton></SumButton>
+                </div>
             </div>
         </main> 
         <Footer></Footer>

@@ -4,6 +4,11 @@
     align-items: center;
     gap: 10px;
     max-width: 790px;
+
+    @media (max-width:1024px) {
+        width: 100%;
+        overflow: hidden;
+    }
 }
 
 .filterBar {
@@ -70,6 +75,10 @@
         path {
             stroke: rgb(52, 104, 194);;
         }
+    }
+
+    @media (max-width:1024px) {
+        display: none;
     }
 }
 

@@ -15,6 +15,18 @@
     position: relative;
     margin-right: 80px;
     box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.20);
+
+    @media (max-width:1024px) {
+        flex-direction: column;
+        gap: 20px;
+        width: 85%;
+        height: 300px;
+        border-radius: 50px;
+        margin-right: unset;
+        padding: 28px;
+        box-shadow: unset;
+        margin-bottom: 30px;
+    }
 }
 
 .inputSection {
@@ -73,6 +85,14 @@
         background-color: rgb(75, 122, 204);
         transition: 0.3s;
     } 
+
+    @media (max-width:1024px) {
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        position: relative;
+        top: 10px;
+    }
 }
 
 .search {

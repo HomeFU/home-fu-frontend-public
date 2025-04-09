@@ -5,10 +5,18 @@ import {MapButton} from "./mapbutton/mapbutton";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LogOutButton } from "../../features/Auth/LogOut/logOutButton";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export const Header = () => {
     const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated);
-    
+    const [isOpenCloseFilterMobile, setOpenCloseFilterMobile] = useState(false);
+
+    const HandleOpenCloseFilter = () => {
+        setOpenCloseFilterMobile((prev) => !prev)
+    }
+
     return (
         <header className={style.header}>
             <div className={style.contentTop}>
@@ -24,10 +32,21 @@ export const Header = () => {
                         isAuthenticatedUser ? <LogOutButton/> : <RegisterButton/>
                     }
                 </div>
+                <div className={style.burgerButton}>
+                    Open
+                </div>
             </div>
             <div className={style.contentBottom}>
-                <TravetFilter></TravetFilter>
-                <MapButton></MapButton>
+                <button className={style.buttonShowClose} onClick={HandleOpenCloseFilter}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size='sm' style={{color: "#000"}}/>
+                    {
+                        isOpenCloseFilterMobile ? "Завершити пошук" : "Почати пошук"
+                    }
+                </button>
+                <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
+                    <TravetFilter></TravetFilter>
+                    <MapButton></MapButton>
+                </div>
             </div>
         </header>
     )
