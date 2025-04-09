@@ -39,29 +39,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   padding: 0;
   transition: border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
 
-  &:hover {
-    border-color: #222;
-    transform: scale(1.05);
+  cursor: default;
+
+  &:not(:disabled) {
+    cursor: pointer;
+
+    &:hover {
+      border-color: #222;
+      transform: scale(1.05);
+    }
   }
 
   &:disabled {
-    cursor: default; // убрать not-allowed
-    pointer-events: none; // отключить hover
-  }
-
-  &.faded {
+    cursor: not-allowed;
     opacity: 0.3;
-    cursor: default;
-    pointer-events: none;
-
-    &:hover {
-      border-color: #b0b0b0;
-      transform: none;
-    }
   }
 }
 
