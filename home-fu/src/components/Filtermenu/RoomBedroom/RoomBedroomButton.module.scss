@@ -49,11 +49,19 @@
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: default; // убрать not-allowed
+    pointer-events: none; // отключить hover
   }
-  
+
   &.faded {
     opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+
+    &:hover {
+      border-color: #b0b0b0;
+      transform: none;
+    }
   }
 }
 
@@ -65,4 +73,3 @@
   font-size: 16px;
   color: #222;
 }
-
