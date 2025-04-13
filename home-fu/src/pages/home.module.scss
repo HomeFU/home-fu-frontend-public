@@ -1,5 +1,10 @@
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
 .main{
-    padding-top: 42px;
+    padding-top: 35px;
 }
 
 .categoryBar {
@@ -7,6 +12,7 @@
     align-items: center;
     justify-content: end;
     gap: 13px;
+    padding-top: 33px;
 }
 
 .filterBar {
@@ -19,4 +25,8 @@
     justify-content: flex-start; 
     bottom: 52px;
     right: 22%;
+}
+
+.divider {
+    border-bottom: 1px solid #e5e7eb;
 }
