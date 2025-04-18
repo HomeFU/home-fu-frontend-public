@@ -22,6 +22,15 @@
     }
 }
 
+// Добавляем миксин для скрытия полосы прокрутки
+@mixin hideScrollbar {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari и Opera */
+    }
+}
+
 .wrapper {
     width: 1135px;
     margin: 600px auto 0 auto;
@@ -54,12 +63,26 @@
     
     @include tablet {
         gap: 20px;
+        // Добавляем для планшетов
+        overflow-x: auto;
+        @include hideScrollbar;
+        scroll-behavior: smooth;
     }
     
     @include mobile {
         gap: 15px;
         overflow-x: auto;
         padding-bottom: 10px;
+        // Добавляем для мобильных
+        @include hideScrollbar;
+        scroll-behavior: smooth;
+    }
+    
+    // Добавляем для десктопов, если нужно
+    @include desktop {
+        overflow-x: auto;
+        @include hideScrollbar;
+        scroll-behavior: smooth;
     }
 }
 
