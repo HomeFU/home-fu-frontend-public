@@ -138,6 +138,9 @@
   }
 
   .inputWrapper {
+    padding: 6px 12px 6px 24px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
     position: relative;
     display: flex;
     align-items: center;
@@ -151,23 +154,15 @@
     }
 
     input {
-      width: 47px;
-      padding: 6px 12px 6px 24px;
-      border: 1px solid #ddd;
-      border-radius: 50px;
-      font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      width: 49px;
       font-weight: 400;
       font-size: 14px;
       color: #222;
       height: 32px;
       text-align: center;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-      &:focus {
-        outline: none;
-        border-color: #222;
-        box-shadow: 0 0 0 1px #222;
-      }
+      outline: none;
+      border: none;
     }
   }
 }
