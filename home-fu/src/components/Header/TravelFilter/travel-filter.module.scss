@@ -19,13 +19,16 @@
     @media (max-width:1024px) {
         flex-direction: column;
         gap: 20px;
-        width: 85%;
+        width: 92%;
         height: 300px;
         border-radius: 50px;
         margin-right: unset;
         padding: 28px;
         box-shadow: unset;
         margin-bottom: 30px;
+    }
+    @media (max-width:768px) {
+        width: 82%;
     }
 }
 

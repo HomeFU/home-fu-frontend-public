@@ -11,6 +11,7 @@
 .container {
     margin: 0 auto;
     max-width: 1200px;
+    padding: 0 15px;
 }
 
 .contentTop {
@@ -21,6 +22,10 @@
 .logo {
     @include text(500, 32px, #211E1A);
     margin-right: auto;
+
+    @media (max-width:768px) {
+        @include text(500, 22px, #211E1A);
+    }
 }
 
 .logoModifier {
