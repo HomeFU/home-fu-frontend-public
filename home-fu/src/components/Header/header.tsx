@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export const Header = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    //
     const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated);
     const [isOpenCloseFilterMobile, setOpenCloseFilterMobile] = useState(false);
 
@@ -33,9 +35,17 @@ export const Header = () => {
                             isAuthenticatedUser ? <LogOutButton/> : <RegisterButton/>
                         }
                     </div>
-                    <div className={style.burgerButton}>
-                        Open
-                    </div>
+                    <button
+                        className={style.menuButton}
+                        onClick={() => setIsOpen(!isOpen)}
+                        >
+                        <div className={style.menuIcon}>
+                            <span className={isOpen ? style.open : ''} />
+                            <span className={isOpen ? style.open : ''} />
+                            <span className={isOpen ? style.open : ''} />
+                        </div>
+                    </button>
+
                 </div>
                 <div className={style.contentBottom}>
                     <button className={style.buttonShowClose} onClick={HandleOpenCloseFilter}>

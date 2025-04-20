@@ -115,8 +115,6 @@
     @media (max-width: 1024px) {
         flex-direction: column;
         gap: 15px;
-
-        /* Анимация */
         max-height: 0;
         opacity: 0;
         overflow: hidden;
@@ -134,10 +132,57 @@
 }
 
 
-.burgerButton {
+.menuButton {
     display: none;
+    position: relative;
+    height: 12px;
+    width: 12px; 
+    cursor: pointer;
+    outline: none;
 
-    @media (max-width:1024px) {
+    @media (max-width:1024px) { 
         display: block;
+    }
+
+    .menuIcon {
+        transform: translate(-50%, -50%);
+    
+        span {
+          position: absolute;
+          display: block;
+          height: 2px; 
+          width: 24px;
+          background-color: black;
+          transition: all 0.3s ease-in-out;
+          transform: none;
+          opacity: 1;
+    
+          &:nth-child(1) {
+            &.open {
+              transform: rotate(45deg);
+            }
+            &:not(.open) {
+              transform: translateY(-0.5rem); 
+            }
+          }
+    
+          &:nth-child(2) {
+            &.open {
+              opacity: 0;
+            }
+            &:not(.open) {
+              opacity: 1;
+            }
+          }
+    
+          &:nth-child(3) {
+            &.open {
+              transform: rotate(-45deg);
+            }
+            &:not(.open) {
+              transform: translateY(0.5rem);
+            }
+          }
+        }
     }
 }
