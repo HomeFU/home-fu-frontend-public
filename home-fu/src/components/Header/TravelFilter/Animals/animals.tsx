@@ -49,7 +49,7 @@ export const AnimalsModal = ({ isOpen, onClose }: AnimalsModalProps) => {
 
   return createPortal(
     <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div ref={modalRef} className={styles.filterCard}>
+      <div ref={modalRef} className={styles.modalContainer}>
         <div className={styles.modalHeader}>
           <button className={styles.closeButton} onClick={handleClose}>
             <svg

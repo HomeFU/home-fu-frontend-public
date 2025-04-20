@@ -28,10 +28,11 @@
   font-family: 'Inter', sans-serif;
 }
 
-.filterCard {
+.modalContainer {
+  padding: 0 24px 24px;
   background-color: #fff;
   width: min(90vw, 560px);
-  max-height: 900vh;
+  max-height: 90vh;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -49,8 +50,8 @@
 
 .closeButton {
   position: absolute;
-  left: 16px;
-  top: 10px;
+  right: 540px;
+  top: 8px;
   background: none;
   border: none;
   padding: 8px;
@@ -67,27 +68,17 @@
 .imageWrapper {
   display: flex;
   justify-content: center;
-  padding: 0 24px;
   margin-bottom: 16px;
 }
 
 .serviceAnimalImage {
-  width: 520px;
-  height: 400px;
+  width: 100%;
+  height: auto;
+  max-width: 520px;
   max-height: 520px;
   border-radius: 8px;
   object-fit: cover;
   display: block;
-
-  @media (max-width: 480px) {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-}
-
-.contentText {
-  padding: 0 24px 24px;
 }
 
 .title {
