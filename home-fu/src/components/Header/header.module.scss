@@ -6,6 +6,10 @@
 
 .header {
     padding-top: 61px;
+
+    @media (max-width:768px) {
+        padding-top: 35px;
+    }
 }
 
 .container {
@@ -24,7 +28,7 @@
     margin-right: auto;
 
     @media (max-width:768px) {
-        @include text(500, 22px, #211E1A);
+        @include text(500, 24px, #211E1A);
     }
 }
 
