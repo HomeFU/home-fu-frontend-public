@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { increment } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { decrement } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { useState } from "react"
-import { AnimalsModal } from "..//..//Animals//animals" 
+import { AnimalsModal } from "../../Animals/animals"
 
 type category = {
   id: number
@@ -27,6 +27,12 @@ export const GuestBlock = () => {
   const counterValue = useSelector((state) => state.counters.counter)
   const dispath = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
 
   // console.log("FirstCounter" + counterValue[0])
   // console.log("SecondCounter" + counterValue[1])
@@ -64,7 +70,7 @@ export const GuestBlock = () => {
         <div className={style.itemBlock}>
           <div className={style.itemDescription}>
             <h5 className={style.title}>Домашні тварини</h5>
-            <span className={style.travelWithAnimal} onClick={() => setIsModalOpen(true)}>
+            <span className={style.travelWithAnimal} onClick={openModal}>
               Подорожуєте із твариною-помічником?
             </span>
           </div>
@@ -90,7 +96,7 @@ export const GuestBlock = () => {
         </div>
       </div>
 
-      <AnimalsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AnimalsModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   )
 }
