@@ -58,8 +58,8 @@ export const AnimalsModal = ({ isOpen, onClose }: AnimalsModalProps) => {
               style={{
                 display: "block",
                 fill: "none",
-                height: "16px",
-                width: "16px",
+                height: "20px",
+                width: "20px",
                 stroke: "currentcolor",
                 strokeWidth: 3,
               }}
@@ -85,7 +85,7 @@ export const AnimalsModal = ({ isOpen, onClose }: AnimalsModalProps) => {
             інформацію про них сюди не потрібно.
           </p>
           <p className={styles.description}>
-            У разі потреби уточніть вимоги щодо супроводу служби підтримки.
+            Подорожуєте з твариною для емоційної підтримки? Ознайомтеся з нашими <u>правилами щодо доступності для людей з особливими потребами.</u>
           </p>
         </div>
       </div>
