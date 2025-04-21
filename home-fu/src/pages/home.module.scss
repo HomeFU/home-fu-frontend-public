@@ -1,10 +1,15 @@
+.main{
+    padding-top: 35px;
+
+    @media (max-width:1024px) {
+        padding-top: 0;
+    }
+}
+
 .container {
     margin: 0 auto;
     max-width: 1200px;
-}
-
-.main{
-    padding-top: 35px;
+    padding: 0 15px;
 }
 
 .categoryBar {
@@ -13,6 +18,15 @@
     justify-content: end;
     gap: 13px;
     padding-top: 33px;
+
+    @media (max-width:1024px) {
+       flex-direction: column;
+       align-items: flex-start;
+    }
+
+    @media (max-width:768px) {
+        gap: 20px;
+    }
 }
 
 .filterBar {
@@ -25,6 +39,17 @@
     justify-content: flex-start; 
     bottom: 52px;
     right: 22%;
+}
+
+.wrapperFilterSumButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    @media (max-width:1024px) {
+       justify-content: space-between;
+    }
 }
 
 .divider {

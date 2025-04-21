@@ -4,6 +4,11 @@
     align-items: center;
     gap: 10px;
     max-width: 790px;
+
+    @media (max-width:1024px) {
+        width: 100%;
+        overflow: hidden;
+    }
 }
 
 .filterBar {
@@ -14,6 +19,10 @@
     width: 99%;
     gap: 38px;
     overflow-y: hidden;
+
+    @media (max-width:768px) {
+        gap: 25px;
+    }
 }
 
 .filterBar::-webkit-scrollbar {
@@ -70,6 +79,10 @@
         path {
             stroke: rgb(52, 104, 194);;
         }
+    }
+
+    @media (max-width:1024px) {
+        display: none;
     }
 }
 
