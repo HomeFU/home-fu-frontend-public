@@ -36,6 +36,30 @@
     color: rgb(52, 104, 194);
 }
 
+// .menu {
+//     display: flex;
+//     align-items: center;
+
+//     @media (max-width: 768px) {
+//         position: fixed;
+//         left: 0;
+//         top: 0;
+//         height: 100%;
+//         background: #fff;
+//         z-index: 3;
+//         opacity: 0;
+//         visibility: hidden;
+//         flex-direction: column;
+//         transition: all 0.3s ease;
+//     }
+// }
+
+// .openMenu {
+//     opacity: 1;
+//     visibility: visible;
+//     width: 100%;
+// }
+
 .listMenu {
     display: flex;
     align-items: center;
@@ -143,6 +167,7 @@
     width: 12px; 
     cursor: pointer;
     outline: none;
+    z-index: 5;
 
     @media (max-width:1024px) { 
         display: block;

@@ -8,7 +8,7 @@ import departureSlice from "./DateDepartureSlice/departureSlice";
 import categorySlice from "./CategoryFilter/CategorySlice/categorySlice"
 import filterMenuSlice from "./Filtermenu/filtermenu"
 import authSlice from "./Auth/authSlice";
-
+import menuSlice from "./MobileMenu/menuSlice";
 export const store = configureStore({
     reducer:{
         form: formReducer,
@@ -19,7 +19,8 @@ export const store = configureStore({
         departure: departureSlice,
         category:categorySlice,
         filterMenu: filterMenuSlice,
-        auth: authSlice
+        auth: authSlice,
+        mobileMenu: menuSlice
     }
 })
 export type RootState = ReturnType<typeof store.getState>

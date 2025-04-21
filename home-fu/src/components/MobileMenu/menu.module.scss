@@ -1,0 +1,64 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color
+}
+
+.menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #fff;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.openMenu {
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+}
+
+.content {
+    padding: 120px 16px 0 16px;
+}
+
+.listMenu {
+    display: flex;
+    flex-direction: column;
+    // gap: 40px;  
+    margin-bottom: 40px
+}
+
+.listItem {
+    @include text(500, 20px, #211E1A);
+
+    &:nth-child(1) {
+        padding-bottom: 40px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    &:nth-child(2) {
+        padding: 40px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    &:nth-child(3) {
+        padding: 40px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+} 
+
+.offerListWrapper {
+    display: flex;
+    flex-direction: column;
+    text-wrap: nowrap;
+
+    .offerItem {
+        padding-bottom: 40px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+}
