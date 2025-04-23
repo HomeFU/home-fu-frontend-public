@@ -51,18 +51,25 @@
 
 /* Dropdown */
 .date_picker_dropdown {
-position: absolute;
-top: 100%;
-left: 0;
-margin-top: 0.5rem;
-background-color: #ffffff;
-border-radius: 24px;
-padding: 1.5rem;
-color: #333333;
-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-z-index: 50;
-width: 700px;
-animation: fadeIn 0.2s ease-out;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    margin-top: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 1.2rem;
+    color: #333333;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    width: 700px;
+    animation: fadeIn 0.2s ease-out;
+
+    @media (max-width:768px) {
+        max-height: 328px;
+        overflow-y: scroll;
+        width: 88%;
+        top: 128px;
+    }
 }
 
 @keyframes fadeIn {
@@ -119,9 +126,13 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
 /* Calendar grid */
 .date_picker_calendars {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+
+    @media (max-width:768px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Quick select buttons */

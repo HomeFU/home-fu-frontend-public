@@ -15,11 +15,17 @@
     border-radius: 26px;
     background-color: #fff;
     z-index: 3;
+
+    @media (max-width:768px) {
+        width: 85%;
+        padding: 24px;
+        height: auto;
+    }
 }
 
 .title {
     @include text(700, 14px, #211E1A);
-    margin-bottom: 25px;
+    margin-bottom: 26px;
 }
 
 .regionType {
@@ -27,6 +33,10 @@
     flex-wrap: wrap;
     column-gap: 20px;
     row-gap: 25px;
+
+    @media (max-width:768px) {
+        justify-content: space-between;
+    }
 }
 
 .typeRegion {
