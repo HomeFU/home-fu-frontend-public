@@ -1,0 +1,101 @@
+@mixin text($font-weight, $font-size, $color) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(72, 72, 72, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  font-family: 'Inter', sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.3s;
+}
+
+.modalContainer {
+  padding: 0 20px 20px;
+  background-color: #fff;
+  width: min(90vw, 500px);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  animation: scaleIn 0.3s ease forwards;
+  font-family: 'Inter', sans-serif;
+}
+  
+.modalHeader {
+  position: relative;
+  height: 60px;
+}
+
+.closeButton {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.serviceAnimalImage {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.title {
+  @include text(700, 22px, #222);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.description {
+  @include text(400, 16px, #222);
+  margin: 16px 0;
+  line-height: 1.5;
+  
+  u {
+    font-weight: 550;
+  }
+}
+
+.accessibilityLink {
+  @include text(600, 16px, #222);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(34, 34, 34, 0.7);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: #000;
+  }
+}
