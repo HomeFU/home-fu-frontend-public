@@ -5,17 +5,21 @@ import styles from "./animals.module.scss";
 import animalImage from "..//..//..//..//assets/images/animal.jpg";
 import { closeAnimalsModal } from "..//..//..//..//redux/TravelFilter/GuestSlices/animalsSlice";
 import { RootState } from "..//..//..//..//redux/store"; 
+import { closeGuest } from "../../../../redux/TravelFilter/GuestSlices/guestSlice";
 
 export const AnimalsModal = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.animalsModal.isOpen);
 
-  if (!isOpen) return null;
+  const onCloseAnimalModal = () => {
+    dispatch(closeAnimalsModal());
+    dispatch(closeGuest())
+  }
 
   return (
     <div
       className={`${styles.overlay} ${isOpen ? styles.open : ''}`}
-      onClick={() => dispatch(closeAnimalsModal())}
+      onClick={onCloseAnimalModal}
     >
       <div
         className={styles.modalContainer}
@@ -24,7 +28,7 @@ export const AnimalsModal = () => {
         <div className={styles.modalHeader}>
           <button
             className={styles.closeButton}
-            onClick={() => dispatch(closeAnimalsModal())}
+            onClick={onCloseAnimalModal}
             type="button"
           >
             <svg
@@ -56,11 +60,10 @@ export const AnimalsModal = () => {
         <div className={styles.contentText}>
           <h2 className={styles.title}>Тварини-помічники</h2>
           <p className={styles.description}>
-            Тварини-помічники не вважаються вихованцями, тому додавати
-            інформацію про них сюди не потрібно.
+            Тварини-помічники не є домашніми тваринами, тому додавати їх тут не потрібно.
           </p>
           <p className={styles.description}>
-            У разі потреби уточніть вимоги щодо супроводу служби підтримки.
+            Подорожуєте з твариною для емоційної підтримки? Ознайомтеся з нашими <u>правилами щодо доступності для людей з особливими потребами.</u>
           </p>
         </div>
       </div>

@@ -2,18 +2,6 @@
   font-weight: $font-weight;
   font-size: $font-size;
   color: $color;
-  line-height: 1.5;
-  font-family: 'Inter', sans-serif;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
 }
 
 .overlay {
@@ -27,12 +15,13 @@
   font-family: 'Inter', sans-serif;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: 0.3s;
 }
 
 .overlay.open {
   opacity: 1;
   pointer-events: auto;
+  transition: 0.3s;
 }
 
 .modalContainer {
@@ -86,12 +75,14 @@
 .title {
   @include text(700, 22px, #222);
   margin: 0 0 16px 0;
+  line-height: 1.5;
 }
 
 .description {
   @include text(400, 16px, #222);
   margin: 16px 0;
-
+  line-height: 1.5;
+  
   u {
     font-weight: 550;
   }
