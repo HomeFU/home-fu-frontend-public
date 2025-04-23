@@ -6,6 +6,16 @@
   font-family: 'Inter', sans-serif;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -14,8 +24,15 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  animation: fadeIn 0.3s ease forwards;
   font-family: 'Inter', sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modalContainer {
@@ -41,7 +58,17 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .imageWrapper {

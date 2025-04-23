@@ -7,8 +7,8 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons"
 import { useDispatch, useSelector } from "react-redux"
 import { increment } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { decrement } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
-import { useState } from "react"
 import { AnimalsModal } from "../../Animals/animals"
+import { openAnimalsModal } from "../../../../../redux/TravelFilter/GuestSlices/animalsSlice"
 
 type category = {
   id: number
@@ -25,14 +25,7 @@ const categorys: category[] = [
 
 export const GuestBlock = () => {
   const counterValue = useSelector((state) => state.counters.counter)
-  const dispath = useDispatch()
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+  const dispatch = useDispatch()
 
   // console.log("FirstCounter" + counterValue[0])
   // console.log("SecondCounter" + counterValue[1])
@@ -50,7 +43,7 @@ export const GuestBlock = () => {
               <button
                 className={counterValue[index] == 0 ? style.button_no_drop : style.buttonDecrement}
                 onClick={() => {
-                  dispath(decrement(index))
+                  dispatch(decrement(index))
                 }}
               >
                 <FontAwesomeIcon icon={faMinus} />
@@ -59,7 +52,7 @@ export const GuestBlock = () => {
               <button
                 className={style.buttonIncrement}
                 onClick={() => {
-                  dispath(increment(index))
+                  dispatch(increment(index))
                 }}
               >
                 <FontAwesomeIcon icon={faPlus} />
@@ -70,7 +63,7 @@ export const GuestBlock = () => {
         <div className={style.itemBlock}>
           <div className={style.itemDescription}>
             <h5 className={style.title}>Домашні тварини</h5>
-            <span className={style.travelWithAnimal} onClick={openModal}>
+            <span className={style.travelWithAnimal} onClick={() => dispatch(openAnimalsModal())}>
               Подорожуєте із твариною-помічником?
             </span>
           </div>
@@ -78,7 +71,7 @@ export const GuestBlock = () => {
             <button
               className={counterValue[3] == 0 ? style.button_no_drop : style.buttonDecrement}
               onClick={() => {
-                dispath(decrement(3))
+                dispatch(decrement(3))
               }}
             >
               <FontAwesomeIcon icon={faMinus} />
@@ -87,7 +80,7 @@ export const GuestBlock = () => {
             <button
               className={style.buttonIncrement}
               onClick={() => {
-                dispath(increment(3))
+                dispatch(increment(3))
               }}
             >
               <FontAwesomeIcon icon={faPlus} />
@@ -96,7 +89,7 @@ export const GuestBlock = () => {
         </div>
       </div>
 
-      <AnimalsModal isOpen={isModalOpen} onClose={closeModal} />
+      <AnimalsModal />
     </>
   )
 }

@@ -1,51 +1,40 @@
-"use client"
+"use client";
 
-import React, { useEffect } from "react"
-import { createPortal } from "react-dom"
-import styles from "./animals.module.scss"
-import animalImage from "../../../../assets/images/animal.jpg"
-import { useDispatch } from "react-redux"
-import { closeGuest } from "..//..//..//..//redux/TravelFilter/GuestSlices/guestSlice"
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./animals.module.scss";
+import animalImage from "..//..//..//..//assets/images/animal.jpg";
+import { closeAnimalsModal } from "..//..//..//..//redux/TravelFilter/GuestSlices/animalsSlice";
+import { RootState } from "..//..//..//..//redux/store"; 
 
-type AnimalsModalProps = {
-  isOpen: boolean
-  onClose: () => void
-}
+export const AnimalsModal = () => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.animalsModal.isOpen);
 
-export const AnimalsModal: React.FC<AnimalsModalProps> = ({ isOpen, onClose }) => {
-  const dispatch = useDispatch()
+  if (!isOpen) return null;
 
-  const handleClose = () => {
-    onClose()
-    dispatch(closeGuest()) 
-  }
-
-  useEffect(() => {
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-    document.body.style.overflow = isOpen ? "hidden" : "auto"
-    document.body.style.paddingRight = isOpen ? `${scrollbarWidth}px` : "0"
-
-    return () => {
-      document.body.style.overflow = "auto"
-      document.body.style.paddingRight = "0"
-    }
-  }, [isOpen])
-
-  if (!isOpen) return null
-
-  return createPortal(
-    <div className={styles.overlay} onClick={handleClose}>
-      <div className={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
+  return (
+    <div
+      className={`${styles.overlay} ${isOpen ? styles.open : ''}`}
+      onClick={() => dispatch(closeAnimalsModal())}
+    >
+      <div
+        className={styles.modalContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.modalHeader}>
-        <button className={styles.closeButton} onClick={handleClose}>
+          <button
+            className={styles.closeButton}
+            onClick={() => dispatch(closeAnimalsModal())}
+            type="button"
+          >
             <svg
               viewBox="0 0 32 32"
               aria-hidden="true"
               style={{
                 display: "block",
                 fill: "none",
-                height: "20px",
-                width: "20px",
+                height: "16px",
+                width: "16px",
                 stroke: "currentcolor",
                 strokeWidth: 3,
               }}
@@ -55,6 +44,7 @@ export const AnimalsModal: React.FC<AnimalsModalProps> = ({ isOpen, onClose }) =
             </svg>
           </button>
         </div>
+
         <div className={styles.imageWrapper}>
           <img
             src={animalImage || "/placeholder.svg"}
@@ -66,14 +56,14 @@ export const AnimalsModal: React.FC<AnimalsModalProps> = ({ isOpen, onClose }) =
         <div className={styles.contentText}>
           <h2 className={styles.title}>Тварини-помічники</h2>
           <p className={styles.description}>
-            Тварини-помічники не вважаються вихованцями, тому додавати інформацію про них сюди не потрібно.
+            Тварини-помічники не вважаються вихованцями, тому додавати
+            інформацію про них сюди не потрібно.
           </p>
           <p className={styles.description}>
-            Подорожуєте з твариною для емоційної підтримки? Ознайомтеся з нашими 
+            У разі потреби уточніть вимоги щодо супроводу служби підтримки.
           </p>
         </div>
       </div>
-    </div>,
-    document.body
-  )
-}
+    </div>
+  );
+};
