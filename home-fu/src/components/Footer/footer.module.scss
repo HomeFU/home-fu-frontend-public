@@ -4,13 +4,54 @@
     color: $color;
 }
 
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 1024px) and (min-width: 769px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+// Добавляем миксин для скрытия полосы прокрутки
+@mixin hideScrollbar {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari и Opera */
+    }
+}
+
 .wrapper {
     width: 1135px;
     margin: 600px auto 0 auto;
+    
+    @include tablet {
+        width: 90%;
+        margin: 400px auto 0 auto;
+    }
+    
+    @include mobile {
+        width: 95%;
+        margin: 300px auto 0 auto;
+    }
 }
 
 .footerTitle {
-    @include text (650, 20px , #000);
+    @include text(650, 20px, #000);
+    
+    @include mobile {
+        @include text(650, 18px, #000);
+    }
 }
 
 .wrapperButtons {
@@ -19,16 +60,45 @@
     border-bottom: 1px solid #6F6558;
     gap: 30px;
     margin-top: 25px;
+    
+    @include tablet {
+        gap: 20px;
+        // Добавляем для планшетов
+        overflow-x: auto;
+        @include hideScrollbar;
+        scroll-behavior: smooth;
+    }
+    
+    @include mobile {
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        // Добавляем для мобильных
+        @include hideScrollbar;
+        scroll-behavior: smooth;
+    }
+    
+    // Добавляем для десктопов, если нужно
+    @include desktop {
+        overflow-x: auto;
+        @include hideScrollbar;
+        scroll-behavior: smooth;
+    }
 }
 
 .tabButton {
     padding-bottom: 3px;
     cursor: pointer;
-    @include text (500, 15px , #000);
+    @include text(500, 15px, #000);
+    
+    @include mobile {
+        @include text(500, 14px, #000);
+        white-space: nowrap;
+    }
 }
 
 .active {
-   font-weight: 600;
+    font-weight: 600;
 }
 
 .tabContent {
@@ -38,6 +108,19 @@
     grid-template-columns: repeat(6, 1fr);
     column-gap: 60px;
     row-gap: 26px;
+    
+    @include tablet {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 40px;
+    }
+    
+    @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+        padding-top: 25px;
+        padding-bottom: 30px;
+    }
 }
 
 .tabItem {
@@ -48,6 +131,10 @@
 
 .tabItemTitle {
     @include text(400, 15px, #2C2823);
+    
+    @include mobile {
+        @include text(400, 14px, #2C2823);
+    }
 }
 
 .tabItemSubtitle {
@@ -61,12 +148,25 @@
     padding-bottom: 61px;
     display: flex;
     gap: 150px;
+    
+    @include tablet {
+        gap: 80px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    @include mobile {
+        flex-direction: column;
+        gap: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
 }
 
 .supportTitle,
 .hostTitle,
 .homeFuTitle {
-    @include text (500, 15px , #000);
+    @include text(500, 15px, #000);
     margin-bottom: 12px;
 }
 
@@ -76,6 +176,10 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    
+    @include mobile {
+        gap: 12px;
+    }
 }
 
 .supportListItem,
@@ -90,12 +194,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
+    @include mobile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
 }
 
 .footerInfo {
     display: flex;
     align-items: center;
     gap: 32px;
+    
+    @include mobile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
 }
 
 .footerText {
@@ -106,6 +222,11 @@
     display: flex;
     align-items: center;
     gap: 25px;
+    
+    @include mobile {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 }
 
 .footerLinksItem {
@@ -117,6 +238,15 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    
+    @include tablet {
+        gap: 15px;
+    }
+    
+    @include mobile {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 }
 
 .languageButton {
@@ -136,4 +266,8 @@
     display: flex;
     align-items: center;
     gap: 22px;
+    
+    @include mobile {
+        margin-top: 10px;
+    }
 }

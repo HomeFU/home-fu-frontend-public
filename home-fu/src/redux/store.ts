@@ -9,6 +9,8 @@ import filterMenuReducer from "../redux/Filtermenu/filtermenu";
 import categorySlice from "./CategoryFilter/CategorySlice/categorySlice"
 import filterMenuSlice from "./Filtermenu/filtermenu"
 import authSlice from "./Auth/authSlice";
+import menuSlice from "./MobileMenu/menuSlice";
+import animalsModalState from "./TravelFilter/GuestSlices/animalsSlice";
 
 export const store = configureStore({
     reducer:{
@@ -21,7 +23,9 @@ export const store = configureStore({
         departure: departureSlice,
         category:categorySlice,
         filterMenu: filterMenuSlice,
-        auth: authSlice
+        auth: authSlice,
+        mobileMenu: menuSlice,
+        animalsModal: animalsModalState
     }
 })
 export type RootState = ReturnType<typeof store.getState>

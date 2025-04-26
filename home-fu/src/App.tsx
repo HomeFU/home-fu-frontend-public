@@ -4,13 +4,11 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="container">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

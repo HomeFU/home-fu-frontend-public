@@ -37,20 +37,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   padding: 0;
   transition: border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
 
-  &:hover {
-    border-color: #222;
-    transform: scale(1.05);
+  cursor: default;
+
+  &:not(:disabled) {
+    cursor: pointer;
+
+    &:hover {
+      border-color: #222;
+      transform: scale(1.05);
+    }
   }
 
   &:disabled {
     cursor: not-allowed;
-  }
-  
-  &.faded {
     opacity: 0.3;
   }
 }
@@ -62,4 +64,3 @@
   font-size: 16px;
   color: #222;
 }
-

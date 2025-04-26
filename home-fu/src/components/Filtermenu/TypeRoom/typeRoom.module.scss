@@ -1,6 +1,10 @@
 .typeRoomContainer {
   padding: 24px 0;
   border-bottom: 1px solid #ebebeb;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .header {
