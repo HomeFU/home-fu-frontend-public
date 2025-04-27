@@ -1,3 +1,21 @@
-.h1 {
-    color: red;
+h1 {
+    margin-top: 50px;
+}
+
+.main{
+    padding-top: 35px;
+
+    @media (max-width:1024px) {
+        padding-top: 0;
+    }
+}
+
+.divider {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 15px;
 }
