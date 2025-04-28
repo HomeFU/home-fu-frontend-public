@@ -19,7 +19,7 @@ import style from "./datePicker.module.scss";
 import { useState } from "react";
 import { toggleDateArrival } from "../../../../redux/DateArrivalSlice/arrivalSlice";
 import { closeDateDeparture } from "../../../../redux/DateDepartureSlice/departureSlice";
-import { closeRegion } from "../../../../redux/TravelFilter/regionSlice";
+import { closeRegion } from "../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import { closeGuest } from "../../../../redux/TravelFilter/GuestSlices/guestSlice";
 
 export function DateArrival() {

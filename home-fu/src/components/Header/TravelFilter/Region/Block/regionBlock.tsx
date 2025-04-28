@@ -5,7 +5,7 @@ import romania from "../../../../../assets/regions/romaniaRegionImage.png";
 import southeast from "../../../../../assets/regions/southeastRegionImage.png";
 import italy from "../../../../../assets/regions/italyRegionImage.png";
 import unitedStates from "../../../../../assets/regions/unitedStatesRegionImage.png";
-import {setSelectRegion} from "../../../../../redux/TravelFilter/regionSlice";
+import {setSelectRegion} from "../../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import { useDispatch } from "react-redux";
 
 type regionsType = {

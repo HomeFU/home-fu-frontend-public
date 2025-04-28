@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import style from "./guestField.module.scss";
 import {toggleGuest} from "../../../../../redux/TravelFilter/GuestSlices/guestSlice";
-import {closeRegion} from "../../../../../redux/TravelFilter/regionSlice";
+import {closeRegion} from "../../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import { closeDateArrival } from "../../../../../redux/DateArrivalSlice/arrivalSlice";
 import { closeDateDeparture } from "../../../../../redux/DateDepartureSlice/departureSlice";
 

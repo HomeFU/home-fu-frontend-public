@@ -13,6 +13,8 @@ import { MobileMenu } from "../MobileMenu/menu";
 
 export const Header = () => {
 
+    const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
+
     const dispatch = useDispatch();
 
     const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen);
@@ -33,11 +35,13 @@ export const Header = () => {
                 <div className={style.container}>
                     <div className={style.contentTop}>
                         <div className={style.logo}><Link to="/">Home<span className={style.logoModifier}>FU</span></Link></div>
-                        <ul className={style.listMenu}>
-                            <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
-                            <li className={style.listItem}><Link to="/">Враження</Link></li>
-                            <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
-                        </ul>
+                        {
+                            showScrolledFilter && <ul className={style.listMenu}>
+                                <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
+                                <li className={style.listItem}><Link to="/">Враження</Link></li>
+                                <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
+                            </ul>
+                        }
                         <div className={style.offerListWrapper}>
                             <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                             {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import formReducer from "../redux/LoginRegisterFormSlice/formSlice";
-import regionReducer from "../redux/TravelFilter/regionSlice";
+import regionReducer from "./TravelFilter/GuestSlices/regionSlice";
 import guestReducer from "./TravelFilter/GuestSlices/guestSlice";
 import countersReducer from "./TravelFilter/GuestSlices/countersSlice";
 import arrivalSlice from "./DateArrivalSlice/arrivalSlice";
@@ -10,6 +10,7 @@ import filterMenuSlice from "./Filtermenu/filtermenu"
 import authSlice from "./Auth/authSlice";
 import menuSlice from "./MobileMenu/menuSlice";
 import animalsModalState from "./TravelFilter/GuestSlices/animalsSlice";
+import scrolledFilter from "./TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll";
 
 export const store = configureStore({
     reducer:{
@@ -23,7 +24,8 @@ export const store = configureStore({
         filterMenu: filterMenuSlice,
         auth: authSlice,
         mobileMenu: menuSlice,
-        animalsModal: animalsModalState
+        animalsModal: animalsModalState,
+        scrolledFilter: scrolledFilter
     }
 })
 export type RootState = ReturnType<typeof store.getState>
