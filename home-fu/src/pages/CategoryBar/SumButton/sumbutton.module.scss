@@ -20,7 +20,9 @@
         @include text(500, 12px, #2C2823);
         flex-grow: 1;
         text-align: center;
-        
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .switchToggle {
@@ -30,6 +32,7 @@
         background-color: rgb(52, 104, 194);
         position: relative;
         transition: background 0.3s ease-in-out;
+        flex-shrink: 0;
 
         &::before {
             content: "";
@@ -42,6 +45,7 @@
             left: 2px;
             transform: translateY(-50%);
             transition: left 0.3s ease-in-out;
+            box-sizing: border-box;
         }
     }
 
@@ -50,8 +54,17 @@
             background-color: rgb(75, 122, 204);
 
             &::before {
-                left: 21px;
+                left: calc(100% - 21px);
             }
         }
     }
+    @media (max-width: 360px) {
+        padding: 0 8px; 
+        width: 200px; 
+        
+        .switchText {
+            font-size: 11px; 
+        }
+    }
+
 }
