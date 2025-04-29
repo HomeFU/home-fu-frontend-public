@@ -10,9 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { openCloseMobileMenu } from "../../redux/MobileMenu/menuSlice";
 import { MobileMenu } from "../MobileMenu/menu";
+import { FilterBar } from "../../pages/CategoryBar/FilterBar/filterbar";
+import { FilterButton } from "../../pages/CategoryBar/FilterButton/filterbutton";
+import { SumButton } from "../../pages/CategoryBar/SumButton/sumbutton";
 
 export const Header = () => {
 
+    
     const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
 
     const dispatch = useDispatch();
@@ -72,6 +76,18 @@ export const Header = () => {
                         </div>
                     </div>
                 </div>
+                <div className={`${style.main} ${showScrolledFilter ? style.main : style.unsetMainTop}`}>
+                    <div className={style.divider}></div>
+                    <div className={style.container}>
+                        <div className= {style.categoryBar}>
+                            <FilterBar></FilterBar>
+                            <div className={style.wrapperFilterSumButton}>
+                                <FilterButton></FilterButton>
+                                <SumButton></SumButton>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </header>
             <MobileMenu/>
         </>

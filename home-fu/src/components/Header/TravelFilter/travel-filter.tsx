@@ -18,6 +18,13 @@ export const TravetFilter = () => {
     const isOpenArrivalCalendar =  useSelector((state) => state.arrival.isOpen);
     const isOpenDepartureCalendar = useSelector((state) => state.departure.isOpen);
 
+    const scrollTop = () => {
+        window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+        });
+    }
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -47,7 +54,7 @@ export const TravetFilter = () => {
                             isOpenRegionBlock || isOpenGuestBlock || isOpenArrivalCalendar || isOpenDepartureCalendar ? (<span className={style.search}>Пошук</span>) : ''
                         }
                     </button>
-                </div> : <div className={style.scroledFilter}>
+                </div> : <div className={style.scroledFilter} onClick={scrollTop}>
                     <div className={`${style.filterItem} ${style.anywhere}`}>
                         <div className={style.label}>Будь-куди</div>
                     </div>
