@@ -5,9 +5,14 @@
 }
 
 .header {
-    padding-top: 61px;
-
+    padding-top: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: white;
+    overflow: hidden;
     @media (max-width:768px) {
+        position: static;
         padding-top: 35px;
     }
 }
@@ -140,6 +145,7 @@
     justify-content: end;
     margin-top: 30px;
     position: relative;
+    z-index: 3;
     // overflow: hidden;
 
     @media (max-width: 1024px) {
