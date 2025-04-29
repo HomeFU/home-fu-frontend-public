@@ -10,8 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { openCloseMobileMenu } from "../../redux/MobileMenu/menuSlice";
 import { MobileMenu } from "../MobileMenu/menu";
+import { FilterBar } from "../../pages/CategoryBar/FilterBar/filterbar";
+import { FilterButton } from "../../pages/CategoryBar/FilterButton/filterbutton";
+import { SumButton } from "../../pages/CategoryBar/SumButton/sumbutton";
 
 export const Header = () => {
+
+    
+    const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
 
     const dispatch = useDispatch();
 
@@ -33,11 +39,13 @@ export const Header = () => {
                 <div className={style.container}>
                     <div className={style.contentTop}>
                         <div className={style.logo}><Link to="/">Home<span className={style.logoModifier}>FU</span></Link></div>
-                        <ul className={style.listMenu}>
-                            <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
-                            <li className={style.listItem}><Link to="/">Враження</Link></li>
-                            <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
-                        </ul>
+                        {
+                            showScrolledFilter && <ul className={style.listMenu}>
+                                <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li> {/**?пока что все ведет на Index */}
+                                <li className={style.listItem}><Link to="/">Враження</Link></li>
+                                <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
+                            </ul>
+                        }
                         <div className={style.offerListWrapper}>
                             <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                             {
@@ -68,6 +76,18 @@ export const Header = () => {
                         </div>
                     </div>
                 </div>
+                <div className={`${style.main} ${showScrolledFilter ? style.main : style.unsetMainTop}`}>
+                    <div className={style.divider}></div>
+                    <div className={style.container}>
+                        <div className= {style.categoryBar}>
+                            <FilterBar></FilterBar>
+                            <div className={style.wrapperFilterSumButton}>
+                                <FilterButton></FilterButton>
+                                <SumButton></SumButton>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </header>
             <MobileMenu/>
         </>

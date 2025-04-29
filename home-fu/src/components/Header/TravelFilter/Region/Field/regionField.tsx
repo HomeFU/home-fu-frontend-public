@@ -1,6 +1,6 @@
 import style from "./regionField.module.scss"
 import { useDispatch, useSelector } from "react-redux";
-import {toggleRegion} from "../../../../../redux/TravelFilter/regionSlice";
+import {toggleRegion} from "../../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import {closeGuest} from "../../../../../redux/TravelFilter/GuestSlices/guestSlice";
 import { closeDateDeparture } from "../../../../../redux/DateDepartureSlice/departureSlice";
 import { closeDateArrival } from "../../../../../redux/DateArrivalSlice/arrivalSlice";

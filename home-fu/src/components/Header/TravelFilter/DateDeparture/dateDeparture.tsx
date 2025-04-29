@@ -18,7 +18,7 @@ import style from "./datePicker.module.scss";
 import { useState } from "react";
 import { setSelectedDepartureDate, toggleDateDeparture } from "../../../../redux/DateDepartureSlice/departureSlice";
 import { closeDateArrival } from "../../../../redux/DateArrivalSlice/arrivalSlice";
-import { closeRegion } from "../../../../redux/TravelFilter/regionSlice";
+import { closeRegion } from "../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import { closeGuest } from "../../../../redux/TravelFilter/GuestSlices/guestSlice";
 
 export function DateDeparture() {
