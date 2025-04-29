@@ -1,7 +1,6 @@
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import style from "./filter.module.scss"
-import { closeFilterMenu, startClosingAnimation, resetFilters } from "../../redux/Filtermenu/filtermenu"
+import { closeFilterMenu,resetFilters } from "../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../redux/store"
 import ButtonType from "./ButtonPosition/ButtonType/ButtonTypes"
 import Room from "./ButtonPosition/Room/RoomButton"
@@ -15,35 +14,27 @@ import Facilities from "../Filtermenu/Facilities/facilities"
 import LanguageMaster from "../Filtermenu/LanguageMaster/languageMaster"
 
 export const Filter = () => {
-  const dispatch = useDispatch()
-  const { isOpen, isAnimating } = useSelector((state: RootState) => state.filterMenu)
-
-  useEffect(() => {
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-    document.body.style.overflow = isOpen ? "hidden" : "auto"
-    document.body.style.paddingRight = isOpen ? `${scrollbarWidth}px` : "0"
-    return () => {
-      document.body.style.overflow = "auto"
-      document.body.style.paddingRight = "0"
-    }
-  }, [isOpen])
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.filterMenu.isOpen);
 
   const handleClose = () => {
-    dispatch(startClosingAnimation())
-    setTimeout(() => dispatch(closeFilterMenu()), 300)
-  }
-
-  const handleResetFilters = () => {
-    dispatch(resetFilters())
-  }
-
-  if (!isOpen && !isAnimating) return null
-
+    dispatch(closeFilterMenu());
+  };
   return (
-    <div className={`${style.overlay} ${isAnimating ? style.fadeOut : ""}`} onClick={handleClose}>
-      <div className={`${style.filterCard} ${isAnimating ? style.scaleOut : ""}`} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={`${style.overlay} ${isOpen ? style.open : ''}`}
+      onClick={handleClose}
+    >
+      <div
+        className={style.filterCard}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={style.header}>
-          <button className={style.closeButton} onClick={handleClose}>
+          <button
+            className={style.closeButton}
+            onClick={handleClose}
+            type="button"
+          >
             <svg
               viewBox="0 0 32 32"
               aria-hidden="true"
@@ -101,14 +92,19 @@ export const Filter = () => {
             <LanguageMaster />
           </section>
         </div>
-
         <div className={style.footer}>
-          <button className={style.clearButton} onClick={handleResetFilters}>
+          <button
+            className={style.clearButton}
+            onClick={() => dispatch(resetFilters())}
+          >
             Очистити все
           </button>
           <button className={style.showResultsButton}>Показати 1000+ осель</button>
         </div>
       </div>
     </div>
+
   )
 }
+
+export default Filter
