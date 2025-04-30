@@ -82,32 +82,32 @@
 }
 
 .searchButton {
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    min-width: 50px;
-    padding: 0 15px 0 15px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: rgb(52, 104, 194);;
-    border-radius: 9999px;
-    transition: 0.3s;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  min-width: 50px;
+  padding: 0 15px 0 15px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: rgb(52, 104, 194);
+  border-radius: 9999px;
+  transition: 0.3s;
 
-    &:hover {
-        background-color: rgb(75, 122, 204);
-        transition: 0.3s;
-    } 
+  &:hover {
+      background-color: rgb(75, 122, 204);
+      transition: 0.3s;
+  } 
 
-    @media (max-width:1024px) {
-        bottom: 20px;
-        left: 0;
-        width: 100%;
-        position: relative;
-        top: 10px;
-    }
+  @media (max-width:1024px) {
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      position: relative;
+      top: 10px;
+  }
 }
 
 .search {
@@ -183,7 +183,7 @@
     background-color: #dddddd;
   }
   
-  .searchButton {
+  .searchButtonSmallFilter {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,11 +193,7 @@
     height: 48px;
     cursor: pointer;
     margin-left: 8px;
-    
-    &.blue {
-      background-color: #4169e1;
-      color: white;
-    }
+    background-color: rgb(52, 104, 194);;
 
   }
   

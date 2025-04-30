@@ -66,7 +66,7 @@ export const TravetFilter = () => {
                     <div className={`${style.filterItem} ${style.guestsCompact}`}>
                     <div className={style.placeholder}>Додайте гостей</div>
                     </div>
-                    <button className={`${style.searchButton} ${style.scrolledButtonSearch}`}>
+                    <button className={`${style.searchButtonSmallFilter} ${style.scrolledButtonSearch}`}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} size='xl' style={{color: "#fff"}}/>
                     </button>
                 </div>
