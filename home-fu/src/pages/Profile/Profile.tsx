@@ -1,7 +1,27 @@
 import type React from "react"
+import { useState, useRef } from "react"
 import styles from "./profile.module.scss"
 import cameraIcon from "..//..//assets/icons/cameraIcon.svg"
+
 export const Profile: React.FC = () => {
+    const [avatar, setAvatar] = useState<string | null>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null)
+
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (event) => {
+                setAvatar(event.target?.result as string)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
+    const triggerFileInput = () => {
+        fileInputRef.current?.click()
+    }
+
     return (
         <div className={styles.profileContainer}>
             <div className={styles.profileHeader}>
@@ -18,9 +38,24 @@ export const Profile: React.FC = () => {
             <div className={styles.profileContent}>
                 <div className={styles.avatarSection}>
                     <div className={styles.avatar}>
-                        <div className={styles.avatarPlaceholder}>I</div>
+                        {avatar ? (
+                            <img src={avatar} alt="User avatar" className={styles.avatarImage} />
+                        ) : (
+                            <div className={styles.avatarPlaceholder}>I</div>
+                        )}
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleAvatarChange}
+                            accept="image/*"
+                            className={styles.fileInput}
+                        />
                     </div>
-                    <button className={styles.avatarUpload}>
+                    <button 
+                        className={styles.avatarUpload}
+                        onClick={triggerFileInput}
+                        type="button"
+                    >
                         <img src={cameraIcon} alt="Camera" className={styles.cameraIcon} />
                         Додати
                     </button>

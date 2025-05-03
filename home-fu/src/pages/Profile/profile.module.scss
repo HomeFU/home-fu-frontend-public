@@ -1,117 +1,140 @@
 @mixin text($font-weight, $font-size, $color) {
-    font-weight: $font-weight;
-    font-size: $font-size;
-    color: $color;
-  }
-  
-  .profileContainer {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #fff;
-  }
-  
-  .profileHeader {
-    margin-bottom: 30px;
-    text-align: center;
-  
-    h1 {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
+
+.profileContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+}
+
+.profileHeader {
+  margin-bottom: 30px;
+  text-align: center;
+
+  h1 {
       @include text(600, 28px, #222);
       margin-bottom: 10px;
-    }
   }
-  
-  .profileDescription {
-    @include text(400, 14px, #717171);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
-  }
-  
-  .brandName {
-    @include text(700, 14px, #222);
-  }
-  
-  .moreLink {
-    @include text(400, 14px, #3a6df0);
-    text-decoration: none;
-  
-    &:hover {
+}
+
+.profileDescription {
+  @include text(400, 14px, #717171);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.brandName {
+  @include text(700, 14px, #222);
+}
+
+.moreLink {
+  @include text(400, 14px, #3a6df0);
+  text-decoration: none;
+
+  &:hover {
       text-decoration: underline;
-    }
   }
-  
-  .profileContent {
-    display: flex;
-    gap: 40px;
-  
-    @media (max-width: 768px) {
+}
+
+.profileContent {
+  display: flex;
+  gap: 40px;
+
+  @media (max-width: 768px) {
       flex-direction: column;
-    }
   }
-  
-  .avatarSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -110px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -110px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #3a6df0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+
+  .avatarImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
   }
-  
-  .avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #3a6df0;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    margin-bottom: 10px;
+
+  .avatarPlaceholder {
+      position: absolute;
   }
-  
-  .avatarUpload {
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 8px 14px;
-    @include text(500, 14px, #222);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.fileInput {
+  display: none;
+}
+
+.avatarUpload {
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 14px;
+  @include text(500, 14px, #222);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  transition: all 0.2s;
+
+  &:hover {
+      background: #f5f5f5;
   }
-    .cameraIcon {
-        height: 20px;
-        position: relative;
-        left: -3px;
-  }
-  
-  .fieldsGrid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
-    row-gap: 40px;
-  
-    @media (max-width: 768px) {
+}
+
+.cameraIcon {
+  height: 20px;
+  position: relative;
+  left: -3px;
+}
+
+.fieldsGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+
+  @media (max-width: 768px) {
       grid-template-columns: 1fr;
-    }
   }
-  
-  .field {
-    position: relative;
-  
-    .fieldLabel {
+}
+
+.field {
+  position: relative;
+
+  .fieldLabel {
       position: absolute;
       left: 0;
       top: 8px;
       @include text(500, 16px, #717171);
       transition: all 0.2s;
       pointer-events: none;
-    }
-  
-    .fieldInput {
+  }
+
+  .fieldInput {
       width: 100%;
       border: none;
       border-bottom: 1px solid #ddd;
@@ -119,16 +142,15 @@
       @include text(400, 16px, #222);
       outline: none;
       background: transparent;
-  
+
       &:focus {
-        border-bottom-color: #3a6df0;
+          border-bottom-color: #3a6df0;
       }
-  
+
       &:focus + .fieldLabel,
       &:not(:placeholder-shown) + .fieldLabel {
-        transform: translateY(-25px);
-        @include text(500, 12px, #3a6df0);
+          transform: translateY(-25px);
+          @include text(500, 12px, #3a6df0);
       }
-    }
   }
-  
+}
