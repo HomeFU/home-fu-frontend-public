@@ -2,8 +2,28 @@ import type React from "react"
 import { useState, useRef } from "react"
 import styles from "./profile.module.scss"
 import cameraIcon from "..//..//assets/icons/cameraIcon.svg"
+import Select, { SingleValue } from 'react-select';
+
+type Option = {
+    value: string;
+    label: string;
+};
 
 export const Profile: React.FC = () => {
+    const options = [
+        { value: 'man', label: 'Чоловіча' },
+        { value: 'woman', label: 'Жіноча' },
+        { value: 'other', label: 'Інша' },
+    ];
+
+    const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+
+
+    const handleChange = (selected:SingleValue<Option> ) => {
+        setSelectedOption(selected);
+        //console.log(selected?.value)
+    };
+
     const [avatar, setAvatar] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -91,12 +111,31 @@ export const Profile: React.FC = () => {
                         <span className={styles.fieldLabel}>Дата народження</span>
                     </div>
                     <div className={styles.field}>
-                        <select className={styles.fieldInput}>
-                            <option value="">Оберіть стать</option>
-                            <option value="male">Чоловіча</option>
-                            <option value="female">Жіноча</option>
-                            <option value="other">Інша</option>
-                        </select>
+                        <Select
+                            value={selectedOption}
+                            onChange={handleChange}
+                            options={options}
+                            placeholder="Оберіть стать"
+                            styles={{
+                                control: (base) => ({
+                                    ...base,
+                                    border: 'none',
+                                    borderBottom: '1px solid #ccc',
+                                    borderRadius: 0,
+                                    boxShadow: 'none',
+                                    backgroundColor: 'transparent',
+                                    minHeight: '40px',
+                                    padding: 0
+                                }),
+                                indicatorSeparator: () => ({
+                                    display: 'none',
+                                }),
+                                valueContainer: (base) => ({
+                                    ...base,
+                                    padding: 0,
+                                }),
+                            }}
+                        />
                     </div>
                 </div>
             </div>
