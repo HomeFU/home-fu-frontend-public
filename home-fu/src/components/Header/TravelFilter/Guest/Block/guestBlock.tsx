@@ -7,7 +7,6 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons"
 import { useDispatch, useSelector } from "react-redux"
 import { increment } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { decrement } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
-import { AnimalsModal } from "../../Animals/animals"
 import { openAnimalsModal } from "../../../../../redux/TravelFilter/GuestSlices/animalsSlice"
 
 type category = {
@@ -88,8 +87,6 @@ export const GuestBlock = () => {
           </div>
         </div>
       </div>
-
-      <AnimalsModal />
     </>
   )
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./animals.module.scss";
 import animalImage from "..//..//..//..//assets/images/animal.jpg";

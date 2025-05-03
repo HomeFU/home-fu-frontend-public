@@ -13,6 +13,7 @@ import { MobileMenu } from "../MobileMenu/menu";
 import { FilterBar } from "../../pages/CategoryBar/FilterBar/filterbar";
 import { FilterButton } from "../../pages/CategoryBar/FilterButton/filterbutton";
 import { SumButton } from "../../pages/CategoryBar/SumButton/sumbutton";
+import { AnimalsModal } from "./TravelFilter/Animals/animals";
 
 export const Header = () => {
 
@@ -90,6 +91,7 @@ export const Header = () => {
                 </div> 
             </header>
             <MobileMenu/>
+            <AnimalsModal/>
         </>
     )
 }
