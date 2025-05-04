@@ -14,10 +14,10 @@ import { FilterBar } from "../../pages/CategoryBar/FilterBar/filterbar";
 import { FilterButton } from "../../pages/CategoryBar/FilterButton/filterbutton";
 import { SumButton } from "../../pages/CategoryBar/SumButton/sumbutton";
 import { AnimalsModal } from "./TravelFilter/Animals/animals";
-
+import { MenuPopoUp } from "../MenuPopUp/menuPopUp";
+import { toggleMenuPopUp } from "../../redux/MenuPopoUp/menuPopoUpSlice";
 export const Header = () => {
 
-    
     const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
 
     const dispatch = useDispatch();
@@ -47,7 +47,8 @@ export const Header = () => {
                                 <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
                             </ul>
                         }
-                        <div className={style.offerListWrapper}>
+                        <MenuPopoUp/>
+                        <div className={style.offerListWrapper} onClick={() => {dispatch(toggleMenuPopUp())}}>
                             <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                             {
                                 isAuthenticatedUser ? <LogOutButton/> : <RegisterButton/>

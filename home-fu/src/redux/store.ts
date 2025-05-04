@@ -12,7 +12,7 @@ import authSlice from "./Auth/authSlice";
 import menuSlice from "./MobileMenu/menuSlice";
 import animalsModalState from "./TravelFilter/GuestSlices/animalsSlice";
 import scrolledFilter from "./TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll";
-
+import menuPopUpSlice from "./MenuPopoUp/menuPopoUpSlice";
 export const store = configureStore({
     reducer:{
         form: formReducer,
@@ -27,7 +27,8 @@ export const store = configureStore({
         auth: authSlice,
         mobileMenu: menuSlice,
         animalsModal: animalsModalState,
-        scrolledFilter: scrolledFilter
+        scrolledFilter: scrolledFilter,
+        menuPopUp: menuPopUpSlice
     }
 })
 export type RootState = ReturnType<typeof store.getState>

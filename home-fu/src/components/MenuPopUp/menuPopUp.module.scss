@@ -1,0 +1,67 @@
+@mixin text ($font-size, $font-weight, $line-height) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    line-height: $line-height;
+}
+
+.logoModifier {
+ color: rgb(52, 104, 194);
+}
+
+.wrapperPopUp {
+    position: absolute;
+    left: 940px;
+    top: 55px;
+    z-index: 4;
+    padding: 15px 0;
+    width: 260px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
+}
+
+.listLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.listLinksItem {
+    padding: 5px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+
+    a {
+        display: block;
+    }
+
+    &:hover {
+        background: rgb(247, 247, 247);
+        transition: .3s;
+    }
+}
+
+.listLinksFirstBlock {
+    @include text(16px, 550, 1.62);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.listLinksSecondBlock {
+    padding-top: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.listLinksThirdBlock {
+    padding-top: 10px;
+}
+
+.listLinksSecondBlock,
+.listLinksThirdBlock {
+    @include text(15px, 300, 1.62);
+}
+
+.buttonLogOut {
+    @include text(15px, 300, 1.62);
+}

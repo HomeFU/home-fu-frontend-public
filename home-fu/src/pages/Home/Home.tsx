@@ -8,7 +8,8 @@ import { FilterBar } from "../CategoryBar/FilterBar/filterbar";
 const Home = () => {
     return (<>
         <Header></Header>
-        <main></main>
+        <main>
+        </main>
         <Footer></Footer>
     </>)
 }
