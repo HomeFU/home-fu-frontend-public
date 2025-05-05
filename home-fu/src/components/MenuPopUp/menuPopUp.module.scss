@@ -34,7 +34,8 @@
     transition: .3s;
 
     a {
-        display: block;
+        display: inline-block;
+        width: 100%;
     }
 
     &:hover {
