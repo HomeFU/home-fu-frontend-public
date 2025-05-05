@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from './footer.module.scss';
+import style from "./footerMain.module.scss"
 import langIcon from '../../assets/icons/languageIcon.svg';
 import instaIcon from '../../assets/icons/instagramIcon.svg';
 import facebookIcon from '../../assets/icons/facebookIcon.svg';
@@ -19,7 +19,7 @@ type ActiveTab = {
     [key: string]: Location[];
 }
 
-export const Footer = () => {
+export const FooterMain = () => {
     const [activeTab, setActiveTab] = useState<string>('popular');
 
     const tabs:Tab[] = [
