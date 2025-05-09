@@ -1,4 +1,4 @@
-import { Header } from "../../components/Header/header";
+import { Header } from "..//..//components/Header/HeaderMain/header";
 import { FooterMain } from "../../components/Footer/footerMain";
 import { FilterButton } from "../CategoryBar/FilterButton/filterbutton";
 import { SumButton } from "../CategoryBar/SumButton/sumbutton";

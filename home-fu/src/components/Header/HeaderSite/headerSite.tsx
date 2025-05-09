@@ -1,0 +1,31 @@
+"use client"
+
+import style from "./headerSite.module.scss"
+import { RegisterButton } from "..//RegisterButton/registerbutton"
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { LogOutButton } from "..//../../features/Auth/LogOut/logOutButton"
+
+export const HeaderSite = () => {
+  const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated)
+
+  return (
+    <header className={style.simpleHeader}>
+      <div className={style.container}>
+        <div className={style.headerContent}>
+          <div className={style.logo}>
+            <Link to="/">
+              Home<span className={style.logoModifier}>FU</span>
+            </Link>
+          </div> 
+          <div className={style.rightSection}>
+            <Link className={style.offerItem} to="/">
+              Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span>
+            </Link>
+            <div className={style.userMenu}>{isAuthenticatedUser ? <LogOutButton /> : <RegisterButton />}</div>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}

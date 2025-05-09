@@ -1,5 +1,5 @@
 import style from "./details.module.scss"
-import { Header } from "../../components/Header/header"
+import { Header } from "..//..//components/Header/HeaderMain/header"
 import { FooterMain } from "../../components/Footer/footerMain"
 export const Details = () => {
     return (

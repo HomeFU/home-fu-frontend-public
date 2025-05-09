@@ -1,21 +1,21 @@
 import style from "./header.module.scss";
-import {RegisterButton} from "./RegisterButton/registerbutton";
-import {TravetFilter} from "./TravelFilter/travel-filter";
-import {MapButton} from "./mapbutton/mapbutton";
+import {RegisterButton} from "..//RegisterButton/registerbutton";
+import {TravetFilter} from "..//TravelFilter/travel-filter";
+import {MapButton} from "..//MapButton/mapbutton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LogOutButton } from "../../features/Auth/LogOut/logOutButton";
+import { LogOutButton } from "..//../../features/Auth/LogOut/logOutButton";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { openCloseMobileMenu } from "../../redux/MobileMenu/menuSlice";
-import { MobileMenu } from "../MobileMenu/menu";
-import { FilterBar } from "../../pages/CategoryBar/FilterBar/filterbar";
-import { FilterButton } from "../../pages/CategoryBar/FilterButton/filterbutton";
-import { SumButton } from "../../pages/CategoryBar/SumButton/sumbutton";
-import { AnimalsModal } from "./TravelFilter/Animals/animals";
-import { MenuPopoUp } from "../MenuPopUp/menuPopUp";
-import { toggleMenuPopUp } from "../../redux/MenuPopoUp/menuPopoUpSlice";
+import { openCloseMobileMenu } from "../../../redux/MobileMenu/menuSlice";
+import { MobileMenu } from "../../MobileMenu/menu";
+import { FilterBar } from "../../../pages/CategoryBar/FilterBar/filterbar";
+import { FilterButton } from "../../../pages/CategoryBar/FilterButton/filterbutton";
+import { SumButton } from "../../../pages/CategoryBar/SumButton/sumbutton";
+import { AnimalsModal } from ".././TravelFilter/Animals/animals";
+import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
+import { toggleMenuPopUp } from "../../../redux/MenuPopoUp/menuPopoUpSlice";
 export const Header = () => {
 
     const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
