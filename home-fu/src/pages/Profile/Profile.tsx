@@ -4,6 +4,7 @@ import styles from "./profile.module.scss"
 import cameraIcon from "..//..//assets/icons/cameraIcon.svg"
 import Select, { SingleValue } from 'react-select';
 import { HeaderSite } from "..//..//components/Header/HeaderSite/headerSite";
+import { FooterSite } from "../../components/Footer/FooterSite/footerSite";
 
 type Option = {
     value: string;
@@ -107,12 +108,10 @@ export const Profile: React.FC = () => {
                                 <input type="text" className={styles.fieldInput} placeholder=" " />
                                 <span className={styles.fieldLabel}>Екстрений контакт</span>
                             </div>
-
                             <div className={styles.field}>
                                 <input type="date" className={styles.fieldInput} placeholder=" " />
                                 <span className={styles.fieldLabel}>Дата народження</span>
                             </div>
-
                             <div className={styles.field}>
                                 <Select
                                     value={selectedOption}
@@ -138,13 +137,15 @@ export const Profile: React.FC = () => {
                                             padding: 0,
                                         }),
                                     }}
+
                                     />
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </main>
-                          </>
+            </main>
+            <FooterSite/>
+        </>
     )
 }
 export default Profile

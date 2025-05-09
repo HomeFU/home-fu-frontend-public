@@ -1,0 +1,143 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.footer {
+    background: #F7F7F7;
+    font-family: "Inknut Antiqua", serif;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 75px auto 0 auto;
+}
+
+.supportWrapper {
+    padding-top: 52px;
+    padding-bottom: 61px;
+    display: flex;
+    gap: 150px;
+    
+    @media (max-width:1024px) {
+        gap: 80px;
+        padding: 40px;
+    }
+    
+    @media (max-width:768px) {
+        flex-direction: column;
+        gap: 40px;
+        padding: 30px;
+    }
+}
+
+.footerBottomBlock {
+    padding-top: 26px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    @media (max-width:768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;   
+        padding: 30px;
+    }
+}
+
+.footerInfo {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    
+    @media (max-width:768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+.footerActions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+    @media (max-width:1024px) {
+        gap: 15px;
+    }
+    
+    @media (max-width:768px) {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+.footerLinks {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    
+    @media (max-width:768px) {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+.footerLinksItem {
+    @include text(400, 12px, #000);
+    text-decoration: underline;
+}
+
+.languageButton {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    @include text(400, 14px, #000);
+}
+
+.currencyButton {
+    cursor: pointer;
+    @include text(400, 14px, #000);
+}
+
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    
+    @media (max-width:768px) {
+        margin-top: 10px;
+    }
+}
+
+.footerText {
+    @include text(400, 12px, #000);
+}
+
+.supportTitle,
+.hostTitle,
+.homeFuTitle {
+    @include text(550, 18px, #000);
+    margin-bottom: 16px;
+}
+
+.supportList,
+.hostList,
+.homeFuList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    @media (max-width:768px) {
+        gap: 12px;
+    }
+}
+
+.supportListItem,
+.hostListItem,
+.homeFuListItem {
+    @include text(300, 15px, #000);
+}

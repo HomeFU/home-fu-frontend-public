@@ -1,5 +1,5 @@
-import { Header } from "..//..//components/Header/HeaderMain/header";
-import { FooterMain } from "../../components/Footer/footerMain";
+import { Header } from "../../components/Header/header";
+import { FooterMain } from "../../components/Footer/FooterMain/footerMain";
 import { FilterButton } from "../CategoryBar/FilterButton/filterbutton";
 import { SumButton } from "../CategoryBar/SumButton/sumbutton";
 import style from "./home.module.scss";

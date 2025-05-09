@@ -1,6 +1,7 @@
 import style from "./details.module.scss"
 import { Header } from "..//..//components/Header/HeaderMain/header"
-import { FooterMain } from "../../components/Footer/footerMain"
+import { FooterSite } from "../../components/Footer/FooterSite/footerSite"
+
 export const Details = () => {
     return (
         <>
@@ -11,7 +12,7 @@ export const Details = () => {
                     <h1>Hello , this is Page Details</h1>
                 </div>
             </main>
-         <FooterMain/>
+         <FooterSite/>
         </>
     )
 }
