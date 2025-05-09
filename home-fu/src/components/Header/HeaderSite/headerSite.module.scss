@@ -54,12 +54,9 @@
   }
   
   .offerItem {
+    cursor: pointer;
     @include text(500, 15px, #211E1A);
-    text-decoration: underline;
-    
-    &:hover {
-      color: rgb(52, 104, 194);
-    }
+    text-decoration: underline; 
     
     @media (max-width: 768px) {
       font-size: 13px;
