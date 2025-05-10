@@ -1,18 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 type selectedCategoriState = {
-    isSelectedCategori:string
+    isSelectedCategori:number
 }
 
 const initialState:selectedCategoriState = {
-    isSelectedCategori: "Гарні краєвиди"
+    isSelectedCategori: 1
 }
 
 export const categorySlice = createSlice({
     name:"category",
     initialState,
     reducers: {
-        setSelectedCategori: (state, action: {payload: string}) => {
+        setSelectedCategori: (state, action: {payload: number}) => {
             state.isSelectedCategori = action.payload
         }
     }

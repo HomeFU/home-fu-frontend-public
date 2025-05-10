@@ -1,13 +1,21 @@
+.blur {
+    filter: blur(5px); /* можно варьировать уровень размытия */
+    transition: filter 0.3s ease;
+    pointer-events: none; /* опционально — чтобы нельзя было кликать по элементам пока они размыты */
+}
+
 .filterBarWrapper {
     position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
     max-width: 790px;
+    min-width: 790px;;
 
     @media (max-width:1024px) {
         width: 100%;
         overflow: hidden;
+        min-width: unset;
     }
 }
 
