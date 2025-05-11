@@ -47,7 +47,21 @@ const Home = () => {
         <main className={style.main}>
             <div className={style.container}>
                 {
-                    isLoadingCardsCategories ? "Loading..." : 
+                    !isLoadingCardsCategories ? <div className={style.cardItemWrapperLoading}>
+                        {Array.from({ length: 16 }, (_, index) => (
+                            <div className={style.cardItemLoading} key={index}>
+                                <div className={style.cardItemImgWrapperLoading}></div>
+                                <div className={style.wrapperLocationRatingLoadind}>
+                                    <span className={style.cardItemLocationNameLoadind}></span>
+                                    <span className={style.cardItemRatingLoading}></span>
+                                </div>
+                                <div className={style.cardItemDate}>
+                                    <span className={style.date}></span>
+                                </div>
+                                <span className={style.cardItemPriceLoading}></span>
+                            </div>
+                        ))}
+                    </div> : 
                     <div className={style.cardItemWrapper}>
                     {
                         dataCardsCategories.map((el) => (

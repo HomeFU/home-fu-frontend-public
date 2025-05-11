@@ -34,7 +34,7 @@
 
 .wrapper {
     width: 1135px;
-    margin: 700px auto 0 auto;
+    margin: 440px auto 0 auto;
     
     @include tablet {
         width: 90%;
@@ -256,6 +256,11 @@
     align-items: center;
     gap: 5px;
     @include text(400, 14px, #000);
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .currencyButton {

@@ -106,7 +106,7 @@ export const FilterBar = () => {
 
     return (
         <div className={style.filterBarWrapper}>
-            {isVisibleLeftButton && (
+            {isVisibleLeftButton && !isLoadingCategories && (
                 <button className={`${style.scrollButton} ${style.leftButton}`} onClick={scrollLeft}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -119,16 +119,14 @@ export const FilterBar = () => {
                 onScroll={checkButtonVisibility}
             >
                 {
-                    isLoadingCategories ? <>
-                        {
-                            categories.map((el) => (
-                                <div key={el.id} className={`${style.filterItem} ${style.blur}`}>
-                                    <span>{el.id}</span>
-                                    <span>{el.name}</span>
-                                </div>
-                            ))
-                        }
-                    </> : <>
+                    !isLoadingCategories ? <div className={style.filterWrapperLoading}>
+                        {Array.from({ length: 7 }, (_, index) => (
+                            <div className={style.wrapperLoading} key={index}>
+                                <div className={style.circle}></div>
+                                <div className={style.bottomBlock}></div>
+                            </div>
+                        ))}
+                    </div> : <>
                         {dataCategories.map((el) => (
                             <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.id ? style.activeItem : ''}`}  onClick={() => {dispatch(setSelectedCategori(el.id)); navigate(`/?category=${el.id}`)}}>
                                 {/* <img src={el.icon} alt={el.label} /> */}
@@ -139,7 +137,7 @@ export const FilterBar = () => {
                     </>
                 }
             </div>
-            {isVisibleRightButton && (
+            {isVisibleRightButton && !isLoadingCategories && (
                 <button className={`${style.scrollButton} ${style.rightButton}`} onClick={scrollRight}>
                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

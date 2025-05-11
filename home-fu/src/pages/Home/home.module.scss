@@ -4,10 +4,15 @@
     color: $color;
 }
 
+@keyframes loading {
+    from {background-color: #f6f6f6;}
+    to {background-color: #e1e1e1;}
+}
+
 main {
    font-family: 'Helvetica Neue', Arial, sans-serif;
    position: relative;
-   top: 350px;
+   top: 340px;
 }
 
 img {
@@ -30,7 +35,7 @@ img {
 
 .cardItem {
     width: 272px;
-    height: 256px;
+    height: auto;
 }
 
 .cardItemImgWrapper {
@@ -91,17 +96,76 @@ img {
     right: 22%;
 }
 
-// .wrapperFilterSumButton {
-//     width: 100%;
-//     display: flex;
-//     align-items: center;
-//     gap: 5px;
+// loading
 
-//     @media (max-width:1024px) {
-//        justify-content: space-between;
-//     }
-// }
+.cardItemWrapperLoading {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
 
-// .divider {
-//     border-bottom: 1px solid #e5e7eb;
-// }
+.cardItemLoading {
+    width: 272px;
+    height: auto;
+}
+
+.cardItemImgWrapperLoading {
+    animation-name: loading;
+    animation-duration: 2s;
+    border-radius: 16px;
+    background: #f6f6f6;
+    height: 256px;
+}
+
+.wrapperLocationRatingLoadind {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
+.cardItemLocationNameLoadind {
+    animation-name: loading;
+    animation-duration: 2s;
+    background: #f6f6f6;
+    width: 79px;
+    height: 13px;
+    border-radius: 10px;
+}
+
+.cardItemRatingLoading {
+    animation-name: loading;
+    animation-duration: 2s;
+    background: #f6f6f6;
+    width: 50px;
+    height: 13px;
+    border-radius: 10px;
+}
+
+.cardItemDate {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .date {
+        background: #f6f6f6;
+        animation-name: loading;
+        animation-duration: 2s;
+        width: 79px;
+        height: 13px;
+        border-radius: 10px;
+    }
+}
+
+.cardItemPriceLoading {
+    animation-name: loading;
+    animation-duration: 2s;
+    display: inline-block;
+    background: #f6f6f6;
+    width: 79px;
+    height: 13px;
+    border-radius: 10px;
+    margin-top: 6px;
+}

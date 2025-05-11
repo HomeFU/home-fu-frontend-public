@@ -1,7 +1,37 @@
-.blur {
-    filter: blur(5px); /* можно варьировать уровень размытия */
-    transition: filter 0.3s ease;
-    pointer-events: none; /* опционально — чтобы нельзя было кликать по элементам пока они размыты */
+@keyframes loading {
+    from {background-color: #f6f6f6;}
+    to {background-color: #e1e1e1;}
+}
+
+.filterWrapperLoading {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.wrapperLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.circle {
+    animation-name: loading;
+    animation-duration: 2s;
+    width: 30px;
+    height: 30px;
+    background: #f6f6f6;
+    border-radius: 50%;
+}
+
+.bottomBlock {
+    animation-name: loading;
+    animation-duration: 2s;
+    width: 80px;
+    height: 10px;
+    background: #f6f6f6;
+    border-radius: 15px;
 }
 
 .filterBarWrapper {
