@@ -6,11 +6,16 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { setSelectedCategori } from "../../redux/CategoryFilter/CategorySlice/categorySlice";
-// import { categorySlice } from "../../redux/CategoryFilter/CategorySlice/categorySlice";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { useSearchParams } from "react-router-dom";
 import style from "./home.module.scss";
 import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -40,14 +45,13 @@ const Home = () => {
     useEffect(() => {
         dispatch(setSelectedCategori(categoryIdFromUrl));
     },[categoryIdFromUrl])
-    console.log(dataCardsCategories);
-
+   
     return (<>
         <Header/>
         <main className={style.main}>
             <div className={style.container}>
                 {
-                    !isLoadingCardsCategories ? <div className={style.cardItemWrapperLoading}>
+                    isLoadingCardsCategories ? <div className={style.cardItemWrapperLoading}>
                         {Array.from({ length: 16 }, (_, index) => (
                             <div className={style.cardItemLoading} key={index}>
                                 <div className={style.cardItemImgWrapperLoading}></div>
@@ -66,13 +70,13 @@ const Home = () => {
                     {
                         dataCardsCategories.map((el) => (
                             <div key={el.id} className={style.cardItem}>
-                                <div className={style.cardItemImgWrapper}>
-                                   {
-                                    el.imageUrls.map((img, index) => (
-                                        <img key={index} src={`https://homefuserverback.azurewebsites.net` + img} alt={el.locationName}/>
-                                    ))
-                                   }
-                                </div>
+                                <Swiper effect={'fade'} navigation={true} pagination={true} modules={[EffectFade , Navigation, Pagination]} className={style.swiperMy}>
+                                    {
+                                        el.imageUrls.map((img, index) => (
+                                            <SwiperSlide className={style.swiperSlide} key={index}><img className={style.cardItemImage} src={`https://homefuserverback.azurewebsites.net` + img} alt={el.locationName} /></SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper>
                                 <div className={style.wrapperLocationRating}>
                                     <span className={style.cardItemLocationName}>{el.locationName}</span>
                                     <span className={style.cardItemRating}><FontAwesomeIcon icon={faStar} size="sm" style={{color: "#FFD43B",}} /> {el.rating}</span>

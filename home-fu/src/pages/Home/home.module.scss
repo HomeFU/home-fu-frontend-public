@@ -9,6 +9,50 @@
     to {background-color: #e1e1e1;}
 }
 
+.swiperMy {
+    border-radius: 16px;
+}
+
+.swiperMy :global(.swiper-button-prev),
+.swiperMy :global(.swiper-button-next) {
+    position: absolute;
+    top: 58%;
+    transform: translateY(-58%);
+    background: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #000;
+}
+
+.swiperMy :global(.swiper-button-prev)::after,
+.swiperMy :global(.swiper-button-next)::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%) ;
+    font-size: 15px;
+    color: rgb(52, 104, 194);
+}
+
+.swiperMy :global(.swiper-pagination-bullet) {
+    width: 7px;
+    height: 7px; 
+    background: rgb(52, 104, 194);; 
+    opacity: 0.5;
+}
+
+.swiperMy :global(.swiper-pagination-bullet-active) {
+    border: 1px solid white;
+    width: 9px;
+    height: 9px;
+    background: rgb(48, 107, 210);; 
+    opacity: 1;
+}
+
+
 main {
    font-family: 'Helvetica Neue', Arial, sans-serif;
    position: relative;
@@ -38,12 +82,9 @@ img {
     height: auto;
 }
 
-.cardItemImgWrapper {
-    height: 256px;
-
-    img {
-        border-radius: 16px;
-    }
+.cardItemImage {
+    height: 300px;
+    border-radius: 16px;
 }
 
 .wrapperLocationRating {

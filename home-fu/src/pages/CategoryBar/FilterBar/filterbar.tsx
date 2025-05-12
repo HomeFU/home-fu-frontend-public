@@ -119,7 +119,7 @@ export const FilterBar = () => {
                 onScroll={checkButtonVisibility}
             >
                 {
-                    !isLoadingCategories ? <div className={style.filterWrapperLoading}>
+                    isLoadingCategories ? <div className={style.filterWrapperLoading}>
                         {Array.from({ length: 7 }, (_, index) => (
                             <div className={style.wrapperLoading} key={index}>
                                 <div className={style.circle}></div>
