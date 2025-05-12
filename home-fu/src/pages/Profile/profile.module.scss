@@ -4,12 +4,17 @@
   color: $color;
 }
 
+.main {
+ position: relative;
+ top: 110px;
+}
+
 .profileContainer {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 60px 20px;
+  height: 530px;
+  padding: 40px 20px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #fff;
 }
 
 .profileHeader {

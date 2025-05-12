@@ -96,6 +96,11 @@
     align-items: center;
     gap: 5px;
     @include text(400, 14px, #000);
+
+    img {
+        height: 20px;
+        width: 20px;
+    }
 }
 
 .currencyButton {

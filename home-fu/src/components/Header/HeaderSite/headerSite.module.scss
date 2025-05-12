@@ -5,6 +5,8 @@
 }
 
 .simpleHeader {
+  position: fixed;
+  z-index: 5;
   width: 100%;
   border-bottom: 1px solid #dddddd;
   padding: 30px 0;

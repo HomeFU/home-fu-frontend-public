@@ -44,7 +44,7 @@ export const Profile: React.FC = () => {
     return (
         <>
             <HeaderSite />
-            <main>
+            <main className={styles.main}>
                 <div className={styles.profileContainer}>
                     <div className={styles.profileHeader}>
                         <h1>Ваш профіль</h1>
