@@ -1,6 +1,7 @@
 
 import { useSelector } from "react-redux";
 import style from "./menuPopUp.module.scss";
+import { LogOutButton } from "../../features/Auth/LogOut/logOutButton";
 import { Link } from "react-router-dom";
 
 export const MenuPopoUp = () => {
@@ -25,7 +26,7 @@ export const MenuPopoUp = () => {
                         </ul>
                         <ul className={`${style.listLinks} ${style.listLinksThirdBlock}`}>
                             <li className={style.listLinksItem}><Link to="/">Довідковий центр</Link></li>
-                            <li className={style.listLinksItem}><button className={style.buttonLogOut} type="button">Вийти</button></li>
+                            <li className={style.listLinksItem}><LogOutButton/></li>
                         </ul>
                     </div>
                 )
