@@ -6,39 +6,6 @@ import { Categories } from "../../../api/Categories/categories";
 import { CategoriesModel } from "../../../types/Categories/categories";
 import { useNavigate } from "react-router-dom";
 
-const categories = [
-    {
-      id: 1,
-      name: "Будинки на озері",
-      icon: "/icons/lake-house.svg",
-    },
-    {
-      id: 2,
-      name: "Гірські котеджі",
-      icon: "/icons/mountain-house.png",
-    },
-    {
-      id: 3,
-      name: "Міські апартаменти",
-      icon: "/icons/city-apartment.png",
-    },
-    {
-      id: 4,
-      name: "Пляжні вілли",
-      icon: "/icons/beach-villa.png",
-    },
-    {
-      id: 5,
-      name: "Лісові будинки",
-      icon: "/icons/forest-house.png",
-    },
-    {
-      id: 6,
-      name: "Заміські котеджі",
-      icon: "/icons/country-house.png",
-    },
-]
-
 export const FilterBar = () => {
 
     const navigate = useNavigate();
@@ -49,6 +16,7 @@ export const FilterBar = () => {
     const [dataCategories, setDataCategories] = useState<CategoriesModel[]>([]);
     const [isLoadingCategories, setLoadingCategories] = useState(true);
 
+    console.log(dataCategories)
     const FetchDataCategories = async () => {
         try {
             const data = await Categories();
@@ -129,8 +97,7 @@ export const FilterBar = () => {
                     </div> : <>
                         {dataCategories.map((el) => (
                             <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.id ? style.activeItem : ''}`}  onClick={() => {dispatch(setSelectedCategori(el.id)); navigate(`/?category=${el.id}`)}}>
-                                {/* <img src={el.icon} alt={el.label} /> */}
-                                <span>{el.id}</span>
+                                <img className={style.filterItemimg} src={'https://homefuserverback.azurewebsites.net' + el.imageUrl} alt={el.name} />
                                 <span>{el.name}</span>
                             </div>
                         ))}
