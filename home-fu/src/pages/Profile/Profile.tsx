@@ -104,7 +104,7 @@ export const Profile: React.FC = () => {
 
               <div className={styles.field}>
                 <input type="text" className={styles.fieldInput} placeholder=" " />
-                <span className={styles.fieldLabel}>Додаткова інформація</span>
+                <span className={styles.fieldLabel}>Ім'я екстреного контакту</span>
               </div>
 
               <div className={styles.field}>
