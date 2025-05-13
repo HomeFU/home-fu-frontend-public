@@ -15,7 +15,7 @@ import { FilterButton } from "../../../pages/CategoryBar/FilterButton/filterbutt
 import { SumButton } from "../../../pages/CategoryBar/SumButton/sumbutton";
 import { AnimalsModal } from ".././TravelFilter/Animals/animals";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
-import { toggleMenuPopUp } from "../../../redux/MenuPopoUp/menuPopoUpSlice";
+import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 export const Header = () => {
 
     const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
@@ -48,10 +48,10 @@ export const Header = () => {
                             </ul>
                         }
                         <MenuPopoUp/>
-                        <div className={style.offerListWrapper} onClick={() => {dispatch(toggleMenuPopUp())}}>
+                        <div className={style.offerListWrapper}>
                             <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                             {
-                                isAuthenticatedUser ? <LogOutButton/> : <RegisterButton/>
+                                isAuthenticatedUser ? <AuthenticatedUserButton/> : <RegisterButton/>
                             }
                         </div>
                         <button
