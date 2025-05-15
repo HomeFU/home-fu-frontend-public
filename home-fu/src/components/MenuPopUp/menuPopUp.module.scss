@@ -32,7 +32,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition: .3s;
-
+    position: relative; 
     a {
         display: inline-block;
         width: 100%;
@@ -65,4 +65,35 @@
 
 .buttonLogOut {
     @include text(15px, 300, 1.62);
+}
+
+
+.comingSoonPopup {
+    position: absolute;
+    left: -130px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #0a1744;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    @include text(12px, 500, 1.4); 
+    z-index: 5;
+    display: none;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-width: 8px 0 8px 8px;
+        border-style: solid;
+        border-color: transparent transparent transparent #0a1744;
+    }
+}
+
+
+.listLinksItem:hover .comingSoonPopup {
+    display: block;
 }
