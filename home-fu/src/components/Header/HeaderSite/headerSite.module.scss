@@ -12,65 +12,47 @@
   padding: 30px 0;
   background-color: white;
   font-family: "Inknut Antiqua", serif;
-  
+ 
   @media (max-width:1024px) {
     border-bottom: 0.3px solid #dddddd;
     padding: 35px 0 30px 0;
   }
 }
 
+.menuPopupWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  z-index: 10;
+}
+
 .menuButton {
   display: none;
   position: relative;
   height: 12px;
-  width: 12px; 
+  width: 12px;
   cursor: pointer;
   outline: none;
   z-index: 5;
 
-  @media (max-width:1024px) { 
+  @media (max-width:1024px) {
       display: block;
   }
 
   .menuIcon {
       transform: translate(-50%, -50%);
-  
+ 
       span {
         position: absolute;
         display: block;
-        height: 2px; 
+        height: 2px;
         width: 24px;
         background-color: black;
         transition: all 0.3s ease-in-out;
         transform: none;
         opacity: 1;
-  
-        &:nth-child(1) {
-          &.open {
-            transform: rotate(45deg);
-          }
-          &:not(.open) {
-            transform: translateY(-0.5rem); 
-          }
-        }
-  
-        &:nth-child(2) {
-          &.open {
-            opacity: 0;
-          }
-          &:not(.open) {
-            opacity: 1;
-          }
-        }
-  
-        &:nth-child(3) {
-          &.open {
-            transform: rotate(-45deg);
-          }
-          &:not(.open) {
-            transform: translateY(0.5rem);
-          }
-        }
       }
   }
 }
@@ -89,12 +71,12 @@
 
 .logo {
   @include text(500, 32px, #211E1A);
-  
+ 
   a {
     text-decoration: none;
     color: #211E1A;
   }
-  
+ 
   @media (max-width: 768px) {
     @include text(500, 24px, #211E1A);
   }
@@ -108,16 +90,17 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  
+  position: relative; 
+ 
   @media (max-width: 768px) {
     gap: 10px;
   }
-  
+ 
   .offerItem {
     cursor: pointer;
     @include text(500, 15px, #211E1A);
-    text-decoration: underline; 
-    
+    text-decoration: underline;
+   
     @media (max-width: 768px) {
       font-size: 13px;
     }
@@ -131,4 +114,5 @@
 .userMenu {
   display: flex;
   align-items: center;
+  position: relative; 
 }
