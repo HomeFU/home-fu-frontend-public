@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import { Details } from "./pages/Details/Details";
 import { Profile } from "./pages/Profile/Profile";
+import { AdminPanel } from "./pages/AdminPanel/mainAdminPage";
 function App() {
   return (
     <BrowserRouter>
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
         <Route path="/details" element={<Details/>}></Route>
+        <Route path="/admin-panel" element={<AdminPanel/>}></Route>
       </Routes>
     </BrowserRouter>
   );

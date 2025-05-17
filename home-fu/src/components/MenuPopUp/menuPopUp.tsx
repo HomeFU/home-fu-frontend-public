@@ -22,6 +22,7 @@ export const MenuPopoUp = () => {
                             <li className={style.listLinksItem}><p>Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></p><div className={style.comingSoonPopup}>Coming soon</div></li>
                             <li className={style.listLinksItem}><p>Організувати враження</p><div className={style.comingSoonPopup}>Coming soon</div></li>
                             <li className={style.listLinksItem}><p>Запросити господаря</p><div className={style.comingSoonPopup}>Coming soon</div></li>
+                            <li className={style.listLinksItem}><Link to="/admin-panel">Адмін панель</Link></li>
                             <li className={style.listLinksItem}><Link to="/profile">Ваш профіль</Link></li>
                         </ul>
                         <ul className={`${style.listLinks} ${style.listLinksThirdBlock}`}>
