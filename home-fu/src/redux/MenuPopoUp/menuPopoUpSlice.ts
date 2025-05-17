@@ -1,18 +1,24 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isOpen:false
+    isOpen: false
 };
 
 const menuPopUpSlice = createSlice({
-    name:"menuPopUp",
+    name: "menuPopUp",
     initialState,
     reducers: {
-        toggleMenuPopUp:(state) => {
+        toggleMenuPopUp: (state) => {
             state.isOpen = !state.isOpen;
+        },
+        closeMenuPopUp: (state) => {
+            state.isOpen = false;
+        },
+        openMenuPopUp: (state) => {
+            state.isOpen = true;
         }
     }
 });
 
-export const {toggleMenuPopUp} = menuPopUpSlice.actions;
+export const { toggleMenuPopUp, closeMenuPopUp, openMenuPopUp } = menuPopUpSlice.actions;
 export default menuPopUpSlice.reducer;

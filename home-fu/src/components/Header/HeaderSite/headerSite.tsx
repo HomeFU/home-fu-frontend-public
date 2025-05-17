@@ -13,6 +13,7 @@ export const HeaderSite = () => {
   const dispatch = useDispatch()
   const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen)
   const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated)
+  const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter)
 
   const onOpenCloceMobileMenu = () => {
     dispatch(openCloseMobileMenu())
@@ -28,6 +29,15 @@ export const HeaderSite = () => {
                 Home<span className={style.logoModifier}>FU</span>
               </Link>
             </div>
+            
+            {showScrolledFilter && (
+              <ul className={style.listMenu}>
+                <li className={style.listItem}><Link to="/">Варіанти помешкань</Link></li>
+                <li className={style.listItem}><Link to="/">Враження</Link></li>
+                <li className={style.listItem}><Link to="/">Онлайн-враження</Link></li>
+              </ul>
+            )}
+            
             <div className={style.rightSection}>
               <Link className={style.offerItem} to="/">
                 Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span>
@@ -38,11 +48,10 @@ export const HeaderSite = () => {
                     <AuthenticatedUserButton />
                     <MenuPopoUp />
                   </div>
-                ) : (
-                  <RegisterButton />
-                )}
+                ) : (<RegisterButton />)}
               </div>
             </div>
+            
             <button className={style.menuButton} onClick={onOpenCloceMobileMenu}>
               <div className={style.menuIcon}>
                 <span className={isOpenMobileMenu ? style.open : ""} />
