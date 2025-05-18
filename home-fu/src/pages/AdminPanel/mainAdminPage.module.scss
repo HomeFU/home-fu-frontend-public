@@ -20,13 +20,13 @@
     top: 93px;
     width: 300px;
     height: 100vh;
-    background-color: #1e1e2f;
+    background-color: #f5f7fb;
     padding: 40px 20px;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 50px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
     z-index: 2;
 }
 
@@ -43,17 +43,24 @@
 }
 
 .link {
-    text-align: left;
-    cursor: pointer;
-    color: #fff;
+    display: block;
+    padding: 12px 24px;
+    color: #2d3e50;
+    font-size: 16px;
     text-decoration: none;
-    font-size: 24px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background 0.2s;
+    border-radius: 8px;
+    margin: 4px 16px;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
-        background-color: #2f2f4f;
+        background-color: #e6ecf5;
+        color: #2d5fff;
     }
+}
+
+.link.active {
+    background-color: #2d5fff;
+    color: #ffffff;
+    font-weight: 600;
 }
   

@@ -1,5 +1,4 @@
-export type AddNewCategoryModel = {
+export type CategoryType = {
     name:string,
-    imageUrl: string,
-    cardCategories: ''
+    imageFile: File,
 };

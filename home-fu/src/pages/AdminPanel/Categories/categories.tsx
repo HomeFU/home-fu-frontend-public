@@ -3,13 +3,13 @@ import style from "./categories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCategoriesForAdmin } from "../../../api/Admin/Categories/getAllCategories";
 import { DeleteCategoryForAdmin } from "../../../api/Admin/Categories/deleteCategory";
+import { AddNewCategory } from "./AddNewCategoryForm/addNewCategoryForm";
 // import { AddNewCategoryForm } from "./AddNewCategoryForm/addNewCategoryForm";
 
 type CategoriesModel = {
   id: number;
   name: string;
-  umgUrl: string;
-  cardCategories: number;
+  imageUrl: string;
 };
 
 export const Categories = () => {
@@ -65,7 +65,6 @@ export const Categories = () => {
           />
         ),
     },  
-    { label: "Cards", renderCell: (item: any) => item.cardCategories },
     {
       label: "Types",
       renderCell: (item: any) => (
@@ -88,7 +87,7 @@ export const Categories = () => {
         <CompactTable columns={columns} data={{ nodes: responseData }} />
       </div>
     </div>
-    {/* {isOpenFormAddCategory && <AddNewCategoryForm/>} */}
+    {isOpenFormAddCategory && <AddNewCategory/>}
     </>
   );
 };

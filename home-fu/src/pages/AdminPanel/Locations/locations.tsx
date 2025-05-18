@@ -3,6 +3,8 @@ import style from "./locations.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllLocationsForAdmin } from "../../../api/Admin/Locations/getAllLocations";
 import { DeleteLocationForAdmin } from "../../../api/Admin/Locations/deleteLocation";
+import { AddNewLocation } from "./AddNewLocationForm/addNewLocation";
+import { UpdateLocation } from "./UpdateLocationForm/updateLocationForm";
 
 type LocationsModel = {
   id: number;
@@ -10,6 +12,12 @@ type LocationsModel = {
 };
 
 export const Locations = () => {
+  const [isOpenFormForAddNewLocation, setOpenFormForAddNewLocation] = useState(false);
+  const [isOpenFormForUpdateLocation, setOpenFormForUpdateLocation] = useState(false);
+
+  const [idForUpdateLocation, setidForDeleteLocation] = useState<number>(null);
+  const [nameForUpdateLocation, setNameForDeleteLocation] = useState<string>('');
+
   const [responseData, setResponseData] = useState<LocationsModel[]>([]);
 
   const fetchData = async () => {
@@ -33,6 +41,12 @@ export const Locations = () => {
     fetchData();
   }, []);
 
+  const editLocationFunction = (id:number, name:string) => {
+    setOpenFormForUpdateLocation((prev) => !prev);
+    setNameForDeleteLocation(name);
+    setidForDeleteLocation(id);
+  }
+
   const columns = [
     { label: "ID", renderCell: (item: any) => item.id },
     { label: "Name", renderCell: (item: any) => item.name },
@@ -40,7 +54,7 @@ export const Locations = () => {
       label: "Types",
       renderCell: (item: any) => (
         <div className={style.typesButtons}>
-          <button onClick={() => {console.log("Edit")}} className={style.editBtn}>Edit</button>
+          <button onClick={() => {editLocationFunction(item.id,item.name)}} className={style.editBtn}>Edit</button>
           <button onClick={() => {deleteLocation(item.id)}} className={style.deleteBtn}>Delete</button>
         </div>
       ),
@@ -48,14 +62,18 @@ export const Locations = () => {
   ];
 
   return (
-    <div>
-      <div className={style.header}>
-        <h1>All Locations</h1>
-        <button>+ Add Locations</button>
+    <>
+      <div>
+        <div className={style.header}>
+          <h1>All Locations</h1>
+          <button onClick={() => {setOpenFormForAddNewLocation((prev) => !prev)}}>+ Add Locations</button>
+        </div>
+        <div className={style.wrapperTable}>
+          <CompactTable columns={columns} data={{ nodes: responseData }} />
+        </div>
       </div>
-      <div className={style.wrapperTable}>
-        <CompactTable columns={columns} data={{ nodes: responseData }} />
-      </div>
-    </div>
+      {isOpenFormForAddNewLocation && <AddNewLocation/>}
+      {isOpenFormForUpdateLocation && <UpdateLocation id={idForUpdateLocation} name={nameForUpdateLocation}/>}
+    </>
   );
 };

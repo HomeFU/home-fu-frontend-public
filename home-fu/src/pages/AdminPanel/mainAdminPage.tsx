@@ -17,19 +17,19 @@ export const AdminPanel = () => {
                         <nav className={style.nav}>
                             <button
                                 onClick={() => setActiveView('location')}
-                                className={style.link}
+                                className={`${style.link} ${activeView === 'location' ? style.active : ''}`}
                             >
                                 Локации
                             </button>
                             <button
                                 onClick={() => setActiveView('category')}
-                                className={style.link}
+                                className={`${style.link} ${activeView === 'category' ? style.active : ''}`}
                             >
                                 Категории
                             </button>
                             <button
                                 onClick={() => setActiveView('cards')}
-                                className={style.link}
+                                className={`${style.link} ${activeView === 'cards' ? style.active : ''}`}
                             >
                                 Карточки для категорий
                             </button>
