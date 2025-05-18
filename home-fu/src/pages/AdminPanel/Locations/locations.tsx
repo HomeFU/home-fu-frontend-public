@@ -7,7 +7,6 @@ import { DeleteLocationForAdmin } from "../../../api/Admin/Locations/deleteLocat
 type LocationsModel = {
   id: number;
   name: string;
-  cards: number;
 };
 
 export const Locations = () => {
@@ -37,7 +36,6 @@ export const Locations = () => {
   const columns = [
     { label: "ID", renderCell: (item: any) => item.id },
     { label: "Name", renderCell: (item: any) => item.name },
-    { label: "Cards", renderCell: (item: any) => item.cards },
     {
       label: "Types",
       renderCell: (item: any) => (
