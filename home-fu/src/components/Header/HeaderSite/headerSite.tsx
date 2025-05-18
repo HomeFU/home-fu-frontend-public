@@ -8,6 +8,7 @@ import { openCloseMobileMenu } from "../../../redux/MobileMenu/menuSlice"
 import { MobileMenu } from "../../MobileMenu/menu"
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton"
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp"
+import { closeMenuPopUp } from "../../../redux/MenuPopoUp/menuPopoUpSlice"
 
 export const HeaderSite = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ export const HeaderSite = () => {
       <header className={style.simpleHeader}>
         <div className={style.container}>
           <div className={style.headerContent}>
-            <div className={style.logo}>
+            <div className={style.logo} onClick={() => {dispatch(closeMenuPopUp())}}>
               <Link to="/">
                 Home<span className={style.logoModifier}>FU</span>
               </Link>

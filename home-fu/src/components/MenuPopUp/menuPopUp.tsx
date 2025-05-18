@@ -9,7 +9,6 @@ export const MenuPopoUp = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => state.menuPopUp.isOpen);
 
-
     return (
         <>
             {
