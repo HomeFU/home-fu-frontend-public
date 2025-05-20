@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import style from "./menu.module.scss";
 import { Link } from "react-router-dom";
@@ -7,6 +8,14 @@ import { LoginButton } from "../../features/Auth/LoginMobileButton/loginButton";
 export const MobileMenu = () => {
     const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated);
     const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen);
+
+        useEffect(() => {
+        if (isOpenMobileMenu) {
+            document.body.classList.add("lock-scroll");
+        } else {
+            document.body.classList.remove("lock-scroll");
+        }
+    }, [isOpenMobileMenu]);
 
     return(
         <div className={`${style.menu} ${isOpenMobileMenu ? style.openMenu : ''}`}>

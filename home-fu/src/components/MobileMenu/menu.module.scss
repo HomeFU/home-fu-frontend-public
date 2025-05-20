@@ -99,3 +99,8 @@
         border-bottom: 1px solid #e5e7eb;
     }
 }
+body.lock-scroll {
+  overflow: hidden;
+  height: 100%;
+  padding-right: 15px; 
+}
