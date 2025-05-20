@@ -4,6 +4,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCategoriesForAdmin } from "../../../api/Admin/Categories/getAllCategories";
 import { DeleteCategoryForAdmin } from "../../../api/Admin/Categories/deleteCategory";
 import { AddNewCategory } from "./AddNewCategoryForm/addNewCategoryForm";
+import { UpdateCategory } from "./UpdateCategoriesForm/updateCategoriesForm";
 // import { AddNewCategoryForm } from "./AddNewCategoryForm/addNewCategoryForm";
 
 type CategoriesModel = {
@@ -14,8 +15,18 @@ type CategoriesModel = {
 
 export const Categories = () => {
   const [isOpenFormAddCategory, setOpenFormAddCategory] = useState(false);
+  const [isOpenFormUpdateCategory, setOpenFormUpdateCategory] = useState(false);
+
+  const [idForUpdateCategory, setIdForUpdateCategory] = useState<number>(null);
+  const [nameForUpdateCategory, setNameForUpdateCategory] = useState<string>('');
 
   const [responseData, setResponseData] = useState<CategoriesModel[]>([]);
+
+  const editCategotyFunction = (id:number, name:string) => {
+    setOpenFormUpdateCategory((prev) => !prev);
+    setNameForUpdateCategory(name);
+    setIdForUpdateCategory(id);
+  }
 
   const fetchData = async () => {
     try {
@@ -29,7 +40,6 @@ export const Categories = () => {
   const deleteCategory = async (id:number) => {
     try {
         DeleteCategoryForAdmin(id);
-        console.log("deleted");
     } catch (error) {
         console.error("Error dele category", error);
     } 
@@ -69,7 +79,7 @@ export const Categories = () => {
       label: "Types",
       renderCell: (item: any) => (
         <div className={style.typesButtons}>
-          <button onClick={() => {console.log("Edit")}} className={style.editBtn}>Edit</button>
+          <button onClick={() => {editCategotyFunction(item.id, item.name)}} className={style.editBtn}>Edit</button>
           <button onClick={() => {deleteCategory(item.id)}} className={style.deleteBtn}>Delete</button>
         </div>
       ),
@@ -88,6 +98,7 @@ export const Categories = () => {
       </div>
     </div>
     {isOpenFormAddCategory && <AddNewCategory/>}
+    {isOpenFormUpdateCategory && <UpdateCategory id={idForUpdateCategory} imageUrl="" name={nameForUpdateCategory}/>}
     </>
   );
 };

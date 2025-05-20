@@ -27,6 +27,7 @@ export const AddNewCategory = () => {
         mutationFn: AddNewCategoryAPI,
         onSuccess:(() => {
             queryClient.invalidateQueries({queryKey: ['category']})
+            window.location.reload();
             // window.location.reload();
             console.log("Added!!!");
             reset();

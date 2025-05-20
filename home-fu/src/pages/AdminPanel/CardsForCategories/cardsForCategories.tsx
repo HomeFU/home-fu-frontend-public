@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./carsForCategories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCardsForCategories } from "../../../api/Admin/CardsCategories/getAllCardsCategories";
+import { DeleteCardsCategoryForAdmin } from "../../../api/Admin/CardsCategories/deleteCardsCategory";
 
 type CategoriesCardsModel = {
   id: number;
@@ -26,6 +27,15 @@ export const CardsForCategories = () => {
       console.error("Error loading categories", error);
     }
   };
+
+  const deleteCardsCategory = (id:number) => {
+    try {
+      DeleteCardsCategoryForAdmin(id);
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     fetchData();
@@ -61,7 +71,7 @@ export const CardsForCategories = () => {
       renderCell: (item: any) => (
         <div className={style.typesButtons}>
           <button onClick={() => {console.log("Edit")}} className={style.editBtn}>Edit</button>
-          <button className={style.deleteBtn}>Delete</button>
+          <button onClick={() => {deleteCardsCategory(item.id)}} className={style.deleteBtn}>Delete</button>
         </div>
       ), 
     },
