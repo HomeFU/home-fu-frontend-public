@@ -18,7 +18,7 @@ type LocationsModel = {
 export const Locations = () => {
   const dispatch = useDispatch();
   const isOpenFormForAddNewLocation = useSelector(
-    (state: RootState) => state.adminPanel.isOpenAddLocationForm
+    (state: RootState) => state.adminPanelAddLocation.isOpenAddLocationForm
   );
   const [isOpenFormForUpdateLocation, setOpenFormForUpdateLocation] = useState(false);
   const [idForUpdateLocation, setidForDeleteLocation] = useState<number>(null);
