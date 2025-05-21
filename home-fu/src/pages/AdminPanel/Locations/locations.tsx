@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./locations.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllLocationsForAdmin } from "../../../api/Admin/Locations/getAllLocations";
 import { DeleteLocationForAdmin } from "../../../api/Admin/Locations/deleteLocation";
 import { AddNewLocation } from "./AddNewLocationForm/addNewLocation";
 import { UpdateLocation } from "./UpdateLocationForm/updateLocationForm";
+import type { RootState } from '..//..//..//redux/store';
+import { openAddLocationForm } from "../../../redux/AdminPanel/adminPanel";
+
 
 type LocationsModel = {
   id: number;
@@ -12,14 +16,16 @@ type LocationsModel = {
 };
 
 export const Locations = () => {
-  const [isOpenFormForAddNewLocation, setOpenFormForAddNewLocation] = useState(false);
+  const dispatch = useDispatch();
+  const isOpenFormForAddNewLocation = useSelector(
+    (state: RootState) => state.adminPanel.isOpenAddLocationForm
+  );
   const [isOpenFormForUpdateLocation, setOpenFormForUpdateLocation] = useState(false);
-
   const [idForUpdateLocation, setidForDeleteLocation] = useState<number>(null);
   const [nameForUpdateLocation, setNameForDeleteLocation] = useState<string>('');
-
   const [responseData, setResponseData] = useState<LocationsModel[]>([]);
 
+  
   const fetchData = async () => {
     try {
       const data = await AllLocationsForAdmin();
@@ -32,6 +38,7 @@ export const Locations = () => {
   const deleteLocation = async (id:number) => {
     try {
         DeleteLocationForAdmin(id);
+        fetchData();
     } catch (error) {
         console.log("Error" + error);
     }
@@ -66,7 +73,7 @@ export const Locations = () => {
       <div>
         <div className={style.header}>
           <h1>All Locations</h1>
-          <button onClick={() => {setOpenFormForAddNewLocation((prev) => !prev)}}>+ Add Locations</button>
+           <button onClick={() => dispatch(openAddLocationForm())}>+ Add Locations</button>
         </div>
         <div className={style.wrapperTable}>
           <CompactTable columns={columns} data={{ nodes: responseData }} />
