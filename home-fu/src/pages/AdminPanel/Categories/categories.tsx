@@ -20,7 +20,6 @@ export const Categories = () => {
   const dispatch = useDispatch();
   const isOpenFormAddCategory = useSelector((state: RootState) => state.categoryPanel.isOpenAddCategoryForm);
   const isOpenFormUpdateCategory = useSelector((state: RootState) => state.categoryPanelEdit.isOpenEditCategoryForm);
-
   const [idForUpdateCategory, setIdForUpdateCategory] = useState<number>(null);
   const [nameForUpdateCategory, setNameForUpdateCategory] = useState<string>('');
   const [responseData, setResponseData] = useState<CategoriesModel[]>([]);

@@ -17,6 +17,9 @@ import adminPanelAddLocationReducer from "../redux/AdminPanel/adminPanel";
 import adminupdateLocationFormReducer from "../redux/AdminPanel/editPanelFirst";
 import adminCategoryAddReducer from "./AdminPanel/adminCategoryAdd";
 import adminCategoryEditReducer from "./AdminPanel/adminCategoryEdit";
+import cardFormAddReducer from "../redux/AdminPanel/adminCardAdd";
+import cardFormUpdateReducer from "../redux/AdminPanel/adminCardUpdate";
+
 
 export const store = configureStore({
     reducer:{
@@ -37,8 +40,10 @@ export const store = configureStore({
         adminPanelAddLocation: adminPanelAddLocationReducer,
         adminupdateLocationForm: adminupdateLocationFormReducer,
         categoryPanel: adminCategoryAddReducer,
-        categoryPanelEdit: adminCategoryEditReducer
-        
+        categoryPanelEdit: adminCategoryEditReducer,
+        cardFormAdd: cardFormAddReducer,
+        cardFormUpdate : cardFormUpdateReducer
+       
     }
 })
 export type RootState = ReturnType<typeof store.getState>

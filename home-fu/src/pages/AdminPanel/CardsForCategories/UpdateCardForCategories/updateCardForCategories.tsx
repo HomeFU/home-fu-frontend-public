@@ -1,33 +1,49 @@
 import style from "./updateCardForCategories.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
+import { closeUpdateCardForm } from "../../../../redux/AdminPanel/adminCardUpdate";
 
-export const UpadteCardForCategories = () => {
-    return (
-        <div>
-            <form>
-                <input type="text" placeholder="Enter new name for card" />
-                <input type="number" placeholder="Enter new locatinId for card"/>
-                <input type="text" placeholder="Enter new locatin name for card"/>
-                <div>
-                    <span>Enter new start date</span>
-                    <input type="date"/>
-                </div>
-                <div>
-                    <span>Enter new end date</span>
-                    <input type="date"/>
-                </div>
-                <input type="number" placeholder="Enter new rating for card"/>
-                <input type="number" placeholder="Enter new price for card"/>
-                <div>
-                    <input type="checkbox" id="isDeleted" name="isDeleted" />
-                    <label for="isDeleted">Deleted or not?</label>
-                </div>
-                <div>
-                    <span>Select images</span>
-                    <input type="file" />
-                </div>
-                <input type="number" placeholder="Enter new ID for category"/>
-                <button>Add new card</button>
-            </form>
-        </div>
-    )
+export const UpdateCardForCategories = () => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.cardFormUpdate.isOpenUpdateCardForm);
+
+  const handleClose = () => {
+    dispatch(closeUpdateCardForm());
+  };
+
+  return (
+    <div className={style.modalWrapper} onClick={handleClose} style={{ display: isOpen ? "flex" : "none" }}>
+      <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
+        <button className={style.closeButton} onClick={handleClose} type="button" aria-label="Закрыть">
+          &times;
+        </button>
+        <h1 className={style.title}>Update card</h1>
+        <form className={style.formContent}>
+          <input className={style.input} type="text" placeholder="Enter new name for card" />
+          <input className={style.input} type="number" placeholder="Enter new locatinId for card"/>
+          <input className={style.input} type="text" placeholder="Enter new locatin name for card"/>
+          <div className={style.dateInputRow}>
+            <span>Enter new start date</span>
+            <input className={style.input} type="date"/>
+          </div>
+          <div className={style.dateInputRow}>
+            <span>Enter new end date</span>
+            <input className={style.input} type="date"/>
+          </div>
+          <input className={style.input} type="number" placeholder="Enter new rating for card"/>
+          <input className={style.input} type="number" placeholder="Enter new price for card"/>
+          <div>
+            <input type="checkbox" id="isDeleted" name="isDeleted" />
+            <label htmlFor="isDeleted">Deleted or not?</label>
+          </div>
+          <div className={style.fileInputWrapper}>
+            <input type="file" id="fileInput" />
+            <label htmlFor="fileInput" className={style.fileInputButton}>Select images</label>
+          </div>
+          <input className={style.input} type="number" placeholder="Enter new ID for category"/>
+          <button type="submit" className={style.submitButton}>Update card</button>
+        </form>
+      </div>
+    </div>
+  );
 }

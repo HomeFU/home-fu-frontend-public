@@ -1,0 +1,157 @@
+@mixin text($font-weight, $font-size, $color) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
+
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(3px);
+}
+
+.modalContent {
+  background: white;
+  width: 500px;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+.title {
+  @include text(800, 22px, #211E1A);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  padding: 14px 20px;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  @include text(400, 16px, #211E1A);
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 104, 194, 0.3);
+    border-color: rgb(52, 104, 194);
+  }
+
+  &::placeholder {
+    @include text(400, 14px, #717171);
+  }
+}
+
+.dateInputRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.dateInputRow span {
+  min-width: 130px;
+  @include text(500, 14px, #555);
+  display: block;
+}
+
+.submitButton {
+  cursor: pointer;
+  padding: 18px 0;
+  border-radius: 9999px;
+  background-color: rgb(52, 104, 194);
+  @include text(700, 16px, #fff);
+  border: none;
+  margin-top: 12px;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgb(75, 122, 204);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 104, 194, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  @include text(bold, 24px, #999);
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #333;
+    background-color: #f3f4f6;
+    transform: rotate(90deg);
+  }
+}
+
+.fileInputWrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+
+  input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .fileInputButton {
+    @extend .input;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    background-color: #f8fafc;
+    border: 1px dashed #d1d5db;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: rgb(52, 104, 194);
+      background-color: #f0f4f8;
+    }
+  }
+}
+
+.error {
+  @include text(400, 14px, rgb(216, 61, 61));
+  margin-top: 4px;
+  padding-left: 20px;
+}
