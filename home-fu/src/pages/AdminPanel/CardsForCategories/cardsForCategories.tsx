@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./carsForCategories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCardsForCategories } from "../../../api/Admin/CardsCategories/getAllCardsCategories";
 import { DeleteCardsCategoryForAdmin } from "../../../api/Admin/CardsCategories/deleteCardsCategory";
 import { AddNewCardForCategories } from "./AddNewCardForCategories/addNewCardForCategories";
 import { UpdateCardForCategories } from "./UpdateCardForCategories/updateCardForCategories";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
 import { openAddCardForm } from "../../../redux/AdminPanel/adminCardAdd";
 import { openUpdateCardForm } from "../../../redux/AdminPanel/adminCardUpdate";
+import type { RootState } from '../../../redux/store';
 
 type CategoriesCardsModel = {
   id: number;
@@ -24,136 +24,89 @@ type CategoriesCardsModel = {
 
 export const CardsForCategories = () => {
   const dispatch = useDispatch();
+
+  const isOpenAddCardForm = useSelector(
+    (state: RootState) => state.cardFormAdd.isOpenAddCardForm
+  );
+  const isOpenUpdateCardForm = useSelector(
+    (state: RootState) => state.cardFormUpdate.isOpenUpdateCardForm
+  );
+
+  const [idForUpdateCard, setIdForUpdateCard] = useState<number>(null);
   const [responseData, setResponseData] = useState<CategoriesCardsModel[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [cardForUpdate, setCardForUpdate] = useState<CategoriesCardsModel | null>(null);
-  const isAddCardFormOpen = useSelector((state: RootState) => state.cardFormAdd.isOpenAddCardForm);
-  const isUpdateCardFormOpen = useSelector((state: RootState) => state.cardFormUpdate.isOpenUpdateCardForm);
 
   const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
     try {
       const data = await AllCardsForCategories();
       setResponseData(data);
     } catch (error) {
       console.error("Error loading categories", error);
-      setError("Failed to load data");
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const deleteCardsCategory = async (id: number) => {
     try {
       await DeleteCardsCategoryForAdmin(id);
-      await fetchData();
+      fetchData();
     } catch (error) {
-      console.error("Delete error:", error);
-      setError("Failed to delete item");
+      console.log(error);
     }
   };
 
-  const handleOpenUpdateForm = (card: CategoriesCardsModel) => {
-    setCardForUpdate(card);
+  const editCardFunction = (id: number) => {
+    setIdForUpdateCard(id);
     dispatch(openUpdateCardForm());
   };
 
- /* useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, []);
-Оригинал , ниже проверка.
-*/
 
-useEffect(() => {
-  setResponseData([
-    {
-      id: 1,
-      name: "Test Card",
-      locationId: 1,
-      locationName: "Test Location",
-      rating: 5,
-      price: 100,
-      isDeleted: false,
-      imageUrls: ["/test.png"],
-      categoryIds: 1,
-    }
-  ]);
-}, []);
   const columns = [
     { label: "ID", renderCell: (item: CategoriesCardsModel) => item.id },
     { label: "Name", renderCell: (item: CategoriesCardsModel) => item.name },
-    { label: "Location", renderCell: (item: CategoriesCardsModel) => item.locationName },
+    { label: "LocationName", renderCell: (item: CategoriesCardsModel) => item.locationName},
     { label: "Rating", renderCell: (item: CategoriesCardsModel) => item.rating },
-    { label: "Price", renderCell: (item: CategoriesCardsModel) => item.price },
+    { label: "Price", renderCell: (item: CategoriesCardsModel) => item.price},
     {
-      label: "Image",
-      renderCell: (item: CategoriesCardsModel) => (
-        item.imageUrls?.length > 0 ? (
+        label: "Image",
+        renderCell: (item: CategoriesCardsModel) => (
           <img
             src={`https://homefuserverback.azurewebsites.net${item.imageUrls[0]}`}
             alt={item.name}
             style={{
-              objectFit: "cover",
-              borderRadius: "6px",
-              width: "40px",
-              height: "40px"
+                objectFit: "cover",
+                borderRadius: "6px",
+                width: "40px",
+                height: "40px"
             }}
           />
-        ) : (
-          <div style={{ width: 40, height: 40, backgroundColor: '#eee' }} />
-        )
-      ),
-    },
+        ),
+    },  
     {
       label: "Actions",
       renderCell: (item: CategoriesCardsModel) => (
         <div className={style.typesButtons}>
-          <button
-            className={style.editBtn}
-            onClick={() => handleOpenUpdateForm(item)}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => deleteCardsCategory(item.id)}
-            className={style.deleteBtn}
-          >
-            Delete
-          </button>
+          <button onClick={() => editCardFunction(item.id)} className={style.editBtn}>Edit</button>
+          <button onClick={() => deleteCardsCategory(item.id)} className={style.deleteBtn}>Delete</button>
         </div>
-      ),
+      ), 
     },
   ];
 
-  if (error) return <div className={style.error}>Error: {error}</div>;
-
   return (
-    <div className={style.container}>
-      <div className={style.header}>
-        <h1>All Cards for Categories</h1>
-        <button
-          className={style.button_add_card}
-          onClick={() => dispatch(openAddCardForm())}
-          disabled={isLoading}
-        >
-          + Add Cards
-        </button>
+    <>
+      <div>
+        <div className={style.header}>
+          <h1>All Cards for Categories</h1>
+          <button onClick={() => dispatch(openAddCardForm())}>+ Add Cards</button>
+        </div>
+        <div className={style.wrapperTable}>
+          <CompactTable columns={columns} data={{ nodes: responseData }} />
+        </div>
       </div>
-
-      <div className={style.wrapperTable}>
-        <CompactTable
-          columns={columns}
-          data={{ nodes: responseData }}
-        />
-      </div>
-      
-      {isAddCardFormOpen && <AddNewCardForCategories/>}
-      {isUpdateCardFormOpen && cardForUpdate && (
-        <UpdateCardForCategories 
-        />
-      )}
-    </div>
+      {isOpenAddCardForm && <AddNewCardForCategories />}
+      {isOpenUpdateCardForm && <UpdateCardForCategories/>}
+    </>
   );
 };

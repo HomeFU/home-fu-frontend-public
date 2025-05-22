@@ -9,7 +9,7 @@ const initialState: CategoryFormEditState = {
 };
 
 const adminCategoryEditSlice = createSlice({
-  name: 'adminCategoryAdd',
+  name: 'adminCategoryEdit',
   initialState,
   reducers: {
     toggleEditCategoryForm(state) {
