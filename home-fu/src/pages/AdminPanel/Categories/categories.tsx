@@ -6,6 +6,9 @@ import { DeleteCategoryForAdmin } from "../../../api/Admin/Categories/deleteCate
 import { AddNewCategory } from "./AddNewCategoryForm/addNewCategoryForm";
 import { UpdateCategory } from "./UpdateCategoriesForm/updateCategoriesForm";
 // import { AddNewCategoryForm } from "./AddNewCategoryForm/addNewCategoryForm";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "..//..//..//redux/store"; 
+import { toggleAddCategoryForm } from "..//..//..//redux/AdminPanel/adminCategoryAdd";
 
 type CategoriesModel = {
   id: number;
@@ -14,7 +17,8 @@ type CategoriesModel = {
 };
 
 export const Categories = () => {
-  const [isOpenFormAddCategory, setOpenFormAddCategory] = useState(false);
+  const dispatch = useDispatch();
+  const isOpenFormAddCategory = useSelector((state: RootState) => state.categoryPanel.isOpenAddCategoryForm);
   const [isOpenFormUpdateCategory, setOpenFormUpdateCategory] = useState(false);
 
   const [idForUpdateCategory, setIdForUpdateCategory] = useState<number>(null);
@@ -27,6 +31,10 @@ export const Categories = () => {
     setNameForUpdateCategory(name);
     setIdForUpdateCategory(id);
   }
+const closeAddForm = () => {
+  dispatch(toggleAddCategoryForm());
+  fetchData(); 
+};
 
   const fetchData = async () => {
     try {
@@ -45,8 +53,8 @@ export const Categories = () => {
     } 
   }
 
-  const toggleFormFormAddCategory = () => {
-    setOpenFormAddCategory((prev) => !prev);
+const toggleForm = () => {
+    dispatch(toggleAddCategoryForm());
   };
 
   useEffect(() => {
@@ -86,19 +94,19 @@ export const Categories = () => {
     },
   ];
 
-  return (
+return (
     <>
-    <div>
-      <div className={style.header}>
-        <h1>All Categories</h1>
-        <button onClick={toggleFormFormAddCategory}>+ Add Category</button>
+      <div>
+        <div className={style.header}>
+          <h1>All Categories</h1>
+          <button onClick={toggleForm}>+ Add Category</button>
+        </div>
+        <div className={style.wrapperTable}>
+          <CompactTable columns={columns} data={{ nodes: responseData }} />
+        </div>
       </div>
-      <div className={style.wrapperTable}>
-        <CompactTable columns={columns} data={{ nodes: responseData }} />
-      </div>
-    </div>
-    {isOpenFormAddCategory && <AddNewCategory/>}
-    {isOpenFormUpdateCategory && <UpdateCategory id={idForUpdateCategory} imageUrl="" name={nameForUpdateCategory}/>}
+      {isOpenFormAddCategory && <AddNewCategory onClose={closeAddForm} />}
+      {isOpenFormUpdateCategory && <UpdateCategory id={idForUpdateCategory} imageUrl="" name={nameForUpdateCategory} />}
     </>
   );
 };

@@ -15,6 +15,7 @@ import scrolledFilter from "./TravelFilter/ScrollUpdateFilterSlice/filterUpdateS
 import menuPopUpSlice from "./MenuPopoUp/menuPopoUpSlice";
 import adminPanelAddLocationReducer from "../redux/AdminPanel/adminPanel";
 import adminupdateLocationFormReducer from "../redux/AdminPanel/editPanelFirst";
+import adminCategoryAddReducer from "./AdminPanel/adminCategoryAdd";
 export const store = configureStore({
     reducer:{
         form: formReducer,
@@ -32,7 +33,9 @@ export const store = configureStore({
         scrolledFilter: scrolledFilter,
         menuPopUp: menuPopUpSlice,
         adminPanelAddLocation: adminPanelAddLocationReducer,
-        adminupdateLocationForm: adminupdateLocationFormReducer
+        adminupdateLocationForm: adminupdateLocationFormReducer,
+        categoryPanel: adminCategoryAddReducer
+        
     }
 })
 export type RootState = ReturnType<typeof store.getState>

@@ -1,46 +1,153 @@
-.wrapperAddNewCategory {
+@mixin text($font-weight, $font-size, $color) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
 
-    .categoryForm {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        max-width: 400px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        background-color: #fff;
-      }
-      
-      .formGroup {
-        display: flex;
-        flex-direction: column;
-      }
-      
-      label {
-        margin-bottom: 4px;
-        font-weight: 500;
-      }
-      
-      input[type="text"],
-      input[type="number"],
-      input[type="file"] {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-      }
-      
-      .submitButton {
-        padding: 10px 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-      }
-      
-      .submitButton:hover {
-        background-color: #0056b3;
-      }
-      
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.9я  ease-out;
+  backdrop-filter: blur(3px);
+}
+
+.modalContent {
+  @extend .formCard;
+  animation: slideIn 0.9s ease-out;
+}
+
+.formCard {
+  background: white;
+  width: 500px;
+  border-radius: 16px;
+  padding: 32px; 
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.title {
+  @include text(800, 28px, #211E1A); 
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; 
+}
+
+.input {
+  padding: 18px 24px; 
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  @include text(400, 18px, #211E1A);
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 104, 194, 0.3); 
+    border-color: rgb(52, 104, 194);
+  }
+
+  &::placeholder {
+    @include text(400, 16px, #717171);
+  }
+}
+
+.error {
+  @include text(400, 16px, rgb(216, 61, 61));
+  margin-left: 24px; 
+  line-height: 24px;
+}
+
+.submitButton {
+  cursor: pointer;
+  padding: 24px 0; 
+  border-radius: 9999px;
+  background-color: rgb(52, 104, 194);
+  transition: all 0.3s ease;
+  @include text(700, 18px, #fff); 
+  border: none;
+  margin-top: 16px; 
+  width: 100%;
+
+  &:hover {
+    background-color: rgb(75, 122, 204);
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(52, 104, 194, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.errorMessage {
+  @include text(400, 16px, red);
+  text-align: center;
+  margin-bottom: 16px; 
+  line-height: 24px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 24px;
+  right: 24px; 
+  font-size: 32px; 
+  @include text(bold, 32px, #999);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  &:hover {
+    color: #333;
+    background-color: #f3f4f6;
+    transform: rotate(90deg); 
+  }
+}
+.fileInputWrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+
+  input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .fileInputButton {
+    @extend .input; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    background-color: #f8fafc;
+    border: 1px dashed #d1d5db;
+    text-align: center;
+
+    &:hover {
+      border-color: rgb(52, 104, 194);
+      background-color: #f0f4f8;
+    }
+  }
 }
