@@ -32,7 +32,6 @@ export const CardsForCategories = () => {
     (state: RootState) => state.cardFormUpdate.isOpenUpdateCardForm
   );
 
-  const [idForUpdateCard, setIdForUpdateCard] = useState<number>(null);
   const [responseData, setResponseData] = useState<CategoriesCardsModel[]>([]);
 
   const fetchData = async () => {
@@ -53,8 +52,7 @@ export const CardsForCategories = () => {
     }
   };
 
-  const editCardFunction = (id: number) => {
-    setIdForUpdateCard(id);
+  const editCardFunction = () => {
     dispatch(openUpdateCardForm());
   };
 
@@ -69,25 +67,25 @@ export const CardsForCategories = () => {
     { label: "Rating", renderCell: (item: CategoriesCardsModel) => item.rating },
     { label: "Price", renderCell: (item: CategoriesCardsModel) => item.price},
     {
-        label: "Image",
-        renderCell: (item: CategoriesCardsModel) => (
-          <img
-            src={`https://homefuserverback.azurewebsites.net${item.imageUrls[0]}`}
-            alt={item.name}
-            style={{
-                objectFit: "cover",
-                borderRadius: "6px",
-                width: "40px",
-                height: "40px"
-            }}
-          />
-        ),
+      label: "Image",
+      renderCell: (item: CategoriesCardsModel) => (
+        <img
+          src={`https://homefuserverback.azurewebsites.net${item.imageUrls[0]}`}
+          alt={item.name}
+          style={{
+            objectFit: "cover",
+            borderRadius: "6px",
+            width: "40px",
+            height: "40px"
+          }}
+        />
+      ),
     },  
     {
       label: "Actions",
       renderCell: (item: CategoriesCardsModel) => (
         <div className={style.typesButtons}>
-          <button onClick={() => editCardFunction(item.id)} className={style.editBtn}>Edit</button>
+          <button onClick={editCardFunction} className={style.editBtn}>Edit</button>
           <button onClick={() => deleteCardsCategory(item.id)} className={style.deleteBtn}>Delete</button>
         </div>
       ), 
@@ -106,7 +104,7 @@ export const CardsForCategories = () => {
         </div>
       </div>
       {isOpenAddCardForm && <AddNewCardForCategories />}
-      {isOpenUpdateCardForm && <UpdateCardForCategories/>}
+      {isOpenUpdateCardForm && <UpdateCardForCategories />}
     </>
   );
 };
