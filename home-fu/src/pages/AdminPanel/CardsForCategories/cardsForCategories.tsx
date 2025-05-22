@@ -3,7 +3,8 @@ import style from "./carsForCategories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCardsForCategories } from "../../../api/Admin/CardsCategories/getAllCardsCategories";
 import { DeleteCardsCategoryForAdmin } from "../../../api/Admin/CardsCategories/deleteCardsCategory";
-
+import { AddNewCardForCategories } from "./AddNewCardForCategories/addNewCardForCategories";
+import { UpadteCardForCategories } from "./UpdateCardForCategories/updateCardForCategories";
 type CategoriesCardsModel = {
   id: number;
   name: string;
@@ -78,14 +79,19 @@ export const CardsForCategories = () => {
   ];
 
   return (
-    <div>
-      <div className={style.header}>
-        <h1>All Cards for Categories</h1>
-        <button>+ Add Cards</button>
+    <>
+      <div>
+        <div className={style.header}>
+          <h1>All Cards for Categories</h1>
+          <button>+ Add Cards</button>
+        </div>
+        <div className={style.wrapperTable}>
+          <CompactTable columns={columns} data={{ nodes: responseData }} />
+        </div>
       </div>
-      <div className={style.wrapperTable}>
-        <CompactTable columns={columns} data={{ nodes: responseData }} />
-      </div>
-    </div>
+      {/* Открытие формы для добавление Карточки для категории */}
+      <AddNewCardForCategories/>
+      <UpadteCardForCategories/>
+    </>
   );
 };
