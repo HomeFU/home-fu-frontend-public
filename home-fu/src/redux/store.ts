@@ -14,6 +14,7 @@ import animalsModalState from "./TravelFilter/GuestSlices/animalsSlice";
 import scrolledFilter from "./TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll";
 import menuPopUpSlice from "./MenuPopoUp/menuPopoUpSlice";
 import adminPanelAddLocationReducer from "../redux/AdminPanel/adminPanel";
+import adminupdateLocationFormReducer from "../redux/AdminPanel/editPanelFirst";
 export const store = configureStore({
     reducer:{
         form: formReducer,
@@ -30,7 +31,8 @@ export const store = configureStore({
         animalsModal: animalsModalState,
         scrolledFilter: scrolledFilter,
         menuPopUp: menuPopUpSlice,
-        adminPanelAddLocation: adminPanelAddLocationReducer
+        adminPanelAddLocation: adminPanelAddLocationReducer,
+        adminupdateLocationForm: adminupdateLocationFormReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>

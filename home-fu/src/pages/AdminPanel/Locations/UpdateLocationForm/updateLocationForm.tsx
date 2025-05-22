@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { UpdateLocationAPI } from "../../../../api/Admin/Locations/updateLocation";
 import { UpdateLocationType } from "../../../../types/Locations/updateLocation";
 import style from "./updateLocation.module.scss";
+import { useDispatch } from "react-redux";
+import { closeAddLocationForm } from "../../../../redux/AdminPanel/adminPanel";
+import { closeUpdateLocationForm } from "../..//..//..//redux/AdminPanel/editPanelFirst";
 
 type UpdateLocationModel = {
     id: number;
@@ -17,6 +20,7 @@ type LocationValidate = {
 export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
     const [errorMessage, setErrorMessage] = useState('');
     const queryClient = useQueryClient();
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -35,7 +39,7 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['locations'] });
             reset();
-            window.location.reload();
+            dispatch(closeUpdateLocationForm());
         },
         onError: (error: any) => {
             setErrorMessage(error?.response?.data || 'Ошибка обновления локации');
@@ -46,28 +50,36 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
         mutation.mutate({ data, id });
     };
 
+    const handleClose = () => {
+        dispatch(closeUpdateLocationForm());
+    };
+
     return (
-        <div className={style.formWrapper}>
-            <h2>Update Location</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className={style.formGroup}>
-                    <label>Old Name: {name}</label>
+        <div className={style.modalWrapper} onClick={handleClose}>
+            <div className={style.modalContent} onClick={e => e.stopPropagation()}>
+                <button className={style.closeButton} onClick={handleClose}>×</button>
+                <h2 className={style.title}>Update Location</h2>
+                <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
+                    <p className={style.oldName}>Old Name: {name}</p>
                     <input
                         type="text"
                         placeholder="Enter new location name"
+                        className={style.input}
                         {...register('name', {
-                            required: 'Введите новое имя',
+                            required: 'Location name is required',
                         })}
                     />
-                    {/* {errors.name && <p className={style.error}>{errors.name.message}</p>} */}
-                </div>
-
-                {/* {mutation.isError && (
-                    <p className={style.errorMessage}>{errorMessage}</p>
-                )} */}
-
-                <button type="submit">Update Location</button>
-            </form>
+                    {errors.name && <p className={style.error}>{errors.name.message}</p>}
+                    {errorMessage && <p className={style.errorMessage}>{errorMessage}</p>}
+                    <button
+                        type="submit"
+                        className={style.submitButton}
+                        disabled={mutation.isPending}
+                    >
+                        {mutation.isPending ? 'Updating...' : 'Update Location'}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
