@@ -8,15 +8,17 @@ type UpdateCategoryModel = {
   id: number;
   name: string;
   imageUrl: string;
+  onClose: () => void;
 };
 
 type CategoryFormData = {
   name: string;
-  imageFile: FileList; // FileList от input type="file"
+  imageFile: FileList;
 };
 
-export const UpdateCategory = ({ id, imageUrl, name }: UpdateCategoryModel) => {
+export const UpdateCategory = ({ id, imageUrl, name, onClose }: UpdateCategoryModel) => {
   const [errorMessage, setErrorMessage] = useState('');
+  const [fileName, setFileName] = useState('');
   const queryClient = useQueryClient();
 
   const {
@@ -34,9 +36,9 @@ export const UpdateCategory = ({ id, imageUrl, name }: UpdateCategoryModel) => {
     mutationFn: ({ data, id }: { data: { name: string; imageFile: File }; id: number }) =>
       UpdateCategoryAPI({ data, id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['locations'] });
+      queryClient.invalidateQueries({ queryKey: ['category'] });
       reset();
-      window.location.reload();
+      onClose();
     },
     onError: (error: any) => {
       setErrorMessage(error?.response?.data || 'Ошибка обновления категории');
@@ -45,7 +47,6 @@ export const UpdateCategory = ({ id, imageUrl, name }: UpdateCategoryModel) => {
 
   const onSubmit: SubmitHandler<CategoryFormData> = (data) => {
     const file = data.imageFile[0];
-
     mutation.mutate({
       data: {
         name: data.name,
@@ -56,29 +57,49 @@ export const UpdateCategory = ({ id, imageUrl, name }: UpdateCategoryModel) => {
   };
 
   return (
-    <div className={style.formWrapper}>
-      <h2>Update Category</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={style.formGroup}>
-          <label>Old Name: {name}</label>
-          <input
-            type="text"
-            placeholder="Enter new category name"
-            {...register('name')}
-          />
-          {errors.name && <p>{errors.name.message}</p>}
+    <div className={style.modalWrapper} onClick={onClose}>
+      <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
+        <button
+          className={style.closeButton}
+          onClick={onClose}
+          type="button"
+          aria-label="Закрыть"
+        >
+          &times;
+        </button>
+        <h2 className={style.title}>Update Category</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
+          <div className={style.formGroup}>
+            <label>Old Name: {name}</label>
+            <input
+              type="text"
+              placeholder="Enter new category name"
+              {...register('name', { required: 'Name is required' })}
+              className={style.input}
+            />
+            {errors.name && <p className={style.error}>{errors.name.message}</p>}
 
-          <span>Add image for category</span>
-          <input
-            type="file"
-            {...register('imageFile')}
-          />
-          {errors.imageFile && <p>{errors.imageFile.message}</p>}
-        </div>
+            <span>Add image for category</span>
+            <div className={style.fileInputWrapper}>
+              <input
+                type="file"
+                id="fileInput"
+                {...register('imageFile', { required: 'Image is required' })}
+                onChange={(e) => setFileName(e.target.files?.[0]?.name || '')}
+              />
+              <label htmlFor="fileInput" className={style.fileInputButton}>
+                {fileName || 'Choose file'}
+              </label>
+            </div>
+            {errors.imageFile && <p className={style.error}>{errors.imageFile.message}</p>}
+          </div>
 
-        {errorMessage && <p className={style.error}>{errorMessage}</p>}
-        <button type="submit">Update Category</button>
-      </form>
+          {errorMessage && <p className={style.errorMessage}>{errorMessage}</p>}
+          <button type="submit" className={style.submitButton}>
+            Update Category
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

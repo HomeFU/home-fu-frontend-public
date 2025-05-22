@@ -16,6 +16,8 @@ import menuPopUpSlice from "./MenuPopoUp/menuPopoUpSlice";
 import adminPanelAddLocationReducer from "../redux/AdminPanel/adminPanel";
 import adminupdateLocationFormReducer from "../redux/AdminPanel/editPanelFirst";
 import adminCategoryAddReducer from "./AdminPanel/adminCategoryAdd";
+import adminCategoryEditReducer from "./AdminPanel/adminCategoryEdit";
+
 export const store = configureStore({
     reducer:{
         form: formReducer,
@@ -34,7 +36,8 @@ export const store = configureStore({
         menuPopUp: menuPopUpSlice,
         adminPanelAddLocation: adminPanelAddLocationReducer,
         adminupdateLocationForm: adminupdateLocationFormReducer,
-        categoryPanel: adminCategoryAddReducer
+        categoryPanel: adminCategoryAddReducer,
+        categoryPanelEdit: adminCategoryEditReducer
         
     }
 })

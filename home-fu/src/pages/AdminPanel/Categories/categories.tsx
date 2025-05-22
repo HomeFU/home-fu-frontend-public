@@ -5,10 +5,10 @@ import { AllCategoriesForAdmin } from "../../../api/Admin/Categories/getAllCateg
 import { DeleteCategoryForAdmin } from "../../../api/Admin/Categories/deleteCategory";
 import { AddNewCategory } from "./AddNewCategoryForm/addNewCategoryForm";
 import { UpdateCategory } from "./UpdateCategoriesForm/updateCategoriesForm";
-// import { AddNewCategoryForm } from "./AddNewCategoryForm/addNewCategoryForm";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "..//..//..//redux/store"; 
 import { toggleAddCategoryForm } from "..//..//..//redux/AdminPanel/adminCategoryAdd";
+import { openEditCategoryForm, closeEditCategoryForm } from "..//..//..//redux/AdminPanel/adminCategoryEdit";
 
 type CategoriesModel = {
   id: number;
@@ -19,22 +19,27 @@ type CategoriesModel = {
 export const Categories = () => {
   const dispatch = useDispatch();
   const isOpenFormAddCategory = useSelector((state: RootState) => state.categoryPanel.isOpenAddCategoryForm);
-  const [isOpenFormUpdateCategory, setOpenFormUpdateCategory] = useState(false);
+  const isOpenFormUpdateCategory = useSelector((state: RootState) => state.categoryPanelEdit.isOpenEditCategoryForm);
 
   const [idForUpdateCategory, setIdForUpdateCategory] = useState<number>(null);
   const [nameForUpdateCategory, setNameForUpdateCategory] = useState<string>('');
-
   const [responseData, setResponseData] = useState<CategoriesModel[]>([]);
 
-  const editCategotyFunction = (id:number, name:string) => {
-    setOpenFormUpdateCategory((prev) => !prev);
+  const editCategoryFunction = (id: number, name: string) => {
+    dispatch(openEditCategoryForm());
     setNameForUpdateCategory(name);
     setIdForUpdateCategory(id);
-  }
-const closeAddForm = () => {
-  dispatch(toggleAddCategoryForm());
-  fetchData(); 
-};
+  };
+
+  const closeAddForm = () => {
+    dispatch(toggleAddCategoryForm());
+    fetchData(); 
+  };
+
+  const closeUpdateForm = () => {
+    dispatch(closeEditCategoryForm());
+    fetchData();
+  };
 
   const fetchData = async () => {
     try {
@@ -45,15 +50,16 @@ const closeAddForm = () => {
     }
   };
 
-  const deleteCategory = async (id:number) => {
+  const deleteCategory = async (id: number) => {
     try {
-        DeleteCategoryForAdmin(id);
+      await DeleteCategoryForAdmin(id);
+      fetchData();
     } catch (error) {
-        console.error("Error dele category", error);
+      console.error("Error deleting category", error);
     } 
-  }
+  };
 
-const toggleForm = () => {
+  const toggleForm = () => {
     dispatch(toggleAddCategoryForm());
   };
 
@@ -65,36 +71,44 @@ const toggleForm = () => {
     { label: "ID", renderCell: (item: any) => item.id },
     { label: "Name", renderCell: (item: any) => item.name },
     {
-        label: "Image",
-        renderCell: (item: CategoriesModel) => (
-          <img
-            src={`https://homefuserverback.azurewebsites.net${item.imageUrl}`}
-            alt={item.name}
-            width={50}
-            height={50}
-            style={
-                { 
-                    objectFit: "cover",
-                    borderRadius: "6px",
-                    width: "40px",
-                    height: "40px"
-                }
-            }
-          />
-        ),
+      label: "Image",
+      renderCell: (item: CategoriesModel) => (
+        <img
+          src={`https://homefuserverback.azurewebsites.net${item.imageUrl}`}
+          alt={item.name}
+          width={50}
+          height={50}
+          style={{ 
+            objectFit: "cover",
+            borderRadius: "6px",
+            width: "40px",
+            height: "40px"
+          }}
+        />
+      ),
     },  
     {
-      label: "Types",
+      label: "Actions",
       renderCell: (item: any) => (
         <div className={style.typesButtons}>
-          <button onClick={() => {editCategotyFunction(item.id, item.name)}} className={style.editBtn}>Edit</button>
-          <button onClick={() => {deleteCategory(item.id)}} className={style.deleteBtn}>Delete</button>
+          <button 
+            onClick={() => editCategoryFunction(item.id, item.name)} 
+            className={style.editBtn}
+          >
+            Edit
+          </button>
+          <button 
+            onClick={() => deleteCategory(item.id)} 
+            className={style.deleteBtn}
+          >
+            Delete
+          </button>
         </div>
       ),
     },
   ];
 
-return (
+  return (
     <>
       <div>
         <div className={style.header}>
@@ -106,7 +120,14 @@ return (
         </div>
       </div>
       {isOpenFormAddCategory && <AddNewCategory onClose={closeAddForm} />}
-      {isOpenFormUpdateCategory && <UpdateCategory id={idForUpdateCategory} imageUrl="" name={nameForUpdateCategory} />}
+      {isOpenFormUpdateCategory && (
+        <UpdateCategory 
+          id={idForUpdateCategory} 
+          imageUrl="" 
+          name={nameForUpdateCategory} 
+          onClose={closeUpdateForm}
+        />
+      )}
     </>
   );
 };
