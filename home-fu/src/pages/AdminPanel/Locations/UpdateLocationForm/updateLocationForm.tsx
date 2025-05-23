@@ -40,6 +40,7 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
             queryClient.invalidateQueries({ queryKey: ['locations'] });
             reset();
             dispatch(closeUpdateLocationForm());
+            window.location.reload();
         },
         onError: (error: any) => {
             setErrorMessage(error?.response?.data || 'Ошибка обновления локации');

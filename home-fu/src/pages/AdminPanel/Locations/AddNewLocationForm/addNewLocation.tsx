@@ -30,6 +30,7 @@ export const AddNewLocation = () => {
       queryClient.invalidateQueries({ queryKey: ['location'] });
       reset();
       dispatch(closeAddLocationForm());
+      window.location.reload();
     },
     onError: (error: any) => {
       setErrorMessage(error?.response?.data || 'Ошибка добавления локации');

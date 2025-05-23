@@ -32,6 +32,7 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
       queryClient.invalidateQueries({ queryKey: ['category'] });
       reset();
       onClose();
+      window.location.reload();
     },
     onError: (error: any) => {
       setErrorMessage(error?.response?.data || 'Ошибка добавления категории');

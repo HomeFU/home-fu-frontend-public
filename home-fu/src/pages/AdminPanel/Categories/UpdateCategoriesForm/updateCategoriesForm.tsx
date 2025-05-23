@@ -39,6 +39,7 @@ export const UpdateCategory = ({ id, imageUrl, name, onClose }: UpdateCategoryMo
       queryClient.invalidateQueries({ queryKey: ['category'] });
       reset();
       onClose();
+      window.location.reload();
     },
     onError: (error: any) => {
       setErrorMessage(error?.response?.data || 'Ошибка обновления категории');
