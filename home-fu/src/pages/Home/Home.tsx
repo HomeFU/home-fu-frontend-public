@@ -17,7 +17,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-const Home = () => {
+export const Home = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const categoryIdFromUrl = parseInt(searchParams.get("category") || "1");
@@ -31,8 +31,8 @@ const Home = () => {
         try {
             const data = await CardsCategories(categoryIdFromUrl);
             setdataCardsCategories(data);
-        } catch {
-            console.log("Error")
+        } catch (err){
+            console.error(err);
         } finally {
             setLoadingCardsCategories(false);
         }
@@ -102,5 +102,3 @@ const Home = () => {
         <FooterMain/>
     </>)
 }
-
-export default Home;

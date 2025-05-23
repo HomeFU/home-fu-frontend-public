@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import {Home} from "./pages/Home/Home";
 import { Details } from "./pages/Details/Details";
 import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/mainAdminPage";
