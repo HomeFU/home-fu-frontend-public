@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Categories } from "../../../api/Categories/categories";
 import { CategoriesModel } from "../../../types/Categories/categories";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 export const FilterBar = () => {
 
@@ -13,27 +14,14 @@ export const FilterBar = () => {
     const dispatch = useDispatch();
     const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
 
-    const [dataCategories, setDataCategories] = useState<CategoriesModel[]>([]);
-    const [isLoadingCategories, setLoadingCategories] = useState(true);
-
-    console.log(dataCategories)
-    const FetchDataCategories = async () => {
-        try {
-            const data = await Categories();
-            setDataCategories(data);
-        }
-        catch {
-            console.log("Error");
-        }
-        finally {
-            setLoadingCategories(false);
-        }
-    }
-
-    useEffect(() => {
-        FetchDataCategories();
-    }, []);
-
+    const {
+        data: dataCategoriesBar = [],
+        isLoading
+    } = useQuery<CategoriesModel[]>({
+        queryKey: ['dataCategoriesBar'],
+        queryFn: () => Categories()
+    })
+   
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isVisibleLeftButton, setVisibleLeftButton] = useState(false);
     const [isVisibleRightButton, setVisibleRightButton] = useState(true);
@@ -74,7 +62,7 @@ export const FilterBar = () => {
 
     return (
         <div className={style.filterBarWrapper}>
-            {isVisibleLeftButton && !isLoadingCategories && (
+            {isVisibleLeftButton && !isLoading && (
                 <button className={`${style.scrollButton} ${style.leftButton}`} onClick={scrollLeft}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M10 12L6 8L10 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -87,7 +75,7 @@ export const FilterBar = () => {
                 onScroll={checkButtonVisibility}
             >
                 {
-                    isLoadingCategories ? <div className={style.filterWrapperLoading}>
+                    isLoading ? <div className={style.filterWrapperLoading}>
                         {Array.from({ length: 7 }, (_, index) => (
                             <div className={style.wrapperLoading} key={index}>
                                 <div className={style.circle}></div>
@@ -95,7 +83,7 @@ export const FilterBar = () => {
                             </div>
                         ))}
                     </div> : <>
-                        {dataCategories.map((el) => (
+                        {dataCategoriesBar.map((el) => (
                             <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.id ? style.activeItem : ''}`}  onClick={() => {dispatch(setSelectedCategori(el.id)); navigate(`/?category=${el.id}`)}}>
                                 <img className={style.filterItemimg} src={'https://homefuserverback.azurewebsites.net' + el.imageUrl} alt={el.name} />
                                 <span>{el.name}</span>
@@ -104,7 +92,7 @@ export const FilterBar = () => {
                     </>
                 }
             </div>
-            {isVisibleRightButton && !isLoadingCategories && (
+            {isVisibleRightButton && !isLoading && (
                 <button className={`${style.scrollButton} ${style.rightButton}`} onClick={scrollRight}>
                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 12L10 8L6 4" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
