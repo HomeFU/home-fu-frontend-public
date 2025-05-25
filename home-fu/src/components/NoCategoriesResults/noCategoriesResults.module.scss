@@ -1,0 +1,147 @@
+@keyframes bounce {
+0%, 100% {
+    transform: translateY(0);
+}
+
+50% {
+    transform: translateY(-8px);
+}
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.wrapper {
+    text-align: center;
+    padding: 100px 40px;
+    position: relative;
+    background-color: #f8f9fb;
+  }
+  
+  .iconContainer {
+    background-color: #2f6fed;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(47, 111, 237, 0.3);
+  }
+  
+  .wrapperPlusIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    background: lightgreen;
+    position: absolute;
+    top: 179px;
+    left: 35%;
+    transform: translateX(-150px);
+    width: 15px;
+    height: 15px;
+    animation: bounce 1s infinite;
+  }
+  
+  .wrapperHomeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    background: lightsalmon;
+    position: absolute;
+    top: 59px;
+    right: 37%;
+    transform: translateX(150px);
+    width: 15px;
+    height: 15px;
+    animation: rotate 1s infinite;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 20px 0 10px;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #5c6574;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .clearFilters {
+    background-color: #2f6fed;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .newSearch {
+    border: 2px solid #2f6fed;
+    color: #2f6fed;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  
+  .tips {
+    background: #eaf1ff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .tipsTitle {
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .tips ul {
+    padding-left: 20px;
+  }
+  
+  .tips li {
+    color: #2f6fed;
+    margin-bottom: 6px;
+  }
+  
+  .hintText {
+    font-size: 16px;
+    color: #2f6fed;
+    background-color: #eaf1ff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
