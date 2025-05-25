@@ -41,12 +41,12 @@ footer {
     
     @include tablet {
         width: 90%;
-        margin: 400px auto 0 auto;
+        margin: 450px auto 0 auto;
     }
     
     @include mobile {
         width: 95%;
-        margin: 300px auto 0 auto;
+        margin: 100px auto 0 auto;
     }
 }
 
@@ -91,6 +91,7 @@ footer {
 }
 
 .tabButton {
+    text-wrap: nowrap;
     padding-bottom: 3px;
     cursor: pointer;
     @include text(500, 15px, #000);

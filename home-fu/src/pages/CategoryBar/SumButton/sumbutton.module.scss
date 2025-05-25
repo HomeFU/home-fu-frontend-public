@@ -7,12 +7,12 @@
 .switchWrapper {
     display: flex;
     align-items: center;
-    width: 240px;
+    width: 100%;
+    padding: 0 15px;
     gap: 8px;
     height: 47px;
     border-radius: 26px;
     border: 1px solid #bdbdbd;
-    padding: 0 15px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
     
@@ -47,8 +47,17 @@
             transition: left 0.3s ease-in-out;
             box-sizing: border-box;
         }
+
+        @media (max-width:1020px) {
+            padding: unset;
+            right: 15px;
+        }
     }
 
+    @media (max-width:1020px) {
+        padding: 0;
+    }
+    
     &.active {
         .switchToggle {
             background-color: rgb(75, 122, 204);
@@ -58,13 +67,4 @@
             }
         }
     }
-    @media (max-width: 360px) {
-        padding: 0 8px; 
-        width: 200px; 
-        
-        .switchText {
-            font-size: 11px; 
-        }
-    }
-
 }

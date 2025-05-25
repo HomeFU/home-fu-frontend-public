@@ -59,8 +59,8 @@ export const Home = () => {
                         ))}
                     </div>
                 </div> : isError ? <NoResultsCategories/> :
-                    <div className={style.container}>
-                        <div className={style.cardItemWrapper}>
+                <div className={style.container}>
+                    <div className={style.cardItemWrapper}>
                         {
                             dataCardsCategories.map((el) => (
                                 <div key={el.id} className={style.cardItem}>

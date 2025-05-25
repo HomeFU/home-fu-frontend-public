@@ -52,11 +52,18 @@
     opacity: 1;
 }
 
-
 main {
-    font-family: "Inknut Antiqua", serif;
+   font-family: "Inknut Antiqua", serif;
    position: relative;
    top: 340px;
+
+   @media (max-width:1020px) {
+    top: 375px;
+   }
+
+   @media (max-width:768px) {
+    top: 20px;
+   }
 }
 
 img {
@@ -75,11 +82,20 @@ img {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+
+    @media (max-width:1020px) {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
 }
 
 .cardItem {
     width: 272px;
     height: auto;
+
+    @media (max-width:1020px) {
+        width: 100%;
+    }
 }
 
 .cardItemImage {
