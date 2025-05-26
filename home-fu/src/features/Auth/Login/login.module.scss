@@ -33,7 +33,13 @@
     border-radius: 13px;
     padding: 24px;
     position: relative;
-    
+
+    @media (max-width:768px) {
+       width: unset;
+       top: 35%;
+        transform: translateY(35%);
+        margin: 0 20px;
+    }
 }
 
 .title {
