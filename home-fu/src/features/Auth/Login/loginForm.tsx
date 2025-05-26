@@ -31,11 +31,11 @@ export const Login = () => {
         mutationKey: ['auth', 'login'],
         mutationFn: UserLogin, 
         onSuccess: (data) => {
+            localStorage.setItem('isAdminUser', data.role);
             queryClient.invalidateQueries({ queryKey: ['auth'] });
             dispatch(closeLoginForm());
             dispatch(login(data));
             reset();
-            console.log(data);
         },
         onError: (error) => {
             setErrorMessage(error.response.data || 'Ошибка авторизации')
@@ -48,7 +48,6 @@ export const Login = () => {
             password: data.password
         }
         mutation.mutate(user);
-        console.log(user);
     }
 
     return (

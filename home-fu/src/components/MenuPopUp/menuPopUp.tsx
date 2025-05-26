@@ -9,6 +9,8 @@ export const MenuPopoUp = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => state.menuPopUp.isOpen);
 
+    const isUserAdmin = localStorage.getItem("isAdminUser");
+
     return (
         <>
             {
@@ -24,7 +26,9 @@ export const MenuPopoUp = () => {
                             <li className={style.listLinksItem}><p>Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></p><div className={style.comingSoonPopup}>Coming soon</div></li>
                             <li className={style.listLinksItem}><p>Організувати враження</p><div className={style.comingSoonPopup}>Coming soon</div></li>
                             <li className={style.listLinksItem}><p>Запросити господаря</p><div className={style.comingSoonPopup}>Coming soon</div></li>
-                            <li className={style.listLinksItem}><Link to="/admin-panel" onClick={() => dispatch(closeMenuPopUp())}>Адмін панель</Link></li>
+                            {
+                                isUserAdmin === "Admin" &&  <li className={style.listLinksItem}><Link to="/admin-panel" onClick={() => dispatch(closeMenuPopUp())}>Адмін панель</Link></li>
+                            }
                             <li className={style.listLinksItem}><Link to="/profile" onClick={() => dispatch(closeMenuPopUp())}>Ваш профіль</Link></li>
                         </ul>
                         <ul className={`${style.listLinks} ${style.listLinksThirdBlock}`}>
