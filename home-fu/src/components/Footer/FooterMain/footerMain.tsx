@@ -233,8 +233,8 @@ export const FooterMain = () => {
                             $ USD
                         </button>
                         <ul className={style.socialLinks}>
-                            <li className={style.socialLinkItem}><Link to="/"><img src={facebookIcon} alt="facebookIcon" /></Link></li>
-                            <li className={style.socialLinkItem}><Link to="/"><img src={instaIcon} alt="instagramIcon"/></Link></li>
+                            <li className={style.socialLinkItem}><Link to="/"><img src={facebookIcon} alt="facebookIcon" loading="lazy" /></Link></li>
+                            <li className={style.socialLinkItem}><Link to="/"><img src={instaIcon} alt="instagramIcon" loading="lazy"/></Link></li>
                         </ul>
                     </div>
                 </div>

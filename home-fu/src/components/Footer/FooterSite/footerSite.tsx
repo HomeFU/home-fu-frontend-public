@@ -53,15 +53,15 @@ export const FooterSite = () => {
                     </div>
                     <div className={style.footerActions}>
                         <button className={style.languageButton}>
-                            <img src={langIcon} alt="languageIcon" />
+                            <img src={langIcon} alt="languageIcon" loading="lazy"/>
                             Українська (UA)
                         </button>
                         <button className={style.currencyButton}>
                             $ USD
                         </button>
                         <ul className={style.socialLinks}>
-                            <li className={style.socialLinkItem}><Link to="/"><img src={facebookIcon} alt="facebookIcon" /></Link></li>
-                            <li className={style.socialLinkItem}><Link to="/"><img src={instaIcon} alt="instagramIcon"/></Link></li>
+                            <li className={style.socialLinkItem}><Link to="/"><img src={facebookIcon} alt="facebookIcon" loading="lazy"/></Link></li>
+                            <li className={style.socialLinkItem}><Link to="/"><img src={instaIcon} alt="instagramIcon" loading="lazy"/></Link></li>
                         </ul>
                     </div>
                 </div>  

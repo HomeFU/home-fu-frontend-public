@@ -15,7 +15,7 @@ type regionsType = {
 }
 
 const regions:regionsType[] = [
-   {id:1, img:flexibleRegion, lable:"Гнучкий пошук"},
+   {id:1, img:flexibleRegion, lable:"Гнучкий пошук" },
    {id:2, img:middleEast, lable:"Близький Схід"},
    {id:3, img:romania, lable:"Румунія"},
    {id:4, img:southeast, lable:"Південно-Східний"},
@@ -33,7 +33,7 @@ export const RegionBlock = () => {
                 {
                     regions.map((region) => (
                         <div className={style.typeRegion} key={region.id} onClick={() => {dispatch(setSelectRegion(region.lable))}}>
-                            <img src={region.img} alt={region.img} />
+                            <img src={region.img} alt={region.img}loading="lazy" />
                             <span>{region.lable}</span>
                         </div>
                     ))

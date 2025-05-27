@@ -83,6 +83,7 @@ export const Categories = () => {
             width: "40px",
             height: "40px"
           }}
+          loading="lazy"
         />
       ),
     },  

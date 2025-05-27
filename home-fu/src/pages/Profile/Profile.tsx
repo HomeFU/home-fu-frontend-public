@@ -63,7 +63,7 @@ export const Profile: React.FC = () => {
             <div className={styles.avatarSection}>
               <div className={styles.avatar}>
                 {avatar ? (
-                  <img src={avatar || "/placeholder.svg"} alt="User avatar" className={styles.avatarImage} />
+                  <img src={avatar || "/placeholder.svg"} alt="User avatar" className={styles.avatarImage} loading="lazy"/>
                 ) : (
                   <div className={styles.avatarPlaceholder}>I</div>
                 )}
@@ -76,7 +76,7 @@ export const Profile: React.FC = () => {
                 />
               </div>
               <button className={styles.avatarUpload} onClick={triggerFileInput} type="button">
-                <img src={cameraIcon || "/placeholder.svg"} alt="Camera" className={styles.cameraIcon} />
+                <img src={cameraIcon || "/placeholder.svg"} alt="Camera" className={styles.cameraIcon} loading="lazy"/>
                 Додати
               </button>
             </div>
