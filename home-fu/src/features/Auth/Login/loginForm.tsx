@@ -112,6 +112,7 @@ export const Login = () => {
                     <button className={style.socialButton}>
                         <img className={style.socialIcon} src={google} alt="googleIcon" />
                         <span>Sign In with Google</span>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
                 </form>
 
@@ -119,6 +120,7 @@ export const Login = () => {
                     <button className={style.socialButton}>
                         <img className={style.socialIcon} src={facebook} alt="facebookIcon" />
                         <span>Sign In with Facebook</span>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
                 </form>
 
@@ -126,6 +128,7 @@ export const Login = () => {
                     <button className={style.socialButton}>
                         <img className={style.socialIcon} src={apple} alt="appleIcon" />
                         <span>Sign In with Apple</span>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
                 </form>
             </div>
