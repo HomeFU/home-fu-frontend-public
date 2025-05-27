@@ -32,6 +32,7 @@ export const Login = () => {
         mutationFn: UserLogin, 
         onSuccess: (data) => {
             localStorage.setItem('isAdminUser', data.role);
+            localStorage.setItem('token', data.token);
             queryClient.invalidateQueries({ queryKey: ['auth'] });
             dispatch(closeLoginForm());
             dispatch(login(data));

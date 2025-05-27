@@ -18,7 +18,6 @@ export const Home = () => {
     const [searchParams] = useSearchParams();
     const categoryIdFromUrl = parseInt(searchParams.get("category") || "1");
 
-
     const {
         data: dataCardsCategories = [],
         isLoading,

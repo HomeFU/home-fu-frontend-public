@@ -17,20 +17,27 @@
   font-family: "Inknut Antiqua", serif;
 }
 
+.wrapperProfileContent {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  align-items: start;
+}
+
 .profileHeader {
   margin-bottom: 30px;
   text-align: center;
 
   h1 {
-      @include text(600, 28px, #222);
-      margin-bottom: 10px;
+    margin-top: 0;
+     @include text(600, 28px, #222);
   }
 }
 
 .profileDescription {
   @include text(400, 14px, #717171);
   max-width: 600px;
-  margin: 0 auto;
+  margin-top: 10px;
   line-height: 1.5;
 }
 
@@ -47,20 +54,19 @@
   }
 }
 
-.profileContent {
-  display: flex;
-  gap: 40px;
+// .profileContent {
+//   display: flex;
+//   gap: 40px;
 
-  @media (max-width: 768px) {
-      flex-direction: column;
-  }
-}
+//   @media (max-width: 768px) {
+//       flex-direction: column;
+//   }
+// }
 
 .avatarSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -110px;
 }
 
 .avatar {
@@ -119,8 +125,8 @@
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
-  row-gap: 40px;
+  gap: 40px;
+  margin-top: 40px;
 
   @media (max-width: 768px) {
       grid-template-columns: 1fr;
@@ -157,6 +163,32 @@
           transform: translateY(-25px);
           @include text(500, 12px, #3a6df0);
       }
+  }
+}
+
+.fieldHappyDate {
+margin-top: 12px;
+}
+
+.updateButton {
+  padding: 8px;
+  width: 110px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  background: #4478ff;
+  justify-content: center;
+  border-radius: 9px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+    transition: 0.3s;
   }
 }
 
