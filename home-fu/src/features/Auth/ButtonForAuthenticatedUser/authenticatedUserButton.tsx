@@ -8,7 +8,7 @@ export const AuthenticatedUserButton = () => {
     
     return (
         <button className={styles.registerbutton} onClick={() => {dispatch(toggleMenuPopUp())}}>
-            <img src={menuIcon} className={styles.icon} />
+            <img src={menuIcon} className={styles.icon} loading="lazy"/>
             <p>Фото Юзера</p>
         </button>
     );

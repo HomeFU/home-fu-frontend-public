@@ -77,7 +77,9 @@ export const CardsForCategories = () => {
             borderRadius: "6px",
             width: "40px",
             height: "40px"
+            
           }}
+          loading="lazy"
         />
       ),
     },  

@@ -10,7 +10,7 @@ export const FilterButton: React.FC = () => {
     return (
         <>
             <button className={`${styles.registerbutton} ${styles.filterWrapper}`} onClick={() => dispatch(toggleForm())}>
-            <img src={iconFilter} alt="iconFilter" className={styles.filterIcon} />
+            <img src={iconFilter} alt="iconFilter" className={styles.filterIcon} loading="lazy"/>
             <span className={styles.filterText}>Фільтри</span>
             </button>
             <Filter></Filter>

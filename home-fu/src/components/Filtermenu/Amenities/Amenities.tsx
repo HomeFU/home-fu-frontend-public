@@ -126,7 +126,7 @@ const Amenities: React.FC = () => {
       <button className={css.showMoreButton} onClick={toggleExpanded}>
         {expanded ? "Показати менше" : "Показати більше"}
         <span className={`${css.arrowIcon} ${expanded ? css.arrowUp : ""}`}>
-        <img src={arrowIcon} alt="arrow" width={16} height={16} />
+        <img src={arrowIcon} alt="arrow" width={16} height={16} loading="lazy"/>
         </span>
       </button>
     </>
