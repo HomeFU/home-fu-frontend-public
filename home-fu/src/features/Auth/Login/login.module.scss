@@ -143,6 +143,7 @@
 }
 
 .socialButton {
+    position: relative;
     width: 100%;
     cursor: pointer;
     padding: 0.75rem 1rem;
@@ -167,8 +168,42 @@
     }
 }
 
+.socialButton:hover .comingSoonPopup {
+    display: block;
+}
+
 .socialIcon {
     width: 20px;
     height: 20px;
 }
 
+.comingSoonPopup {
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0a1744;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    @include text(12px, 500, 1.4);
+    z-index: 5;
+    display: none;
+    white-space: nowrap;
+    margin-bottom: 8px; 
+}
+
+.comingSoonPopup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 8px 0 8px;
+    border-style: solid;
+    border-color: #0a1744 transparent transparent transparent;
+}
+
+.listLinksItem:hover .comingSoonPopup {
+    display: block;
+}
