@@ -15,6 +15,11 @@
   height: 530px;
   padding: 40px 20px;
   font-family: "Inknut Antiqua", serif;
+
+  @media (max-width:768px) {
+    padding: 5px 20px;
+    height: unset;
+  }
 }
 
 .wrapperProfileContent {
@@ -22,6 +27,11 @@
   flex-direction: row;
   gap: 80px;
   align-items: start;
+
+  @media (max-width:768px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 }
 
 .profileHeader {
@@ -67,6 +77,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width:768px) {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .avatar {

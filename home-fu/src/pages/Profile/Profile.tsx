@@ -67,6 +67,7 @@ export const Profile: React.FC = () => {
     mutationFn: UpdateInfoAboutUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fullInfoUser'] });
+      window.location.reload();
     },
     onError: (error) => {
       console.error("Update error:", error);

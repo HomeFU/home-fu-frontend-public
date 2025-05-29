@@ -5,7 +5,6 @@ import { UpdateLocationAPI } from "../../../../api/Admin/Locations/updateLocatio
 import { UpdateLocationType } from "../../../../types/Locations/updateLocation";
 import style from "./updateLocation.module.scss";
 import { useDispatch } from "react-redux";
-import { closeAddLocationForm } from "../../../../redux/AdminPanel/adminPanel";
 import { closeUpdateLocationForm } from "../..//..//..//redux/AdminPanel/editPanelFirst";
 
 type UpdateLocationModel = {
@@ -27,6 +26,7 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
         handleSubmit,
         formState: { errors },
         reset,
+        formState: {isDirty}
     } = useForm<LocationValidate>({
         defaultValues: { name },
         mode: 'onChange',

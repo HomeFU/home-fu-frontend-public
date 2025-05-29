@@ -7,12 +7,16 @@ export const apiBaseURL = axios.create({
 apiBaseURL.interceptors.response.use(
     (response) => response,
     (error) => {
-        const message = error?.response?.data?.message;
-        if(error?.response?.status === 401 && message?.toLowerCase().includes("token")) {
+        const status = error?.response?.status;
+        // const message = error?.response?.data?.message;
+        console.log("Axios interceptor error:", error?.response); // добавь это для отладки
+
+        if (status === 401) {
             alert('Сессия истекла. Пожалуйста, войдите снова.');
             localStorage.removeItem('token');
             window.location.href = '/';
         }
+
         return Promise.reject(error);
     }
-)
+);
