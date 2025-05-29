@@ -1,8 +1,8 @@
-import axios from "axios";
+import { apiBaseURL } from "..";
 
-const URL_Categories = "https://homefuserverback.azurewebsites.net/api/categories";
+const URL_Categories = "categories";
 
 export const Categories = async () => {
-    const response = await axios.get(URL_Categories );
+    const response = await apiBaseURL.get(URL_Categories);
     return response.data;
 }

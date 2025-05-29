@@ -1,8 +1,8 @@
-import axios from "axios";
+import { apiBaseURL } from "..";
 
-const URl_Locations = "https://homefuserverback.azurewebsites.net/api/locations";
+const URl_Locations = "locations";
 
 export const Locations = async () => {
-    const response = await axios.get(URl_Locations);
+    const response = await apiBaseURL.get(URl_Locations);
     return response.data;
 }

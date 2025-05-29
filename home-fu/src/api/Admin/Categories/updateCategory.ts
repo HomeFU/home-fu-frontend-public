@@ -1,7 +1,7 @@
-import axios from "axios";
 import { UpdateCategoryType } from "../../../types/Categories/updateCategory";
+import { apiBaseURL } from "../..";
 
-const URL_UpdateCategory = "https://homefuserverback.azurewebsites.net/api/categories/";
+const URL_UpdateCategory = "categories/";
 
 export const UpdateCategoryAPI = async ({
   data,
@@ -14,7 +14,7 @@ export const UpdateCategoryAPI = async ({
   formData.append('name', data.name);
   formData.append('imageFile', data.imageFile);
 
-  const response = await axios.put(
+  const response = await apiBaseURL.put(
     `${ URL_UpdateCategory}${id}`,
     formData,
     {

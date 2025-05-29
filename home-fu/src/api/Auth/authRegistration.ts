@@ -1,9 +1,9 @@
-import axios from "axios";
 import { UserModel } from "../../types/Auth/auth";
+import { apiBaseURL } from "..";
 
-const URL_Registration = "https://homefuserverback.azurewebsites.net/api/auth/register";
+const URL_Registration = "auth/register";
 
 export const RegistrationUser = async (data:UserModel) => {
-    const response = await axios.post(URL_Registration, data);
+    const response = await apiBaseURL.post(URL_Registration, data);
     return response;
 }
