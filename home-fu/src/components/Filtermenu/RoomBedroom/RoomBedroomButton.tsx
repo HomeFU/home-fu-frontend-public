@@ -7,7 +7,7 @@ import style from "./RoomBedroomButton.module.scss"
 
 type RoomType = "bedrooms" | "beds" | "bathrooms"
 
-const RoomBedroom = () => {
+export const RoomBedroom = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state: RootState) => state.filterMenu)
 
@@ -63,5 +63,3 @@ const RoomBedroom = () => {
     </>
   )
 }
-
-export default RoomBedroom

@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from "react-redux"
 import style from "./filter.module.scss"
 import { closeFilterMenu,resetFilters } from "../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../redux/store"
-import ButtonType from "./ButtonPosition/ButtonType/ButtonTypes"
-import Room from "./ButtonPosition/Room/RoomButton"
-import FullRoom from "../Filtermenu/ButtonPosition/FullRoom/fullRoomButton"
-import PriceRange from "../Filtermenu/PriceRange/RriceRangeScroll"
-import RoomBedroom from "../Filtermenu//RoomBedroom/RoomBedroomButton"
-import Amenities from "../Filtermenu/Amenities/Amenities"
-import Armoring from "../Filtermenu/Armoring/Armoring"
-import TypeRoom from "../Filtermenu/TypeRoom/typeRoom"
-import Facilities from "../Filtermenu/Facilities/facilities"
-import LanguageMaster from "../Filtermenu/LanguageMaster/languageMaster"
+import { ButtonType} from "./ButtonPosition/ButtonType/ButtonTypes"
+import { Room } from "./ButtonPosition/Room/RoomButton"
+import {FullRoom}  from "../Filtermenu/ButtonPosition/FullRoom/fullRoomButton"
+import {PriceRange}  from "../Filtermenu/PriceRange/RriceRangeScroll"
+import {RoomBedroom } from "../Filtermenu//RoomBedroom/RoomBedroomButton"
+import {Amenities}  from "../Filtermenu/Amenities/Amenities"
+import {Armoring } from "../Filtermenu/Armoring/Armoring"
+import {TypeRoom } from "../Filtermenu/TypeRoom/typeRoom"
+import {Facilities}  from "../Filtermenu/Facilities/facilities"
+import {LanguageMaster}  from "../Filtermenu/LanguageMaster/languageMaster"
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -106,5 +106,3 @@ export const Filter = () => {
 
   )
 }
-
-export default Filter

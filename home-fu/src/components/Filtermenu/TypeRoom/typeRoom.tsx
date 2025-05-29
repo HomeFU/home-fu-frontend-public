@@ -11,7 +11,7 @@ type AccommodationType = {
   icon: string
 }
 
-const TypeRoom = () => {
+export const TypeRoom = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
@@ -67,5 +67,3 @@ const TypeRoom = () => {
     </div>
   )
 }
-
-export default TypeRoom

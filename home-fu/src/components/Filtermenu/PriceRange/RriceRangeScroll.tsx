@@ -6,7 +6,7 @@ import { setPriceRange } from "../../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../../redux/store"
 import style from "./RriceRangeScroll.module.scss"
 
-const PriceRange = () => {
+export const PriceRange = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state: RootState) => state.filterMenu)
   const [minPrice, setMinPrice] = useState(filters.priceRange.min)
@@ -111,5 +111,3 @@ const PriceRange = () => {
     </>
   )
 }
-
-export default PriceRange

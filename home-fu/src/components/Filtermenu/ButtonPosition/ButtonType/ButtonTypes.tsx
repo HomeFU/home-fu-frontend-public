@@ -5,7 +5,7 @@ import { setPlaceType } from "../../../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../../../redux/store"
 import style from "./ButtonTypes.module.scss"
 
-const ButtonType = () => {
+export const ButtonType = () => {
     const dispatch = useDispatch()
     const { filters } = useSelector((state: RootState) => state.filterMenu)
   
@@ -19,5 +19,4 @@ const ButtonType = () => {
     )
   }
   
-  export default ButtonType
   

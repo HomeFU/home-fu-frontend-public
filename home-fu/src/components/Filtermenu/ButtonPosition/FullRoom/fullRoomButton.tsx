@@ -4,7 +4,7 @@ import { setPlaceType } from "../../../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../../../redux/store"
 import style from "./fullRoomButton.module.scss"
 
-const FullRoom = () => {
+export const FullRoom = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state: RootState) => state.filterMenu)
   
@@ -18,4 +18,3 @@ const FullRoom = () => {
   )
 }
 
-export default FullRoom

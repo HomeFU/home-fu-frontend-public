@@ -10,7 +10,7 @@ type Language = {
   name: string
 }
 
-const LanguageMaster = () => {
+export const LanguageMaster = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
@@ -133,5 +133,3 @@ const LanguageMaster = () => {
     </div>
   )
 }
-
-export default LanguageMaster

@@ -16,7 +16,7 @@ type AccessibilityCategory = {
   options: AccessibilityOption[]
 }
 
-const Facilities = () => {
+export const Facilities = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
@@ -107,5 +107,3 @@ const Facilities = () => {
     </div>
   )
 }
-
-export default Facilities

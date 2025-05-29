@@ -17,7 +17,7 @@ type AmenityCategory = {
   amenities: Amenity[]
 }
 
-const Amenities = () => {
+export  const Amenities = () => {
   const [expanded, setExpanded] = useState(false)
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([])
   const [animating, setAnimating] = useState(false)
@@ -131,5 +131,3 @@ const Amenities = () => {
     </>
   )
 }
-
-export default Amenities

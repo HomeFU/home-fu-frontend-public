@@ -17,7 +17,7 @@ type BookingCategory = {
   options: BookingOption[]
 }
 
-const Armoring = () => {
+export const Armoring = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
   const bookingCategories: BookingCategory[] = [
@@ -107,5 +107,3 @@ const Armoring = () => {
     </>
   )
 }
-
-export default Armoring

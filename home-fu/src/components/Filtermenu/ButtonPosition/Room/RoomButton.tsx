@@ -5,7 +5,7 @@ import { setPlaceType } from "../../../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../../../redux/store"
 import style from "./RoomButton.module.scss"
 
-const Room = () => {
+export const Room = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state: RootState) => state.filterMenu)
   
@@ -18,5 +18,3 @@ const Room = () => {
     </button>
   )
 }
-
-export default Room
