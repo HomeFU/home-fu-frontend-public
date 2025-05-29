@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import styles from "./Amenities.module.scss"
@@ -18,7 +17,7 @@ type AmenityCategory = {
   amenities: Amenity[]
 }
 
-const Amenities: React.FC = () => {
+const Amenities = () => {
   const [expanded, setExpanded] = useState(false)
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([])
   const [animating, setAnimating] = useState(false)

@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { useSelector } from "react-redux"
 import style from "./facilities.module.scss"
@@ -17,7 +16,7 @@ type AccessibilityCategory = {
   options: AccessibilityOption[]
 }
 
-const Facilities: React.FC = () => {
+const Facilities = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)

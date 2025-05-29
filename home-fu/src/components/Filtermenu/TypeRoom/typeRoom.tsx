@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import style from "./typeroom.module.scss"
@@ -12,7 +11,7 @@ type AccommodationType = {
   icon: string
 }
 
-const TypeRoom: React.FC = () => {
+const TypeRoom = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)

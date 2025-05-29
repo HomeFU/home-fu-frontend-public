@@ -1,6 +1,4 @@
 "use client"
-
-import type React from "react"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import styles from "./Armoring.module.scss"
@@ -19,7 +17,7 @@ type BookingCategory = {
   options: BookingOption[]
 }
 
-const Armoring: React.FC = () => {
+const Armoring = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const { resetTriggered } = useSelector((state: RootState) => state.filterMenu)
   const bookingCategories: BookingCategory[] = [

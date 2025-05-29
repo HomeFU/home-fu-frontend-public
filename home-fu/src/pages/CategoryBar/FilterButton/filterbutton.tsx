@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { toggleForm } from "../../../redux/Filtermenu/filtermenu";
 import { Filter } from "../../../components/Filtermenu/filter";
 
-export const FilterButton: React.FC = () => {
+export const FilterButton = () => {
     const dispatch = useDispatch();
 
     return (

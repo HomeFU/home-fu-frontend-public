@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { useSelector } from "react-redux"
 import style from "./languageMaster.module.scss"
@@ -11,7 +10,7 @@ type Language = {
   name: string
 }
 
-const LanguageMaster: React.FC = () => {
+const LanguageMaster = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const contentRef = useRef<HTMLDivElement>(null)

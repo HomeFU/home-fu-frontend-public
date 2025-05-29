@@ -4,10 +4,11 @@ import {toggleRegion} from "../../../../../redux/TravelFilter/GuestSlices/region
 import {closeGuest} from "../../../../../redux/TravelFilter/GuestSlices/guestSlice";
 import { closeDateDeparture } from "../../../../../redux/DateDepartureSlice/departureSlice";
 import { closeDateArrival } from "../../../../../redux/DateArrivalSlice/arrivalSlice";
+import { RootState } from "..//..//..//..//..//redux//store"; 
 
 export const RegionField = () => {
     const dispatch = useDispatch();
-    const typeRegion = useSelector((state) => state.region.selectedRegion)
+    const typeRegion = useSelector((state: RootState) => state.region.selectedRegion)
 
     const openCloseRegionBlock = () => {
         dispatch(toggleRegion())

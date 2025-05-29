@@ -13,7 +13,7 @@ type Option = {
   label: string
 }
 
-export const Profile: React.FC = () => {
+export const Profile = () => {
   const options = [
     { value: "man", label: "Чоловіча" },
     { value: "woman", label: "Жіноча" },

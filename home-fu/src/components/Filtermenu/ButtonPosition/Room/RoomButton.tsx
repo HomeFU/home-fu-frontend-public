@@ -1,12 +1,11 @@
 "use client"
 
-import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPlaceType } from "../../../../redux/Filtermenu/filtermenu"
 import type { RootState } from "../../../../redux/store"
 import style from "./RoomButton.module.scss"
 
-const Room: React.FC = () => {
+const Room = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state: RootState) => state.filterMenu)
   
