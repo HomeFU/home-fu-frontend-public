@@ -33,6 +33,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
                     className={style.cardItemImage} 
                     src={`https://homefuserverback.azurewebsites.net${img}`} 
                     alt={el.locationName} 
+                    loading="lazy"
                   />
                 </SwiperSlide>
               ))}

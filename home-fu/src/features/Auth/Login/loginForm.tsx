@@ -56,7 +56,7 @@ export const Login = () => {
             <h2 className={style.title}>Login</h2>
 
             <button className={style.closeButton} onClick={() => dispatch(closeLoginForm())}>
-                <img src={close} alt="close" />
+                <img src={close} alt="close" loading="lazy" />
             </button>
 
             <form className={style.formContent} onSubmit={handleSubmit(onSubmit)}>
@@ -107,28 +107,24 @@ export const Login = () => {
                 <span>Do not have an account?</span>
                 <button onClick={() => dispatch(openRegisterForm())}>Registration</button>
             </div>
-
             <div className={style.socialButtons}>
-                <form>
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={google} alt="googleIcon" />
+                        <img className={style.socialIcon} src={google} alt="googleIcon"loading="lazy" />
                         <span>Sign In with Google</span>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
-                </form>
 
-                <form>
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={facebook} alt="facebookIcon" />
+                        <img className={style.socialIcon} src={facebook} alt="facebookIcon"loading="lazy" />
                         <span>Sign In with Facebook</span>
-                    </button>
-                </form>
-
-                <form>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
+                    </button>       
+                    
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={apple} alt="appleIcon" />
+                        <img className={style.socialIcon} src={apple} alt="appleIcon" loading="lazy" />
                         <span>Sign In with Apple</span>
-                    </button>
-                </form>
+                        <div className={style.comingSoonPopup}>Coming soon</div>
+                    </button>               
             </div>
         </div>
     )

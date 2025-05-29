@@ -30,7 +30,7 @@ export const MapButton = ({ onClick }: MapButtonProps) => {
         {showScrolledFilter && 
           <button className={styles.mapButton} onClick={onClick}>
             <span className={styles.text}>Показати мапу</span>
-            <img src={mapIcon} className={styles.icon} />
+            <img src={mapIcon} className={styles.icon} loading="lazy"/>
           </button>
         }
     </>

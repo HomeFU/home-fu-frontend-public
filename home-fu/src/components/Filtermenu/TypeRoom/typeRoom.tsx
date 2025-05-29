@@ -58,7 +58,7 @@ const TypeRoom: React.FC = () => {
               onClick={() => selectType(type.id)}
             >
               <span className={style.typeIcon}>
-              <img src={type.icon} alt={type.name} width={20} height={20} />
+              <img src={type.icon} alt={type.name} width={20} height={20} loading="lazy"/>
               </span>
               <span className={style.typeName}>{type.name}</span>
             </button>

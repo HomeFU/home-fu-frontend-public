@@ -11,8 +11,8 @@ export const RegisterButton = () => {
   return (
     <>
       <button className={styles.registerbutton} onClick={() => dispatch(toggleForm())}>
-        <img src={menuIcon} className={styles.icon} />
-        <img src={userIcon} className={styles.icon} />
+        <img src={menuIcon} className={styles.icon}loading="lazy" />
+        <img src={userIcon} className={styles.icon} loading="lazy"/>
       </button>
       <LoginRegister/>
     </>

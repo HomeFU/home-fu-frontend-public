@@ -50,7 +50,7 @@ export const AnimalsModal = () => {
         <div className={styles.imageWrapper}>
           <img
             src={animalImage || "/placeholder.svg"}
-            alt="Изображение с животным"
+            alt="Изображение с животным" loading="lazy"
             className={styles.serviceAnimalImage}
           />
         </div>
