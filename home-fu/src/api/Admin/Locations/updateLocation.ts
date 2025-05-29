@@ -1,7 +1,7 @@
-import axios from "axios";
 import { UpdateLocationType } from "../../../types/Locations/updateLocation";
+import { apiBaseURL } from "../..";
 
-const URL_UpdateLocation = "https://homefuserverback.azurewebsites.net/api/locations/";
+const URL_UpdateLocation = "locations/";
 
 export const UpdateLocationAPI = async ({
   data,
@@ -10,6 +10,6 @@ export const UpdateLocationAPI = async ({
   data: UpdateLocationType;
   id: number;
 }) => {
-  const response = await axios.put(`${URL_UpdateLocation}${id}`, data);
+  const response = await apiBaseURL.put(`${URL_UpdateLocation}${id}`, data);
   return response.data;
 };

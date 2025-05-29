@@ -1,9 +1,9 @@
-import axios from "axios";
 import { LocationType } from "../../../types/Locations/addNewLocation";
+import { apiBaseURL } from "../..";
 
-const URL_AddNewLocation = "https://homefuserverback.azurewebsites.net/api/locations";
+const URL_AddNewLocation = "locations";
 
 export const AddNewLocationAPI = async (data:LocationType) => {
-    const response = await axios.post(URL_AddNewLocation, data);
+    const response = await apiBaseURL.post(URL_AddNewLocation, data);
     return response;
 }

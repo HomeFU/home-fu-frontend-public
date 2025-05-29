@@ -1,4 +1,4 @@
-.registerbutton {
+.authenticatedUserButton {
     width: 87px;
     height: 43px;
     border-radius: 26px;
@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
+    padding: 0 5px 0 14px;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
 }
@@ -19,4 +19,10 @@
 .icon:first-of-type {
     width: 18px; 
     height: 18px;
+}
+
+.userImage {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }

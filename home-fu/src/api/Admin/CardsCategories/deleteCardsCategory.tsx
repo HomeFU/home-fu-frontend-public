@@ -1,7 +1,7 @@
-import axios from "axios";
+import { apiBaseURL } from "../..";
 
-const URL_Delete_CardsCategory = "https://homefuserverback.azurewebsites.net/api/cards/";
+const URL_Delete_CardsCategory = "cards/";
 
 export const DeleteCardsCategoryForAdmin = async (id: number) => {
-    await axios.delete(URL_Delete_CardsCategory + `${id}`);
+    await apiBaseURL.delete(URL_Delete_CardsCategory + `${id}`);
 }
