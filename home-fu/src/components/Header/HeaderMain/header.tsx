@@ -1,10 +1,9 @@
 import style from "./header.module.scss";
 import {RegisterButton} from "..//RegisterButton/registerbutton";
 import {TravetFilter} from "..//TravelFilter/travel-filter";
-import {MapButton} from "..//MapButton/mapbutton";
+import { MapButton } from "../mapbutton/mapbutton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LogOutButton } from "..//../../features/Auth/LogOut/logOutButton";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
