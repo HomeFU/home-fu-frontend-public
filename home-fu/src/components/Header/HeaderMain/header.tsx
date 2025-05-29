@@ -16,18 +16,20 @@ import { SumButton } from "../../../pages/CategoryBar/SumButton/sumbutton";
 import { AnimalsModal } from ".././TravelFilter/Animals/animals";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
+import type { RootState } from "..//..//..//redux/store";
+
 export const Header = () => {
 
-    const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
+    const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
 
     const dispatch = useDispatch();
 
-    const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen);
+    const isOpenMobileMenu = useSelector((state: RootState) => state.mobileMenu.isOpen);
     const onOpenCloceMobileMenu = () => {
        dispatch(openCloseMobileMenu());
     }
 
-    const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated);
+    const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
     const [isOpenCloseFilterMobile, setOpenCloseFilterMobile] = useState(false);
 
     const HandleOpenCloseFilter = () => {

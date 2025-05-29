@@ -9,12 +9,13 @@ import { MobileMenu } from "../../MobileMenu/menu"
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton"
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp"
 import { closeMenuPopUp } from "../../../redux/MenuPopoUp/menuPopoUpSlice"
+import type { RootState } from "..//..//..//redux/store";
 
 export const HeaderSite = () => {
   const dispatch = useDispatch()
-  const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen)
-  const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated)
-  const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter)
+  const isOpenMobileMenu = useSelector((state: RootState) => state.mobileMenu.isOpen)
+  const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated)
+  const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter)
 
   const onOpenCloceMobileMenu = () => {
     dispatch(openCloseMobileMenu())

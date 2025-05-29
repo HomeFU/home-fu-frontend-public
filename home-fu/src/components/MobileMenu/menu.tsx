@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { LogOutButton } from "../../features/Auth/LogOut/logOutButton";
 import { LoginButton } from "../../features/Auth/LoginMobileButton/loginButton";
 import { closeMenuPopUp } from "../../redux/MenuPopoUp/menuPopoUpSlice";
-
+import type { RootState } from "..//..//redux/store";
 export const MobileMenu = () => {
-    const isAuthenticatedUser = useSelector((state) => state.auth.isAuthenticated);
-    const isOpenMobileMenu = useSelector((state) => state.mobileMenu.isOpen);
+    const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const isOpenMobileMenu = useSelector((state: RootState) => state.mobileMenu.isOpen);
 
     const isUserAdmin = localStorage.getItem("isAdminUser");
 

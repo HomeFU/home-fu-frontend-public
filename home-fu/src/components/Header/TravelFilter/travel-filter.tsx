@@ -10,13 +10,14 @@ import { GuestField } from './Guest/Field/guestField';
 import { GuestBlock } from './Guest/Block/guestBlock';
 import { useEffect } from 'react';
 import { handlerScrolledFilter } from '../../../redux/TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll';
+import type { RootState } from "..//..//..//redux/store";
 
 export const TravetFilter = () => {
-    const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
-    const isOpenRegionBlock = useSelector((state) => state.region.isOpen);
-    const isOpenGuestBlock = useSelector((state) => state.guest.isOpen);
-    const isOpenArrivalCalendar =  useSelector((state) => state.arrival.isOpen);
-    const isOpenDepartureCalendar = useSelector((state) => state.departure.isOpen);
+    const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
+    const isOpenRegionBlock = useSelector((state: RootState) => state.region.isOpen);
+    const isOpenGuestBlock = useSelector((state: RootState) => state.guest.isOpen);
+    const isOpenArrivalCalendar =  useSelector((state: RootState) => state.arrival.isOpen);
+    const isOpenDepartureCalendar = useSelector((state: RootState) => state.departure.isOpen);
 
     const scrollTop = () => {
         window.scrollTo({

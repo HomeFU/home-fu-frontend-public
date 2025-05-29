@@ -21,12 +21,13 @@ import { toggleDateArrival } from "../../../../redux/DateArrivalSlice/arrivalSli
 import { closeDateDeparture } from "../../../../redux/DateDepartureSlice/departureSlice";
 import { closeRegion } from "../../../../redux/TravelFilter/GuestSlices/regionSlice";
 import { closeGuest } from "../../../../redux/TravelFilter/GuestSlices/guestSlice";
+import type { RootState } from "..//..//..//..//redux/store";
 
 export function DateArrival() {
 
   const dispatch = useDispatch()
-  const selectedDate = useSelector((state) => state.arrival.selectedDate);
-  const isOpen = useSelector((state) => state.arrival.isOpen);
+  const selectedDate = useSelector((state: RootState) => state.arrival.selectedDate);
+  const isOpen = useSelector((state: RootState) => state.arrival.isOpen);
 
   const onCloseDateArrive = () => {
     dispatch(toggleDateArrival());

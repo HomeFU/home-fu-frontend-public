@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { increment } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { decrement } from "../../../../../redux/TravelFilter/GuestSlices/countersSlice"
 import { openAnimalsModal } from "../../../../../redux/TravelFilter/GuestSlices/animalsSlice"
+import type { RootState } from "..//..//..//..//..//redux/store";
 
 type category = {
   id: number
@@ -23,7 +24,7 @@ const categorys: category[] = [
 ]
 
 export const GuestBlock = () => {
-  const counterValue = useSelector((state) => state.counters.counter)
+  const counterValue = useSelector((state: RootState) => state.counters.counter)
   const dispatch = useDispatch()
 
   // console.log("FirstCounter" + counterValue[0])

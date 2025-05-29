@@ -4,10 +4,11 @@ import style from "./menuPopUp.module.scss";
 import { LogOutButton } from "../../features/Auth/LogOut/logOutButton";
 import { Link } from "react-router-dom";
 import { closeMenuPopUp } from "..//..//redux/MenuPopoUp/menuPopoUpSlice"
+import type { RootState } from "..//..//redux/store";
 
 export const MenuPopoUp = () => {
     const dispatch = useDispatch();
-    const isOpen = useSelector((state) => state.menuPopUp.isOpen);
+    const isOpen = useSelector((state: RootState) => state.menuPopUp.isOpen);
 
     const isUserAdmin = localStorage.getItem("isAdminUser");
 

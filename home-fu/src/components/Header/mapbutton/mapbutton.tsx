@@ -3,6 +3,7 @@ import mapIcon from "../../../assets/icons/iconMap.svg";
 import { useEffect, useState } from "react";
 import { handlerScrolledFilter } from "../../../redux/TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll";
 import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "..//..//..//redux/store";
 
 type MapButtonProps = {
   onClick?: () => void; 
@@ -10,7 +11,7 @@ type MapButtonProps = {
 
 export const MapButton = ({ onClick }: MapButtonProps) => {
 
-  const showScrolledFilter = useSelector((state) => state.scrolledFilter.isShowScrolledFilter);
+  const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
 
   const dispatch = useDispatch();
 

@@ -6,13 +6,13 @@ import { Categories } from "../../../api/Categories/categories";
 import { CategoriesModel } from "../../../types/Categories/categories";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
+import type { RootState } from "..//..//..//redux/store";
 export const FilterBar = () => {
 
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    const selectedCategori = useSelector((state) => state.category.isSelectedCategori);
+    const selectedCategori = useSelector((state: RootState) => state.category.isSelectedCategori);
 
     const {
         data: dataCategoriesBar = [],
