@@ -122,8 +122,6 @@ export const Profile: React.FC = () => {
     });
   };
   
-  console.log(token);
-
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
