@@ -1,7 +1,7 @@
 import style from "./header.module.scss";
 import {RegisterButton} from "..//RegisterButton/registerbutton";
-import {TravetFilter} from "..//TravelFilter/travel-filter";
-import { MapButton } from "../mapbutton/mapbutton";
+import {TravelFilter} from "..//TravelFilter/travel-filter";
+import { MapButton } from "../ButtonMap/mapbutton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -74,8 +74,8 @@ export const Header = () => {
                             }
                         </button>
                         <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
-                            <TravetFilter></TravetFilter>
-                            <MapButton></MapButton>
+                            <TravelFilter/>
+                            <MapButton/>
                         </div>
                     </div>
                 </div>
@@ -83,10 +83,10 @@ export const Header = () => {
                     <div className={style.divider}></div>
                     <div className={style.container}>
                         <div className= {style.categoryBar}>
-                            <FilterBar></FilterBar>
+                            <FilterBar/>
                             <div className={style.wrapperFilterSumButton}>
-                                <FilterButton></FilterButton>
-                                <SumButton></SumButton>
+                                <FilterButton/>
+                                <SumButton/>
                             </div>
                         </div>
                     </div>

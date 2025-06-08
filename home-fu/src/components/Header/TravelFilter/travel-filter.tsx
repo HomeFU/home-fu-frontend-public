@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { handlerScrolledFilter } from '../../../redux/TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll';
 import type { RootState } from "..//..//..//redux/store";
 
-export const TravetFilter = () => {
+export const TravelFilter = () => {
     const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
     const isOpenRegionBlock = useSelector((state: RootState) => state.region.isOpen);
     const isOpenGuestBlock = useSelector((state: RootState) => state.guest.isOpen);

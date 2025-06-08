@@ -3,7 +3,7 @@ import mapIcon from "../../../assets/icons/iconMap.svg";
 import { useEffect } from "react";
 import { handlerScrolledFilter } from "../../../redux/TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "..//..//..//redux/store";
+import type { RootState } from "../../../redux/store";
 
 type MapButtonProps = {
   onClick?: () => void; 
