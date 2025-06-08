@@ -25,7 +25,7 @@ export const Locations = () => {
     (state: RootState) => state.adminupdateLocationForm.isOpenUpdateLocationForm
   );
 
-  const [idForUpdateLocation, setidForDeleteLocation] = useState<number>(null);
+  const [idForUpdateLocation, setidForDeleteLocation] = useState<number | null>(null);
   const [nameForUpdateLocation, setNameForUpdateLocation] = useState<string>("");
   const [responseData, setResponseData] = useState<LocationsModel[]>([]);
 

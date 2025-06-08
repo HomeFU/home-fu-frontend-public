@@ -34,8 +34,8 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
       onClose();
       window.location.reload();
     },
-    onError: (error: any) => {
-      setErrorMessage(error?.response?.data || 'Ошибка добавления категории');
+    onError: () => {
+      setErrorMessage('Ошибка добавления категории');
     },
   });
 

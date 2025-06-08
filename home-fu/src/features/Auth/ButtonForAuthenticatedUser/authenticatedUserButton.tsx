@@ -5,13 +5,27 @@ import { useDispatch } from "react-redux";
 import { useFullInfoUser } from "../../../hooks/useFullUserInfo";
 import NoUserPhoto from "../../../assets/images/noPhotoUser.jpg";
 
+type UserValidate = {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    address: string;
+    emergencyContactName: string;
+    emergencyContactPhone: string;
+    birthDate: string;
+    gender: string;
+    profileImageUrl: string;
+};
+
 export const AuthenticatedUserButton = () => {
     const dispatch = useDispatch();
 
     const token = localStorage.getItem('token') as string;
 
     const {
-        data: fullInfoUserData = [],
+        data: fullInfoUserData = {} as UserValidate,
     } = useFullInfoUser(token);
     
 

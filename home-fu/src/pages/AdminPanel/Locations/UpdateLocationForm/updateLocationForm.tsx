@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { closeUpdateLocationForm } from "../..//..//..//redux/AdminPanel/editPanelFirst";
 
 type UpdateLocationModel = {
-    id: number;
+    id: number | null;
     name: string;
 };
 
@@ -26,7 +26,6 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
         handleSubmit,
         formState: { errors },
         reset,
-        formState: {isDirty}
     } = useForm<LocationValidate>({
         defaultValues: { name },
         mode: 'onChange',
@@ -42,13 +41,15 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
             dispatch(closeUpdateLocationForm());
             window.location.reload();
         },
-        onError: (error: any) => {
-            setErrorMessage(error?.response?.data || 'Ошибка обновления локации');
+        onError: () => {
+            setErrorMessage('Ошибка обновления локации');
         },
     });
 
     const onSubmit: SubmitHandler<LocationValidate> = (data) => {
-        mutation.mutate({ data, id });
+        if (id !== null) {
+            mutation.mutate({ data, id });
+        }
     };
 
     const handleClose = () => {
