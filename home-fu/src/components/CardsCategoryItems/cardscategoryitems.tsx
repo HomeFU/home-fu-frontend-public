@@ -5,9 +5,13 @@ import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { CardsCategoriesModel } from "../../types/Categories/cardsCategories";
 import style from "./cardscategoryitems.module.scss";
 
+// @ts-ignore
 import 'swiper/css';
+// @ts-ignore
 import 'swiper/css/navigation';
+// @ts-ignore
 import 'swiper/css/pagination';
+// @ts-ignore
 import 'swiper/css/effect-fade';
 
 type CardsListProps = {
