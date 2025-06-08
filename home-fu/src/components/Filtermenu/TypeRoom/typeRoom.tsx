@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import style from "./typeroom.module.scss"
+import style from "./typeRoom.module.scss"
 import type { RootState } from "../../../redux/store"
 
 type AccommodationType = {
