@@ -34,6 +34,7 @@ export const GoogleMap = () => {
 
   return (
     <div
+      id="google-map"
       ref={mapRef}
       className={styles.map}
       style={{

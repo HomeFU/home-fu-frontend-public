@@ -26,13 +26,27 @@ export const MapButton = ({ onClick }: MapButtonProps) => {
     }
   }, [showScrolledFilter]);
 
+const handleClick = () => {
+  if (onClick) onClick();
+  
+  const mapElement = document.getElementById('google-map');
+  if (mapElement) {
+    const yOffset = -300;
+    const y = mapElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+  }
+};
   return (
     <>
       {showScrolledFilter && (
-        <button className={styles.mapButton} onClick={onClick}>
-          <span className={styles.text}>Показати мапу</span>
-          <img src={mapIcon || "/placeholder.svg"} className={styles.icon} loading="lazy" />
-        </button>
+      <button className={styles.mapButton} onClick={handleClick}>
+      <span className={styles.text}>Показати мапу</span>
+      <img src={mapIcon} className={styles.icon} loading="lazy" alt="Map icon" />
+     </button>
       )}
     </>
   );
