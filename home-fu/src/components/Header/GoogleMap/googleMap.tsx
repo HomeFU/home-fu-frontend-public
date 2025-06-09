@@ -13,11 +13,11 @@ type GoogleMapProps = {
   isVisible: boolean;
 };
 
-export const GoogleMap = ({ isVisible }: GoogleMapProps) => {
+export const GoogleMap = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isVisible || !mapRef.current) return;
+    // if (!isVisible || !mapRef.current) return;
 
     if (window.google) {
       initMap();
@@ -42,9 +42,7 @@ export const GoogleMap = ({ isVisible }: GoogleMapProps) => {
         document.head.removeChild(script);
       }
     };
-  }, [isVisible]);
+  }, []);
 
-  if (!isVisible) return null;
-
-  return <div ref={mapRef} className={styles.map} style={{ width: "100%", height: "1000px" }} />;
+  return <div ref={mapRef} className={styles.map} style={{ margin:"0 auto", maxWidth:"1200px" , height: "500px" }} />;
 };

@@ -95,7 +95,6 @@ const [showMap, setShowMap] = useState(false);
             </header>
             <MobileMenu/>
             <AnimalsModal/>
-             <GoogleMap isVisible={showMap} />
         </>
     )
 }
