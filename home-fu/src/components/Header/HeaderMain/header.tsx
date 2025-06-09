@@ -1,8 +1,8 @@
 import style from "./header.module.scss";
 import {RegisterButton} from "..//RegisterButton/registerbutton";
 import {TravetFilter} from "..//TravelFilter/travel-filter";
-import { MapButton } from "../MapButton/mapbutton";
-import { Link } from "react-router-dom";
+import { MapButton } from "../mapbutton/mapbutton";
+import { Link } from "react-router-dom";  
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,10 +16,10 @@ import { AnimalsModal } from ".././TravelFilter/Animals/animals";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 import type { RootState } from "..//..//..//redux/store";
-import { GoogleMap } from "../GoogleMap/googleMap";
+
 
 export const Header = () => {
-const [showMap, setShowMap] = useState(false);
+
     const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
 
     const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const [showMap, setShowMap] = useState(false);
                         </button>
                         <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
                             <TravetFilter></TravetFilter>
-                            <MapButton onClick={() => setShowMap(!showMap)} />
+                            <MapButton/>
                         </div>
                     </div>
                 </div>
