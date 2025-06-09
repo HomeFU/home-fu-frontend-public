@@ -36,8 +36,8 @@ footer {
 }
 
 .wrapper {
-    width: 1135px;
-    margin: 440px auto 0 auto;
+    max-width: 1200px;
+    margin: 400px auto 0 auto;
     
     @include tablet {
         width: 90%;
