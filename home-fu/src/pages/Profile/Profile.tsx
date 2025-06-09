@@ -139,7 +139,7 @@ export const Profile: React.FC = () => {
                 <div className={styles.avatar}>
                   {fullInfoUserData.profileImageUrl ? (
                     <img
-                      src={`https://homefuserverback.azurewebsites.net${fullInfoUserData.profileImageUrl}`}
+                      src={`https://homefu.azurewebsites.net${fullInfoUserData.profileImageUrl}`}
                       alt="User avatar"
                       className={styles.avatarImage}
                     />

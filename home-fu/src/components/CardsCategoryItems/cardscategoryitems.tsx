@@ -5,9 +5,13 @@ import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { CardsCategoriesModel } from "../../types/Categories/cardsCategories";
 import style from "./cardscategoryitems.module.scss";
 
+// @ts-ignore
 import 'swiper/css';
+// @ts-ignore
 import 'swiper/css/navigation';
+// @ts-ignore
 import 'swiper/css/pagination';
+// @ts-ignore
 import 'swiper/css/effect-fade';
 
 type CardsListProps = {
@@ -31,7 +35,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
                 <SwiperSlide className={style.swiperSlide} key={index}>
                   <img 
                     className={style.cardItemImage} 
-                    src={`https://homefuserverback.azurewebsites.net${img}`} 
+                    src={`https://homefu.azurewebsites.net${img}`} 
                     alt={el.locationName} 
                     loading="lazy"
                   />

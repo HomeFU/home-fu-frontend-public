@@ -34,7 +34,7 @@ export const AuthenticatedUserButton = () => {
             <img src={menuIcon} className={styles.icon} />
             {
                 fullInfoUserData.profileImageUrl !== null
-                ?  <img className={styles.userImage} loading="lazy" src={`https://homefuserverback.azurewebsites.net${fullInfoUserData.profileImageUrl}`} alt="userPhoto" /> 
+                ?  <img className={styles.userImage} loading="lazy" src={`https://homefu.azurewebsites.net${fullInfoUserData.profileImageUrl}`} alt="userPhoto" /> 
                 : <img className={styles.userImage} loading="lazy" src={NoUserPhoto} alt="userPhoto" />
             }
         </button>

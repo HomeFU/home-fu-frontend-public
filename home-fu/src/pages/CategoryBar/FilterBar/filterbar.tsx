@@ -85,7 +85,7 @@ export const FilterBar = () => {
                     </div> : <>
                         {dataCategoriesBar.map((el) => (
                             <div key={el.id} className={`${style.filterItem} ${selectedCategori === el.id ? style.activeItem : ''}`}  onClick={() => {dispatch(setSelectedCategori(el.id)); navigate(`/?category=${el.id}`)}}>
-                                <img className={style.filterItemimg} src={'https://homefuserverback.azurewebsites.net' + el.imageUrl} alt={el.name} loading="lazy"/>
+                                <img className={style.filterItemimg} src={'https://homefu.azurewebsites.net' + el.imageUrl} alt={el.name} loading="lazy"/>
                                 <span>{el.name}</span>
                             </div>
                         ))}

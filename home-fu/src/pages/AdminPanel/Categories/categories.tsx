@@ -73,7 +73,7 @@ export const Categories = () => {
       label: "Image",
       renderCell: (item: CategoriesModel) => (
         <img
-          src={`https://homefuserverback.azurewebsites.net${item.imageUrl}`}
+          src={`https://homefu.azurewebsites.net${item.imageUrl}`}
           alt={item.name}
           width={50}
           height={50}

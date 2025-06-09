@@ -10,8 +10,8 @@ import {RoomBedroom } from "../Filtermenu//RoomBedroom/RoomBedroomButton"
 import {Amenities}  from "../Filtermenu/Amenities/Amenities"
 import {Armoring } from "../Filtermenu/Armoring/Armoring"
 import {TypeRoom } from "../Filtermenu/TypeRoom/typeRoom"
-import {Facilities}  from "../Filtermenu/Facilities/facilities"
-import {LanguageMaster}  from "../Filtermenu/LanguageMaster/languageMaster"
+// import {Facilities}  from "../Filtermenu/Facilities/facilities"
+// import {LanguageMaster}  from "../Filtermenu/LanguageMaster/languageMaster"
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -84,13 +84,13 @@ export const Filter = () => {
             <TypeRoom />
           </section>
 
-          <section className={`${style.section} ${style.noPaddingSection}`}>
+          {/* <section className={`${style.section} ${style.noPaddingSection}`}>
             <Facilities />
           </section>
 
           <section className={`${style.section} ${style.noPaddingSection}`}>
             <LanguageMaster />
-          </section>
+          </section> */}
         </div>
         <div className={style.footer}>
           <button

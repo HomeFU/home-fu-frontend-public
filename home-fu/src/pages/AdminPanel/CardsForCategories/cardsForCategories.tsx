@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "./carsForCategories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCardsForCategories } from "../../../api/Admin/CardsCategories/getAllCardsCategories";
-import { DeleteCardsCategoryForAdmin } from "../../../api/Admin/CardsCategories/deleteCardsCategory";
 import { AddNewCardForCategories } from "./AddNewCardForCategories/addNewCardForCategories";
 import { UpdateCardForCategories } from "./UpdateCardForCategories/updateCardForCategories";
-import { openAddCardForm } from "../../../redux/AdminPanel/adminCardAdd";
 import { openUpdateCardForm } from "../../../redux/AdminPanel/adminCardUpdate";
 import type { RootState } from '../../../redux/store';
 
@@ -43,15 +41,6 @@ export const CardsForCategories = () => {
     }
   };
 
-  const deleteCardsCategory = async (id: number) => {
-    try {
-      await DeleteCardsCategoryForAdmin(id);
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const editCardFunction = () => {
     dispatch(openUpdateCardForm());
   };
@@ -70,7 +59,7 @@ export const CardsForCategories = () => {
       label: "Image",
       renderCell: (item: CategoriesCardsModel) => (
         <img
-          src={`https://homefuserverback.azurewebsites.net${item.imageUrls[0]}`}
+          src={`https://homefu.azurewebsites.net${item.imageUrls[0]}`}
           alt={item.name}
           style={{
             objectFit: "cover",
@@ -85,10 +74,9 @@ export const CardsForCategories = () => {
     },  
     {
       label: "Actions",
-      renderCell: (item: CategoriesCardsModel) => (
+      renderCell: () => (
         <div className={style.typesButtons}>
           <button onClick={editCardFunction} className={style.editBtn}>Edit</button>
-          <button onClick={() => deleteCardsCategory(item.id)} className={style.deleteBtn}>Delete</button>
         </div>
       ), 
     },
@@ -99,7 +87,6 @@ export const CardsForCategories = () => {
       <div>
         <div className={style.header}>
           <h1>All Cards for Categories</h1>
-          <button onClick={() => dispatch(openAddCardForm())}>+ Add Cards</button>
         </div>
         <div className={style.wrapperTable}>
           <CompactTable columns={columns} data={{ nodes: responseData }} />
