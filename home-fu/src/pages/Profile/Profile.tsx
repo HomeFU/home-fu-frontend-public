@@ -20,6 +20,7 @@ type Option = {
 };
 
 type UserValidate = {
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
@@ -29,6 +30,7 @@ type UserValidate = {
   emergencyContactPhone: string;
   birthDate: string;
   gender: string;
+  profileImageUrl: string;
 };
 
 export const Profile: React.FC = () => {
@@ -59,7 +61,7 @@ export const Profile: React.FC = () => {
   };
   
   const {
-    data: fullInfoUserData = {},
+    data: fullInfoUserData = {} as UserValidate,
     isSuccess,
   } = useFullInfoUser(token);
 
@@ -117,7 +119,7 @@ export const Profile: React.FC = () => {
   
     mutation.mutate({
       token,
-      id: fullInfoUserData.id,
+      id: fullInfoUserData.id!,
       data: userData,
     });
   };

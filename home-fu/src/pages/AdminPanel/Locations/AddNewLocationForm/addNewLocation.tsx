@@ -32,8 +32,8 @@ export const AddNewLocation = () => {
       dispatch(closeAddLocationForm());
       window.location.reload();
     },
-    onError: (error: any) => {
-      setErrorMessage(error?.response?.data || 'Ошибка добавления локации');
+    onError: () => {
+      setErrorMessage('Ошибка добавления локации');
     },
   });
 

@@ -20,7 +20,7 @@ export const Categories = () => {
   const dispatch = useDispatch();
   const isOpenFormAddCategory = useSelector((state: RootState) => state.categoryPanel.isOpenAddCategoryForm);
   const isOpenFormUpdateCategory = useSelector((state: RootState) => state.categoryPanelEdit.isOpenEditCategoryForm);
-  const [idForUpdateCategory, setIdForUpdateCategory] = useState<number>(null);
+  const [idForUpdateCategory, setIdForUpdateCategory] = useState<number | null >(null);
   const [nameForUpdateCategory, setNameForUpdateCategory] = useState<string>('');
   const [responseData, setResponseData] = useState<CategoriesModel[]>([]);
 
@@ -67,8 +67,8 @@ export const Categories = () => {
   }, []);
 
   const columns = [
-    { label: "ID", renderCell: (item: any) => item.id },
-    { label: "Name", renderCell: (item: any) => item.name },
+    { label: "ID", renderCell: (item: CategoriesModel) => item.id },
+    { label: "Name", renderCell: (item: CategoriesModel) => item.name },
     {
       label: "Image",
       renderCell: (item: CategoriesModel) => (
@@ -89,7 +89,7 @@ export const Categories = () => {
     },  
     {
       label: "Actions",
-      renderCell: (item: any) => (
+      renderCell: (item: CategoriesModel) => (
         <div className={style.typesButtons}>
           <button 
             onClick={() => editCategoryFunction(item.id, item.name)} 

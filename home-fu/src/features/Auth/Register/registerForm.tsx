@@ -36,8 +36,8 @@ export const Register = () => {
             dispatch(openLoginForm());
             reset();
         },
-        onError: (error) => {
-            setErrorMessage(error.response.data || 'Ошибка регистрации');
+        onError: () => {
+            setErrorMessage('Ошибка регистрации');
         }
     });
 

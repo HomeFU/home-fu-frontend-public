@@ -38,8 +38,8 @@ export const Login = () => {
             dispatch(login(data));
             reset();
         },
-        onError: (error) => {
-            setErrorMessage(error.response.data || 'Ошибка авторизации')
+        onError: () => {
+            setErrorMessage('Ошибка авторизации')
         }
     });
 

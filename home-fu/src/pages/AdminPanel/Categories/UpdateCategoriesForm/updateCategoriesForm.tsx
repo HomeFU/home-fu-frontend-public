@@ -5,7 +5,7 @@ import { useState } from 'react';
 import style from './updateCategoriesForm.module.scss';
 
 type UpdateCategoryModel = {
-  id: number;
+  id: number | null;
   name: string;
   imageUrl: string;
   onClose: () => void;
@@ -16,7 +16,7 @@ type CategoryFormData = {
   imageFile: FileList;
 };
 
-export const UpdateCategory = ({ id, imageUrl, name, onClose }: UpdateCategoryModel) => {
+export const UpdateCategory = ({ id, name, onClose }: UpdateCategoryModel) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [fileName, setFileName] = useState('');
   const queryClient = useQueryClient();
@@ -41,20 +41,22 @@ export const UpdateCategory = ({ id, imageUrl, name, onClose }: UpdateCategoryMo
       onClose();
       window.location.reload();
     },
-    onError: (error: any) => {
-      setErrorMessage(error?.response?.data || 'Ошибка обновления категории');
+    onError: () => {
+      setErrorMessage('Ошибка обновления категории');
     },
   });
 
   const onSubmit: SubmitHandler<CategoryFormData> = (data) => {
     const file = data.imageFile[0];
-    mutation.mutate({
-      data: {
-        name: data.name,
-        imageFile: file,
-      },
-      id,
-    });
+    if (id !== null) {
+      mutation.mutate({
+        data: {
+          name: data.name,
+          imageFile: file,
+        },
+        id,
+      });
+    }    
   };
 
   return (
