@@ -3,7 +3,7 @@ import { logout } from "../redux/Auth/authSlice";
 import { store } from "../redux/store";
 
 export const apiBaseURL = axios.create({
-    baseURL: 'https://homefuserverback.azurewebsites.net/api/',
+    baseURL: 'https://homefu.azurewebsites.net/api/',
 });
 
 let hasRedirected = false;
