@@ -19,7 +19,13 @@
   font-weight: 550;
   font-size: 17px;
   letter-spacing: 0.2px;
-  margin-bottom: 14px;
+}
+
+.wrapperButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .amenitiesContainer {
@@ -42,12 +48,13 @@
 }
 
 .amenityButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   padding: 12px 18px;
   background-color: #fff;
   border: 1px solid #bbb;
   border-radius: 30px;
+  gap: 6px;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
   font-size: 15px;
@@ -89,6 +96,11 @@
   &:hover {
     opacity: 0.75;
   }
+}
+
+.imageIcon {
+  height: 20px;
+  width: 20px;
 }
 
 .arrowIcon {

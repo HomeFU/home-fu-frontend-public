@@ -7,28 +7,21 @@ import { CardDetailsApi } from "../../api/CardDetails/cardDetails"
 import { HeaderSite } from "../../components/Header/HeaderSite/headerSite"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-// import { Swiper } from "swiper/types"
-// import { Navigation, Pagination, EffectFade } from 'swiper/modules';
-// import { SwiperSlide } from "swiper/react"
+import { LoadingHight } from "../../components/LoadingHight/loadinghight"
 
-// // @ts-ignore
-// import 'swiper/css';
-// // @ts-ignore
-// import 'swiper/css/navigation';
-// // @ts-ignore
-// import 'swiper/css/pagination';
-// // @ts-ignore
-// import 'swiper/css/effect-fade';
-// import { Link } from "react-router-dom";
-// import { da } from "date-fns/locale"
+// @ts-ignore
+import 'swiper/css';
+// @ts-ignore
+import 'swiper/css/navigation';
+// @ts-ignore
+import 'swiper/css/pagination';
 
 export const Details = () => {
     const { id } = useParams<{ id: string }>();
     
     const {
         data,
-        // isLoading,
-        // isError
+        isLoading,
     } = useQuery<CardDetailsModel>({
         queryKey: ['cardDetails', id],
         queryFn: () => CardDetailsApi(id!),
@@ -40,7 +33,9 @@ export const Details = () => {
          <HeaderSite/>
             <main className={`${style.main} ${style.mainDetail}`}>
                 <div className={style.container}>
-                    <div className={style.mainWrapper}>
+                    {
+                        isLoading ? <LoadingHight/> : <>
+                             <div className={style.mainWrapper}>
                     <div className={style.mainWrapperImageFerstSection}>
                         <div className={style.wrapperFerstSecondSection}>
                             <div className={style.firstBlock}>
@@ -229,6 +224,8 @@ export const Details = () => {
                         </div>
                     </div>
                     </div>
+                        </>
+                    }
                 </div>
                 <div className={style.divider}></div>
             </main>
