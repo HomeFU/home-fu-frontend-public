@@ -62,7 +62,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
                 month: "long",
               })}
             </div>
-            <span className={style.cardItemPrice}>&#8372; {el.price} ніч</span>
+            <span className={style.cardItemPrice}>$ {el.price} ніч</span>
           </Link>
         ))}
       </div>
