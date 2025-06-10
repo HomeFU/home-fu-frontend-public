@@ -4,14 +4,50 @@
     color: $color;
 }
 
-.footer {
-    background: #F7F7F7;
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 1024px) and (min-width: 769px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+// Добавляем миксин для скрытия полосы прокрутки
+@mixin hideScrollbar {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari и Opera */
+    }
+}
+
+footer {
     font-family: "Inknut Antiqua", serif;
 }
 
 .wrapper {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 140px auto 0 auto;
+    
+    @include tablet {
+        width: 90%;
+        margin: 450px auto 0 auto;
+    }
+    
+    @include mobile {
+        width: 95%;
+        margin: 100px auto 0 auto;
+    }
 }
 
 .supportWrapper {

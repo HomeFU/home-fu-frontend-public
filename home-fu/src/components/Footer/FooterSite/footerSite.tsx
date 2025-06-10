@@ -7,7 +7,7 @@ import facebookIcon from '../../../assets/icons/facebookIcon.svg';
 
 export const FooterSite = () => {
     return (
-        <footer className={style.footer}>
+        <footer>
             <div className={style.wrapper}>
                 <div className={style.supportWrapper}>
                     <div className={style.supportItem}>

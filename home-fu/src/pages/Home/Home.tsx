@@ -12,7 +12,6 @@ import { CardsCategoriesModel } from "../../types/Categories/cardsCategories";
 import { CardsList } from "..//..//components/CardsCategoryItems/cardscategoryitems";
 import { LoadingHight } from "..//../components/LoadingHight/loadinghight";
 
-
 export const Home = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();

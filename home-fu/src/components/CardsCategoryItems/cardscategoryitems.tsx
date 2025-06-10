@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // @ts-ignore
 import 'swiper/css/effect-fade';
+import { Link } from "react-router-dom";
 
 type CardsListProps = {
   dataCardsCategories: CardsCategoriesModel[]; 
@@ -23,7 +24,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
     <div className={style.container}>
       <div className={style.cardItemWrapper}>
         {dataCardsCategories.map((el) => (
-          <div key={el.id} className={style.cardItem}>
+          <Link to={`/carddetails/${el.id}`} key={el.id} className={style.cardItem}>
             <Swiper 
               effect={'fade'} 
               navigation={true} 
@@ -62,7 +63,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
               })}
             </div>
             <span className={style.cardItemPrice}>&#8372; {el.price} ніч</span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
