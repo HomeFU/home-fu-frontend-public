@@ -17,7 +17,7 @@
     transition: background 0.3s ease-in-out;
     
     .switchText {
-        @include text(500, 12px, #2C2823);
+        @include text(550, 13px, #2C2823);
         flex-grow: 1;
         text-align: center;
         white-space: nowrap;
