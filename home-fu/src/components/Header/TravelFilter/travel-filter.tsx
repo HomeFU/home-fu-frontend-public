@@ -39,6 +39,18 @@ export const TravelFilter = () => {
         }
     },[showScrolledFilter])
 
+    const typeRegion = useSelector((state: RootState) => state.region.selectedRegion)
+    const selectedDate = useSelector((state: RootState) => state.arrival.selectedDate);
+    const selectedDateDeparture = useSelector((state: RootState) => state.departure.selectedDate);
+    const counterValue = useSelector((state: RootState) => state.counters.counter)
+
+    // console.log({
+    //     LocationId: typeRegion,
+    //     CheckInDate: selectedDate,
+    //     CheckOutDate: selectedDateDeparture,
+    //     Adults: counterValue[0]
+    // });
+
     return (
         <>
             {
@@ -67,7 +79,16 @@ export const TravelFilter = () => {
                     <div className={`${style.filterItem} ${style.guestsCompact}`}>
                     <div className={style.placeholder}>Додайте гостей</div>
                     </div>
-                    <button className={`${style.searchButtonSmallFilter} ${style.scrolledButtonSearch}`}>
+                    <button className={`${style.searchButtonSmallFilter} ${style.scrolledButtonSearch}`} onClick={
+                        () => {
+                            console.log({
+                                LocationId: typeRegion,
+                                CheckInDate: selectedDate,
+                                CheckOutDate: selectedDateDeparture,
+                                Adults: counterValue[0]
+                            })
+                        }
+                    }>
                         <FontAwesomeIcon icon={faMagnifyingGlass} size='xl' style={{color: "#fff"}}/>
                     </button>
                 </div>
