@@ -24,7 +24,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
     <div className={style.container}>
       <div className={style.cardItemWrapper}>
         {dataCardsCategories.map((el) => (
-          <Link to={`/carddetails/${el.id}`} key={el.id} className={style.cardItem}>
+          <Link to={`/carddetails/${el.id}`} key={el.id} className={`${style.cardItem} ${el.isDeleted ? style.hiddenItem : ''}`}>
             <Swiper 
               effect={'fade'} 
               navigation={true} 
@@ -44,7 +44,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
               ))}
             </Swiper>
             <div className={style.wrapperLocationRating}>
-              <span className={style.cardItemLocationName}>{el.locationName}</span>
+              <span className={style.cardItemLocationName}>{el.name}</span>
               <span className={style.cardItemRating}>
                 <FontAwesomeIcon 
                   icon={faStar} 
@@ -62,7 +62,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
                 month: "long",
               })}
             </div>
-            <span className={style.cardItemPrice}>&#8372; {el.price} ніч</span>
+            <span className={style.cardItemPrice}>$ {el.price} ніч</span>
           </Link>
         ))}
       </div>

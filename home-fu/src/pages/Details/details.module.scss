@@ -7,6 +7,10 @@ h1 {
     color: #2c3e50;
 }
 
+.swiper-slide {
+    border-radius: 16px;
+}
+
 .swiperMy {
     border-radius: 16px;
 }
@@ -48,11 +52,11 @@ h1 {
     max-height: 324px;
     max-width: 570px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     flex: 1;
 
     img {
         max-height: 324px;
+        min-height: 324px;
         max-width: 570px;
     }
 }
