@@ -26,6 +26,8 @@
 }
 
 .cardItemImage {
+  width: auto;
+  object-fit: cover;
   height: 300px;
   border-radius: 16px;
 }
