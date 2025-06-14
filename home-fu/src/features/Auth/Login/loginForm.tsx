@@ -12,6 +12,9 @@ import { UserLogin } from "../../../api/Auth/authLogin";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { login } from "../../../redux/Auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../../App";
 
 type UserValidate = {
     email: string;
@@ -19,6 +22,27 @@ type UserValidate = {
 }
 
 export const Login = () => {
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        try {
+          const result = await signInWithPopup(auth, googleProvider);
+          const firebaseUser = result.user;
+    
+          const userData = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+            photoURL: firebaseUser.photoURL,
+          };
+    
+          dispatch(login(userData));
+          navigate("/profile");
+        } catch (error) {
+          console.error("Ошибка авторизации:", error);
+        }
+      };
+
     const [isErrorMessage, setErrorMessage] = useState<string>('');
 
     const dispatch = useDispatch();
@@ -108,10 +132,9 @@ export const Login = () => {
                 <button onClick={() => dispatch(openRegisterForm())}>Registration</button>
             </div>
             <div className={style.socialButtons}>
-                    <button className={style.socialButton}>
+                    <button onClick={handleLogin} className={style.socialButton}>
                         <img className={style.socialIcon} src={google} alt="googleIcon"loading="lazy" />
                         <span>Sign In with Google</span>
-                        <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
 
                     <button className={style.socialButton}>
