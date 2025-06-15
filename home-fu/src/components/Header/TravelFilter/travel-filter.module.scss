@@ -65,7 +65,7 @@
 }
 
 .inputLabel {
-    @include text(550, 12px, #211E1A)
+    @include text(500, 12px, #211E1A)
 }
 
 .input {
@@ -118,19 +118,20 @@
 
 
 .scroledFilter {
-  display: flex;
-  align-items: center;
-  max-width: 500px;
-  padding: 5px 32px;
-  border-radius: 9999px;
-  position: absolute;
-  top: -80px;
-  left: 24%;
-  box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    padding: 5px 32px;
+    border-radius: 9999px;
+    position: absolute;
+    top: -80px;
+    left: 24%;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
+
+    @media (max-width:1020px) {
+      display: none;
+    }
     
-  @media (max-width:1020px) {
-    display: none;
-  }
 }
 
 .searchFilterContainer {

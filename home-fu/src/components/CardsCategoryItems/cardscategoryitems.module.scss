@@ -4,6 +4,10 @@
   padding: 0 15px;
 }
 
+.hiddenItem {
+  display: none;
+}
+
 .cardItemWrapper {
   width: 100%;
   display: grid;
@@ -26,6 +30,9 @@
 }
 
 .cardItemImage {
+  min-width: 100%;
+  width: auto;
+  object-fit: cover;
   height: 300px;
   border-radius: 16px;
 }
