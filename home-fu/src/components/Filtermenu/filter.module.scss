@@ -27,27 +27,36 @@
 
 .filterCard {
   background-color: #fff;
-  width: min(80vw, 600px);
-  max-height: 90vh;
-  border-radius: 12px;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-  transform: scale(0.95);
+  box-shadow: none;
+  transform: translateY(20px);
   opacity: 0;
   transition: 
     transform 0.3s ease-out,
     opacity 0.3s ease-out;
 
   .open & {
-    transform: scale(1);
+    transform: translateY(0);
     opacity: 1;
   }
 
   @media (min-width: 744px) {
+    width: min(80vw, 600px);
+    height: auto;
+    max-height: 90vh;
     border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+    transform: scale(0.95);
+    
+    .open & {
+      transform: scale(1);
+    }
   }
 }
 
@@ -55,20 +64,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 24px;
+  padding: 16px;
   border-bottom: 1px solid #ebebeb;
   position: relative;
+  
+  @media (min-width: 744px) {
+    padding: 20px 24px;
+  }
 }
 
 .title {
   @include text(600, 16px, #222);
   text-align: center;
   margin: 0;
+  
+  @media (min-width: 744px) {
+    font-size: 18px;
+  }
 }
 
 .closeButton {
   position: absolute;
-  left: 24px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -80,22 +97,34 @@
   &:hover {
     color: #000;
   }
+  
+  @media (min-width: 744px) {
+    left: 24px;
+  }
 }
 
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 0 24px;
-  max-height: 70vh;
-  overflow-x: hidden;
+  padding: 0 16px;
+  max-height: calc(100vh - 120px); 
+  
+  @media (min-width: 744px) {
+    padding: 0 24px;
+    max-height: 70vh;
+  }
 }
 
 .section {
-  padding: 24px 0;
+  padding: 16px 0;
   border-bottom: 1px solid #ebebeb;
 
   &:last-child {
     border-bottom: none;
+  }
+  
+  @media (min-width: 744px) {
+    padding: 24px 0;
   }
 }
 
@@ -104,16 +133,22 @@
 }
 
 .sectionTitle {
-  @include text(600, 18px, #222);
-  margin: 0 0 16px 0;
+  @include text(600, 16px, #222);
+  margin: 0 0 12px 0;
+  
+  @media (min-width: 744px) {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
 }
 
 .placeTypeButtons {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
+  
+  @media (min-width: 600px) {
+    flex-direction: row;
   }
 }
 
@@ -121,12 +156,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  padding: 12px 16px;
   border-top: 1px solid #ebebeb;
+  
+  @media (min-width: 744px) {
+    padding: 16px 24px;
+  }
 }
 
 .clearButton {
-  @include text(600, 16px, #222);
+  @include text(600, 14px, #222);
   text-decoration: underline;
   background: none;
   border: none;
@@ -137,19 +176,28 @@
   &:hover {
     opacity: 0.8;
   }
+  
+  @media (min-width: 744px) {
+    font-size: 16px;
+  }
 }
 
 .showResultsButton {
-  @include text(600, 16px, white);
+  @include text(600, 14px, white);
   background-color: #222;
   border: none;
   border-radius: 8px;
-  padding: 14px 24px;
+  padding: 12px 16px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
     background-color: #000;
     transform: scale(1.02);
+  }
+  
+  @media (min-width: 744px) {
+    font-size: 16px;
+    padding: 14px 24px;
   }
 }
