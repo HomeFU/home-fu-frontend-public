@@ -65,7 +65,7 @@ h1 {
         
         @media (max-width: 768px) {
             max-width: 100%;
-            min-height: auto;
+            min-height: 324px;
         }
     }
     
@@ -85,6 +85,10 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
+
+      @media (max-width: 768px) {
+      margin-top: 15px;
+  }
 
     .reserverBlock {
         padding: 4px 15px;
