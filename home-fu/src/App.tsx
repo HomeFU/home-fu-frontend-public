@@ -5,6 +5,8 @@ import { Details } from "./pages/Details/Details";
 import { Profile } from "./pages/Profile/Profile";
 import { AdminPanel } from "./pages/AdminPanel/mainAdminPage";
 import { NotFound } from "./pages/NotFound/NotFound";
+import { Owner } from "./pages/Owner/Owner";
+
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +15,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}></Route>
         <Route path="/carddetails/:id" element={<Details/>}></Route>
         <Route path="/admin-panel" element={<AdminPanel/>}></Route>
+        <Route path="/owner" element={<Owner/>}></Route>
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
     </BrowserRouter>
