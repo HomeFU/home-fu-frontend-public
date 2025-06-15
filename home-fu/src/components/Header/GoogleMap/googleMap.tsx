@@ -1,47 +1,55 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useCallback } from "react";
+import { GoogleMap as GoogleMapApi, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { CardDetailsModel } from "../../../types/DatailsCard/details";
+import { CardDetailsApi } from "../../../api/CardDetails/cardDetails";
 import styles from "./googleMap.module.scss";
 
 export const GoogleMap = () => {
-  const mapRef = useRef<HTMLDivElement>(null);
+  const { id } = useParams<{ id: string }>();
 
-  useEffect(() => {
-    const initMap = () => {
-      const mapElement = mapRef.current;
-      if (!mapElement) return;
+  const { data, isLoading } = useQuery<CardDetailsModel>({
+    queryKey: ["cardDetails", id],
+    queryFn: () => CardDetailsApi(id!),
+    enabled: !!id,
+  });
 
-      new window.google.maps.Map(mapElement, {
-        center: { lat: 50.4501, lng: 30.5234 },
-        zoom: 12,
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY!,
+    language: "uk",
+  });
+
+  const onLoad = useCallback((map: google.maps.Map) => {
+    if (data?.latitude && data?.longitude) {
+      const bounds = new window.google.maps.LatLngBounds({
+        lat: data.latitude,
+        lng: data.longitude,
       });
-    };
-    if (window.google?.maps) {
-      initMap();
-      return;
+      map.fitBounds(bounds);
     }
+  }, [data]);
 
-
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
-    script.async = true;
-    script.onload = initMap;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  if (!isLoaded || isLoading || !data?.latitude || !data?.longitude) {
+    return <p>Завантаження...</p>;
+  }
 
   return (
-    <div
-      id="google-map"
-      ref={mapRef}
-      className={styles.map}
-      style={{
-        margin: "0 auto",
-        maxWidth: "1200px",
-        height: "500px",
-      }}
-    />
+    <div className={styles.mapWrapper}>
+      <GoogleMapApi
+        mapContainerClassName={styles.map}
+        center={{ lat: data.latitude, lng: data.longitude }}
+        zoom={12}
+        options={{
+          minZoom: 1,
+          maxZoom: 12,
+        }}
+        onLoad={onLoad}
+      >
+        <Marker position={{ lat: data.latitude, lng: data.longitude }} />
+      </GoogleMapApi>
+    </div>
   );
 };

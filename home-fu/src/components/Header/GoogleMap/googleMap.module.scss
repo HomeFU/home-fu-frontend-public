@@ -1,27 +1,13 @@
-.mapContainer {
-  margin: 20px 0;
+.mapWrapper {
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .map {
-  box-sizing: border-box; // ← Чтобы padding и border не увеличивали размер
   width: 100%;
   height: 500px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 50px !important;
-}
-
-.toggleButton {
-  background: #ff5a5f;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  font-weight: 600;
-
-  &:hover {
-    background: #e04a50;
-  }
+  margin: 20px 0;
+  border-radius: 12px;  // можно убрать 
+  overflow: hidden;// можно убрать 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);// можно убрать 
 }

@@ -15,6 +15,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // @ts-ignore
 import 'swiper/css/pagination';
+import { GoogleMap } from "../../components/Header/GoogleMap/googleMap"
 
 export const Details = () => {
     const { id } = useParams<{ id: string }>();
@@ -236,6 +237,7 @@ export const Details = () => {
                         </>
                     }
                 </div>
+                 <div className={style.map}><GoogleMap/></div> 
                 <div className={style.divider}></div>
             </main>
          <FooterSite/>
