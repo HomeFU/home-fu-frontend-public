@@ -462,6 +462,12 @@ h1 {
        flex-direction: column;
        transition: all 0.2s ease;
        background: linear-gradient(to bottom right, #f8fafc, #f0f7ff);
+
+       &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
     }
 
     .commentItemHead {
@@ -491,6 +497,10 @@ h1 {
         display: flex;
         align-items: center;
         gap: 3px;
+        margin-bottom: 10px;
+    }
+
+    .blockComment {
         margin-bottom: 10px;
     }
 }

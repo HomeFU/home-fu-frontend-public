@@ -43,7 +43,8 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
     <div className={style.container}>
       <div className={style.cardItemWrapper}>
         {dataCardsCategories.map((el) => (
-           <Link to={`/carddetails/${el.id}`} key={el.id} className={`${style.cardItem} ${isUserAdmin !== "Admin" || !isAuthenticatedUser && el.isDeleted ? style.hiddenItem : ''}`}>
+          // ${isUserAdmin !== "Admin" || !isAuthenticatedUser && el.isDeleted ? style.hiddenItem : ''}
+           <Link to={`/carddetails/${el.id}`} key={el.id} className={`${style.cardItem}`}>
             <div className={`${el.isDeleted ? style.restoreBlock : ''}`} onClick={(e) => {
               e.preventDefault();
               restoreCard(el.id)}}

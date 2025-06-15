@@ -8,6 +8,7 @@ import { HeaderSite } from "../../components/Header/HeaderSite/headerSite"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { LoadingHight } from "../../components/LoadingHight/loadinghight"
+import NoUserPhoto from "../../assets/images/noPhotoUser.jpg";
 
 // @ts-ignore
 import 'swiper/css';
@@ -16,10 +17,21 @@ import 'swiper/css/navigation';
 // @ts-ignore
 import 'swiper/css/pagination';
 import { GoogleMap } from "../../components/Header/GoogleMap/googleMap"
+import { useFullInfoUser } from "../../hooks/useFullUserInfo"
+
+type UserData = {
+    profileImageUrl: string;
+};
 
 export const Details = () => {
     const { id } = useParams<{ id: string }>();
     
+    // const token = localStorage.getItem('token') as string;
+
+    // const {
+    //     data: fullInfoUserData = {} as UserData,
+    // } = useFullInfoUser(token);
+
     const {
         data,
         isLoading,
@@ -243,7 +255,13 @@ export const Details = () => {
                                 data?.reviews.map((el) => (
                                     <div className={style.commentItem}>
                                         <div className={style.commentItemHead}>
-                                            <div className={style.commentItemBlockImg}><img src={`https://homefu.azurewebsites.net${el.userProfileImageUrl}`} alt="userProfileImage" /></div>
+                                            <div className={style.commentItemBlockImg}>
+                                            {
+                                                el.userProfileImageUrl !== null
+                                                ?  <img className={style.userImage} loading="lazy" src={`https://homefu.azurewebsites.net${el.userProfileImageUrl}`} alt="userPhoto" /> 
+                                                : <img className={style.userImage} loading="lazy" src={NoUserPhoto} alt="userPhoto" />
+                                            }
+                                            </div>
                                             <div className={style.wrapperNameStar}>
                                                 <span>{el.userName}</span>
                                                 <span>
@@ -257,10 +275,10 @@ export const Details = () => {
                                         </div>
                                         <div className={style.wrapperCreatedAt}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-calendar _7QGNqa_metaIcon"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
-                                            <span>{el.createdAt}</span>
+                                            <span>{el.createdAt.split('T')[0]}</span>
                                         </div>
-                                        <div>{el.text}</div>
-                                        <div><span>Загальний рейтинг: {el.overallRating}</span></div>
+                                        <div className={style.blockComment}>{el.text}</div>
+                                        <div><span>Загальний рейтинг: {el.overallRating.toFixed(1)}</span></div>
                                     </div>
                                 ))
                             }
