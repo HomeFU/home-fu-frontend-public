@@ -11,8 +11,8 @@ import { openCloseMobileMenu } from "../../../redux/MobileMenu/menuSlice";
 import { MobileMenu } from "../../MobileMenu/menu";
 import { FilterBar } from "../../CategoryBar/FilterBar/filterbar";
 import { FilterButton } from "../../CategoryBar/FilterButton/filterbutton";
-import { SumButton } from "../../CategoryBar/SumButton/sumbutton";
 import { AnimalsModal } from ".././TravelFilter/Animals/animals";
+import {Search} from "..//..//CategoryBar/Search/search";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 import type { RootState } from "..//..//..//redux/store";
@@ -86,7 +86,7 @@ export const Header = () => {
                             <FilterBar/>
                             <div className={style.wrapperFilterSumButton}>
                                 <FilterButton/>
-                                <SumButton/>
+                                <Search/>
                             </div>
                         </div>
                     </div>

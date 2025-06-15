@@ -1,0 +1,57 @@
+@mixin text($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.searchWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    height: 47px;
+    border-radius: 26px;
+    border: 1px solid #bdbdbd;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    background: white;
+
+    &:focus-within {
+        border-color: rgb(52, 104, 194);
+        box-shadow: 0 0 0 2px rgba(52, 104, 194, 0.2);
+    }
+
+    .searchInput {
+        @include text(400, 14px, #2C2823);
+        flex-grow: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 0 10px;
+        
+        &::placeholder {
+            color: #bdbdbd;
+        }
+    }
+
+    .searchButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        color: rgb(52, 104, 194);
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
