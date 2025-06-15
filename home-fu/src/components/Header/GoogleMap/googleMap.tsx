@@ -33,7 +33,7 @@ export const GoogleMap = () => {
   }, [data]);
 
   if (!isLoaded || isLoading || !data?.latitude || !data?.longitude) {
-    return <p>Завантаження...</p>;
+    return;
   }
 
   return (
