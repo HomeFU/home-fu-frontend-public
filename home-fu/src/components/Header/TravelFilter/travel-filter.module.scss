@@ -127,6 +127,10 @@
     top: -80px;
     left: 24%;
     box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
+
+    @media (max-width:1020px) {
+      display: none;
+    }
     
 }
 

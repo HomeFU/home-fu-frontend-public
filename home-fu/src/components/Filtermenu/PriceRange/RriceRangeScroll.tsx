@@ -86,7 +86,7 @@ export const PriceRange = () => {
         <div className={style.priceInput}>
           <label>Мінімум</label>
           <div className={style.inputWrapper}>
-            <span className={style.currencySymbol}>₴</span>
+            <span className={style.currencySymbol}>$</span>
             <input
               type="text"
               value={minPrice}
@@ -98,7 +98,7 @@ export const PriceRange = () => {
         <div className={style.priceInput}>
           <label>Максимум</label>
           <div className={style.inputWrapper}>
-            <span className={style.currencySymbol}>₴</span>
+            <span className={style.currencySymbol}>$</span>
             <input
               type="text"
               value={maxPrice === 14000 ? "14000+" : maxPrice}
