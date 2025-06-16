@@ -91,6 +91,10 @@ export const Details = () => {
         enabled: !!id
     });
 
+    const center = {
+        lat: data?.latitude,
+        lang: data?.longitude
+    }
     return (
         <>
          <HeaderSite/>
