@@ -16,8 +16,13 @@ import { AnimalsModal } from ".././TravelFilter/Animals/animals";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 import type { RootState } from "..//..//..//redux/store";
+import { SearchParams } from "../../../types/SearchParams/searchParams";
 
-export const Header = () => {
+type HeaderProps = {
+    onSearch?: (params: SearchParams) => void;
+};
+
+export const Header = ({ onSearch }: HeaderProps) => {
 
     const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
 
@@ -74,7 +79,7 @@ export const Header = () => {
                             }
                         </button>
                         <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
-                            <TravelFilter/>
+                            <TravelFilter onSearch={onSearch}/>
                             <MapButton/>
                         </div>
                     </div>
