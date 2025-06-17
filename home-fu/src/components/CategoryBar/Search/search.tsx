@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./search.module.scss";
+import { setFilters } from ".//..//..//..//redux/SearchCardsCategory/searchCardsCategory";
 
 export const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const handleSearch = () => {
         if (!searchQuery.trim()) return;
         setIsLoading(true);
+        dispatch(setFilters({ SearchTerm: searchQuery }));
         console.log("Searching for:", searchQuery);
         setTimeout(() => {
             setIsLoading(false);

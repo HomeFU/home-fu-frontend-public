@@ -13,6 +13,7 @@ import { CardsList } from "../../components/CardsCategoryItems/cardscategoryitem
 import { LoadingHight } from "../../components/LoadingHight/loadinghight";
 import { SearchParams } from "../../types/SearchParams/searchParams";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
+import {useHightSearch} from "..//..//hooks/useHightSearch";
 
 export const Home = () => {
     const dispatch = useDispatch();
@@ -55,6 +56,12 @@ export const Home = () => {
 
     // 🔹 С фильтрами
     const {
+        data: filterCards = [],
+        isLoading: isLoadingFiltered,
+        isError: isErrorFiltered,
+    } = useFilterSearch(filterParams);
+
+        const {
         data: filterCards = [],
         isLoading: isLoadingFiltered,
         isError: isErrorFiltered,
