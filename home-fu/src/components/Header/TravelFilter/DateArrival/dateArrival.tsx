@@ -26,7 +26,8 @@ import type { RootState } from "..//..//..//..//redux/store";
 export function DateArrival() {
 
   const dispatch = useDispatch()
-  const selectedDate = useSelector((state: RootState) => state.arrival.selectedDate);
+  const selectedDateStr = useSelector((state: RootState) => state.arrival.selectedDate);
+  const selectedDate = selectedDateStr ? new Date(selectedDateStr + "T00:00:00") : null;  
   const isOpen = useSelector((state: RootState) => state.arrival.isOpen);
 
   const onCloseDateArrive = () => {
@@ -39,7 +40,8 @@ export function DateArrival() {
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
   const handleDateClick = (date: Date) => {
-    dispatch(setSelectedArrivalDate(date))
+    const formatted = format(date, "yyyy-MM-dd");
+    dispatch(setSelectedArrivalDate(formatted));
   }
 
   const renderCalendar = (month: Date) => {
