@@ -15,6 +15,7 @@ import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 import type { RootState } from "..//..//..//redux/store";
 import { SearchParams } from "../../../types/SearchParams/searchParams";
+import { Search } from "../../CategoryBar/Search/search";
 
 type HeaderProps = {
     onSearch?: (params: SearchParams) => void;
@@ -86,6 +87,7 @@ export const Header = ({ onSearch }: HeaderProps) => {
                     <div className={style.container}>
                         <div className= {style.categoryBar}>
                             <FilterBar/>
+                            <Search/>
                             <div className={style.wrapperFilterSumButton}>
                                 <FilterButton/>
                             </div>
