@@ -1,7 +1,6 @@
 import style from "./header.module.scss";
 import {RegisterButton} from "..//RegisterButton/registerbutton";
 import {TravelFilter} from "..//TravelFilter/travel-filter";
-import { MapButton } from "../ButtonMap/mapbutton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -75,7 +74,6 @@ export const Header = () => {
                         </button>
                         <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
                             <TravelFilter/>
-                            <MapButton/>
                         </div>
                     </div>
                 </div>
