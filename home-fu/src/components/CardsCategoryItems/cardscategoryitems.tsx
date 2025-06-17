@@ -37,14 +37,12 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
   });
 
   const isUserAdmin = localStorage.getItem("isAdminUser");
-  const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   return (
     <div className={style.container}>
       <div className={style.cardItemWrapper}>
         {dataCardsCategories.map((el) => (
-          // ${isUserAdmin !== "Admin" || !isAuthenticatedUser && el.isDeleted ? style.hiddenItem : ''}
-           <Link to={`/carddetails/${el.id}`} key={el.id} className={`${style.cardItem}`}>
+           <Link to={`/carddetails/${el.id}`} key={el.id} className={`${style.cardItem} ${isUserAdmin !== "Admin" && el.isDeleted ? style.hiddenItem : ''}`}>
             <div className={`${el.isDeleted ? style.restoreBlock : ''}`} onClick={(e) => {
               e.preventDefault();
               restoreCard(el.id)}}
