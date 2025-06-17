@@ -22,7 +22,7 @@
     }
 
     .searchInput {
-        @include text(400, 14px, #2C2823);
+        @include text(400, 16px, #2C2823);
         flex-grow: 1;
         border: none;
         outline: none;
