@@ -87,9 +87,10 @@ export const Header = ({ onSearch }: HeaderProps) => {
                     <div className={style.container}>
                         <div className= {style.categoryBar}>
                             <FilterBar/>
-                            <Search/>
+                            
                             <div className={style.wrapperFilterSumButton}>
                                 <FilterButton/>
+                                <Search/>
                             </div>
                         </div>
                     </div>
