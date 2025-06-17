@@ -28,6 +28,7 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
     const isOpenDepartureCalendar = useSelector((state: RootState) => state.departure.isOpen);
 
     const selectedDateDeparture = useSelector((state: RootState) => state.departure.selectedDate);
+    const selectedDateArival = useSelector((state: RootState) => state.arrival.selectedDate);
 
     useEffect(() => {
         const handlerScroll = () => {
@@ -48,6 +49,7 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
         if (selectedDateDeparture) {
             const filterPayload = {
                 CheckOutDate: selectedDateDeparture,
+                CheckInDate: selectedDateArival
             };
 
             dispatch(setFilters(filterPayload)); // сохранить в Redux
