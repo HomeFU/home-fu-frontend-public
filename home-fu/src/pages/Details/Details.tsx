@@ -255,7 +255,7 @@ export const Details = () => {
                                         </div>
                                         <div className={style.cardItem}>
                                             <div className={style.cardItemRating}>{data?.ratings.checkIn || "0"}</div>
-                                            <p>Регистрироваться</p>
+                                            <p>Прибуття</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.checkIn) > 0 &&
                                                     Array.from({ length: Number(data?.ratings.checkIn) }, (_, i) => (
