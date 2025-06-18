@@ -52,6 +52,24 @@
   text-align: center;
 }
 
+.error {
+  color: #f44336;
+  background-color: #ffebee;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.successMessage {
+  color: #4caf50;
+  background-color: #e8f5e9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
 .bookingForm {
   display: flex;
   flex-direction: column;
@@ -190,10 +208,28 @@
   cursor: not-allowed;
 }
 
+.calendar_day_booked {
+  background-color: #ffebee;
+  color: #f44336;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  
+  &:hover {
+    background-color: #ffebee;
+    color: #f44336;
+  }
+}
+
 .detailsSection {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.maxGuestsMessage {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
 }
 
 .guestsControls {

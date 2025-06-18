@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://homefu.azurewebsites.net/api'
+const API_BASE_URL = 'https://homefu.azurewebsites.net/api';
 
 export const ReservationService = {
- 
   createReservation: async (data: {
     checkInDate: string;
     checkOutDate: string;
@@ -22,10 +21,24 @@ export const ReservationService = {
       });
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Ошибка при создании бронирования');
+      throw new Error(error.response?.data?.message || 'Помилка при бронюванні');
     }
   },
 
+  checkAvailability: async (cardId: number, from?: string, to?: string) => {
+    try {
+      const params = new URLSearchParams();
+      if (from) params.append('from', from);
+      if (to) params.append('to', to);
+      
+      const response = await axios.get(
+        `${API_BASE_URL}/reservation/card/${cardId}/availability?${params.toString()}`
+      );
+      return response.data as Array<{checkIn: string, checkOut: string}>;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || 'Помилка при перевірці доступності');
+    }
+  },
 
   getUserReservations: async (token: string) => {
     try {
@@ -36,7 +49,7 @@ export const ReservationService = {
       });
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Ошибка при получении бронирований');
+      throw new Error(error.response?.data?.message || 'Помилка при отриманні бронювань');
     }
   },
 
@@ -58,7 +71,7 @@ export const ReservationService = {
       });
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Ошибка при обновлении бронирования');
+      throw new Error(error.response?.data?.message || 'Помилка при оновленні бронювання');
     }
   },
 
@@ -71,7 +84,7 @@ export const ReservationService = {
       });
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Ошибка при отмене бронирования');
+      throw new Error(error.response?.data?.message || 'Помилка при скасуванні бронювання');
     }
   },
 
@@ -84,7 +97,7 @@ export const ReservationService = {
       });
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Ошибка при удалении бронирования');
+      throw new Error(error.response?.data?.message || 'Помилка при видаленні бронювання');
     }
   }
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./bookHome.module.scss";
 import { ReservationService } from "..//..//api/reservationService/reservationService";
 import {
@@ -15,6 +15,7 @@ import {
   isToday,
   isBefore,
   isAfter,
+  parseISO,
 } from "date-fns";
 import { uk } from "date-fns/locale";
 
@@ -23,6 +24,11 @@ type BookHomeModalProps = {
   onClose: () => void;
   maxGuests: number;
   cardId: number;
+};
+
+type BookedPeriod = {
+  checkIn: string;
+  checkOut: string;
 };
 
 export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeModalProps) => {
@@ -37,6 +43,39 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [bookedPeriods, setBookedPeriods] = useState<BookedPeriod[]>([]);
+
+  useEffect(() => {
+    const today = new Date();
+    const sixMonthsLater = new Date();
+    sixMonthsLater.setMonth(today.getMonth() + 6);
+    
+    const loadAvailability = async () => {
+      try {
+        const fromDate = format(today, 'yyyy-MM-dd');
+        const toDate = format(sixMonthsLater, 'yyyy-MM-dd');
+        
+        const periods = await ReservationService.checkAvailability(
+          cardId, 
+          fromDate, 
+          toDate
+        );
+        setBookedPeriods(periods);
+      } catch (error) {
+        console.error("Помилка при загрузці доступних дат:", error);
+      }
+    };
+    
+    loadAvailability();
+  }, [cardId]);
+
+  const isDateBooked = (day: Date) => {
+    return bookedPeriods.some(period => {
+      const checkIn = parseISO(period.checkIn);
+      const checkOut = parseISO(period.checkOut);
+      return day >= checkIn && day <= checkOut;
+    });
+  };
 
   const handleAdultsChange = (increment: boolean) => {
     if (increment) {
@@ -69,18 +108,37 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   };
 
   const handleDateClick = (day: Date) => {
+    if (isDateBooked(day)) {
+      setError("Ці дати вже заброньовані");
+      return;
+    }
+
     if ((startDate && endDate) || (startDate && isBefore(day, startDate))) {
       setStartDate(day);
       setEndDate(null);
       setTotalPrice(0);
       return;
     }
+
     if (!startDate || isSameDay(day, startDate)) {
       setStartDate(day);
       setEndDate(null);
       setTotalPrice(0);
       return;
     }
+
+    const daysInRange = eachDayOfInterval({
+      start: startDate,
+      end: day
+    });
+
+    const hasBookedDates = daysInRange.some(d => isDateBooked(d));
+    
+    if (hasBookedDates) {
+      setError("У вибраному діапазоні є заброньовані дати");
+      return;
+    }
+
     setEndDate(day);
     if (startDate) {
       const daysCount = Math.ceil(
@@ -119,6 +177,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
               ? (isAfter(day, startDate) && isBefore(day, endDate)) 
               : false;
             const isPast = isBefore(day, new Date()) && !isToday(day);
+            const isBooked = isDateBooked(day);
 
             let dayClasses = style.calendar_day;
             if (!isCurrentMonth) dayClasses += ` ${style.calendar_day_other_month}`;
@@ -127,13 +186,14 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
             if (isSelected) dayClasses += ` ${style.calendar_day_selected}`;
             if (isToday(day)) dayClasses += ` ${style.calendar_day_today}`;
             if (isPast) dayClasses += ` ${style.calendar_day_past}`;
+            if (isBooked) dayClasses += ` ${style.calendar_day_booked}`;
 
             return (
               <button
                 key={i}
                 type="button"
                 onClick={() => handleDateClick(day)}
-                disabled={isPast}
+                disabled={isPast || isBooked}
                 className={dayClasses}
               >
                 {format(day, "d")}
@@ -179,7 +239,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
 
       await ReservationService.createReservation(bookingData, token);
       setIsSuccess(true);
-      setTimeout(onClose, 5000);
+      setTimeout(onClose, 3000);
     } catch (err: any) {
       console.error("Помилка бронювання:", err);
       setError(err.message || "Помилка при бронюванні. Спробуйте ще раз.");
@@ -205,6 +265,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
         <h2 className={style.modalTitle}>Бронювання помешкання</h2>
         
         {error && <div className={style.error}>{error}</div>}
+        {isSuccess && <div className={style.successMessage}>Успішно заброньовано!</div>}
 
         <form onSubmit={handleSubmit} className={style.bookingForm}>
           <div className={style.calendarSection}>
@@ -363,11 +424,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
             </div>
           </div>
 
-          {isSuccess ? (
-            <div className={style.successMessage}>
-              Успішно заброньовано!
-            </div>
-          ) : (
+          {!isSuccess && (
             <button 
               type="submit" 
               className={style.submitButton}
