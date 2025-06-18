@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'https://homefu.azurewebsites.net/api'
 
 export const ReservationService = {
-  // Создать бронирование
+ 
   createReservation: async (data: {
     checkInDate: string;
     checkOutDate: string;
@@ -26,7 +26,7 @@ export const ReservationService = {
     }
   },
 
-  // Получить бронирования пользователя
+
   getUserReservations: async (token: string) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/reservation/user`, {
@@ -40,7 +40,6 @@ export const ReservationService = {
     }
   },
 
-  // Обновить бронирование
   updateReservation: async (id: number, data: Partial<{
     checkInDate: string;
     checkOutDate: string;
@@ -63,7 +62,6 @@ export const ReservationService = {
     }
   },
 
-  // Отменить бронирование
   cancelReservation: async (id: number, token: string) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/reservation/${id}/cancel`, {}, {
@@ -77,7 +75,6 @@ export const ReservationService = {
     }
   },
 
-  // Удалить бронирование (только для админа)
   deleteReservation: async (id: number, token: string) => {
     try {
       const response = await axios.delete(`${API_BASE_URL}/reservation/${id}`, {

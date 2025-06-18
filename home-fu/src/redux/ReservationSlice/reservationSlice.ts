@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ReservationService } from '..//..//api/reservationService/reservationService'; // поправь путь
+import { ReservationService } from '..//..//api/reservationService/reservationService';
 import type { RootState } from '../../redux/store';
 
 interface Reservation {
@@ -25,7 +25,6 @@ const initialState: ReservationState = {
   error: null,
 };
 
-// Thunk для создания бронирования
 export const createReservation = createAsyncThunk<
   Reservation,
   { data: Omit<Reservation, 'id'>; token: string },
@@ -42,7 +41,6 @@ export const createReservation = createAsyncThunk<
   }
 );
 
-// Thunk для получения бронирований пользователя
 export const fetchUserReservations = createAsyncThunk<
   Reservation[],
   string,
@@ -65,7 +63,6 @@ const reservationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Создание бронирования
       .addCase(createReservation.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -78,7 +75,6 @@ const reservationSlice = createSlice({
         state.loading = false;
         state.error = action.payload || 'Ошибка';
       })
-      // Получение бронирований
       .addCase(fetchUserReservations.pending, (state) => {
         state.loading = true;
         state.error = null;
