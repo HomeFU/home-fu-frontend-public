@@ -1,76 +1,59 @@
-import { useState, FormEvent, ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import styles from './search.module.scss';
-import { setFilters } from '..//..//..//redux/SearchCardsCategory/searchCardsCategory';
-import { SearchHight } from '..//..//..//types/SearchHight/searchHight';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import styles from "./search.module.scss";
+import { setFilters } from ".//..//..//..//redux/SearchCardsCategory/searchCardsCategory";
 
 export const Search = () => {
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        const trimmedQuery = searchQuery.trim();
-        if (!trimmedQuery) return;
-
-        const searchParams: Partial<SearchHight> = {
-            SearchTerm: trimmedQuery,
-            CheckInDate: undefined,
-            CheckOutDate: undefined,
-            Adults: undefined,
-            Children: undefined,
-            LocationId: undefined
-        };
-
-        dispatch(setFilters(searchParams));
+    const handleSearch = () => {
+        if (!searchQuery.trim()) return;
+        setIsLoading(true);
+        dispatch(setFilters({ SearchTerm: searchQuery }));
+        console.log("Searching for:", searchQuery);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
     };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(e.target.value);
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.searchWrapper}>
+        <div className={styles.searchWrapper}>
             <input
                 type="text"
                 className={styles.searchInput}
                 placeholder="Пошук..."
                 value={searchQuery}
-                onChange={handleChange}
-                aria-label="Пошук"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
+            
             <button 
-                type="submit" 
-                className={styles.searchButton}
-                aria-label="Виконати пошук"
+                className={styles.searchButton} 
+                onClick={handleSearch}
+                disabled={isLoading}
             >
-                <SearchIcon />
+                {isLoading ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" opacity="0.25"/>
+                        <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="4">
+                            <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+                        </path>
+                    </svg>
+                ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                )}
             </button>
-        </form>
+        </div>
     );
 };
-
-const SearchIcon = () => (
-    <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 24 24" 
-        fill="none"
-        aria-hidden="true"
-    >
-        <circle 
-            cx="11" 
-            cy="11" 
-            r="8" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-        />
-        <line 
-            x1="21" 
-            y1="21" 
-            x2="16.65" 
-            y2="16.65" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-        />
-    </svg>
-);
