@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { setSelectedCategori } from "../../redux/CategoryFilter/CategorySlice/categorySlice";
 import { useSearchParams } from "react-router-dom";
 import style from "./home.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NoResultsCategories } from "../../components/NoCategoriesResults/noCategoriesResults";
 import { useQuery } from "@tanstack/react-query";
 import { CardsCategoriesModel } from "../../types/Categories/cardsCategories";
@@ -13,11 +13,13 @@ import { CardsList } from "../../components/CardsCategoryItems/cardscategoryitem
 import { LoadingHight } from "../../components/LoadingHight/loadinghight";
 import { SearchParams } from "../../types/SearchParams/searchParams";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
-import {useHightSearch} from "..//..//hooks/useHightSearch";
+import { useHightSearch } from "../../hooks/useHightSearch";
+import { RootState } from "../../redux/store";
 
 export const Home = () => {
     const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
+    const searchTerm = useSelector((state: RootState) => state.search.SearchTerm);
 
     const categoryParam = searchParams.get("category");
     const categoryIdFromUrl = categoryParam ? parseInt(categoryParam) : undefined;
@@ -51,21 +53,22 @@ export const Home = () => {
     } = useQuery<CardsCategoriesModel[]>({
         queryKey: ['cardsCategories', categoryIdFromUrl ?? 'default'],
         queryFn: () => CardsCategories(categoryIdFromUrl ?? 1),
-        enabled: !filterParams,
+        enabled: !filterParams && !searchTerm, // Не выполняем, если есть поиск или фильтры
     });
 
-    // 🔹 С фильтрами
+    // 🔹 С фильтрами (даты, гости и т.д.)
     const {
         data: filterCards = [],
         isLoading: isLoadingFiltered,
         isError: isErrorFiltered,
     } = useFilterSearch(filterParams);
 
-        const {
-        data: filterCards = [],
-        isLoading: isLoadingFiltered,
-        isError: isErrorFiltered,
-    } = useFilterSearch(filterParams);
+    // 🔹 С поиском по тексту (SearchTerm)
+const { 
+    data: searchResults = [], 
+    isLoading: isSearchLoading 
+} = useHightSearch(searchTerm ? { SearchTerm: searchTerm } : null);
+
 
     // 🔹 Установка категории в Redux
     useEffect(() => {
@@ -93,9 +96,20 @@ export const Home = () => {
         setSearchParams(queryParams);
     };
 
-    const isLoading = filterParams ? isLoadingFiltered : isLoadingDefault;
-    const isError = filterParams ? isErrorFiltered : isErrorDefault;
-    const data = filterParams ? filterCards : dataCardsCategories;
+    // 🔹 Определяем, какие данные показывать
+    const getDataToRender = () => {
+        if (searchTerm) {
+            return searchResults; // Приоритет у поиска
+        }
+        if (filterParams) {
+            return filterCards; // Затем фильтры
+        }
+        return dataCardsCategories; // Иначе базовые данные
+    };
+
+    const isLoading = isSearchLoading || isLoadingFiltered || isLoadingDefault;
+    const isError =   isErrorFiltered || isErrorDefault;
+    const data = getDataToRender();
 
     return (
         <>

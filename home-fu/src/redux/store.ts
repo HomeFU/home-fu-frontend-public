@@ -19,6 +19,7 @@ import adminCategoryEditReducer from "./AdminPanel/adminCategoryEdit";
 import cardFormAddReducer from "../redux/AdminPanel/adminCardAdd";
 import cardFormUpdateReducer from "../redux/AdminPanel/adminCardUpdate";
 import filtersReducer from "./CardsCategoryFilter/filterSlice";
+import searchReducer from './SearchCardsCategory/searchCardsCategory';
 
 export const store = configureStore({
     reducer:{
@@ -42,6 +43,7 @@ export const store = configureStore({
         cardFormAdd: cardFormAddReducer,
         cardFormUpdate : cardFormUpdateReducer,
         filters: filtersReducer,
+        search: searchReducer,
     }
 })
 export type RootState = ReturnType<typeof store.getState>
