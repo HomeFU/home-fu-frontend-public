@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./bookHome.module.scss";
+import { ReservationService } from "..//..//api/reservationService/reservationService";
 import {
   addMonths,
   subMonths,
@@ -20,10 +21,11 @@ import { uk } from "date-fns/locale";
 type BookHomeModalProps = {
   price: number;
   onClose: () => void;
-  maxGuests: number;    
+  maxGuests: number;
+  cardId: number;
 };
 
-export const BookHomeModal = ({ price, onClose, maxGuests }: BookHomeModalProps) => {
+export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeModalProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -32,6 +34,8 @@ export const BookHomeModal = ({ price, onClose, maxGuests }: BookHomeModalProps)
   const [infants, setInfants] = useState(0);
   const [hasPet, setHasPet] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAdultsChange = (increment: boolean) => {
     if (increment) {
@@ -149,25 +153,40 @@ export const BookHomeModal = ({ price, onClose, maxGuests }: BookHomeModalProps)
 
   const nextMonth = addMonths(currentMonth, 1);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!startDate || !endDate) {
       alert("Будь ласка, оберіть період бронювання");
       return;
     }
-    
-    const bookingData = {
-      startDate: format(startDate, 'yyyy-MM-dd'),
-      endDate: format(endDate, 'yyyy-MM-dd'),
-      adults,
-      children,
-      infants,
-      hasPet,
-      totalPrice,
-    };
-    
-    console.log("Дані бронювання:", bookingData);
-    alert(`Бронювання з ${format(startDate, 'dd.MM.yyyy')} по ${format(endDate, 'dd.MM.yyyy')} для ${adults} дорослих, ${children} дітей, ${infants} немовлят${hasPet ? ', з твариною' : ''}. Загальна сума: ${totalPrice} грн`);
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const token = localStorage.getItem('token') || '';
+      const bookingData = {
+        checkInDate: format(startDate, 'yyyy-MM-dd'),
+        checkOutDate: format(endDate, 'yyyy-MM-dd'),
+        adults,
+        children,
+        infants,
+        pets: hasPet ? 1 : 0,
+        cardId
+      };
+
+      console.log("Отправка данных бронирования:", bookingData);
+      const response = await ReservationService.createReservation(bookingData, token);
+      console.log("Ответ сервера:", response);
+
+      alert(`Бронювання успішно створено!`);
+      onClose();
+    } catch (err: any) {
+      console.error("Ошибка бронирования:", err);
+      setError(err.message || "Помилка при бронюванні");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -182,6 +201,8 @@ export const BookHomeModal = ({ price, onClose, maxGuests }: BookHomeModalProps)
         
         <h2 className={style.modalTitle}>Бронювання помешкання</h2>
         
+        {error && <div className={style.error}>{error}</div>}
+
         <form onSubmit={handleSubmit} className={style.bookingForm}>
           <div className={style.calendarSection}>
             <h3>Оберіть період:</h3>
@@ -342,9 +363,9 @@ export const BookHomeModal = ({ price, onClose, maxGuests }: BookHomeModalProps)
           <button 
             type="submit" 
             className={style.submitButton}
-            disabled={!startDate || !endDate}
+            disabled={!startDate || !endDate || isLoading}
           >
-            Підтвердити бронювання
+            {isLoading ? 'Відправка...' : 'Підтвердити бронювання'}
           </button>
         </form>
       </div>

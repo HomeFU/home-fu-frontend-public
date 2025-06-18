@@ -12,6 +12,8 @@ import { LoadingHight } from "../../components/LoadingHight/loadinghight"
 import NoUserPhoto from "../../assets/images/noPhotoUser.jpg";
 import {useState} from "react";
 import { BookHomeModal } from "..//..//components/BookHome/bookHome";
+import { createReservation } from "../../redux/ReservationSlice/reservationSlice";
+
 
 // @ts-ignore
 import 'swiper/css';
@@ -402,9 +404,10 @@ export const Details = () => {
                                     price={data.card.price} 
                                     onClose={() => setIsBookingModalOpen(false)} 
                                     maxGuests={data.numberOfGuests}
+                                     cardId={data.card.id}
                                   />
                                 )}
-                                <div>
+                                <div>   
                                         
                                 </div>
                             </div>

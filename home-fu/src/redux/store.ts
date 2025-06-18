@@ -18,6 +18,8 @@ import adminCategoryAddReducer from "./AdminPanel/adminCategoryAdd";
 import adminCategoryEditReducer from "./AdminPanel/adminCategoryEdit";
 import cardFormAddReducer from "../redux/AdminPanel/adminCardAdd";
 import cardFormUpdateReducer from "../redux/AdminPanel/adminCardUpdate";
+import reservationReducer from '..//redux/ReservationSlice/reservationSlice'; 
+
 
 
 export const store = configureStore({
@@ -40,7 +42,8 @@ export const store = configureStore({
         categoryPanel: adminCategoryAddReducer,
         categoryPanelEdit: adminCategoryEditReducer,
         cardFormAdd: cardFormAddReducer,
-        cardFormUpdate : cardFormUpdateReducer
+        cardFormUpdate : cardFormUpdateReducer,
+         reservation: reservationReducer,
        
     }
 })
