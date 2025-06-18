@@ -6,7 +6,6 @@ import facebookIcon from '../../../assets/icons/facebookIcon.svg';
 import { Link } from "react-router-dom";
 import { Locations } from "../../../api/Locations/locations";
 import { LocationModel } from "../../../types/Locations/locations";
-import { GoogleMap } from "../../Header/GoogleMap/googleMap";
 
 export const FooterMain = () => {
     const [activeTab, setActiveTab] = useState<string>("Популярні")
@@ -168,7 +167,7 @@ export const FooterMain = () => {
         <>
         <footer className={style.footer}>
             <div className={style.wrapper}>
-                <GoogleMap/>
+              
                 <h2 className={style.footerTitle}>Ідеї для майбутніх поїздок</h2>
                 <div className={style.wrapperButtons}>
                     {

@@ -4,6 +4,15 @@ type Amenities = {
   imageUrl: string,
 }
 
+type Reviews = {
+  id: number
+  text: string
+  createdAt: string
+  userName: string,
+  userProfileImageUrl: string,
+  overallRating: number
+}
+
 export type CardDetailsModel = {
     id: number;
     numberOfGuests: number;
@@ -38,5 +47,6 @@ export type CardDetailsModel = {
       imageUrls: string[];
       categoryIds: string[];
     };
+    reviews: Reviews[];
   }
   

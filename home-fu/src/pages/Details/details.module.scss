@@ -7,15 +7,23 @@ h1 {
     color: #2c3e50;
 }
 
+.css-1dimb5e-singleValue {
+    overflow: unset !important;
+}
+
+.swiper-slide {
+    border-radius: 16px;
+}
+
 .swiperMy {
     border-radius: 16px;
 }
 
-.main{
+.main {
     padding-top: 35px;
     background: linear-gradient(to bottom right, #f0f7ff, #ffffff);
     
-    @media (max-width:1024px) {
+    @media (max-width: 1024px) {
         padding-top: 0;
     }
 }
@@ -35,6 +43,10 @@ h1 {
     display: flex;
     justify-content: space-between;
     gap: 30px;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 .wrapperFerstSecondSection {
@@ -48,12 +60,21 @@ h1 {
     max-height: 324px;
     max-width: 570px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     flex: 1;
 
     img {
         max-height: 324px;
+        min-height: 324px;
         max-width: 570px;
+        
+        @media (max-width: 768px) {
+            max-width: 100%;
+            min-height: 324px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        max-width: 100%;
     }
 }
 
@@ -68,6 +89,10 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
+
+      @media (max-width: 768px) {
+      margin-top: 15px;
+  }
 
     .reserverBlock {
         padding: 4px 15px;
@@ -86,12 +111,23 @@ h1 {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 
     .reserverBlockButtons {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
     }
 
     .wrapperNameRating {
@@ -105,6 +141,10 @@ h1 {
         font-weight: 700;
         color: #1a365d;
         margin-top: 0;
+        
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
     }
 
     .wrapperStarRating,
@@ -118,6 +158,10 @@ h1 {
         display: flex;
         align-items: start;
         gap: 15px;
+        
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
+        }
 
         button {
             display: flex;
@@ -135,6 +179,11 @@ h1 {
                 background-color: rgba(59, 130, 246, 0.1);
                 border-color: rgba(59, 130, 246, 0.4);
             }
+            
+            @media (max-width: 768px) {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
         }
     }
 
@@ -142,6 +191,12 @@ h1 {
         display: flex;
         align-items: center;
         gap: 50px;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
     }
 
     .rating {
@@ -171,8 +226,15 @@ h1 {
     padding: 20px;
     color: white;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        text-align: center;
+    }
 
-    .hostImg{
+    .hostImg {
         height: 100px;
         width: 100px;
         overflow: hidden;
@@ -204,6 +266,10 @@ h1 {
             padding: 5px;
             border-radius: 20px;
             color: white;
+            
+            @media (max-width: 768px) {
+                justify-content: center;
+            }
         }
     }
 }
@@ -222,11 +288,6 @@ h1 {
         display: flex;
         align-items: center;
         gap: 10px;
-
-        img {
-            width: 30px;
-            height: 30px;
-        }
     }
 
     .descriptionTitle {
@@ -234,6 +295,10 @@ h1 {
         font-weight: 700;
         font-size: 30px;
         margin-top: 0;
+        
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
     }
 
     .description {
@@ -261,6 +326,10 @@ h1 {
             font-weight: 700;
             font-size: 30px;
             margin-top: 0;
+            
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
         }
 
         img {
@@ -273,6 +342,10 @@ h1 {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1rem;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
     }
 
     .premiumApartamentAmenitiesCard {
@@ -314,6 +387,12 @@ h1 {
         display: flex;
         align-items: center;
         gap: 50px;
+        
+        @media (max-width: 1024px) {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
     }
 
     .wrapperAnyDataGredItem {
@@ -341,6 +420,10 @@ h1 {
             font-size: 20px;
             font-weight: 550;
         }
+        
+        @media (max-width: 768px) {
+            width: 100%;
+        }
     }
 }
 
@@ -362,6 +445,10 @@ h1 {
             color: #2563eb;
             font-size: 30px;
             margin-top: 0;
+            
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
         }
 
         img {
@@ -373,18 +460,26 @@ h1 {
     .gridUserRating {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-       row-gap: 40px;
-       column-gap: 30px;
+        row-gap: 40px;
+        column-gap: 30px;
+        
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
 
         .cardItem {
             padding: 30px;
             border: 1px solid rgba(59, 130, 246, 0.1);
             border-radius: 15px;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           transition: all 0.2s ease;
-           background: linear-gradient(to bottom right, #f8fafc, #f0f7ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.2s ease;
+            background: linear-gradient(to bottom right, #f8fafc, #f0f7ff);
            
             &:hover {
                 transform: translateY(-3px);
@@ -417,5 +512,253 @@ h1 {
     }
 }
 
+@media (max-width: 768px) {
+    h1 {
+        margin-top: 30px;
+        font-size: 28px;
+    }
+    
+    .mainDetail {
+        top: 60px;
+    }
+    
+    .divider {
+        margin-top: 30px;
+    }
+    
+    .mainWrapper {
+        padding-top: 20px;
+    }
+    
+    .firstBlock,
+    .hostBlock,
+    .mainDescriptionBlock,
+    .premiumApartament,
+    .wrapperAnyData,
+    .clientStarBlock {
+        padding: 15px;
+    }
+}
 
-  
+.commentGuest {
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    margin-top: 30px;
+
+    .wrapperCommentGuestHead {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h3 {
+            font-weight: 600;
+            color: #2563eb;
+            font-size: 30px;
+            margin-top: 0;
+            
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
+        }
+
+        img {
+            height: 30px;
+            width: 30px;
+            
+            @media (max-width: 768px) {
+                height: 24px;
+                width: 24px;
+            }
+        }
+    }
+
+    .wrapperCommentGuest {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 40px;
+        column-gap: 30px;
+        
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+            row-gap: 20px;
+        }
+    }
+
+    .commentItem {
+        padding: 20px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.2s ease;
+        background: linear-gradient(to bottom right, #f8fafc, #f0f7ff);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            padding: 15px;
+        }
+    }
+
+    .commentItemHead {
+        display: flex;
+        gap: 15px;
+        
+        @media (max-width: 480px) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    .commentItemBlockImg {
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        border-radius: 50%;
+        padding: 2px;
+        background-color: #fff;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        
+        @media (max-width: 768px) {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .wrapperNameStar {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        
+        @media (max-width: 480px) {
+            align-items: center;
+        }
+    }
+
+    .wrapperCreatedAt {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #64748b;
+        
+        @media (max-width: 480px) {
+            justify-content: center;
+        }
+    }
+
+    .blockComment {
+        margin-bottom: 10px;
+        color: #334155;
+        line-height: 1.5;
+        
+        @media (max-width: 768px) {
+            font-size: 15px;
+        }
+    }
+}
+
+.createCommentBlock {
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    margin-top: 30px;
+
+    .title {
+        font-weight: 600;
+        color: #2563eb;
+        font-size: 30px;
+        margin-top: 0;
+        margin-bottom: 20px;
+        
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .textarea {
+        margin-top: 15px;
+        resize: none;
+        height: 100px;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s ease;
+        width: 100%;
+      
+        &:focus {
+          border-color: #457b9d;
+        }
+        
+        @media (max-width: 768px) {
+            height: 120px;
+            padding: 10px;
+        }
+    }
+     
+    .button {
+        align-self: flex-end;
+        background-color: #1d3557;
+        color: white;
+        padding: 10px 20px;
+        font-size: 15px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+      
+        &:hover {
+          background-color: #457b9d;
+        }
+        
+        @media (max-width: 480px) {
+            width: 100%;
+            padding: 12px;
+        }
+    }
+    
+    .ratingWrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        
+        @media (max-width: 480px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        label {
+            font-weight: 500;
+            color: #334155;
+        }
+    }
+}
