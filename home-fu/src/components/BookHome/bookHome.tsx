@@ -36,6 +36,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleAdultsChange = (increment: boolean) => {
     if (increment) {
@@ -130,6 +131,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
             return (
               <button
                 key={i}
+                type="button"
                 onClick={() => handleDateClick(day)}
                 disabled={isPast}
                 className={dayClasses}
@@ -156,7 +158,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!startDate || !endDate) {
-      alert("Будь ласка, оберіть період бронювання");
+      setError("Будь ласка, оберіть період бронювання");
       return;
     }
 
@@ -175,15 +177,12 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
         cardId
       };
 
-      console.log("Отправка данных бронирования:", bookingData);
-      const response = await ReservationService.createReservation(bookingData, token);
-      console.log("Ответ сервера:", response);
-
-      alert(`Бронювання успішно створено!`);
-      onClose();
+      await ReservationService.createReservation(bookingData, token);
+      setIsSuccess(true);
+      setTimeout(onClose, 5000);
     } catch (err: any) {
-      console.error("Ошибка бронирования:", err);
-      setError(err.message || "Помилка при бронюванні");
+      console.error("Помилка бронювання:", err);
+      setError(err.message || "Помилка при бронюванні. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -192,7 +191,11 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   return (
     <div className={style.modalOverlay} onClick={onClose}>
       <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={style.closeButton} onClick={onClose}>
+        <button 
+          type="button" 
+          className={style.closeButton} 
+          onClick={onClose}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -360,13 +363,19 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
             </div>
           </div>
 
-          <button 
-            type="submit" 
-            className={style.submitButton}
-            disabled={!startDate || !endDate || isLoading}
-          >
-            {isLoading ? 'Відправка...' : 'Підтвердити бронювання'}
-          </button>
+          {isSuccess ? (
+            <div className={style.successMessage}>
+              Успішно заброньовано!
+            </div>
+          ) : (
+            <button 
+              type="submit" 
+              className={style.submitButton}
+              disabled={!startDate || !endDate || isLoading}
+            >
+              {isLoading ? 'Відправка...' : 'Підтвердити бронювання'}
+            </button>
+          )}
         </form>
       </div>
     </div>
