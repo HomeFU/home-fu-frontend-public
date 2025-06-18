@@ -401,10 +401,11 @@ export const Details = () => {
                                   <BookHomeModal 
                                     price={data.card.price} 
                                     onClose={() => setIsBookingModalOpen(false)} 
+                                    maxGuests={data.numberOfGuests}
                                   />
                                 )}
                                 <div>
-                                    
+                                        
                                 </div>
                             </div>
                         </>
