@@ -1,18 +1,36 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import styles from "./search.module.scss";
-import { setFilters } from ".//..//..//..//redux/SearchCardsCategory/searchCardsCategory";
+import { setFilters } from "..//..//..//redux/SearchCardsCategory/searchCardsCategory";
 
 export const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [_, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
 
     const handleSearch = () => {
-        if (!searchQuery.trim()) return;
+        const query = searchQuery.trim();
+        if (!query) return;
+        
         setIsLoading(true);
-        dispatch(setFilters({ SearchTerm: searchQuery }));
-        console.log("Searching for:", searchQuery);
+        
+        // 1. Отправляем в Redux (как было)
+        dispatch(setFilters({ SearchTerm: query }));
+        console.log("Searching for:", query);
+
+        // 2. Обновляем URL с закодированным параметром
+        const encodedQuery = encodeURIComponent(query);
+        setSearchParams({ SearchTerm: encodedQuery });
+
+        // 3. Принудительное обновление URL для браузера
+        window.history.replaceState(
+            null,
+            '',
+            `?SearchTerm=${encodedQuery}`
+        );
+
         setTimeout(() => {
             setIsLoading(false);
         }, 1000);
