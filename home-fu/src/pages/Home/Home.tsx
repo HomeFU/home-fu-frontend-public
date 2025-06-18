@@ -32,6 +32,7 @@ export const Home = () => {
             Adults: urlParams.Adults ? Number(urlParams.Adults) : undefined,
             Children: urlParams.Children ? Number(urlParams.Children) : undefined,
             LocationId: urlParams.LocationId ? Number(urlParams.LocationId) : undefined,
+            SearchTerm: urlParams.SearchTerm || undefined,
         };
 
         const hasAnyFilter = Object.values(extractedParams).some(v => v !== undefined);
@@ -67,7 +68,6 @@ export const Home = () => {
         }
     }, [categoryIdFromUrl, dispatch]);
 
-    // 🔹 Поиск — обновление фильтра и URL
     const handleApplyFilter = (params: SearchParams) => {
         setFilterParams(params);
 
@@ -82,6 +82,7 @@ export const Home = () => {
         if (params.Adults !== undefined) queryParams.Adults = params.Adults.toString();
         if (params.Children !== undefined) queryParams.Children = params.Children.toString();
         if (params.LocationId !== undefined) queryParams.LocationId = params.LocationId.toString();
+        if (params.SearchTerm) queryParams.SearchTerm = params.SearchTerm;
 
         setSearchParams(queryParams);
     };

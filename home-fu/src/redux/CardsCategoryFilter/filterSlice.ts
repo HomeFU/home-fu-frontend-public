@@ -8,6 +8,7 @@ type FilterState = {
   Adults?: number | null;
   Children?: number | null;
   LocationId?: number | null;
+  SearchTerm?:string | null;
 }
 
 const initialState: FilterState = {
@@ -16,6 +17,7 @@ const initialState: FilterState = {
   Adults: null,
   Children: null,
   LocationId: null,
+  SearchTerm: null
 }
 
 const filterSlice = createSlice({

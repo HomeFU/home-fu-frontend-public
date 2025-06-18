@@ -52,7 +52,7 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
                 CheckInDate: selectedDateArival
             };
 
-            dispatch(setFilters(filterPayload)); // сохранить в Redux
+            dispatch(setFilters(filterPayload));
 
             if (onSearch) {
                 onSearch(filterPayload); // запустить useFilterSearch (если передали)

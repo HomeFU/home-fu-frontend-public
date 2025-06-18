@@ -3,5 +3,6 @@ export type SearchParams = {
     CheckOutDate?: string;  
     Adults?: number;        
     Children?: number;      
-    LocationId?: number;     
+    LocationId?: number;  
+    SearchTerm?: string;   
 };
