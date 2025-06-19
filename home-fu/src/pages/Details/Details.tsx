@@ -1,6 +1,6 @@
 import style from "./details.module.scss"
 import { FooterSite } from "../../components/Footer/FooterSite/footerSite"
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { CardDetailsModel } from "../../types/DatailsCard/details"
 import { useParams } from "react-router-dom"
 import Select from "react-select"
@@ -10,6 +10,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { LoadingHight } from "../../components/LoadingHight/loadinghight"
 import NoUserPhoto from "../../assets/images/noPhotoUser.jpg";
+import { GoogleMap } from "../../components/Header/GoogleMap/googleMap"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { CreateComment } from "../../api/CardDetails/createComment"
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
 
 // @ts-ignore
 import 'swiper/css';
@@ -17,16 +22,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // @ts-ignore
 import 'swiper/css/pagination';
-import { GoogleMap } from "../../components/Header/GoogleMap/googleMap"
-import { useFullInfoUser } from "../../hooks/useFullUserInfo"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { CreateComment } from "../../api/CardDetails/createComment"
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
 
-// type UserData = {
-//     profileImageUrl: string;
-// };
 
 type Option = {
     value: number;
@@ -91,10 +87,6 @@ export const Details = () => {
         enabled: !!id
     });
 
-    const center = {
-        lat: data?.latitude,
-        lang: data?.longitude
-    }
     return (
         <>
          <HeaderSite/>
