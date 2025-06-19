@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./bookHome.module.scss";
-import { ReservationService } from "..//..//api/reservationService/reservationService";
+import { ReservationService } from "..//..//api//ServiceReservation/reservationService";
 import {
   addMonths,
   subMonths,

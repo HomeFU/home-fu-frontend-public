@@ -1,58 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ReservationService } from '..//..//api/reservationService/reservationService';
+import { ReservationService } from '../../api/ServiceReservation/reservationService';
 import type { RootState } from '../../redux/store';
 
-interface Reservation {
-  id?: number;
-  checkInDate: string;
-  checkOutDate: string;
-  adults: number;
-  children?: number;
-  infants?: number;
-  pets?: number;
-  cardId: number;
-}
-
 interface ReservationState {
-  reservations: Reservation[];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ReservationState = {
-  reservations: [],
   loading: false,
   error: null,
 };
 
-export const createReservation = createAsyncThunk<
-  Reservation,
-  { data: Omit<Reservation, 'id'>; token: string },
-  { rejectValue: string }
->(
+export const createReservation = createAsyncThunk(
   'reservation/create',
-  async ({ data, token }, { rejectWithValue }) => {
+  async (payload: { 
+    data: { 
+      checkInDate: string;
+      checkOutDate: string;
+      adults: number;
+      children?: number;
+      infants?: number;
+      pets?: number;
+      cardId: number;
+    };
+    token: string;
+  }, { rejectWithValue }) => {
     try {
-      const response = await ReservationService.createReservation(data, token);
+      const response = await ReservationService.createReservation(payload.data, payload.token);
       return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message || 'Неизвестная ошибка');
-    }
-  }
-);
-
-export const fetchUserReservations = createAsyncThunk<
-  Reservation[],
-  string,
-  { rejectValue: string }
->(
-  'reservation/fetchUserReservations',
-  async (token, { rejectWithValue }) => {
-    try {
-      const response = await ReservationService.getUserReservations(token);
-      return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message || 'Неизвестная ошибка');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('Помилка при бронюванні');
     }
   }
 );
@@ -60,36 +41,27 @@ export const fetchUserReservations = createAsyncThunk<
 const reservationSlice = createSlice({
   name: 'reservation',
   initialState,
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.error = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createReservation.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(createReservation.fulfilled, (state, action) => {
+      .addCase(createReservation.fulfilled, (state) => {
         state.loading = false;
-        state.reservations.push(action.payload);
       })
       .addCase(createReservation.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Ошибка';
-      })
-      .addCase(fetchUserReservations.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchUserReservations.fulfilled, (state, action) => {
-        state.loading = false;
-        state.reservations = action.payload;
-      })
-      .addCase(fetchUserReservations.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || 'Ошибка';
+        state.error = action.payload as string;
       });
   }
 });
 
-export const selectReservations = (state: RootState) => state.reservation;
-
+export const { resetError } = reservationSlice.actions;
+export const selectReservationState = (state: RootState) => state.reservation;
 export default reservationSlice.reducer;
