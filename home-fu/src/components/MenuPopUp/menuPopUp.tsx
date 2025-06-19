@@ -31,6 +31,7 @@ export const MenuPopoUp = () => {
                                 isUserAdmin === "Admin" &&  <li className={style.listLinksItem}><Link to="/admin-panel" onClick={() => dispatch(closeMenuPopUp())}>Адмін панель</Link></li>
                             }
                             <li className={style.listLinksItem}><Link to="/profile" onClick={() => dispatch(closeMenuPopUp())}>Ваш профіль</Link></li>
+                            <li className={style.listLinksItem}><Link to="/owner" onClick={() => dispatch(closeMenuPopUp())}>Стати господарем</Link></li>
                         </ul>
                         <ul className={`${style.listLinks} ${style.listLinksThirdBlock}`}>
                             <li className={style.listLinksItem}><p>Довідковий центр</p><div className={style.comingSoonPopup}>Coming soon</div></li>

@@ -1,7 +1,6 @@
 import style from "./header.module.scss";
 import {RegisterButton} from "..//RegisterButton/registerbutton";
 import {TravelFilter} from "..//TravelFilter/travel-filter";
-import { MapButton } from "../ButtonMap/mapbutton";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -11,13 +10,21 @@ import { openCloseMobileMenu } from "../../../redux/MobileMenu/menuSlice";
 import { MobileMenu } from "../../MobileMenu/menu";
 import { FilterBar } from "../../CategoryBar/FilterBar/filterbar";
 import { FilterButton } from "../../CategoryBar/FilterButton/filterbutton";
-import { SumButton } from "../../CategoryBar/SumButton/sumbutton";
+// import { FilterBar } from "../../../pages/CategoryBar/FilterBar/filterbar";
+// import { FilterButton } from "../../../pages/CategoryBar/FilterButton/filterbutton";
+// import { SumButton } from "../../../pages/CategoryBar/SumButton/sumbutton";
 import { AnimalsModal } from ".././TravelFilter/Animals/animals";
 import { MenuPopoUp } from "../../MenuPopUp/menuPopUp";
 import { AuthenticatedUserButton } from "../../../features/Auth/ButtonForAuthenticatedUser/authenticatedUserButton";
 import type { RootState } from "..//..//..//redux/store";
+import { SearchParams } from "../../../types/SearchParams/searchParams";
+import { Search } from "../../CategoryBar/Search/search";
 
-export const Header = () => {
+type HeaderProps = {
+    onSearch?: (params: SearchParams) => void;
+};
+
+export const Header = ({ onSearch }: HeaderProps) => {
 
     const showScrolledFilter = useSelector((state: RootState) => state.scrolledFilter.isShowScrolledFilter);
 
@@ -74,8 +81,7 @@ export const Header = () => {
                             }
                         </button>
                         <div className={`${style.wrapperTravelFilter} ${isOpenCloseFilterMobile ? style.showTravelFilter : ''}`}>
-                            <TravelFilter/>
-                            <MapButton/>
+                            <TravelFilter onSearch={onSearch}/>
                         </div>
                     </div>
                 </div>
@@ -86,7 +92,7 @@ export const Header = () => {
                             <FilterBar/>
                             <div className={style.wrapperFilterSumButton}>
                                 <FilterButton/>
-                                <SumButton/>
+                                <Search onSearch={onSearch} />
                             </div>
                         </div>
                     </div>

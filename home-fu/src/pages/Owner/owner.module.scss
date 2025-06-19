@@ -1,0 +1,65 @@
+.ownerMainBlock {
+    position: relative;
+    top: 130px;
+    padding-bottom: 40px;
+}
+
+.cardForm {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f0f6ff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+  
+    label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #003366;
+    }
+  
+    input {
+      padding: 0.7rem 1rem;
+      border: 1px solid #ccd6e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+  
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    }
+  
+    input[type='file'] {
+      padding: 0.4rem;
+      background-color: #ffffff;
+    }
+  }
+  
+  .submitButton {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  

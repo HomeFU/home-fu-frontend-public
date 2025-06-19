@@ -21,12 +21,25 @@
 }
 
 .cardItem {
+  position: relative;
   width: 272px;
   height: auto;
 
   @media (max-width:1020px) {
     width: 100%;
   }
+}
+
+.restoreBlock {
+  width: 100%;
+  opacity: 0.3;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  border-radius: 16px;
+  background: lightgray;
+  height: 101%;
 }
 
 .cardItemImage {
