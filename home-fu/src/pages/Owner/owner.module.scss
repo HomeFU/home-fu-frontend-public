@@ -20,7 +20,8 @@
     flex-direction: column;
     margin-bottom: 1.2rem;
   
-    label {
+    label,
+    span {
       font-weight: 600;
       margin-bottom: 0.5rem;
       color: #003366;
@@ -63,3 +64,68 @@
     }
   }
   
+.amenitiesWrapper,
+.categoryWrapper {
+  margin-top: 10px;
+  display: flex;
+  align-items: center; 
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  padding-left: 28px;
+  user-select: none;
+  color: #333;
+  font-weight: 500;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: rgb(52, 104, 194);;
+    border-color: rgb(52, 104, 194);;
+  }
+
+  .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ .checkmark::after {
+    display: block;
+  }
+
+  .checkmark::after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
