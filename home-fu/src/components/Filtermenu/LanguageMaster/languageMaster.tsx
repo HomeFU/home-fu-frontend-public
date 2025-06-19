@@ -105,7 +105,7 @@ export const LanguageMaster = () => {
           <div className={style.languageColumn}>
             {leftColumnLanguages.map((language) => (
               <label key={language.id} className={style.languageItem}>
-                <input
+                <input autoComplete="off"
                   type="checkbox"
                   checked={selectedLanguages.includes(language.id)}
                   onChange={() => toggleLanguage(language.id)}
@@ -118,7 +118,7 @@ export const LanguageMaster = () => {
           <div className={style.languageColumn}>
             {rightColumnLanguages.map((language) => (
               <label key={language.id} className={style.languageItem}>
-                <input
+                <input autoComplete="off"
                   type="checkbox"
                   checked={selectedLanguages.includes(language.id)}
                   onChange={() => toggleLanguage(language.id)}

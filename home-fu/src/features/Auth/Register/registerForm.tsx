@@ -61,7 +61,7 @@ export const Register = () => {
 
             <form className={style.formContent} onSubmit={handleSubmit(onSubmit)}>
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="email"
                         placeholder="Email"
                         className={style.input}
@@ -77,7 +77,7 @@ export const Register = () => {
                 </div>
 
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="password"
                         placeholder="Password"
                         className={style.input}
@@ -93,7 +93,7 @@ export const Register = () => {
                 </div>
 
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="password"
                         placeholder="Repeat password"
                         className={style.input}

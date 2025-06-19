@@ -91,7 +91,7 @@ export const Facilities = () => {
               <div className={style.categoryTitle}>{category.title}</div>
               {category.options.map((option) => (
                 <label key={option.id} className={style.checkboxItem}>
-                  <input
+                  <input autoComplete="off"
                     type="checkbox"
                     checked={selectedOptions.includes(option.id)}
                     onChange={() => toggleOption(option.id)}
