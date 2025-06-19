@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import style from "./bookHome.module.scss";
-import { ReservationService } from "..//..//api//ServiceReservation/reservationService";
+import { ReservationService } from "../../api/ServiceReservation/reservationService";
 import {
   addMonths,
   subMonths,
@@ -50,6 +50,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
   const [hasPet, setHasPet] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const { data: bookedPeriods = [] } = useQuery<BookedPeriod[], Error>({
     queryKey: ['availability', cardId],
@@ -58,26 +59,32 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
       const sixMonthsLater = new Date();
       sixMonthsLater.setMonth(today.getMonth() + 6);
       
-      const fromDate = format(today, 'yyyy-MM-dd');
-      const toDate = format(sixMonthsLater, 'yyyy-MM-dd');
-      
-      return await ReservationService.checkAvailability(cardId, fromDate, toDate);
+      return await ReservationService.checkAvailability(
+        cardId, 
+        format(today, 'yyyy-MM-dd'),
+        format(sixMonthsLater, 'yyyy-MM-dd')
+      );
     },
   });
 
-  const { mutate, isPending, isSuccess, error } = useMutation<void, Error, BookingData>({
+  const { mutate, isPending, isSuccess } = useMutation<void, Error, BookingData>({
     mutationFn: (bookingData) => {
       const token = localStorage.getItem('token') || '';
       return ReservationService.createReservation(bookingData, token);
     },
     onSuccess: () => {
       setTimeout(onClose, 3000);
+    },
+    onError: (error) => {
+      setError(error.message);
     }
   });
 
-  const totalPrice = startDate && endDate 
-    ? Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) * price
-    : 0;
+  const calculateTotalPrice = (start: Date, end: Date) => {
+    return Math.ceil(Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) * price;
+  };
+
+  const totalPrice = startDate && endDate ? calculateTotalPrice(startDate, endDate) : 0;
 
   const isDateBooked = (day: Date) => {
     return bookedPeriods.some((period: BookedPeriod) => {
@@ -118,7 +125,10 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   };
 
   const handleDateClick = (day: Date) => {
+    setError(null);
+
     if (isDateBooked(day)) {
+      setError("Ці дати вже заброньовані");
       return;
     }
 
@@ -134,14 +144,14 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
       return;
     }
 
+    // Здесь TypeScript знает, что startDate не null
     const daysInRange = eachDayOfInterval({
-      start: startDate!,
+      start: startDate,
       end: day
     });
 
-    const hasBookedDates = daysInRange.some(d => isDateBooked(d));
-    
-    if (hasBookedDates) {
+    if (daysInRange.some(d => isDateBooked(d))) {
+      setError("У вибраному діапазоні є заброньовані дати");
       return;
     }
 
@@ -205,21 +215,20 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
     );
   };
 
-  const goToPreviousMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-  };
-
-  const goToNextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
-
+  const goToPreviousMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
+  const goToNextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
   const nextMonth = addMonths(currentMonth, 1);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!startDate || !endDate) return;
+    
+    if (!startDate || !endDate) {
+      setError("Будь ласка, оберіть період бронювання");
+      return;
+    }
 
-    const bookingData: BookingData = {
+    // После проверки TypeScript знает, что startDate и endDate не null
+    mutate({
       checkInDate: format(startDate, 'yyyy-MM-dd'),
       checkOutDate: format(endDate, 'yyyy-MM-dd'),
       adults,
@@ -227,19 +236,13 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
       infants,
       pets: hasPet ? 1 : 0,
       cardId
-    };
-
-    mutate(bookingData);
+    });
   };
 
   return (
     <div className={style.modalOverlay} onClick={onClose}>
       <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button 
-          type="button" 
-          className={style.closeButton} 
-          onClick={onClose}
-        >
+        <button type="button" className={style.closeButton} onClick={onClose}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -248,19 +251,14 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
         
         <h2 className={style.modalTitle}>Бронювання помешкання</h2>
         
-        {error && <div className={style.error}>{error.message}</div>}
+        {error && <div className={style.error}>{error}</div>}
         {isSuccess && <div className={style.successMessage}>Успішно заброньовано!</div>}
 
         <form onSubmit={handleSubmit} className={style.bookingForm}>
           <div className={style.calendarSection}>
             <h3>Оберіть період:</h3>
             <div className={style.calendarNavigation}>
-              <button 
-                type="button" 
-                onClick={goToPreviousMonth} 
-                className={style.navButton}
-                aria-label="Попередній місяць"
-              >
+              <button type="button" onClick={goToPreviousMonth} className={style.navButton} aria-label="Попередній місяць">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
@@ -268,12 +266,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
               <span className={style.currentMonth}>
                 {format(currentMonth, "MMMM yyyy", { locale: uk })}
               </span>
-              <button 
-                type="button" 
-                onClick={goToNextMonth} 
-                className={style.navButton}
-                aria-label="Наступний місяць"
-              >
+              <button type="button" onClick={goToNextMonth} className={style.navButton} aria-label="Наступний місяць">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
@@ -295,21 +288,11 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
               <div className={style.guestControl}>
                 <label>Дорослі:</label>
                 <div className={style.counterControl}>
-                  <button 
-                    type="button" 
-                    onClick={() => handleAdultsChange(false)}
-                    disabled={adults <= 1}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleAdultsChange(false)} disabled={adults <= 1} className={style.counterButton}>
                     -
                   </button>
                   <span className={style.counterValue}>{adults}</span>
-                  <button 
-                    type="button" 
-                    onClick={() => handleAdultsChange(true)}
-                    disabled={adults + children + infants >= maxGuests}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleAdultsChange(true)} disabled={adults + children + infants >= maxGuests} className={style.counterButton}>
                     +
                   </button>
                 </div>
@@ -318,21 +301,11 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
               <div className={style.guestControl}>
                 <label>Діти (2-12 років):</label>
                 <div className={style.counterControl}>
-                  <button 
-                    type="button" 
-                    onClick={() => handleChildrenChange(false)}
-                    disabled={children <= 0}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleChildrenChange(false)} disabled={children <= 0} className={style.counterButton}>
                     -
                   </button>
                   <span className={style.counterValue}>{children}</span>
-                  <button 
-                    type="button" 
-                    onClick={() => handleChildrenChange(true)}
-                    disabled={adults + children + infants >= maxGuests}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleChildrenChange(true)} disabled={adults + children + infants >= maxGuests} className={style.counterButton}>
                     +
                   </button>
                 </div>
@@ -341,21 +314,11 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
               <div className={style.guestControl}>
                 <label>Немовлята (до 2 років):</label>
                 <div className={style.counterControl}>
-                  <button 
-                    type="button" 
-                    onClick={() => handleInfantsChange(false)}
-                    disabled={infants <= 0}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleInfantsChange(false)} disabled={infants <= 0} className={style.counterButton}>
                     -
                   </button>
                   <span className={style.counterValue}>{infants}</span>
-                  <button 
-                    type="button" 
-                    onClick={() => handleInfantsChange(true)}
-                    disabled={adults + children + infants >= maxGuests}
-                    className={style.counterButton}
-                  >
+                  <button type="button" onClick={() => handleInfantsChange(true)} disabled={adults + children + infants >= maxGuests} className={style.counterButton}>
                     +
                   </button>
                 </div>
@@ -363,11 +326,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
 
               <div className={style.petControl}>
                 <label>
-                  <input 
-                    type="checkbox" 
-                    checked={hasPet}
-                    onChange={(e) => setHasPet(e.target.checked)}
-                  />
+                  <input type="checkbox" checked={hasPet} onChange={(e) => setHasPet(e.target.checked)} />
                   <span>Я буду з твариною</span>
                 </label>
               </div>
@@ -393,11 +352,11 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
                 </div>
               )}
               
-              {totalPrice > 0 && (
+              {startDate && endDate && totalPrice > 0 && (
                 <>
                   <div className={style.priceRow}>
                     <span>Кількість днів:</span>
-                    <span>{Math.ceil(Math.abs(endDate!.getTime() - startDate!.getTime()) / (1000 * 60 * 60 * 24))}</span>
+                    <span>{Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))}</span>
                   </div>
                   <div className={`${style.priceRow} ${style.totalPrice}`}>
                     <span>До сплати:</span>
@@ -409,11 +368,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
           </div>
 
           {!isSuccess && (
-            <button 
-              type="submit" 
-              className={style.submitButton}
-              disabled={!startDate || !endDate || isPending}
-            >
+            <button type="submit" className={style.submitButton} disabled={!startDate || !endDate || isPending}>
               {isPending ? 'Відправка...' : 'Підтвердити бронювання'}
             </button>
           )}
