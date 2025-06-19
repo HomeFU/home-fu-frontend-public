@@ -55,12 +55,7 @@ export const Details = () => {
         { value: 2, label:2 },
         { value: 1, label: 1 },
     ];
-    // const token = localStorage.getItem('token') as string;
-
-    // const {
-    //     data: fullInfoUserData = {} as UserData,
-    // } = useFullInfoUser(token);
-
+    
     const mutation = useMutation({
         mutationKey: ["createComment"],
         mutationFn: ({ text, value }: { text: string; value: number }) =>
@@ -68,7 +63,6 @@ export const Details = () => {
         onSuccess: () => {
           alert("Ваш коментар додано!");
           reset();
-        //   queryClient.invalidateQueries({ queryKey: ['cardDetails'], id});
         },
         onError: (err) => {
           alert(err?.message || "Помилка при надсиланні коментаря.");
