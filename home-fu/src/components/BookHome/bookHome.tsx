@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import style from "./bookHome.module.scss";
 import { ReservationService } from "..//..//api//ServiceReservation/reservationService";
 import {
@@ -31,6 +32,16 @@ type BookedPeriod = {
   checkOut: string;
 };
 
+type BookingData = {
+  checkInDate: string;
+  checkOutDate: string;
+  adults: number;
+  children: number;
+  infants: number;
+  pets: number;
+  cardId: number;
+};
+
 export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeModalProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -39,38 +50,37 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
   const [hasPet, setHasPet] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [bookedPeriods, setBookedPeriods] = useState<BookedPeriod[]>([]);
 
-  useEffect(() => {
-    const today = new Date();
-    const sixMonthsLater = new Date();
-    sixMonthsLater.setMonth(today.getMonth() + 6);
-    
-    const loadAvailability = async () => {
-      try {
-        const fromDate = format(today, 'yyyy-MM-dd');
-        const toDate = format(sixMonthsLater, 'yyyy-MM-dd');
-        
-        const periods = await ReservationService.checkAvailability(
-          cardId, 
-          fromDate, 
-          toDate
-        );
-        setBookedPeriods(periods);
-      } catch (error) {
-        console.error("Помилка при загрузці доступних дат:", error);
-      }
-    };
-    
-    loadAvailability();
-  }, [cardId]);
+  const { data: bookedPeriods = [] } = useQuery<BookedPeriod[], Error>({
+    queryKey: ['availability', cardId],
+    queryFn: async () => {
+      const today = new Date();
+      const sixMonthsLater = new Date();
+      sixMonthsLater.setMonth(today.getMonth() + 6);
+      
+      const fromDate = format(today, 'yyyy-MM-dd');
+      const toDate = format(sixMonthsLater, 'yyyy-MM-dd');
+      
+      return await ReservationService.checkAvailability(cardId, fromDate, toDate);
+    },
+  });
+
+  const { mutate, isPending, isSuccess, error } = useMutation<void, Error, BookingData>({
+    mutationFn: (bookingData) => {
+      const token = localStorage.getItem('token') || '';
+      return ReservationService.createReservation(bookingData, token);
+    },
+    onSuccess: () => {
+      setTimeout(onClose, 3000);
+    }
+  });
+
+  const totalPrice = startDate && endDate 
+    ? Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) * price
+    : 0;
 
   const isDateBooked = (day: Date) => {
-    return bookedPeriods.some(period => {
+    return bookedPeriods.some((period: BookedPeriod) => {
       const checkIn = parseISO(period.checkIn);
       const checkOut = parseISO(period.checkOut);
       return day >= checkIn && day <= checkOut;
@@ -109,43 +119,33 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
 
   const handleDateClick = (day: Date) => {
     if (isDateBooked(day)) {
-      setError("Ці дати вже заброньовані");
       return;
     }
 
     if ((startDate && endDate) || (startDate && isBefore(day, startDate))) {
       setStartDate(day);
       setEndDate(null);
-      setTotalPrice(0);
       return;
     }
 
     if (!startDate || isSameDay(day, startDate)) {
       setStartDate(day);
       setEndDate(null);
-      setTotalPrice(0);
       return;
     }
 
     const daysInRange = eachDayOfInterval({
-      start: startDate,
+      start: startDate!,
       end: day
     });
 
     const hasBookedDates = daysInRange.some(d => isDateBooked(d));
     
     if (hasBookedDates) {
-      setError("У вибраному діапазоні є заброньовані дати");
       return;
     }
 
     setEndDate(day);
-    if (startDate) {
-      const daysCount = Math.ceil(
-        Math.abs(day.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
-      );
-      setTotalPrice(daysCount * price);
-    }
   };
 
   const renderCalendar = (month: Date) => {
@@ -215,37 +215,21 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
 
   const nextMonth = addMonths(currentMonth, 1);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!startDate || !endDate) {
-      setError("Будь ласка, оберіть період бронювання");
-      return;
-    }
+    if (!startDate || !endDate) return;
 
-    setIsLoading(true);
-    setError(null);
+    const bookingData: BookingData = {
+      checkInDate: format(startDate, 'yyyy-MM-dd'),
+      checkOutDate: format(endDate, 'yyyy-MM-dd'),
+      adults,
+      children,
+      infants,
+      pets: hasPet ? 1 : 0,
+      cardId
+    };
 
-    try {
-      const token = localStorage.getItem('token') || '';
-      const bookingData = {
-        checkInDate: format(startDate, 'yyyy-MM-dd'),
-        checkOutDate: format(endDate, 'yyyy-MM-dd'),
-        adults,
-        children,
-        infants,
-        pets: hasPet ? 1 : 0,
-        cardId
-      };
-
-      await ReservationService.createReservation(bookingData, token);
-      setIsSuccess(true);
-      setTimeout(onClose, 3000);
-    } catch (err: any) {
-      console.error("Помилка бронювання:", err);
-      setError(err.message || "Помилка при бронюванні. Спробуйте ще раз.");
-    } finally {
-      setIsLoading(false);
-    }
+    mutate(bookingData);
   };
 
   return (
@@ -264,7 +248,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
         
         <h2 className={style.modalTitle}>Бронювання помешкання</h2>
         
-        {error && <div className={style.error}>{error}</div>}
+        {error && <div className={style.error}>{error.message}</div>}
         {isSuccess && <div className={style.successMessage}>Успішно заброньовано!</div>}
 
         <form onSubmit={handleSubmit} className={style.bookingForm}>
@@ -428,9 +412,9 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
             <button 
               type="submit" 
               className={style.submitButton}
-              disabled={!startDate || !endDate || isLoading}
+              disabled={!startDate || !endDate || isPending}
             >
-              {isLoading ? 'Відправка...' : 'Підтвердити бронювання'}
+              {isPending ? 'Відправка...' : 'Підтвердити бронювання'}
             </button>
           )}
         </form>
