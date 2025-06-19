@@ -91,10 +91,6 @@ export const Details = () => {
         enabled: !!id
     });
 
-    const center = {
-        lat: data?.latitude,
-        lang: data?.longitude
-    }
     return (
         <>
          <HeaderSite/>
@@ -232,7 +228,10 @@ export const Details = () => {
                                     </div>
                                     <div className={style.gridUserRating}>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.cleanliness || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.cleanliness ? Number(data.ratings.cleanliness).toFixed(1) : "0"}
+                                                {/* {data?.ratings.cleanliness || "0"} */}
+                                            </div>
                                             <p>Чистота</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.cleanliness) > 0 &&
@@ -243,7 +242,10 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.accuracy || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.accuracy ? Number(data.ratings.accuracy).toFixed(1) : "0"}
+                                                {/* {data?.ratings.accuracy || "0"} */}
+                                            </div>
                                             <p>Точность</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.accuracy) > 0 &&
@@ -254,7 +256,10 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.checkIn || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.checkIn ? Number(data.ratings.checkIn).toFixed(1) : "0"}
+                                                {/* {data?.ratings.checkIn || "0"} */}
+                                            </div>
                                             <p>Прибуття</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.checkIn) > 0 &&
@@ -265,7 +270,10 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.communication || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.communication ? Number(data.ratings.communication).toFixed(1) : "0"}
+                                                {/* {data?.ratings.communication || "0"} */}
+                                            </div>
                                             <p>Коммуникация</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.communication) > 0 &&
@@ -276,7 +284,10 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.location || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.location ? Number(data.ratings.location).toFixed(1) : "0"}
+                                                {/* {data?.ratings.location || "0"} */}
+                                            </div>
                                             <p>Расположение</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.location) > 0 &&
@@ -287,7 +298,10 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.value || "0"}</div>
+                                            <div className={style.cardItemRating}>
+                                                {data?.ratings.value ? Number(data.ratings.value).toFixed(1) : "0"}
+                                                {/* {data?.ratings.value || "0"} */}
+                                            </div>
                                             <p>Цены</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.value) > 0 &&
