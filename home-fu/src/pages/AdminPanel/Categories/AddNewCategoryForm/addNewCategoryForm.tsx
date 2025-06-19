@@ -66,7 +66,7 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
         </button>
         <h1 className={style.title}>Add new category</h1>
         <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
-          <input
+          <input autoComplete="off"
             className={style.input}
             type="text"
             placeholder="Enter name for new category"
@@ -78,7 +78,7 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
           
           <span>Add image for category</span>
           <div className={style.fileInputWrapper}>
-            <input
+            <input autoComplete="off"
               type="file"
               id="fileInput"
               {...register('imageFile', {

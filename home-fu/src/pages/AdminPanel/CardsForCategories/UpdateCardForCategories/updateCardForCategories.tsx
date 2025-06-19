@@ -19,28 +19,28 @@ export const UpdateCardForCategories = () => {
         </button>
         <h1 className={style.title}>Update card</h1>
         <form className={style.formContent}>
-          <input className={style.input} type="text" placeholder="Enter new name for card" />
-          <input className={style.input} type="number" placeholder="Enter new locatinId for card"/>
-          <input className={style.input} type="text" placeholder="Enter new locatin name for card"/>
+          <input autoComplete="off" className={style.input} type="text" placeholder="Enter new name for card" />
+          <input autoComplete="off" className={style.input} type="number" placeholder="Enter new locatinId for card"/>
+          <input autoComplete="off" className={style.input} type="text" placeholder="Enter new locatin name for card"/>
           <div className={style.dateInputRow}>
             <span>Enter new start date</span>
-            <input className={style.input} type="date"/>
+            <input autoComplete="off" className={style.input} type="date"/>
           </div>
           <div className={style.dateInputRow}>
             <span>Enter new end date</span>
-            <input className={style.input} type="date"/>
+            <input autoComplete="off" className={style.input} type="date"/>
           </div>
-          <input className={style.input} type="number" placeholder="Enter new rating for card"/>
-          <input className={style.input} type="number" placeholder="Enter new price for card"/>
+          <input autoComplete="off" className={style.input} type="number" placeholder="Enter new rating for card"/>
+          <input autoComplete="off" className={style.input} type="number" placeholder="Enter new price for card"/>
           <div>
-            <input type="checkbox" id="isDeleted" name="isDeleted" />
+            <input autoComplete="off" type="checkbox" id="isDeleted" name="isDeleted" />
             <label htmlFor="isDeleted">Deleted or not?</label>
           </div>
           <div className={style.fileInputWrapper}>
-            <input type="file" id="fileInput" />
+            <input autoComplete="off" type="file" id="fileInput" />
             <label htmlFor="fileInput" className={style.fileInputButton}>Select images</label>
           </div>
-          <input className={style.input} type="number" placeholder="Enter new ID for category"/>
+          <input autoComplete="off" className={style.input} type="number" placeholder="Enter new ID for category"/>
           <button type="submit" className={style.submitButton}>Update card</button>
         </form>
       </div>

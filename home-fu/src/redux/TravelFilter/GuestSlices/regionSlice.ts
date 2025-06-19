@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     isOpen: false,
-    selectedRegion: "" as string
+    selectedRegion: "" as string,
+    selectedRegionId: null as number | null,
 }
 
 const regionSlice = createSlice({
@@ -20,9 +21,12 @@ const regionSlice = createSlice({
         },
         setSelectRegion: (state, action: { payload: string }) => {
             state.selectedRegion = action.payload
+        },
+        setSelectRegionId: (state, action: { payload: number }) => {
+            state.selectedRegionId = action.payload
         }
     }
 });
 
-export const {toggleRegion, closeRegion, openRegion, setSelectRegion} = regionSlice.actions;
+export const {toggleRegion, closeRegion, openRegion, setSelectRegion, setSelectRegionId} = regionSlice.actions;
 export default regionSlice.reducer;

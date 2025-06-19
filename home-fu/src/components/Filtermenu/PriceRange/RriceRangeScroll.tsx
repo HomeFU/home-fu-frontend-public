@@ -56,7 +56,7 @@ export const PriceRange = () => {
       <div className={style.priceSlider}>
         <div className={style.sliderGraph}>{generatePriceBars()}</div>
         <div className={style.sliderContainer}>
-          <input
+          <input autoComplete="off"
             type="range"
             min="0"
             max="14000"
@@ -66,7 +66,7 @@ export const PriceRange = () => {
             onTouchEnd={handlePriceChange}
             className={style.rangeInputMin}
           />
-          <input
+          <input autoComplete="off"
             type="range"
             min="0"
             max="14000"
@@ -87,7 +87,7 @@ export const PriceRange = () => {
           <label>Мінімум</label>
           <div className={style.inputWrapper}>
             <span className={style.currencySymbol}>$</span>
-            <input
+            <input autoComplete="off"
               type="text"
               value={minPrice}
               onChange={(e) => setMinPrice(Number(e.target.value.replace(/\D/g, "")))}
@@ -99,7 +99,7 @@ export const PriceRange = () => {
           <label>Максимум</label>
           <div className={style.inputWrapper}>
             <span className={style.currencySymbol}>$</span>
-            <input
+            <input autoComplete="off"
               type="text"
               value={maxPrice === 14000 ? "14000+" : maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value.replace(/\D/g, "").replace(/\+/g, "")))}

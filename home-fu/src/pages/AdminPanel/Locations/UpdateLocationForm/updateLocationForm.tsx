@@ -63,7 +63,7 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
                 <h2 className={style.title}>Update Location</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
                     <p className={style.oldName}>Old Name: {name}</p>
-                    <input
+                    <input autoComplete="off"
                         type="text"
                         placeholder="Enter new location name"
                         className={style.input}

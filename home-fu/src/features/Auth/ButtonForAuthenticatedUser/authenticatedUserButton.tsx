@@ -4,8 +4,10 @@ import { toggleMenuPopUp } from "../../../redux/MenuPopoUp/menuPopoUpSlice";
 import { useDispatch } from "react-redux";
 import { useFullInfoUser } from "../../../hooks/useFullUserInfo";
 import NoUserPhoto from "../../../assets/images/noPhotoUser.jpg";
+import { useEffect } from "react";
 
 type UserData = {
+    id:string;
     profileImageUrl: string;
 };
 
@@ -18,6 +20,11 @@ export const AuthenticatedUserButton = () => {
         data: fullInfoUserData = {} as UserData,
     } = useFullInfoUser(token);
     
+    useEffect(() => {
+        if (fullInfoUserData?.id) {
+        localStorage.setItem("userId", String(fullInfoUserData.id));
+        }
+    }, [fullInfoUserData?.id]);
 
     return (
         <button className={styles.authenticatedUserButton} onClick={() => {dispatch(toggleMenuPopUp())}}>

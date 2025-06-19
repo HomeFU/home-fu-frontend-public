@@ -61,7 +61,7 @@ export const Login = () => {
 
             <form className={style.formContent} onSubmit={handleSubmit(onSubmit)}>
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="email"
                         placeholder="Email"
                         className={style.input}
@@ -77,7 +77,7 @@ export const Login = () => {
                 </div>
 
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="password"
                         placeholder="Password"
                         className={style.input}
