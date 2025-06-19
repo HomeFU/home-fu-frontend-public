@@ -20,7 +20,7 @@ export const RegionField = () => {
     return (
         <div className={style.wrapperRegionBlock} onClick={() => {openCloseRegionBlock()}}>
             <div className={style.inputLabel}>Куди</div>
-            <input
+            <input autoComplete="off"
                 readOnly={true}
                 type="text"
                 placeholder="Пошук напрямку"
