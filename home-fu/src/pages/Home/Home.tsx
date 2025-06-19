@@ -33,6 +33,8 @@ export const Home = () => {
             Children: urlParams.Children ? Number(urlParams.Children) : undefined,
             LocationId: urlParams.LocationId ? Number(urlParams.LocationId) : undefined,
             SearchTerm: urlParams.SearchTerm || undefined,
+            Pets: urlParams.Infants ? Number(urlParams.Pets) : undefined,
+            Infants: urlParams.Infants ? Number(urlParams.Infants) : undefined,
         };
 
         const hasAnyFilter = Object.values(extractedParams).some(v => v !== undefined);
@@ -80,6 +82,8 @@ export const Home = () => {
         if (params.CheckInDate) queryParams.CheckInDate = params.CheckInDate;
         if (params.CheckOutDate) queryParams.CheckOutDate = params.CheckOutDate;
         if (params.Adults !== undefined) queryParams.Adults = params.Adults.toString();
+        if (params.Infants !== undefined) queryParams.Adults = params.Infants.toString();
+        if (params.Pets !== undefined) queryParams.Adults = params.Pets.toString();
         if (params.Children !== undefined) queryParams.Children = params.Children.toString();
         if (params.LocationId !== undefined) queryParams.LocationId = params.LocationId.toString();
         if (params.SearchTerm) queryParams.SearchTerm = params.SearchTerm;

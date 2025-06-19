@@ -31,6 +31,31 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
     const selectedDateDeparture = useSelector((state: RootState) => state.departure.selectedDate);
     const selectedDateArival = useSelector((state: RootState) => state.arrival.selectedDate);
 
+    const locationId = useSelector((state:RootState) => state.region.selectedRegionId);
+
+    const adults = useSelector((state:RootState) => state.counters.counter[0]);
+    const children = useSelector((state:RootState) => state.counters.counter[1]);
+    const infants = useSelector((state:RootState) => state.counters.counter[2]);
+    const pets = useSelector((state:RootState) => state.counters.counter[3]);
+
+    const handleSearch = () => {
+        const filterPayload: SearchParams = {
+            CheckOutDate: selectedDateDeparture || undefined,
+            CheckInDate: selectedDateArival || undefined,
+            LocationId: locationId !== null ? locationId : undefined,
+            Adults: adults || undefined,
+            Children: children || undefined,
+            Infants: infants || undefined,
+            Pets: pets || undefined
+        };
+
+        dispatch(setFilters(filterPayload));
+
+        if (onSearch) {
+            onSearch(filterPayload);
+        }
+    };
+
     useEffect(() => {
         const handlerScroll = () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -44,20 +69,6 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
 
     const scrollTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    const handleSearch = () => {
-        if (selectedDateDeparture || selectedDateArival) {
-            const filterPayload: SearchParams = {
-                CheckOutDate: selectedDateDeparture || undefined,
-                CheckInDate: selectedDateArival || undefined
-            };
-
-            dispatch(setFilters(filterPayload));
-            if (onSearch) {
-                onSearch(filterPayload);
-            }
-        }
     };
 
     return (

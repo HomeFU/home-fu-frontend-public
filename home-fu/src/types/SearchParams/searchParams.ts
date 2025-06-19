@@ -4,5 +4,7 @@ export type SearchParams = {
     Adults?: number;        
     Children?: number;      
     LocationId?: number;  
-    SearchTerm?: string;   
+    SearchTerm?: string; 
+    Infants?: number,
+    Pets?: number
 };

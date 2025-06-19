@@ -8,6 +8,8 @@ export const SearchCardsCategory = async (params: SearchParams) => {
     if (params.CheckInDate) queryParams.append("CheckInDate", params.CheckInDate);
     if (params.CheckOutDate) queryParams.append("CheckOutDate", params.CheckOutDate);
     if (params.Adults !== undefined) queryParams.append("Adults", params.Adults.toString());
+    if (params.Pets !== undefined) queryParams.append("Adults", params.Pets.toString());
+    if (params.Infants !== undefined) queryParams.append("Adults", params.Infants.toString());
     if (params.Children !== undefined) queryParams.append("Children", params.Children.toString());
     if (params.LocationId !== undefined) queryParams.append("LocationId", params.LocationId.toString());
 
