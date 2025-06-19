@@ -45,7 +45,6 @@ export const Home = () => {
         }
     }, [searchParams]);
 
-    // 🔹 Без фильтра — стандартный запрос по категории
     const {
         data: dataCardsCategories = [],
         isLoading: isLoadingDefault,
@@ -56,7 +55,6 @@ export const Home = () => {
         enabled: !filterParams,
     });
 
-    // 🔹 С фильтрами
     const {
         data: filterCards = [],
         isLoading: isLoadingFiltered,
