@@ -102,7 +102,7 @@ export const Owner = () => {
         <form className={style.cardForm} onSubmit={handleSubmit(onSubmit)}>
           <div className={style.formGroup}>
             <label>Card Name</label>
-            <input type="text" {...register("cardName")} />
+            <input autoComplete="off" type="text" {...register("cardName")} />
           </div>
 
           <div className={style.formGroup}>
@@ -174,42 +174,42 @@ export const Owner = () => {
           </div>
           <div className={style.formGroup}>
             <label>Price</label>
-            <input type="text" {...register("price")} />
+            <input autoComplete="off" type="text" {...register("price")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Number Of Guests</label>
-            <input type="text" {...register("numberOfGuests")} />
+            <input autoComplete="off" type="text" {...register("numberOfGuests")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Number Of Bedrooms</label>
-            <input type="text" {...register("numberOfBedrooms")} />
+            <input autoComplete="off" type="text" {...register("numberOfBedrooms")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Number Of Beds</label>
-            <input type="text" {...register("numberOfBeds")} />
+            <input autoComplete="off" type="text" {...register("numberOfBeds")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Number Of Bathrooms</label>
-            <input type="text" {...register("numberOfBathrooms")} />
+            <input autoComplete="off" type="text" {...register("numberOfBathrooms")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Description</label>
-            <input type="text" {...register("description")} />
+            <input autoComplete="off" type="text" {...register("description")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Latitude</label>
-            <input type="text" {...register("latitude")} />
+            <input autoComplete="off" type="text" {...register("latitude")} />
           </div>
 
           <div className={style.formGroup}>
             <label>Longitude</label>
-            <input type="text" {...register("longitude")} />
+            <input autoComplete="off" type="text" {...register("longitude")} />
           </div>
 
           <div className={style.formGroup}>
@@ -247,7 +247,7 @@ export const Owner = () => {
 
           <div className={style.formGroup}>
             <label className={style.formGroup}>Card Images</label>
-            <input type="file" multiple {...register("cardImages")} />
+            <input autoComplete="off" type="file" multiple {...register("cardImages")} />
           </div>
 
           <button type="submit" className={style.submitButton}>Создать карточку</button>
