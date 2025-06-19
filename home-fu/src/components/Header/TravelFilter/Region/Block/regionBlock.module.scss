@@ -9,8 +9,8 @@
     position: absolute;
     left: 0;
     top: 70px;
-    width: 400px;
-    height: 353px;
+    width: auto;
+    height: auto;
     padding: 40px 38px;
     border-radius: 26px;
     background-color: #fff;
@@ -24,36 +24,34 @@
 }
 
 .title {
-    @include text(700, 14px, #211E1A);
+    @include text(700, 17px, #211E1A);
     margin-bottom: 26px;
 }
 
 .regionType {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 20px;
-    row-gap: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .typeRegion {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    transition: .3s;
+  padding: 10px 16px;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  font-weight: 500;
+  color: #444;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 
-    img {
-        width: 120px;
-        height: 125px;
-    }
+  &:hover {
+    background-color: #e0e7ff;
+    color: #1e40af;
+    transform: scale(1.05);
+  }
 
-    span {
-        @include text(500, 12px, #8A8278);
-    }
-
-    &:hover {
-        transform: scale(1.03);
-        transition: .3s;
-    }
+  span {
+    white-space: nowrap;
+  }
 }
-
