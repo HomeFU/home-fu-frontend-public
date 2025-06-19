@@ -232,7 +232,7 @@ export const Details = () => {
                                     </div>
                                     <div className={style.gridUserRating}>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.cleanliness || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.cleanliness.toFixed(1) || "0"}</div>
                                             <p>Чистота</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.cleanliness) > 0 &&
@@ -243,7 +243,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.accuracy || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.accuracy.toFixed(1) || "0"}</div>
                                             <p>Точность</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.accuracy) > 0 &&
@@ -254,7 +254,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.checkIn || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.checkIn.toFixed(1) || "0"}</div>
                                             <p>Регистрироваться</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.checkIn) > 0 &&
@@ -265,7 +265,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.communication || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.communication.toFixed(1) || "0"}</div>
                                             <p>Коммуникация</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.communication) > 0 &&
@@ -276,7 +276,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.location || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.location.toFixed(1) || "0"}</div>
                                             <p>Расположение</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.location) > 0 &&
@@ -287,7 +287,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.value || "0"}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.value.toFixed(1) || "0"}</div>
                                             <p>Цены</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.value) > 0 &&
