@@ -13,9 +13,10 @@ import { useEffect } from 'react';
 import { handlerScrolledFilter } from '../../../redux/TravelFilter/ScrollUpdateFilterSlice/filterUpdateScroll';
 import { setFilters } from '../../../redux/CardsCategoryFilter/filterSlice';
 import type { RootState } from "../../../redux/store";
+import { SearchParams } from '../../../types/SearchParams/searchParams';
 
 type TravelFilterProps = {
-    onSearch?: (params: { CheckOutDate: string }) => void;
+    onSearch?: (params: SearchParams) => void;
 };
 
 export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
@@ -46,16 +47,15 @@ export const TravelFilter = ({ onSearch }: TravelFilterProps) => {
     };
 
     const handleSearch = () => {
-        if (selectedDateDeparture) {
-            const filterPayload = {
-                CheckOutDate: selectedDateDeparture,
-                CheckInDate: selectedDateArival
+        if (selectedDateDeparture || selectedDateArival) {
+            const filterPayload: SearchParams = {
+                CheckOutDate: selectedDateDeparture || undefined,
+                CheckInDate: selectedDateArival || undefined
             };
 
             dispatch(setFilters(filterPayload));
-
             if (onSearch) {
-                onSearch(filterPayload); // запустить useFilterSearch (если передали)
+                onSearch(filterPayload);
             }
         }
     };
