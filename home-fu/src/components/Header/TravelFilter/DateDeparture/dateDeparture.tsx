@@ -24,7 +24,8 @@ import type { RootState } from "..//..//..//..//redux/store";
 
 export function DateDeparture() {
   const dispatch = useDispatch()
-  const selectedDate = useSelector((state: RootState) => state.departure.selectedDate);
+  const selectedDateStr = useSelector((state: RootState) => state.departure.selectedDate);
+  const selectedDate = selectedDateStr ? new Date(selectedDateStr + "T00:00:00") : null;  
   const isOpen = useSelector((state: RootState) => state.departure.isOpen);
 
   const onCloseDateArrive = () => {
@@ -37,7 +38,8 @@ export function DateDeparture() {
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
   const handleDateClick = (date: Date) => {
-    dispatch(setSelectedDepartureDate(date))
+    const formatted = format(date, "yyyy-MM-dd");
+    dispatch(setSelectedDepartureDate(formatted));
   }
 
   const renderCalendar = (month: Date) => {
