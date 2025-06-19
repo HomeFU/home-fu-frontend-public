@@ -19,6 +19,7 @@ import adminCategoryEditReducer from "./AdminPanel/adminCategoryEdit";
 import cardFormAddReducer from "../redux/AdminPanel/adminCardAdd";
 import cardFormUpdateReducer from "../redux/AdminPanel/adminCardUpdate";
 import filtersReducer from "./CardsCategoryFilter/filterSlice";
+import reservationReducer from '..//redux/ReservationSlice/reservationSlice'; 
 
 export const store = configureStore({
     reducer:{
@@ -42,6 +43,8 @@ export const store = configureStore({
         cardFormAdd: cardFormAddReducer,
         cardFormUpdate : cardFormUpdateReducer,
         filters: filtersReducer,
+        reservation: reservationReducer,
+       
     }
 })
 export type RootState = ReturnType<typeof store.getState>

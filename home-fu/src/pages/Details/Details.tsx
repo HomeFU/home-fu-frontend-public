@@ -10,6 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { LoadingHight } from "../../components/LoadingHight/loadinghight"
 import NoUserPhoto from "../../assets/images/noPhotoUser.jpg";
+import {useState} from "react";
+import { BookHomeModal } from "..//..//components/BookHome/bookHome";
+import { createReservation } from "../../redux/ReservationSlice/reservationSlice";
+
 
 // @ts-ignore
 import 'swiper/css';
@@ -37,10 +41,12 @@ type CommentValidate = {
     text:string;
     value: number;
 }
+
+
 export const Details = () => {
     const { id } = useParams<{ id: string }>();
     const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
-
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const { register, reset, control, handleSubmit } = useForm<CommentValidate>({
         mode: "onChange",
         defaultValues: {
@@ -98,6 +104,7 @@ export const Details = () => {
     return (
         <>
          <HeaderSite/>
+         
             <main className={`${style.main} ${style.mainDetail}`}>
                 <div className={style.container}>
                     {
@@ -178,6 +185,7 @@ export const Details = () => {
                                     </Swiper>
                                     </div>
                                 </div>
+                                <button className={style.reserveButton}onClick={() => setIsBookingModalOpen(true)}>Зарезервувати</button>
                                 <div className={style.mainDescriptionBlock}>
                                     <div className={style.wrapperDescriptionStar}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-sparkles w-5 h-5 text-blue-500"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
@@ -391,16 +399,24 @@ export const Details = () => {
                                         </form>
                                     </div>
                                 )}
-
-                                <div>
-                                    
+{isBookingModalOpen && data && (
+                                  <BookHomeModal 
+                                    price={data.card.price} 
+                                    onClose={() => setIsBookingModalOpen(false)} 
+                                    maxGuests={data.numberOfGuests}
+                                     cardId={data.card.id}
+                                  />
+                                )}
+                                <div>   
+                                        
                                 </div>
                             </div>
                         </>
+                        
                     }
                 </div>
-                 <div className={style.map}><GoogleMap/></div> 
-                <div className={style.divider}></div>
+                        <div className={style.map}><GoogleMap/></div>
+                        <div className={style.divider}></div>    
             </main>
          <FooterSite/>
         </>
