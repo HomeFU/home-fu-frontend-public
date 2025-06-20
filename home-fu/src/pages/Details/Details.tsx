@@ -1,6 +1,6 @@
 import style from "./details.module.scss"
 import { FooterSite } from "../../components/Footer/FooterSite/footerSite"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { CardDetailsModel } from "../../types/DatailsCard/details"
 import { useParams } from "react-router-dom"
 import Select from "react-select"
@@ -11,6 +11,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { LoadingHight } from "../../components/LoadingHight/loadinghight"
 import NoUserPhoto from "../../assets/images/noPhotoUser.jpg";
 
+
 // @ts-ignore
 import 'swiper/css';
 // @ts-ignore
@@ -18,10 +19,17 @@ import 'swiper/css/navigation';
 // @ts-ignore
 import 'swiper/css/pagination';
 import { GoogleMap } from "../../components/Header/GoogleMap/googleMap"
+import { useFullInfoUser } from "../../hooks/useFullUserInfo"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CreateComment } from "../../api/CardDetails/createComment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
+import { BookHomeModal } from "..//..//components/BookHome/bookHome"
+import { useState } from "react"
+
+// type UserData = {
+//     profileImageUrl: string;
+// };
 
 type Option = {
     value: number;
@@ -31,25 +39,15 @@ type Option = {
 type CommentValidate = {
     text:string;
     value: number;
-    cleanliness: number;
-    accuracy: number;
-    checkIn: number;
-    communication: number;
-    location: number;
 }
 export const Details = () => {
     const { id } = useParams<{ id: string }>();
     const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
-
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const { register, reset, control, handleSubmit } = useForm<CommentValidate>({
         mode: "onChange",
         defaultValues: {
             value: 5,
-            cleanliness: 5,
-            accuracy: 5,
-            checkIn: 5,
-            communication: 5,
-            location: 5
         },
     });
       
@@ -60,15 +58,20 @@ export const Details = () => {
         { value: 2, label:2 },
         { value: 1, label: 1 },
     ];
-    
+    // const token = localStorage.getItem('token') as string;
+
+    // const {
+    //     data: fullInfoUserData = {} as UserData,
+    // } = useFullInfoUser(token);
+
     const mutation = useMutation({
         mutationKey: ["createComment"],
-        mutationFn: ({ text, value , cleanliness, accuracy, checkIn, communication,location }: CommentValidate) =>
-          CreateComment({ id: id!, text, value , cleanliness, accuracy, checkIn, communication, location}),
+        mutationFn: ({ text, value }: { text: string; value: number }) =>
+          CreateComment({ id: id!, text, value }),
         onSuccess: () => {
           alert("Ваш коментар додано!");
-          window.location.reload();
           reset();
+        //   queryClient.invalidateQueries({ queryKey: ['cardDetails'], id});
         },
         onError: (err) => {
           alert(err?.message || "Помилка при надсиланні коментаря.");
@@ -79,7 +82,7 @@ export const Details = () => {
         const trimmed = data.text.trim();
         if (!trimmed) return;
       
-        mutation.mutate({ text: trimmed, value: data.value , cleanliness: data.cleanliness, accuracy: data.accuracy, checkIn: data.checkIn, communication: data.communication, location: data.location});
+        mutation.mutate({ text: trimmed, value: data.value });
     };
 
     const {
@@ -91,6 +94,10 @@ export const Details = () => {
         enabled: !!id
     });
 
+    const center = {
+        lat: data?.latitude,
+        lang: data?.longitude
+    }
     return (
         <>
          <HeaderSite/>
@@ -146,9 +153,7 @@ export const Details = () => {
                                                 <img src={`https://homefu.azurewebsites.net${data?.hostAvatarUrl}`} alt="hostAvatarUrl" />
                                             </div>
                                             <div className={style.blockContent}>
-                                                <h2>Имя владельца: {data?.hostName}</h2>
-                                                <span>Телефон владельца: {data?.hostNum}</span>
-                                                <span>Почта владельца: {data?.hostMail}</span>
+                                                <h2>Хозяин: {data?.hostName}</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -176,6 +181,7 @@ export const Details = () => {
                                     </Swiper>
                                     </div>
                                 </div>
+                                <button className={style.reserveButton}onClick={() => setIsBookingModalOpen(true)}>Зарезервувати</button>
                                 <div className={style.mainDescriptionBlock}>
                                     <div className={style.wrapperDescriptionStar}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-sparkles w-5 h-5 text-blue-500"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
@@ -230,7 +236,7 @@ export const Details = () => {
                                     </div>
                                     <div className={style.gridUserRating}>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.cleanliness.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.cleanliness || "0"}</div>
                                             <p>Чистота</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.cleanliness) > 0 &&
@@ -241,7 +247,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.accuracy.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.accuracy || "0"}</div>
                                             <p>Точность</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.accuracy) > 0 &&
@@ -252,7 +258,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.checkIn.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.checkIn || "0"}</div>
                                             <p>Прибуття</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.checkIn) > 0 &&
@@ -263,7 +269,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.communication.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.communication || "0"}</div>
                                             <p>Коммуникация</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.communication) > 0 &&
@@ -274,7 +280,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.location.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.location || "0"}</div>
                                             <p>Расположение</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.location) > 0 &&
@@ -285,7 +291,7 @@ export const Details = () => {
                                             </div>
                                         </div>
                                         <div className={style.cardItem}>
-                                            <div className={style.cardItemRating}>{data?.ratings.value.toFixed(0)}</div>
+                                            <div className={style.cardItemRating}>{data?.ratings.value || "0"}</div>
                                             <p>Цены</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.value) > 0 &&
@@ -330,7 +336,7 @@ export const Details = () => {
                                                         <span>{el.createdAt.split('T')[0]}</span>
                                                     </div>
                                                     <div className={style.blockComment}>{el.text}</div>
-                                                    <div><span>Загальний рейтинг: {el.overallRating != null ? Number(el.overallRating).toFixed(0) : '0'}</span></div>
+                                                    <div><span>Загальний рейтинг: {el.overallRating}</span></div>
                                                 </div>
                                             ))
                                         }
@@ -346,253 +352,57 @@ export const Details = () => {
                                             className={style.textarea}
                                             placeholder="Напишіть свій коментар..."
                                         />
-                                        <div>
-                                            <span>Цены</span>
-                                            <Controller
-                                                control={control}
-                                                name="value"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
+                                        <Controller
+                                        control={control}
+                                        name="value"
+                                        render={({ field }) => (
+                                            <Select
+                                            {...field}
+                                            options={options}
+                                            placeholder="Додайте оцінку"
+                                            value={options.find((option) => option.value === field.value)}
+                                            onChange={(option) => field.onChange(option?.value)}
+                                            styles={{
+                                                control: (base) => ({
+                                                ...base,
+                                                border: "none",
+                                                borderBottom: "1px solid #ccc",
+                                                borderRadius: 0,
+                                                boxShadow: "none",
+                                                backgroundColor: "transparent",
+                                                minHeight: "40px",
+                                                padding: 0,
+                                                overflow: "visible",
+                                                }),
+                                                singleValue: (base) => ({
+                                                    ...base,
+                                                    overflow: "visible",
+                                                }),
+                                                indicatorSeparator: () => ({
+                                                display: "none",
+                                                }),
+                                                valueContainer: (base) => ({
+                                                ...base,
+                                                padding: 0,
+                                                }),
+                                            }}
                                             />
-                                        </div>
-                                        <div>
-                                            <span>Расположение</span>
-                                            <Controller
-                                                control={control}
-                                                name="location"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку локації"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
-                                        <div>
-                                            <span>Коммуникация</span>
-                                            <Controller
-                                                control={control}
-                                                name="communication"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку комунікації"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
-                                        <div>
-                                            <span>Прибуття</span>
-                                            <Controller
-                                                control={control}
-                                                name="checkIn"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку по приїзду"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
-                                        <div>
-                                            <span>Точность</span>
-                                            <Controller
-                                                control={control}
-                                                name="accuracy"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку по точності"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
-                                        <div>
-                                            <span>Чистота</span>
-                                            <Controller
-                                                control={control}
-                                                name="cleanliness"
-                                                render={({ field }) => (
-                                                    <Select
-                                                    {...field}
-                                                    options={options}
-                                                    placeholder="Додайте оцінку по чистоти"
-                                                    value={options.find((option) => option.value === field.value)}
-                                                    onChange={(option) => field.onChange(option?.value)}
-                                                    styles={{
-                                                        control: (base) => ({
-                                                        ...base,
-                                                        border: "none",
-                                                        borderBottom: "1px solid #ccc",
-                                                        borderRadius: 0,
-                                                        boxShadow: "none",
-                                                        backgroundColor: "transparent",
-                                                        minHeight: "40px",
-                                                        padding: 0,
-                                                        overflow: "visible",
-                                                        }),
-                                                        singleValue: (base) => ({
-                                                            ...base,
-                                                            overflow: "visible",
-                                                        }),
-                                                        indicatorSeparator: () => ({
-                                                        display: "none",
-                                                        }),
-                                                        valueContainer: (base) => ({
-                                                        ...base,
-                                                        padding: 0,
-                                                        }),
-                                                    }}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
+                                        )}
+                                        />
                                         <button type="submit" className={style.button}>
                                             Надіслати
                                         </button>
                                         </form>
                                     </div>
                                 )}
-
+{isBookingModalOpen && data && (
+  <BookHomeModal
+    price={data.card.price}
+    onClose={() => setIsBookingModalOpen(false)}
+    maxGuests={data.numberOfGuests}
+    cardId={data.card.id}
+  />
+)}
                                 <div>
                                     
                                 </div>
