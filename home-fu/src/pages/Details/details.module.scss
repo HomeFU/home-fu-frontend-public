@@ -63,6 +63,9 @@ h1 {
     flex: 1;
 
     img {
+        min-width: 100%;
+        width: auto;
+        object-fit: cover;
         max-height: 324px;
         min-height: 324px;
         max-width: 570px;
