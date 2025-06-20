@@ -12,6 +12,7 @@ import { UserLogin } from "../../../api/Auth/authLogin";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { login } from "../../../redux/Auth/authSlice";
+import { ConfirmEmail } from "..//..//..//components/ConfirmEmail/confirmEmail"; 
 
 type UserValidate = {
     email: string;
@@ -20,12 +21,20 @@ type UserValidate = {
 
 export const Login = () => {
     const [isErrorMessage, setErrorMessage] = useState<string>('');
+    const [showConfirmEmail, setShowConfirmEmail] = useState(false);
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const dispatch = useDispatch();
 
     const {register, reset, formState: {errors}, handleSubmit} = useForm<UserValidate>({mode:"onChange"});
 
     const queryClient = useQueryClient();
+
+    const handleEmailConfirmed = () => {
+        setShowConfirmEmail(false);
+        setUserEmail('');
+        setErrorMessage('');
+    };
 
     const mutation = useMutation({
         mutationKey: ['auth', 'login'],
@@ -38,17 +47,29 @@ export const Login = () => {
             dispatch(login(data));
             reset();
         },
-        onError: () => {
-            setErrorMessage('Ошибка авторизации')
+        onError: (error: any) => {
+            const errorMessage = error.response?.data?.message || error.response?.data?.title || 'Ошибка авторизации';
+        
+            if (errorMessage.includes('подтвержден') || errorMessage.includes('confirm') || error.response?.status === 403) {
+                setShowConfirmEmail(true); 
+            } else {
+                setErrorMessage(errorMessage);
+            }
         }
     });
 
     const onSubmit: SubmitHandler<UserValidate> = (data) => {
-        const user:UserModel = {
+        setErrorMessage(''); 
+        setUserEmail(data.email); 
+        const user: UserModel = {
             email: data.email,
             password: data.password
         }
         mutation.mutate(user);
+    }
+
+    if (showConfirmEmail) {
+        return <ConfirmEmail email={userEmail} onEmailConfirmed={handleEmailConfirmed} />;
     }
 
     return (
@@ -56,7 +77,7 @@ export const Login = () => {
             <h2 className={style.title}>Login</h2>
 
             <button className={style.closeButton} onClick={() => dispatch(closeLoginForm())}>
-                <img src={close} alt="close" loading="lazy" />
+                <img src={close || "/placeholder.svg"} alt="close" loading="lazy" />
             </button>
 
             <form className={style.formContent} onSubmit={handleSubmit(onSubmit)}>
@@ -109,19 +130,19 @@ export const Login = () => {
             </div>
             <div className={style.socialButtons}>
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={google} alt="googleIcon"loading="lazy" />
+                        <img className={style.socialIcon} src={google || "/placeholder.svg"} alt="googleIcon"loading="lazy" />
                         <span>Sign In with Google</span>
                         <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>
 
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={facebook} alt="facebookIcon"loading="lazy" />
+                        <img className={style.socialIcon} src={facebook || "/placeholder.svg"} alt="facebookIcon"loading="lazy" />
                         <span>Sign In with Facebook</span>
                         <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>       
                     
                     <button className={style.socialButton}>
-                        <img className={style.socialIcon} src={apple} alt="appleIcon" loading="lazy" />
+                        <img className={style.socialIcon} src={apple || "/placeholder.svg"} alt="appleIcon" loading="lazy" />
                         <span>Sign In with Apple</span>
                         <div className={style.comingSoonPopup}>Coming soon</div>
                     </button>               

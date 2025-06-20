@@ -9,13 +9,14 @@ import { closeRegisterForm } from "../../redux/LoginRegisterFormSlice/formSlice"
 
 interface ConfirmEmailProps {
   email: string;
+  onEmailConfirmed?: () => void;
 }
 
 interface ConfirmEmailFormData {
   confirmCode: string;
 }
 
-export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
+export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => {
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -27,11 +28,15 @@ export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
   } = useForm<ConfirmEmailFormData>();
 
   const mutation = useMutation({
-    mutationFn: (code: string) => ConfirmEmailService.confirmEmail(email, code),
+    mutationFn: (confirmCode: string) => ConfirmEmailService.confirmEmail(email, confirmCode),
     onSuccess: () => {
       setSuccessMessage("Email успешно подтвержден!");
       setTimeout(() => {
-        dispatch(closeRegisterForm());
+        if (onEmailConfirmed) {
+          onEmailConfirmed();
+        } else {
+          dispatch(closeRegisterForm());
+        }
       }, 2000);
     },
     onError: (error: any) => {
@@ -53,7 +58,13 @@ export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
 
       <button
         className={style.closeButton}
-        onClick={() => dispatch(closeRegisterForm())}
+        onClick={() => {
+          if (onEmailConfirmed) {
+            onEmailConfirmed();
+          } else {
+            dispatch(closeRegisterForm());
+          }
+        }}
       >
         <img src="/src/assets/icons/closeIcon.svg" alt="close" loading="lazy" />
       </button>
