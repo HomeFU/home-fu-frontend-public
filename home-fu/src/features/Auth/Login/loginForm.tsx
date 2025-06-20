@@ -12,6 +12,8 @@ import { UserLogin } from "../../../api/Auth/authLogin";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { login } from "../../../redux/Auth/authSlice";
+import { AxiosError } from "axios";
+import { ConfirmEmail } from "../../../components/ConfirmEmail/confirmEmail";
 
 type UserValidate = {
     email: string;
@@ -20,10 +22,12 @@ type UserValidate = {
 
 export const Login = () => {
     const [isErrorMessage, setErrorMessage] = useState<string>('');
+    const [showConfirmEmail, setShowConfirmEmail] = useState(false);
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const dispatch = useDispatch();
 
-    const {register, reset, formState: {errors}, handleSubmit} = useForm<UserValidate>({mode:"onChange"});
+    const {register, reset, watch, formState: {errors}, handleSubmit} = useForm<UserValidate>({mode:"onChange"});
 
     const queryClient = useQueryClient();
 
@@ -35,19 +39,29 @@ export const Login = () => {
             localStorage.setItem('token', data.token);
             queryClient.invalidateQueries({ queryKey: ['auth'] });
             dispatch(closeLoginForm());
+            setUserEmail(watch("email"));
             dispatch(login(data));
             reset();
         },
-        onError: () => {
+        onError: (error:AxiosError) => {
+            if(error.response?.status === 403) {
+                setShowConfirmEmail(true);
+            }
             setErrorMessage('Ошибка авторизации')
         }
     });
+
+    if(showConfirmEmail) {
+        console.log(userEmail);
+        return <ConfirmEmail email={userEmail} />
+    }
 
     const onSubmit: SubmitHandler<UserValidate> = (data) => {
         const user:UserModel = {
             email: data.email,
             password: data.password
         }
+        setUserEmail(data.email);
         mutation.mutate(user);
     }
 

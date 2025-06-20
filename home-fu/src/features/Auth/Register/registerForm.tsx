@@ -53,9 +53,9 @@ export const Register = () => {
         mutation.mutate(user);
     };
 
-if (showConfirmEmail) {
-  return <ConfirmEmail email={userEmail} />;
-}
+    if (showConfirmEmail) {
+        return <ConfirmEmail email={userEmail} />;
+    }
 
     return (
         <div className={style.formCard}>

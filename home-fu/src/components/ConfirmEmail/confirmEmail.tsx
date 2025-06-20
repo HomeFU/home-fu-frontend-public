@@ -3,22 +3,19 @@ import { useForm } from "react-hook-form";
 import { BeatLoader } from "react-spinners";
 import { useMutation } from "@tanstack/react-query";
 import { ConfirmEmailService } from "../../api/ConfirmEmail/confirmEmail";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeRegisterForm } from "../../redux/LoginRegisterFormSlice/formSlice";
 
-interface ConfirmEmailProps {
+type ConfirmEmailProps = {
   email: string;
 }
 
-interface ConfirmEmailFormData {
+type ConfirmEmailFormData = {
   confirmCode: string;
 }
 
 export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
   const dispatch = useDispatch();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     register,
@@ -27,23 +24,17 @@ export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
   } = useForm<ConfirmEmailFormData>();
 
   const mutation = useMutation({
-    mutationFn: (code: string) => ConfirmEmailService.confirmEmail(email, code),
+    mutationFn: (code: string) => ConfirmEmailService(email, code),
     onSuccess: () => {
-      setSuccessMessage("Email успешно подтвержден!");
       setTimeout(() => {
         dispatch(closeRegisterForm());
       }, 2000);
-    },
-    onError: (error: any) => {
-      setErrorMessage(
-        error.response?.data?.message || "Ошибка подтверждения email"
-      );
-    },
+    }
   });
 
+  const {isSuccess, isError} = mutation;
+
   const onSubmit = (data: ConfirmEmailFormData) => {
-    setErrorMessage("");
-    setSuccessMessage("");
     mutation.mutate(data.confirmCode);
   };
 
@@ -84,9 +75,11 @@ export const ConfirmEmail = ({ email }: ConfirmEmailProps) => {
           <p className={style.error}>{errors.confirmCode?.message}</p>
         </div>
 
-        {errorMessage && <p className={style.errorMessage}>{errorMessage}</p>}
-        {successMessage && (
-          <p className={style.successMessage}>{successMessage}</p>
+        {isError && <p className={style.errorMessage}>
+         Помилка підтвердження пошти
+        </p>}
+        {isSuccess && (
+          <p className={style.successMessage}>Підтвердження пошти пройшло успішно!</p>
         )}
 
         <button
