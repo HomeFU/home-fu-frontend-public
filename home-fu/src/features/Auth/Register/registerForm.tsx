@@ -23,6 +23,7 @@ type UserValidate = {
 export const Register = () => {
     const [isErrorMessage, setErrorMessage] = useState<string>('');
     const [showConfirmEmail, setShowConfirmEmail] = useState(false);
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ export const Register = () => {
         mutationFn: RegistrationUser,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["auth"] });
+            setUserEmail(watch("email"));
             setShowConfirmEmail(true);
             reset();
         },
@@ -51,9 +53,9 @@ export const Register = () => {
         mutation.mutate(user);
     };
 
-    if (showConfirmEmail) {
-        return <ConfirmEmail />;
-    }
+if (showConfirmEmail) {
+  return <ConfirmEmail email={userEmail} />;
+}
 
     return (
         <div className={style.formCard}>

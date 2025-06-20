@@ -100,3 +100,15 @@
         transition: 0.3s;
     }
 }
+
+.errorMessage {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.successMessage {
+    color: green;
+    margin-bottom: 10px;
+    text-align: center;
+}
