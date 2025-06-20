@@ -2,25 +2,22 @@ import style from "./confirmEmail.module.scss";
 import { useForm } from "react-hook-form";
 import { BeatLoader } from "react-spinners";
 import { useMutation } from "@tanstack/react-query";
-import { ConfirmEmailService } from "../../api/ConfirmEmail/confirmEmail";
-import { useState } from "react";
+import { ConfirmEmailApi } from "../../api/ConfirmEmail/confirmEmail";
 import { useDispatch } from "react-redux";
 import { closeRegisterForm } from "../../redux/LoginRegisterFormSlice/formSlice";
 
-interface ConfirmEmailProps {
+type ConfirmEmailProps = {
   email: string;
   onEmailConfirmed?: () => void;
 }
 
-interface ConfirmEmailFormData {
+type ConfirmEmailFormData = {
   confirmCode: string;
 }
 
 export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => {
   const dispatch = useDispatch();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
+  
   const {
     register,
     handleSubmit,
@@ -28,9 +25,8 @@ export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => 
   } = useForm<ConfirmEmailFormData>();
 
   const mutation = useMutation({
-    mutationFn: (confirmCode: string) => ConfirmEmailService.confirmEmail(email, confirmCode),
+    mutationFn: (confirmCode: string) => ConfirmEmailApi(email, confirmCode),
     onSuccess: () => {
-      setSuccessMessage("Email успешно подтвержден!");
       setTimeout(() => {
         if (onEmailConfirmed) {
           onEmailConfirmed();
@@ -38,17 +34,12 @@ export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => 
           dispatch(closeRegisterForm());
         }
       }, 2000);
-    },
-    onError: (error: any) => {
-      setErrorMessage(
-        error.response?.data?.message || "Ошибка подтверждения email"
-      );
-    },
+    }
   });
 
+  const {isError, isSuccess} = mutation;
+
   const onSubmit = (data: ConfirmEmailFormData) => {
-    setErrorMessage("");
-    setSuccessMessage("");
     mutation.mutate(data.confirmCode);
   };
 
@@ -95,9 +86,9 @@ export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => 
           <p className={style.error}>{errors.confirmCode?.message}</p>
         </div>
 
-        {errorMessage && <p className={style.errorMessage}>{errorMessage}</p>}
-        {successMessage && (
-          <p className={style.successMessage}>{successMessage}</p>
+        {isError && <p className={style.errorMessage}>Ошибка подтверждения email</p>}
+        {isSuccess && (
+          <p className={style.successMessage}>Email успешно подтвержден!</p>
         )}
 
         <button

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { login } from "../../../redux/Auth/authSlice";
 import { ConfirmEmail } from "..//..//..//components/ConfirmEmail/confirmEmail"; 
+import { AxiosError } from "axios";
 
 type UserValidate = {
     email: string;
@@ -47,8 +48,8 @@ export const Login = () => {
             dispatch(login(data));
             reset();
         },
-        onError: (error: any) => {
-            const errorMessage = error.response?.data?.message || error.response?.data?.title || 'Ошибка авторизации';
+        onError: (error: AxiosError) => {
+            const errorMessage = error.message || error.message || 'Ошибка авторизации';
         
             if (errorMessage.includes('подтвержден') || errorMessage.includes('confirm') || error.response?.status === 403) {
                 setShowConfirmEmail(true); 
