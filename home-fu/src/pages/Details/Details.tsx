@@ -395,14 +395,14 @@ export const Details = () => {
                                         </form>
                                     </div>
                                 )}
-{isBookingModalOpen && data && (
-  <BookHomeModal
-    price={data.card.price}
-    onClose={() => setIsBookingModalOpen(false)}
-    maxGuests={data.numberOfGuests}
-    cardId={data.card.id}
-  />
-)}
+                                  {isBookingModalOpen && data && (
+                                    <BookHomeModal
+                                         price={data.card.price}
+                                     onClose={() => setIsBookingModalOpen(false)}
+                                     maxGuests={data.numberOfGuests}
+                                     cardId={data.card.id}
+                                         />
+                                )}
                                 <div>
                                     
                                 </div>
