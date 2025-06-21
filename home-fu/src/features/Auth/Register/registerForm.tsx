@@ -9,9 +9,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { UserModel } from "../../../types/Auth/auth";
 import { RegistrationUser } from "../../../api/Auth/authRegistration";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { openLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
+// import { openLoginForm } from "../../../redux/LoginRegisterFormSlice/formSlice";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { ConfirmEmail } from "..//..//..//components/ConfirmEmail/confirmEmail";
 
 type UserValidate = {
     email: string;
@@ -21,10 +22,12 @@ type UserValidate = {
 
 export const Register = () => {
     const [isErrorMessage, setErrorMessage] = useState<string>('');
+    const [showConfirmEmail, setShowConfirmEmail] = useState(false);
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const dispatch = useDispatch();
 
-    const { register, reset, formState: { errors },  handleSubmit, watch} = useForm<UserValidate>({mode:'onChange'});
+    const { register, reset, formState: { errors }, handleSubmit, watch } = useForm<UserValidate>({ mode: 'onChange' });
 
     const queryClient = useQueryClient();
 
@@ -32,8 +35,9 @@ export const Register = () => {
         mutationKey: ['auth', 'register'],
         mutationFn: RegistrationUser,
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["auth"]});
-            dispatch(openLoginForm());
+            queryClient.invalidateQueries({ queryKey: ["auth"] });
+            setUserEmail(watch("email"));
+            setShowConfirmEmail(true);
             reset();
         },
         onError: () => {
@@ -42,26 +46,28 @@ export const Register = () => {
     });
 
     const onSubmit: SubmitHandler<UserValidate> = (data) => {
-       
-        const user:UserModel = {
+        const user: UserModel = {
             email: data.email,
             password: data.password,
         }
-
         mutation.mutate(user);
     };
+
+if (showConfirmEmail) {
+  return <ConfirmEmail email={userEmail} />;
+}
 
     return (
         <div className={style.formCard}>
             <h2 className={style.title}>Register</h2>
 
             <button className={style.closeButton} onClick={() => dispatch(closeRegisterForm())}>
-                <img src={close} alt="close" loading="lazy"/>
+                <img src={close} alt="close" loading="lazy" />
             </button>
 
             <form className={style.formContent} onSubmit={handleSubmit(onSubmit)}>
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="email"
                         placeholder="Email"
                         className={style.input}
@@ -77,7 +83,7 @@ export const Register = () => {
                 </div>
 
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="password"
                         placeholder="Password"
                         className={style.input}
@@ -93,7 +99,7 @@ export const Register = () => {
                 </div>
 
                 <div className={style.formGroup}>
-                    <input
+                    <input autoComplete="off"
                         type="password"
                         placeholder="Repeat password"
                         className={style.input}
@@ -107,7 +113,7 @@ export const Register = () => {
                 </div>
 
                 <p className={style.errorMessage}>
-                    { mutation.isError ? `Error: ${isErrorMessage} !` : '' }
+                    {mutation.isError ? `Error: ${isErrorMessage} !` : ''}
                 </p>
 
                 <button type="submit" className={style.registerButton}>
@@ -119,13 +125,13 @@ export const Register = () => {
 
             <div className={style.socialButtons}>
                 <button className={style.socialButton}>
-                    <img className={style.socialIcon} src={google} alt="googleIcon" loading="lazy"/>
+                    <img className={style.socialIcon} src={google} alt="googleIcon" loading="lazy" />
                     <span>Sign In with Google</span>
                     <div className={style.comingSoonPopup}>Coming soon</div>
                 </button>
 
                 <button className={style.socialButton}>
-                    <img className={style.socialIcon} src={facebook} alt="facebookIcon" loading="lazy"/>
+                    <img className={style.socialIcon} src={facebook} alt="facebookIcon" loading="lazy" />
                     <span>Sign In with Facebook</span>
                     <div className={style.comingSoonPopup}>Coming soon</div>
                 </button>
@@ -139,4 +145,3 @@ export const Register = () => {
         </div>
     );
 };
-

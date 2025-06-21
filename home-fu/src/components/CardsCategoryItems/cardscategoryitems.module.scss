@@ -40,6 +40,19 @@
   border-radius: 16px;
   background: lightgray;
   height: 101%;
+
+  &::before {
+    content: 'Бажаєте відновити?';
+    position: absolute;
+    font-size: 25px;
+    text-wrap: nowrap;
+    font-weight: 600;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    color: rgb(52, 104, 194);
+    transform: translate(-50%, -50%);
+  }
 }
 
 .cardItemImage {

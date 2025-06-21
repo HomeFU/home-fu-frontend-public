@@ -46,6 +46,7 @@
         width: 100%;
         overflow: hidden;
         min-width: unset;
+        max-width: unset;
     }
 }
 
@@ -54,7 +55,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     white-space: nowrap;
-    width: 99%;
+    width: 93%;
     gap: 38px;
     overflow-y: hidden;
 

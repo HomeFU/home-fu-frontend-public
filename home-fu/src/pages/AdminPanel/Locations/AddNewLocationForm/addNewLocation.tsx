@@ -30,7 +30,6 @@ export const AddNewLocation = () => {
       queryClient.invalidateQueries({ queryKey: ['location'] });
       reset();
       dispatch(closeAddLocationForm());
-      window.location.reload();
     },
     onError: () => {
       setErrorMessage('Ошибка добавления локации');
@@ -51,7 +50,7 @@ export const AddNewLocation = () => {
         <button className={style.closeButton} onClick={handleClose}>×</button>
         <h2 className={style.title}>Add new location</h2>
         <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
-          <input
+          <input autoComplete="off"
             type="text"
             placeholder="Enter name for new location"
             className={style.input}

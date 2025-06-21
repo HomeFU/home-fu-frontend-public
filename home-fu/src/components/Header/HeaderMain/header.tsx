@@ -57,7 +57,7 @@ export const Header = ({ onSearch }: HeaderProps) => {
                         }
                         <MenuPopoUp/>
                         <div className={style.offerListWrapper}>
-                            <Link className={style.offerItem} to="/">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
+                            <Link className={style.offerItem} to="/owner">Запропонувати помешкання на Home<span className={style.logoModifier}>FU</span></Link>
                             {
                                 isAuthenticatedUser ? <AuthenticatedUserButton/> : <RegisterButton/>
                             }

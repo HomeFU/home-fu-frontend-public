@@ -5,7 +5,7 @@ import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { CardsCategoriesModel } from "../../types/Categories/cardsCategories";
 import style from "./cardscategoryitems.module.scss";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RestoreCard } from "../../api/CardDetails/restoreCard";
 
 // @ts-ignore
@@ -22,12 +22,15 @@ type CardsListProps = {
 }
 
 export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
+  const queryClient = useQueryClient();
+
   const { 
     mutate: restoreCard 
   } = useMutation({
     mutationFn: RestoreCard,
     onSuccess: () => {
-      window.location.reload();
+      queryClient.invalidateQueries({queryKey: ['cardsCategories']});
+      alert('Карточка відновлена');
     },
     onError: (error) => {
       console.error('Ошибка восстановления карточки', error);

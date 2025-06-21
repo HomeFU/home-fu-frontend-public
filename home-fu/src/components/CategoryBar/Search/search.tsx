@@ -59,6 +59,7 @@ export const Search = ({ onSearch }: Props) => {
     return (
         <div className={styles.searchWrapper}>
             <input
+                autoComplete="off"
                 type="text"
                 className={styles.searchInput}
                 placeholder="Пошук..."

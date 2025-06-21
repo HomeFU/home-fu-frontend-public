@@ -21,6 +21,8 @@ export type CardDetailsModel = {
     numberOfBathrooms: number;
     hostId: string;
     hostName: string;
+    hostNum: string;
+    hostMail: string;
     hostAvatarUrl: string;
     description: string;
     latitude: number;

@@ -26,13 +26,12 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
   } = useForm<CategoryValidate>({ mode: 'onChange' });
 
   const mutation = useMutation({
-    mutationKey: ['category', 'add'],
+    mutationKey: ['category'],
     mutationFn: AddNewCategoryAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['category'] });
+      queryClient.invalidateQueries({ queryKey: ['category', 'full'] });
       reset();
       onClose();
-      window.location.reload();
     },
     onError: () => {
       setErrorMessage('Ошибка добавления категории');
@@ -66,7 +65,7 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
         </button>
         <h1 className={style.title}>Add new category</h1>
         <form onSubmit={handleSubmit(onSubmit)} className={style.formContent}>
-          <input
+          <input autoComplete="off"
             className={style.input}
             type="text"
             placeholder="Enter name for new category"
@@ -78,7 +77,7 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
           
           <span>Add image for category</span>
           <div className={style.fileInputWrapper}>
-            <input
+            <input autoComplete="off"
               type="file"
               id="fileInput"
               {...register('imageFile', {

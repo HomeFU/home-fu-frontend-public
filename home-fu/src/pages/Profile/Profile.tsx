@@ -49,7 +49,7 @@ export const Profile: React.FC = () => {
     const file = e.target.files?.[0];
   
     if (!file || !fullInfoUserData.id || !token) return;
-  
+
     try {
       await AddUserPhoto(fullInfoUserData.id, token, file);
       queryClient.invalidateQueries({ queryKey: ['fullInfoUser'] });
@@ -69,7 +69,7 @@ export const Profile: React.FC = () => {
     mutationFn: UpdateInfoAboutUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fullInfoUser'] });
-      window.location.reload();
+      alert("Ви оновили свої дані!");
     },
     onError: (error) => {
       console.error("Update error:", error);
@@ -146,7 +146,7 @@ export const Profile: React.FC = () => {
                   ) : (
                     <img className={styles.userImage} loading="lazy" src={NoUserPhoto} alt="userPhoto" />
                   )}
-                  <input
+                  <input autoComplete="off"
                     type="file"
                     ref={fileInputRef}
                     accept="image/*"
@@ -173,37 +173,37 @@ export const Profile: React.FC = () => {
 
                 <div className={styles.fieldsGrid}>
                   <div className={styles.field}>
-                    <input {...register("firstName")} type="text" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("firstName")} type="text" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Ім'я</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("lastName")} type="text" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("lastName")} type="text" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Прізвище</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("email")} readOnly type="email" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("email")} readOnly type="email" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Електронна пошта</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("phoneNumber")} type="tel" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("phoneNumber")} type="tel" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Телефон</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("address")} type="text" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("address")} type="text" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Адреса</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("emergencyContactName")} type="text" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("emergencyContactName")} type="text" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Ім'я екстреного контакту</span>
                   </div>
 
                   <div className={styles.field}>
-                    <input {...register("emergencyContactPhone")} type="text" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("emergencyContactPhone")} type="text" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Екстрений контакт</span>
                   </div>
 
@@ -243,7 +243,7 @@ export const Profile: React.FC = () => {
                   </div>
 
                   <div className={`${styles.field} ${styles.fieldHappyDate}`}>
-                    <input {...register("birthDate")} type="date" className={styles.fieldInput} placeholder=" " />
+                    <input autoComplete="off" {...register("birthDate")} type="date" className={styles.fieldInput} placeholder=" " />
                     <span className={styles.fieldLabel}>Дата народження</span>
                   </div>
                 </div>

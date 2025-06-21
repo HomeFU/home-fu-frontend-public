@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./locations.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
@@ -9,6 +9,7 @@ import { UpdateLocation } from "./UpdateLocationForm/updateLocationForm";
 import { openUpdateLocationForm } from "../../../redux/AdminPanel/editPanelFirst";
 import type { RootState } from '../../../redux/store';
 import { openAddLocationForm } from "../../../redux/AdminPanel/adminPanel";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type LocationsModel = {
   id: number;
@@ -25,31 +26,33 @@ export const Locations = () => {
     (state: RootState) => state.adminupdateLocationForm.isOpenUpdateLocationForm
   );
 
+  const queryClient = useQueryClient();
+
   const [idForUpdateLocation, setidForDeleteLocation] = useState<number | null>(null);
   const [nameForUpdateLocation, setNameForUpdateLocation] = useState<string>("");
-  const [responseData, setResponseData] = useState<LocationsModel[]>([]);
 
-  const fetchData = async () => {
-    try {
-      const data = await AllLocationsForAdmin();
-      setResponseData(data);
-    } catch (error) {
-      console.error("Error loading locations", error);
+  const {
+    data: fullDataInfoLocations
+  } = useQuery<LocationsModel[]>({
+    queryKey:['location', 'full'],
+    queryFn: () => AllLocationsForAdmin()
+  })
+
+  const deleteLocationMutation = useMutation({
+    mutationFn: (id: number) => DeleteLocationForAdmin(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['location', 'full']});
+      alert("Локацію видалено!");
+    },
+    onError: (error) => {
+      console.error("Помилка при видаленні категорії:", error);
+      alert("Не вдалося видалити категорію");
     }
-  };
+  });
 
-  const deleteLocation = async (id: number) => {
-    try {
-      await DeleteLocationForAdmin(id);
-      fetchData();
-    } catch (error) {
-      console.log("Error deleting location: ", error);
-    }
+  const deleteLocation = (id: number) => {
+    deleteLocationMutation.mutate(id);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const editLocationFunction = (id: number, name: string) => {
     setidForDeleteLocation(id);
@@ -79,7 +82,7 @@ export const Locations = () => {
           <button onClick={() => dispatch(openAddLocationForm())}>+ Add Location</button>
         </div>
         <div className={style.wrapperTable}>
-          <CompactTable columns={columns} data={{ nodes: responseData }} />
+          <CompactTable columns={columns} data={{ nodes: fullDataInfoLocations || [] }} />
         </div>
       </div>
       {isOpenFormForAddNewLocation && <AddNewLocation/>}

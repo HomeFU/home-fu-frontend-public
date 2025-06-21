@@ -1,0 +1,114 @@
+@mixin text ($font-weight, $font-size, $color) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.formCard {
+    background: white;
+    box-shadow: 1px 1px 18px 0 rgba(0, 0, 0, 0.2);
+    width: 400px;
+    border-radius: 13px;
+    padding: 24px;
+    position: relative;
+
+    @media (max-width:768px) {
+        width: unset;
+        top: 35%;
+        transform: translateY(35%);
+        margin: 0 20px;
+    }
+}
+
+.title {
+    @include text(800, 24px, #211E1A);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.description {
+    @include text(400, 16px, #4b5563);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.closeButton {
+    position: absolute;
+    color: #6b7280;
+    right: 24px;
+    top: 24px;
+    cursor: pointer;
+
+    &:hover {
+        color: #374151;
+    }
+}
+
+.formContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input {
+    padding: 15px 24px;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    @include text(400, 18px, #211E1A);
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #9ca3af;
+    }
+
+    &::placeholder {
+        @include text(400, 16px, #717171);
+    }
+}
+
+.error {
+    @include text(400, 16px, rgb(216, 61, 61));
+    margin-left: 19px;
+    line-height: 24px;
+}
+
+.errorMessage {
+    @include text(400, 16px, red);
+    text-align: center;
+    line-height: 24px;
+}
+
+.confirmButton {
+    cursor: pointer;
+    padding: 22px 0;
+    border-radius: 9999px;
+    background-color: rgb(52, 104, 194);
+    transition: 0.3s;
+    @include text(700, 16px, #fff);
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: rgb(75, 122, 204);
+        transition: 0.3s;
+    }
+}
+
+.errorMessage {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.successMessage {
+    color: green;
+    margin-bottom: 10px;
+    text-align: center;
+}
