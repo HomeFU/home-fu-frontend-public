@@ -8,20 +8,25 @@
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 500px;
     height: 47px;
     border-radius: 26px;
     border: 1px solid #bdbdbd;
-    padding: 0 15px;
+    // padding: 0 15px;
     transition: all 0.3s ease;
     background: white;
 
+
+    @media (min-width:1200px) {
+        max-width: 500px;
+    }
+    
     &:focus-within {
         border-color: rgb(52, 104, 194);
         box-shadow: 0 0 0 2px rgba(52, 104, 194, 0.2);
     }
 
     .searchInput {
+        margin-left: 15px;
         @include text(400, 16px, #2C2823);
         flex-grow: 1;
         border: none;
@@ -35,6 +40,7 @@
     }
 
     .searchButton {
+        margin-right: 15px;
         background: none;
         border: none;
         cursor: pointer;
