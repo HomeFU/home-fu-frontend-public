@@ -49,10 +49,11 @@ export const Profile: React.FC = () => {
     const file = e.target.files?.[0];
   
     if (!file || !fullInfoUserData.id || !token) return;
-  
+
     try {
       await AddUserPhoto(fullInfoUserData.id, token, file);
       queryClient.invalidateQueries({ queryKey: ['fullInfoUser'] });
+      window.location.reload();
     } catch (error) {
       alert("Ошибка при загрузке фото");
       console.error("Ошибка при загрузке фото:", error);
@@ -68,7 +69,7 @@ export const Profile: React.FC = () => {
     mutationFn: UpdateInfoAboutUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fullInfoUser'] });
-      alert("Ви поновили свої дані!");
+      alert("Ви оновили свої дані!");
     },
     onError: (error) => {
       console.error("Update error:", error);

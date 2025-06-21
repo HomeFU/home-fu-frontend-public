@@ -61,7 +61,6 @@ export const Home = () => {
         isError: isErrorFiltered,
     } = useFilterSearch(filterParams);
 
-    // 🔹 Установка категории в Redux
     useEffect(() => {
         if (categoryIdFromUrl) {
             dispatch(setSelectedCategori(categoryIdFromUrl));
