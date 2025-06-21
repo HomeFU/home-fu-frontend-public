@@ -32,14 +32,13 @@ export const UpdateCategory = ({ id, name, onClose }: UpdateCategoryModel) => {
   });
 
   const mutation = useMutation({
-    mutationKey: ['category', 'update', id],
+    mutationKey: ['category', id],
     mutationFn: ({ data, id }: { data: { name: string; imageFile: File }; id: number }) =>
       UpdateCategoryAPI({ data, id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['category'] });
+      queryClient.invalidateQueries({ queryKey: ['category', 'full'] });
       reset();
       onClose();
-      window.location.reload();
     },
     onError: () => {
       setErrorMessage('Ошибка обновления категории');
@@ -87,7 +86,7 @@ export const UpdateCategory = ({ id, name, onClose }: UpdateCategoryModel) => {
               <input autoComplete="off"
                 type="file"
                 id="fileInput"
-                {...register('imageFile', { required: 'Image is required' })}
+                {...register('imageFile')}
                 onChange={(e) => setFileName(e.target.files?.[0]?.name || '')}
               />
               <label htmlFor="fileInput" className={style.fileInputButton}>

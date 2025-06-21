@@ -26,13 +26,12 @@ export const AddNewCategory = ({ onClose }: AddNewCategoryProps) => {
   } = useForm<CategoryValidate>({ mode: 'onChange' });
 
   const mutation = useMutation({
-    mutationKey: ['category', 'add'],
+    mutationKey: ['category'],
     mutationFn: AddNewCategoryAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['category'] });
+      queryClient.invalidateQueries({ queryKey: ['category', 'full'] });
       reset();
       onClose();
-      window.location.reload();
     },
     onError: () => {
       setErrorMessage('Ошибка добавления категории');

@@ -25,6 +25,7 @@ type FormValues = {
   longitude: string
   amenityIds: number[]
   cardImages: FileList
+  startDate:string
 }
 
 export const Owner = () => {
@@ -53,6 +54,7 @@ export const Owner = () => {
   const mutation = useMutation({
     mutationFn: (formData: FormData) => CreateOwnerCards(formData),
     onSuccess: (data) => {
+      window.location.reload();
       console.log("Card created:", data);
     },
     onError: (error) => {
@@ -67,6 +69,8 @@ export const Owner = () => {
       return;
     }
 
+    const today = new Date().toISOString().split('T')[0];
+
     const formData = new FormData();
     formData.append("CardName", data.cardName);
     formData.append("LocationId", String(data.locationId));
@@ -79,6 +83,7 @@ export const Owner = () => {
     formData.append("Latitude", data.latitude);
     formData.append("Longitude", data.longitude);
     formData.append("HostId", userId);
+    formData.append("StartDate", today);
 
     data.amenityIds.forEach(id => {
       formData.append("AmenityIds[]", String(id));

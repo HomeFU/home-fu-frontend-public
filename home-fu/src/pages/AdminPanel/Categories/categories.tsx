@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./categories.module.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { AllCategoriesForAdmin } from "../../../api/Admin/Categories/getAllCategories";
@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "..//..//..//redux/store"; 
 import { toggleAddCategoryForm } from "..//..//..//redux/AdminPanel/adminCategoryAdd";
 import { openEditCategoryForm, closeEditCategoryForm } from "..//..//..//redux/AdminPanel/adminCategoryEdit";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type CategoriesModel = {
   id: number;
@@ -22,7 +23,8 @@ export const Categories = () => {
   const isOpenFormUpdateCategory = useSelector((state: RootState) => state.categoryPanelEdit.isOpenEditCategoryForm);
   const [idForUpdateCategory, setIdForUpdateCategory] = useState<number | null >(null);
   const [nameForUpdateCategory, setNameForUpdateCategory] = useState<string>('');
-  const [responseData, setResponseData] = useState<CategoriesModel[]>([]);
+
+  const queryClient = useQueryClient();
 
   const editCategoryFunction = (id: number, name: string) => {
     dispatch(openEditCategoryForm());
@@ -32,39 +34,38 @@ export const Categories = () => {
 
   const closeAddForm = () => {
     dispatch(toggleAddCategoryForm());
-    fetchData(); 
   };
 
   const closeUpdateForm = () => {
     dispatch(closeEditCategoryForm());
-    fetchData();
   };
 
-  const fetchData = async () => {
-    try {
-      const data = await AllCategoriesForAdmin();
-      setResponseData(data);
-    } catch (error) {
-      console.error("Error loading categories", error);
-    }
-  };
+  const {
+    data: fullDataInfoCategories,
+  } = useQuery<CategoriesModel[]>({
+    queryKey:['category', 'full'],
+    queryFn: () => AllCategoriesForAdmin()
+  });
 
-  const deleteCategory = async (id: number) => {
-    try {
-      await DeleteCategoryForAdmin(id);
-      fetchData();
-    } catch (error) {
-      console.error("Error deleting category", error);
-    } 
+  const deleteCategoryMutation = useMutation({
+    mutationFn: (id:number) => DeleteCategoryForAdmin(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['category', 'full'] });
+      alert("Категорію видалено!");
+    },
+    onError: (error) => {
+    console.error("Помилка при видаленні категорії:", error);
+    alert("Не вдалося видалити категорію");
+  },
+  })
+
+  const deleteCategory = (id: number) => {
+    deleteCategoryMutation.mutate(id);
   };
 
   const toggleForm = () => {
     dispatch(toggleAddCategoryForm());
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const columns = [
     { label: "ID", renderCell: (item: CategoriesModel) => item.id },
@@ -116,7 +117,7 @@ export const Categories = () => {
           <button onClick={toggleForm}>+ Add Category</button>
         </div>
         <div className={style.wrapperTable}>
-          <CompactTable columns={columns} data={{ nodes: responseData }} />
+          <CompactTable columns={columns} data={{ nodes: fullDataInfoCategories || [] }} />
         </div>
       </div>
       {isOpenFormAddCategory && <AddNewCategory onClose={closeAddForm} />}

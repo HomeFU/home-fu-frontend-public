@@ -36,10 +36,9 @@ export const UpdateLocation = ({ id, name }: UpdateLocationModel) => {
         mutationFn: ({ data, id }: { data: UpdateLocationType; id: number }) =>
             UpdateLocationAPI({ data, id }),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['locations'] });
+            queryClient.invalidateQueries({ queryKey: ['location'] });
             reset();
             dispatch(closeUpdateLocationForm());
-            window.location.reload();
         },
         onError: () => {
             setErrorMessage('Ошибка обновления локации');

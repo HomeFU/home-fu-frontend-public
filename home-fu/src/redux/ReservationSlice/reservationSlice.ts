@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ReservationService } from '../../api/ServiceReservation/reservationService';
+// import { ReservationService } from '../../api/ServiceReservation/reservationService';
 import type { RootState } from '../../redux/store';
+import { CreateReservation } from '../../api/ServiceReservation/createReservation';
 
 interface ReservationState {
   loading: boolean;
@@ -27,7 +28,7 @@ export const createReservation = createAsyncThunk(
     token: string;
   }, { rejectWithValue }) => {
     try {
-      const response = await ReservationService.createReservation(payload.data, payload.token);
+      const response = await CreateReservation(payload.data, payload.token);
       return response;
     } catch (error: unknown) {
       if (error instanceof Error) {

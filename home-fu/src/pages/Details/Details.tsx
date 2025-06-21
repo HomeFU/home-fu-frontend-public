@@ -1,6 +1,6 @@
 import style from "./details.module.scss"
 import { FooterSite } from "../../components/Footer/FooterSite/footerSite"
-import {useMutation, useQuery } from "@tanstack/react-query"
+import {useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { CardDetailsModel } from "../../types/DatailsCard/details"
 import { useParams } from "react-router-dom"
 import Select from "react-select"
@@ -40,6 +40,8 @@ type CommentValidate = {
     location:number
 }
 export const Details = () => {
+    const queryClient = useQueryClient();
+
     const { id } = useParams<{ id: string }>();
     const isAuthenticatedUser = useSelector((state: RootState) => state.auth.isAuthenticated);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -67,9 +69,9 @@ export const Details = () => {
         mutationKey: ["createComment"],
         mutationFn: ({ id, text, value, cleanliness, accuracy, checkIn, communication, location }: CommentsModel) =>
             CreateComment({ id, text, value, cleanliness, accuracy, checkIn, communication, location }),
-        onSuccess: () => {
+        onSuccess: (_, variables) => {
             alert("Ваш коментар додано!");
-            window.location.reload(); 
+            queryClient.invalidateQueries({ queryKey:["cardDetails", variables.id]});
             reset();
         },
         onError: () => {
@@ -77,22 +79,21 @@ export const Details = () => {
         },
     });
 
-const onSubmit: SubmitHandler<CommentValidate> = (data) => {
-  const trimmed = data.text.trim();
-  if (!trimmed) return;
+    const onSubmit: SubmitHandler<CommentValidate> = (data) => {
+        const trimmed = data.text.trim();
+        if (!trimmed) return;
 
-  mutation.mutate({
-    id: id!,
-    text: trimmed,
-    value: data.value,
-    cleanliness: data.cleanliness,
-    accuracy: data.accuracy,
-    checkIn: data.checkIn,
-    communication: data.communication,
-    location: data.location,
-  });
-};
-
+        mutation.mutate({
+            id: id!,
+            text: trimmed,
+            value: data.value,
+            cleanliness: data.cleanliness,
+            accuracy: data.accuracy,
+            checkIn: data.checkIn,
+            communication: data.communication,
+            location: data.location,
+        });
+    };
 
     const {
         data,
@@ -117,15 +118,15 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                     <div className={style.reserverBlockButtons}>
                                         <div className={style.reserverBlock}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-circle-check-big w-3 h-3 mr-1"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>    
-                                            Мгновенное бронирование
+                                           Миттєве бронювання
                                         </div>
                                         <div className={style.wrapperButtons}>
                                             <button>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-share w-4 h-4"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" x2="12" y1="2" y2="15"></line></svg>    
-                                            Поделится</button>
+                                            Поділиться</button>
                                             <button>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-heart w-4 h-4 transition-all duration-300 "><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                                            Сохранить</button>
+                                            Зберегти</button>
                                         </div>
                                     </div>
                                     <div className={style.wrapperMainContent}>
@@ -141,10 +142,10 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                                     <span className={style.locationName}>{data?.card.locationName}</span>
                                                 </div>
                                                 <div className={style.wrapperPrice}>
-                                                    <span>Price: {data?.card.price}$</span>
+                                                    <span>Ціна: {data?.card.price}$</span>
                                                 </div>
                                                 <div className={style.wrapperPrice}>
-                                                    <span>Days: </span>
+                                                    <span>Дні: </span>
                                                     <span>{data?.card.startDate ? new Date(data.card.startDate).getDate() : ''}</span>
                                                     -
                                                     <span>{data?.card.endDate ? new Date(data.card.endDate).getDate() : ''}</span>
@@ -158,9 +159,9 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                                 <img src={`https://homefu.azurewebsites.net${data?.hostAvatarUrl}`} alt="hostAvatarUrl" />
                                             </div>
                                             <div className={style.blockContent}>
-                                                <h2>Хозяин: {data?.hostName}</h2>
-                                                <span>Телефон владельца: {data?.hostNum}</span>
-                                                <span>Почта владельца: {data?.hostMail}</span>
+                                                <h2>Господар: {data?.hostName}</h2>
+                                                <span>Телефон власника: {data?.hostNum}</span>
+                                                <span>Пошта власника: {data?.hostMail}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +193,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                 <div className={style.mainDescriptionBlock}>
                                     <div className={style.wrapperDescriptionStar}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-sparkles w-5 h-5 text-blue-500"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
-                                        <h3 className={style.descriptionTitle}>Описание</h3>
+                                        <h3 className={style.descriptionTitle}>Опис</h3>
                                     </div>
                                     <p className={style.description}>{data?.description}</p>
                                 </div>
@@ -211,19 +212,19 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             <div className={style.wrapperAnyDataGredItem}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-bed w-8 h-8 mx-auto mb-2 text-blue-800"><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg>
                                                 <span>{data?.numberOfBeds}</span>
-                                                <span>Кроватей</span>
+                                                <span>Ліжків</span>
                                             </div>
                                             <div className={style.wrapperAnyDataGredItem}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-bath w-8 h-8 mx-auto mb-2 text-cyan-600"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"></path><line x1="10" x2="8" y1="5" y2="7"></line><line x1="2" x2="22" y1="12" y2="12"></line><line x1="7" x2="7" y1="19" y2="21"></line><line x1="17" x2="17" y1="19" y2="21"></line></svg>
                                                 <span>{data?.numberOfBathrooms}</span>
-                                                <span>Ванных</span>
+                                                <span>Ванних</span>
                                             </div>
                                         </div>
                                 </div>
                                 <div className={style.premiumApartament}>
                                     <div className={style.wrapperPremiumApartament}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-crown w-5 h-5 text-blue-600"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"></path><path d="M5 21h14"></path></svg>
-                                        <h3 className={style.descriptionTitle}>Премиум удобства</h3>
+                                        <h3 className={style.descriptionTitle}>Преміум зручності</h3>
                                     </div>
                                 <div className={style.mainWrapperAmenitiesCard}>
                                     {
@@ -255,7 +256,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                         </div>
                                         <div className={style.cardItem}>
                                             <div className={style.cardItemRating}>{data?.ratings.accuracy.toFixed(0)}</div>
-                                            <p>Точность</p>
+                                            <p>Точність</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.accuracy) > 0 &&
                                                     Array.from({ length: Number(data?.ratings.accuracy) }, (_, i) => (
@@ -277,7 +278,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                         </div>
                                         <div className={style.cardItem}>
                                             <div className={style.cardItemRating}>{data?.ratings.communication.toFixed(0)}</div>
-                                            <p>Коммуникация</p>
+                                            <p>Комунікація</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.communication) > 0 &&
                                                     Array.from({ length: Number(data?.ratings.communication) }, (_, i) => (
@@ -288,7 +289,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                         </div>
                                         <div className={style.cardItem}>
                                             <div className={style.cardItemRating}>{data?.ratings.location.toFixed(0)}</div>
-                                            <p>Расположение</p>
+                                            <p>Розташування</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.location) > 0 &&
                                                     Array.from({ length: Number(data?.ratings.location) }, (_, i) => (
@@ -299,7 +300,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                         </div>
                                         <div className={style.cardItem}>
                                             <div className={style.cardItemRating}>{data?.ratings.value.toFixed(0)}</div>
-                                            <p>Цены</p>
+                                            <p>Ціни</p>
                                             <div className={style.wrapperCounterStars}>
                                                 {Number(data?.ratings.value) > 0 &&
                                                     Array.from({ length: Number(data?.ratings.value) }, (_, i) => (
@@ -359,7 +360,9 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             className={style.textarea}
                                             placeholder="Напишіть свій коментар..."
                                         />
-                                        <Controller
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку</p>
+                                            <Controller
                                         control={control}
                                         name="value"
                                         render={({ field }) => (
@@ -396,14 +399,17 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
-                                        <Controller
+                                        </div>
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку чистоти</p>
+                                                                                    <Controller
                                         control={control}
                                         name="cleanliness"
                                         render={({ field }) => (
                                             <Select
                                             {...field}
                                             options={options}
-                                            placeholder="Додайте оцінку"
+                                            placeholder="Додайте оцінку чистоти"
                                             value={options.find((option) => option.value === field.value)}
                                             onChange={(option) => field.onChange(option?.value)}
                                             styles={{
@@ -433,14 +439,17 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
-                                        <Controller
+                                        </div>
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку точністі</p>
+                                            <Controller
                                         control={control}
                                         name="accuracy"
                                         render={({ field }) => (
                                             <Select
                                             {...field}
                                             options={options}
-                                            placeholder="Додайте оцінку"
+                                            placeholder="Додайте оцінку точність"
                                             value={options.find((option) => option.value === field.value)}
                                             onChange={(option) => field.onChange(option?.value)}
                                             styles={{
@@ -470,14 +479,17 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
-                                        <Controller
+                                        </div>
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку прибуття</p>
+                                                                                    <Controller
                                         control={control}
                                         name="checkIn"
                                         render={({ field }) => (
                                             <Select
                                             {...field}
                                             options={options}
-                                            placeholder="Додайте оцінку"
+                                            placeholder="Додайте оцінку прибуття"
                                             value={options.find((option) => option.value === field.value)}
                                             onChange={(option) => field.onChange(option?.value)}
                                             styles={{
@@ -507,14 +519,17 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
-                                        <Controller
+                                        </div>
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку комунікації</p>
+                                            <Controller
                                         control={control}
                                         name="communication"
                                         render={({ field }) => (
                                             <Select
                                             {...field}
                                             options={options}
-                                            placeholder="Додайте оцінку"
+                                            placeholder="Додайте оцінку комунікації"
                                             value={options.find((option) => option.value === field.value)}
                                             onChange={(option) => field.onChange(option?.value)}
                                             styles={{
@@ -544,14 +559,17 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
-                                        <Controller
+                                        </div>
+                                        <div className={style.wrapperSelectType}>
+                                            <p>Додайте оцінку розташування</p>
+                                            <Controller
                                         control={control}
                                         name="location"
                                         render={({ field }) => (
                                             <Select
                                             {...field}
                                             options={options}
-                                            placeholder="Додайте оцінку"
+                                            placeholder="Додайте оцінку розташування"
                                             value={options.find((option) => option.value === field.value)}
                                             onChange={(option) => field.onChange(option?.value)}
                                             styles={{
@@ -581,6 +599,7 @@ const onSubmit: SubmitHandler<CommentValidate> = (data) => {
                                             />
                                         )}
                                         />
+                                        </div>
                                         <button type="submit" className={style.button}>
                                             Надіслати
                                         </button>

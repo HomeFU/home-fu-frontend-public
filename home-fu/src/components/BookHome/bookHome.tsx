@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import style from "./bookHome.module.scss";
-import { ReservationService } from "../../api/ServiceReservation/reservationService";
 import {
   addMonths,
   subMonths,
@@ -19,6 +18,8 @@ import {
   parseISO,
 } from "date-fns";
 import { uk } from "date-fns/locale";
+import { CheckAvailability } from "../../api/ServiceReservation/checkAvailability";
+import { CreateReservation } from "../../api/ServiceReservation/createReservation";
 
 type BookHomeModalProps = {
   price: number;
@@ -52,6 +53,8 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const [hasPet, setHasPet] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const isAuthenticatedUser = localStorage.getItem('isAuthenticatedUser');
+
   const { data: bookedPeriods = [] } = useQuery<BookedPeriod[], Error>({
     queryKey: ['availability', cardId],
     queryFn: async () => {
@@ -59,7 +62,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
       const sixMonthsLater = new Date();
       sixMonthsLater.setMonth(today.getMonth() + 6);
       
-      return await ReservationService.checkAvailability(
+      return await CheckAvailability(
         cardId, 
         format(today, 'yyyy-MM-dd'),
         format(sixMonthsLater, 'yyyy-MM-dd')
@@ -70,7 +73,7 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
   const { mutate, isPending, isSuccess } = useMutation<void, Error, BookingData>({
     mutationFn: (bookingData) => {
       const token = localStorage.getItem('token') || '';
-      return ReservationService.createReservation(bookingData, token);
+      return CreateReservation(bookingData, token);
     },
     onSuccess: () => {
       setTimeout(onClose, 3000);
@@ -368,8 +371,13 @@ export const BookHomeModal = ({ price, onClose, maxGuests, cardId }: BookHomeMod
           </div>
 
           {!isSuccess && (
-            <button type="submit" className={style.submitButton} disabled={!startDate || !endDate || isPending}>
-              {isPending ? 'Відправка...' : 'Підтвердити бронювання'}
+            <button type="submit" className={style.submitButton} disabled={!startDate || !endDate || isPending || !isAuthenticatedUser}>
+              {isPending
+                ? 'Відправка...'
+                : !isAuthenticatedUser
+                ? 'Бронювання можливе тільки для авторизованних юзерів!'
+                : 'Підтвердити бронювання'
+              }
             </button>
           )}
         </form>
