@@ -77,13 +77,22 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
                {el.rating}
              </span>
            </div>
-           <div>
-             <span>{new Date(el.startDate).getDate()}</span>
-             -
-             {new Date(el.endDate).toLocaleDateString("uk-UA", {
-               day: "numeric",
-               month: "long",
-             })}
+           <div className={style.wrapperDays}>
+             <span>
+                {new Date(el.startDate).toLocaleDateString("uk-UA", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric"
+                })}
+              </span>
+              -
+              <span>
+                {new Date(el.endDate).toLocaleDateString("uk-UA", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric"
+                })}
+              </span>
            </div>
            <span className={style.cardItemPrice}>$ {el.price} ніч</span>
          </Link>

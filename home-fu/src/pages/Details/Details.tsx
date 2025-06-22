@@ -146,9 +146,25 @@ export const Details = () => {
                                                 </div>
                                                 <div className={style.wrapperPrice}>
                                                     <span>Дні: </span>
-                                                    <span>{data?.card.startDate ? new Date(data.card.startDate).getDate() : ''}</span>
+                                                   <span>
+                                                    {data?.card.startDate
+                                                        ? new Date(data.card.startDate).toLocaleDateString("uk-UA", {
+                                                            day: "numeric",
+                                                            month: "long",
+                                                            year: "numeric"
+                                                        })
+                                                        : ''}
+                                                    </span>
                                                     -
-                                                    <span>{data?.card.endDate ? new Date(data.card.endDate).getDate() : ''}</span>
+                                                    <span>
+                                                    {data?.card.endDate
+                                                        ? new Date(data.card.endDate).toLocaleDateString("uk-UA", {
+                                                            day: "numeric",
+                                                            month: "long",
+                                                            year: "numeric",
+                                                        })
+                                                        : ''}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

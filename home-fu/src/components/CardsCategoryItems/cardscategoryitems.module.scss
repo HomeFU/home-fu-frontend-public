@@ -71,6 +71,12 @@
   margin-bottom: 15px;
 }
 
+.wrapperDays {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .cardItemLocationName {
   max-width: 243px;
   text-wrap: wrap;

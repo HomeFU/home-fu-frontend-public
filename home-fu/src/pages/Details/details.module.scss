@@ -193,12 +193,12 @@ h1 {
     .wrapperRatingRocationName {
         display: flex;
         align-items: center;
-        gap: 50px;
+        gap: 19px;
         
         @media (max-width: 768px) {
             flex-direction: column;
             align-items: flex-start;
-            gap: 15px;
+            gap: 10px;
         }
     }
 
