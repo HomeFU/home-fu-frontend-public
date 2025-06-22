@@ -66,18 +66,23 @@
 .wrapperLocationRating {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
 .cardItemLocationName {
+  max-width: 243px;
+  text-wrap: wrap;
   font-weight: 500;
   font-size: 16px;
   color: black;
 }
 
 .cardItemRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   font-weight: 400;
   font-size: 15px;
   color: black;

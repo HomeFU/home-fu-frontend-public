@@ -67,7 +67,7 @@ export const CardsList = ({ dataCardsCategories }: CardsListProps) => {
              ))}
            </Swiper>
            <div className={style.wrapperLocationRating}>
-             <span className={style.cardItemLocationName}>{el.name}</span>
+             <p className={style.cardItemLocationName}>{el.name}</p>
              <span className={style.cardItemRating}>
                <FontAwesomeIcon 
                  icon={faStar} 
