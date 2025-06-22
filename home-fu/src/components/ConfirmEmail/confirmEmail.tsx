@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ConfirmEmailApi } from "../../api/ConfirmEmail/confirmEmail";
 import { useDispatch } from "react-redux";
 import { closeRegisterForm } from "../../redux/LoginRegisterFormSlice/formSlice";
+import close from "../../assets/icons/closeIcon.svg";
 
 type ConfirmEmailProps = {
   email: string;
@@ -57,7 +58,7 @@ export const ConfirmEmail = ({ email, onEmailConfirmed }: ConfirmEmailProps) => 
           }
         }}
       >
-        <img src="/src/assets/icons/closeIcon.svg" alt="close" loading="lazy" />
+        <img src={close} alt="close" loading="lazy" />
       </button>
 
       <div className={style.description}>
